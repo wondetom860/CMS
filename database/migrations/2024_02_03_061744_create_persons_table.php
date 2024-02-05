@@ -15,10 +15,13 @@ return new class extends Migration
     {
         Schema::create('persons', function (Blueprint $table) {
             $table->id();
-            $table->string('f_name');
-            $table->string('m_name');
-            $table->string('l_name');
-            $table->string('rank');
+            $table->string('first_name');
+            $table->string('fath_name');
+            $table->string('gfath_name');
+            $table->integer('dob');
+            $table->string('gender');
+            $table->string('id_number');
+            $table->integer('court_id')->references('id')->on('court');
             $table->timestamps();
         });
     }
