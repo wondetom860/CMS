@@ -79,6 +79,12 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/document_type/show/{id}', App\Http\Controllers\DocumetTypeController::class . '@show')->name('admin.document_type.show');
     Route::get('/document_type/create', App\Http\Controllers\DocumetTypeController::class . '@create')->name('admin.document_type.create');
     Route::post('/document_type/store', App\Http\Controllers\DocumetTypeController::class . '@store')->name('admin.document_type.store');
+
+    Route::get('/court', App\Http\Controllers\CourtController::class . '@index')->name('admin.court.index');
+    Route::get('/court/show/{id}', App\Http\Controllers\CourtController::class . '@show')->name('admin.court.show');
+    Route::get('/court/create', App\Http\Controllers\CourtController::class . '@create')->name('admin.court.create');
+    Route::post('/court/store', App\Http\Controllers\CourtController::class . '@store')->name('admin.court.store');
+
 });
 
 Route::get('/post', App\Http\Controllers\PostsController::class . '@index')->name('post.list');
