@@ -58,7 +58,11 @@ class CourtController extends Controller
      */
     public function show($id)
     {
-        //
+        $court = Court::find($id);
+        $viewData['title'] = 'Admin Page - Court Detail - CCMS';
+        $viewData['subtitle'] = "Course Detail: ".$court->getDetail();
+        $viewData['court'] = $court;
+        return view('admin.court.detail')->with('viewData', $viewData);
     }
 
     /**

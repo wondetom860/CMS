@@ -20,4 +20,8 @@ class Court extends Model
             'zip' => "max:15",
         ]);
     }
+
+    public function getDetail(){
+        return $this->name;
+    }
 }
