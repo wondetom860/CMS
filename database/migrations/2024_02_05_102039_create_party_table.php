@@ -19,9 +19,9 @@ return new class extends Migration
             $table->unsignedBigInteger('case_id');
             $table->unsignedBigInteger('person_id');
             $table->unsignedBigInteger('party_type_id');
-            $table->foreign('court_id')->references('id')->on('court')->onDelete('cascade');
+            $table->foreign('case_id')->references('id')->on('case')->onDelete('cascade');
             $table->foreign('person_id')->references('id')->on('persons')->onDelete('cascade');
-            $table->foreign('party_type_id')->references('id')->on('partytype')->onDelete('cascade');
+            $table->foreign('party_type_id')->references('id')->on('party_type')->onDelete('cascade');
         });
     }
 
