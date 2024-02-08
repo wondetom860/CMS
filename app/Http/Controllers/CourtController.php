@@ -58,7 +58,11 @@ class CourtController extends Controller
      */
     public function show($id)
     {
-        //
+        $court = Court::findOrFail($id);
+        $viewData['title'] = 'Admin Page - Court Detail - CCMS';
+        $viewData['subtitle'] = "Court Detail: " . $court->getDetail();
+        $viewData['court'] = $court;
+        return view('admin.court.detail')->with('viewData', $viewData);
     }
 
     /**
@@ -69,7 +73,10 @@ class CourtController extends Controller
      */
     public function edit($id)
     {
-        //
+        $viewData = [];
+        $viewData['title'] = 'Admin Page - Edit Court Info - CCMS';
+        $viewData['court'] = Court::findOrFail($id);
+        return view('admin.court.edit')->with('viewData', $viewData);
     }
 
     /**

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('case_id');
             $table->unsignedBigInteger('csa_id');
             $table->unsignedBigInteger('document_type_id');
-            $table->date('end_filed');
+            $table->date('date_filed');
             $table->string('description');
             $table->string('doc_storage_path');
             $table->foreign('case_id')->references('id')->on('case')->onDelete('cascade');
