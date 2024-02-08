@@ -17,6 +17,7 @@
                         <th>State</th>
                         <th>City</th>
                         <th>Zip</th>
+                        <th>Active Cases</th>
                         <th>Show</th>
                         <th>Update</th>
                         <th>Delete</th>
@@ -29,6 +30,7 @@
                                 <td>{{ $court->state }}</td>
                                 <td>{{ $court->city }}</td>
                                 <td>{{ $court->zip }}</td>
+                                <td>{{ $court->getActiveCases() }}</td>
                                 <td><a href="{{ route('admin.court.show', ['id' => $court->id]) }}">Show</a></td>
                                 <td>
                                     {{-- <a href="{{ route('admin.court.edit', ['id' =>$court->id]) }}">
