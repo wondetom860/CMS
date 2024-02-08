@@ -85,6 +85,19 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/court/create', App\Http\Controllers\CourtController::class . '@create')->name('admin.court.create');
     Route::post('/court/store', App\Http\Controllers\CourtController::class . '@store')->name('admin.court.store');
 
+    Route::get('/party', App\Http\Controllers\PartyController::class . '@index')->name('admin.party.index');
+    Route::get('/party/show/{id}', App\Http\Controllers\CourtController::class . '@show')->name('admin.party.show');
+    Route::get('/party/create', App\Http\Controllers\PartyController::class . '@create')->name('admin.party.create');
+    Route::post('/party/store', App\Http\Controllers\PartyController::class . '@store')->name('admin.party.store');
+
+    Route::get('/staffrole', App\Http\Controllers\StaffRoleController::class . '@index')->name('admin.staffrole.index');
+    Route::get('/staffrole/show/{id}', App\Http\Controllers\StaffRoleController::class . '@show')->name('admin.staffrole.show');
+    Route::get('/staffrole/create', App\Http\Controllers\StaffRoleController::class . '@create')->name('admin.staffrole.create');
+    Route::post('/staffrole/store', App\Http\Controllers\StaffRoleController::class . '@store')->name('admin.staffrole.store');
+    Route::get('/staffrole/{id}/edit',  App\Http\Controllers\StaffRoleController::class . '@edit')->name('admin.staffrole.edit');
+    Route::post('/staffrole/{id}/delete', App\Http\Controllers\StaffRoleController::class . '@delete')->name('admin.staffrole.delete');
+    Route::put('/staffrole/{id}/update', App\Http\Controllers\StaffRoleController::class . '@update')->name('admin.staffrole.update');
+
 });
 
 Route::get('/post', App\Http\Controllers\PostsController::class . '@index')->name('post.list');
@@ -119,7 +132,7 @@ Route::get('/{locale?}', function ($locale = null) {
         app()->setLocale($locale);
     }
     $viewData = [];
-    $viewData["title"] = "Home Page - Online Store";
+    $viewData["title"] = "Home Page - CCMS";
     return view('home.index')->with("viewData", $viewData);
 });
 
