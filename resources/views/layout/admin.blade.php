@@ -69,8 +69,7 @@
                         
                     </li>
                     @can('product-list')
-                        <li><a href="{{ route('admin.document_type.index') }}" class="nav-link text-white">Document
-                                Type</a>
+                        <li><a href="{{ route('admin.document_type.index') }}" class="nav-link text-white">Document Type</a>
                         </li>
                         <li><a href="{{ route('admin.person.index') }}" class="nav-link text-white">People</a>
                         </li>

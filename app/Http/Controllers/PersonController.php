@@ -29,7 +29,8 @@ class PersonController extends Controller
      */
     public function create()
     {
-        //
+        $viewData['title'] = 'Admin Page - Register a Person Information - CCMS';
+        return view('admin.person.create')->with('viewData', $viewData);
     }
 
     /**
@@ -40,7 +41,19 @@ class PersonController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Person::validate($request);
+        $caseTypes = new Person();
+        $caseTypes->court_id = $request->court_id;
+        $caseTypes->first_name = $request->first_name;
+        $caseTypes->fat_name = $request->fat_name;
+        $caseTypes->fat_name = $request->fat_name;
+        $caseTypes->gfat_name = $request->gfat_name;
+        $caseTypes->dob = $request->dob;
+        $caseTypes->id_number = $request->id_number;
+
+        $caseTypes->save();
+        notify()->success('Person Information Registered Successfully', 'Creation Success');
+        return redirect()->route('admin.person.index');
     }
 
     /**
