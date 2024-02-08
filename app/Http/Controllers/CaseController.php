@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CaseModel;
 use Illuminate\Http\Request;
-use App\Models\Court;
 
-class CourtController extends Controller
+class CaseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,11 +14,15 @@ class CourtController extends Controller
      */
     public function index()
     {
-        $viewData['title'] = "Courts";
-        $viewData['subtitle'] = "Lists Courts";
-        $viewData['courts'] = Court::all();
-        return view('admin.court.index')->with('viewData', $viewData);
+        //
+        $viewData = [];
+        $viewData["title"] = "Register_Case - CCMS";
+        $viewData["subtitle"] = "List of Cases";
+        $viewData["case"] =CaseModel::all();
+        return view('case.index')->with('viewData', $viewData);
     }
+
+    
 
     /**
      * Show the form for creating a new resource.
@@ -27,8 +31,8 @@ class CourtController extends Controller
      */
     public function create()
     {
-        $viewData['title'] = 'Admin Page - Courts - CCMS';
-        return view('admin.court.create')->with('viewData', $viewData);
+        $viewData['title'] = 'Register Case - CCMS';
+        return view('case.create')->with('viewData', $viewData);
     }
 
     /**
@@ -39,30 +43,24 @@ class CourtController extends Controller
      */
     public function store(Request $request)
     {
-        Court::validate($request);
-        $court = new Court();
-        $court->name = $request->name;
-        $court->state = $request->state;
-        $court->city = $request->city;
-        $court->zip = $request->zip;
-        $court->save();
-        notify()->success('Court registered Successfully', 'Creation Success');
-        return redirect()->route('admin.court.index');
+        //
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     
      */
     public function show($id)
     {
-        $court = Court::findOrFail($id);
-        $viewData['title'] = 'Admin Page - Court Detail - CCMS';
-        $viewData['subtitle'] = "Court Detail: " . $court->getDetail();
-        $viewData['court'] = $court;
-        return view('admin.court.detail')->with('viewData', $viewData);
+        $case = CaseModel::find($id); //findOrFail
+        if (is_null($case)) {
+            return view('error')
+                ->with('title', 'Case not found')
+                ->with('message', 'Such item does NOT exist');
+        }
+        return view('case.detail')->with('case', $case);
     }
 
     /**
@@ -73,10 +71,7 @@ class CourtController extends Controller
      */
     public function edit($id)
     {
-        $viewData = [];
-        $viewData['title'] = 'Admin Page - Edit Court Info - CCMS';
-        $viewData['court'] = Court::findOrFail($id);
-        return view('admin.court.edit')->with('viewData', $viewData);
+        
     }
 
     /**
@@ -88,7 +83,7 @@ class CourtController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
     /**
