@@ -75,15 +75,21 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/person/show/{id}', App\Http\Controllers\PersonController::class . '@show')->name('admin.person.show');
     Route::get('/person/create', App\Http\Controllers\PersonController::class . '@create')->name('admin.person.create');
 
+    // document-type
     Route::get('/document_type', App\Http\Controllers\DocumetTypeController::class . '@index')->name('admin.document_type.index');
     Route::get('/document_type/show/{id}', App\Http\Controllers\DocumetTypeController::class . '@show')->name('admin.document_type.show');
     Route::get('/document_type/create', App\Http\Controllers\DocumetTypeController::class . '@create')->name('admin.document_type.create');
     Route::post('/document_type/store', App\Http\Controllers\DocumetTypeController::class . '@store')->name('admin.document_type.store');
+    Route::get('/document_type/{id}/edit', App\Http\Controllers\DocumetTypeController::class . '@edit')->name('admin.document_type.edit');
+    Route::put('/document_type/{id}/update', App\Http\Controllers\DocumetTypeController::class . '@update')->name('admin.document_type.update');
+    Route::post('/document_type/{id}/delete', App\Http\Controllers\DocumetTypeController::class . '@destroy')->name('admin.document_type.delete');
 
+    // Court
     Route::get('/court', App\Http\Controllers\CourtController::class . '@index')->name('admin.court.index');
     Route::get('/court/show/{id}', App\Http\Controllers\CourtController::class . '@show')->name('admin.court.show');
     Route::get('/court/create', App\Http\Controllers\CourtController::class . '@create')->name('admin.court.create');
     Route::post('/court/store', App\Http\Controllers\CourtController::class . '@store')->name('admin.court.store');
+
                               //case type
     Route::get('/case_type', App\Http\Controllers\CaseTypeController::class . '@index')->name('admin.case_type.index');
     Route::get('/case_type/show/{id}', App\Http\Controllers\CaseTypeController::class . '@show')->name('admin.case_type.show');
@@ -100,6 +106,19 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/party_type/{id}/delete', App\Http\Controllers\PartyTypeController::class . '@delete')->name('admin.party_type.delete');
     Route::get('/party_type/{id}/edit', App\Http\Controllers\PartyTypeController::class . '@edit')->name('admin.party_type.edit');
     Route::put('/party_type/{id}/update', App\Http\Controllers\PartyTypeController::class . '@update')->name('admin.party_type.update');
+    Route::get('/court/{id}/edit', App\Http\Controllers\CourtController::class . '@edit')->name('admin.court.edit');
+    Route::put('/court/{id}/update', App\Http\Controllers\CourtController::class . '@update')->name('admin.court.update');
+    Route::post('/court/{id}/delete', App\Http\Controllers\CourtController::class . '@destroy')->name('admin.court.delete');
+
+    // event-type
+    Route::get('/event-type', App\Http\Controllers\EventTypeController::class . '@index')->name('admin.event-type.index');
+    Route::get('/event-type/show/{id}', App\Http\Controllers\EventTypeController::class . '@show')->name('admin.event-type.show');
+    Route::get('/event-type/create', App\Http\Controllers\EventTypeController::class . '@create')->name('admin.event-type.create');
+    Route::post('/event-type/store', App\Http\Controllers\EventTypeController::class . '@store')->name('admin.event-type.store');
+    Route::get('/event-type/{id}/edit', App\Http\Controllers\EventTypeController::class . '@edit')->name('admin.event-type.edit');
+    Route::put('/event-type/{id}/update', App\Http\Controllers\EventTypeController::class . '@update')->name('admin.event-type.update');
+    Route::post('/event-type/{id}/delete', App\Http\Controllers\EventTypeController::class . '@destroy')->name('admin.event-type.delete');
+
 });
 
                                //case
