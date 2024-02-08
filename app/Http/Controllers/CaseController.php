@@ -16,7 +16,7 @@ class CaseController extends Controller
     {
         //
         $viewData = [];
-        $viewData["title"] = "Register_Case - CCMS";
+        $viewData["title"] = "Register Case - CCMS";
         $viewData["subtitle"] = "List of Cases";
         $viewData["case"] =CaseModel::all();
         return view('case.index')->with('viewData', $viewData);

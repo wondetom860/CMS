@@ -6,8 +6,8 @@
         <div class="card">
             <h4 class="card-header">
                 Document Types - Admin Panel - MOD-CCMS
-                <a class="btn btn-primary btn-xs pull-right" href="{{ route('admin.document_type.create') }}"
-                    style="align-self: flex-end">Register New Doxument Type</a>
+                <a class="btn btn-primary btn-xs register-caseType-btn" href="{{ route('admin.document_type.create') }}"
+                    style="align-self: flex-end">Register New Document Type</a>
             </h4>
             <div class="card-body">
                 <table class="table table-condensed table-hover table-sm table-bordered">
