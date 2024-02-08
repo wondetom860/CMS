@@ -84,8 +84,32 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/court/show/{id}', App\Http\Controllers\CourtController::class . '@show')->name('admin.court.show');
     Route::get('/court/create', App\Http\Controllers\CourtController::class . '@create')->name('admin.court.create');
     Route::post('/court/store', App\Http\Controllers\CourtController::class . '@store')->name('admin.court.store');
-
+                              //case type
+    Route::get('/case_type', App\Http\Controllers\CaseTypeController::class . '@index')->name('admin.case_type.index');
+    Route::get('/case_type/show/{id}', App\Http\Controllers\CaseTypeController::class . '@show')->name('admin.case_type.show');
+    Route::get('/case_type/create', App\Http\Controllers\CaseTypeController::class . '@create')->name('admin.case_type.create');
+    Route::post('/case_type/store', App\Http\Controllers\CaseTypeController::class . '@store')->name('admin.case_type.store');
+    Route::get('/case_type/{id}/delete', App\Http\Controllers\CaseTypeController::class . '@delete')->name('admin.case_type.delete');
+    Route::get('/case_type/{id}/edit', App\Http\Controllers\CaseTypeController::class . '@edit')->name('admin.case_type.edit');
+    Route::put('/case_type/{id}/update', App\Http\Controllers\CaseTypeController::class . '@update')->name('admin.case_type.update');
+                              //party type
+    Route::get('/party_type', App\Http\Controllers\PartyTypeController::class . '@index')->name('admin.party_type.index');
+    Route::get('/party_type/show/{id}', App\Http\Controllers\PartyTypeController::class . '@show')->name('admin.party_type.show');
+    Route::get('/party_type/create', App\Http\Controllers\PartyTypeController::class . '@create')->name('admin.party_type.create');
+    Route::post('/party_type/store', App\Http\Controllers\PartyTypeController::class . '@store')->name('admin.party_type.store');
+    Route::get('/party_type/{id}/delete', App\Http\Controllers\PartyTypeController::class . '@delete')->name('admin.party_type.delete');
+    Route::get('/party_type/{id}/edit', App\Http\Controllers\PartyTypeController::class . '@edit')->name('admin.party_type.edit');
+    Route::put('/party_type/{id}/update', App\Http\Controllers\PartyTypeController::class . '@update')->name('admin.party_type.update');
 });
+
+                               //case
+Route::get('/case', App\Http\Controllers\CaseController::class . '@index')->name('case.index');
+Route::get('/case/show/{id}', App\Http\Controllers\CaseController::class . '@show')->name('case.detail');
+Route::get('/case/create', App\Http\Controllers\CaseController::class . '@create')->name('case.create');
+Route::post('/case/store', App\Http\Controllers\CourtController::class . '@store')->name('case.store');
+
+
+
 
 Route::get('/post', App\Http\Controllers\PostsController::class . '@index')->name('post.list');
 Route::get('/post/insert', App\Http\Controllers\PostsController::class . '@insert')->name('post.insert');

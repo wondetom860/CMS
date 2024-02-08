@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('description');
             $table->string('doc_storage_path');
             $table->foreign('case_id')->references('id')->on('case')->onDelete('cascade');
-            $table->foreign('csa_id')->references('id')->on('case_staff_assigning')->onDelete('cascade');
+            $table->foreign('csa_id')->references('id')->on('case_staff_assignment')->onDelete('cascade');
             $table->foreign('document_type_id')->references('id')->on('document_type')->onDelete('cascade');
             $table->timestamps();
         });

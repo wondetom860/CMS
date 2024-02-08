@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('court_id');
             $table->string('case_status');
             $table->unsignedBigInteger('case_type_id');
-            $table->foreign('court_id')->references('id')->on('court')->onDelete('cascade');
+            $table->foreign('court_id')->references('id')->on('courts')->onDelete('cascade');
             $table->foreign('case_type_id')->references('id')->on('case_type')->onDelete('cascade');
             $table->date('start_date');
             $table->date('end_date');
