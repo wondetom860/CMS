@@ -39,6 +39,26 @@
                 <div class="row">
                     <div class="col">
                         <div class="mb-3 row">
+                            <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Name:</label>
+                            <div class="col-lg-10 col-md-6 col-sm-12">
+                                <input name="name" value="{{ $viewData['court']->name }}" type="text"
+                                    class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="mb-3 row">
+                            <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">State:</label>
+                            <div class="col-lg-10 col-md-6 col-sm-12">
+                                <input name="state" value="{{ $viewData['court']->state }}" type="text"
+                                    class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-3 row">
                             <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Image:</label>
                             <div class="col-lg-10 col-md-6 col-sm-12">
                                 <input class="form-control" type="file" name="image">

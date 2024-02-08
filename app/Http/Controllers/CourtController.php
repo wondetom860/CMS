@@ -60,7 +60,7 @@ class CourtController extends Controller
     {
         $court = Court::findOrFail($id);
         $viewData['title'] = 'Admin Page - Court Detail - CCMS';
-        $viewData['subtitle'] = "Course Detail: " . $court->getDetail();
+        $viewData['subtitle'] = "Court Detail: " . $court->getDetail();
         $viewData['court'] = $court;
         return view('admin.court.detail')->with('viewData', $viewData);
     }
