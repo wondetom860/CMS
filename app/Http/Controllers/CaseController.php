@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\CaseModel;
+use App\Models\CaseType;
+use App\Models\Court;
 use Illuminate\Http\Request;
 
 class CaseController extends Controller
@@ -32,6 +34,8 @@ class CaseController extends Controller
     public function create()
     {
         $viewData['title'] = 'Register Case - CCMS';
+        $viewData['courts'] = Court::all();
+        $viewData['case_type'] = CaseType::all();
         return view('case.create')->with('viewData', $viewData);
     }
 
@@ -46,14 +50,15 @@ class CaseController extends Controller
         CaseModel::validate($request);
         $case = new CaseModel();
         $case->case_number = $request->case_number;
-        $case->case_of_action = $request->case_of_action;
-       // $case->court_id = $request->court_id;
-        //$case->case_type_id = $request->case_type_id;
+        $case->cause_of_action = $request->cause_of_action;
+        $case->court_id = $request->court_id;
+        $case->case_status = 0;
+        $case->case_type_id = $request->case_type_id;
         $case->start_date = $request->start_date;
-        $case->end_date = $request->end_date;
+        //$case->end_date = $request->end_date;
         $case->save();
         notify()->success('Case Created Successfully', 'Creation Success');
-        return redirect()->route('admin.case.index');
+        return redirect()->route('case.index');
     }
 
     /**
@@ -68,9 +73,9 @@ class CaseController extends Controller
         if (is_null($case)) {
             return view('error')
                 ->with('title', 'Case not found')
-                ->with('message', 'Such item does NOT exist');
+                ->with('message', 'Such cases does NOT exist');
         }
-        return view('case.detail')->with('case', $case);
+        return view('case.show')->with('case', $case);
     }
 
     /**
@@ -81,7 +86,12 @@ class CaseController extends Controller
      */
     public function edit($id)
     {
-        
+        $viewData = [];
+        $viewData['title'] = 'Case Page - Edit Case - CMS';
+        $viewData['courts'] = Court::all();
+        $viewData['case_type'] = CaseType::all();
+        $viewData['case'] = CaseModel::findOrFail($id);
+        return view('case.edit')->with('viewData', $viewData);
     }
 
     /**
@@ -93,8 +103,25 @@ class CaseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+        CaseModel::validate($request);
+        $case = CaseModel::findOrFail($id);
+        $case->case_number = $request->case_number;
+        $case->cause_of_action = $request->cause_of_action;
+        $case->court_id = $request->court_id;
+        $case->case_type_id = $request->case_type_id;
+        $case->start_date = $request->start_date;
+        $case->save();
+        notify()->success('Case Updateted Successfully', 'Update Success');
+        return redirect()->route('case.index');
     }
+
+    public function delete($id)
+    {
+        CaseModel::destroy($id);
+        notify()->success('Case Deleted Successfully', 'Delete Success');
+        return back();
+    }
+
 
     /**
      * Remove the specified resource from storage.

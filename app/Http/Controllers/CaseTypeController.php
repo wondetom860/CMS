@@ -83,10 +83,10 @@ class CaseTypeController extends Controller
     public function update(Request $request, $id)
     {
         CaseType::validate($request);
-        $party_type = CaseType::findOrFail($id);
-        $party_type->case_type_name = $request->case_type_name;
-        $party_type->description = $request->description;
-        $party_type->save();
+        $case_type = CaseType::findOrFail($id);
+        $case_type->case_type_name = $request->case_type_name;
+        $case_type->description = $request->description;
+        $case_type->save();
         notify()->success('Case Type Updateted Successfully', 'Update Success');
         return redirect()->route('admin.case_type.index');
     }

@@ -46,6 +46,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/my-account/profile', App\Http\Controllers\MyAccountController::class . '@profile')->name('myaccount.profile');
     Route::post('/my-account/update/{id}', App\Http\Controllers\MyAccountController::class . '@update')->name('myaccount.update.profile');
     Route::post('/my-account/resetPassword/{id}', App\Http\Controllers\MyAccountController::class . '@resetPassword')->name('myaccount.reset.password');
+
+    // case
+    Route::get('/case', App\Http\Controllers\CaseController::class . '@index')->name('case.index');
+    Route::get('/case/show/{id}', App\Http\Controllers\CaseController::class . '@show')->name('case.show');
+    Route::get('/case/create', App\Http\Controllers\CaseController::class . '@create')->name('case.create');
+    Route::post('/case/store', App\Http\Controllers\CaseController::class . '@store')->name('case.store');
+    Route::get('/case/{id}/edit', App\Http\Controllers\CaseController::class . '@edit')->name('case.edit');
+    Route::put('/case/{id}/update', App\Http\Controllers\CaseController::class . '@update')->name('case.update');
+    Route::post('/case/{id}/delete', App\Http\Controllers\CaseController::class . '@delete')->name('case.delete');
+
 });
 
 Route::middleware('auth')->group(function () {
@@ -103,10 +113,10 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/staffrole/show/{id}', App\Http\Controllers\StaffRoleController::class . '@show')->name('admin.staffrole.show');
     Route::get('/staffrole/create', App\Http\Controllers\StaffRoleController::class . '@create')->name('admin.staffrole.create');
     Route::post('/staffrole/store', App\Http\Controllers\StaffRoleController::class . '@store')->name('admin.staffrole.store');
-    Route::get('/staffrole/{id}/edit',  App\Http\Controllers\StaffRoleController::class . '@edit')->name('admin.staffrole.edit');
+    Route::get('/staffrole/{id}/edit', App\Http\Controllers\StaffRoleController::class . '@edit')->name('admin.staffrole.edit');
     Route::post('/staffrole/{id}/delete', App\Http\Controllers\StaffRoleController::class . '@delete')->name('admin.staffrole.delete');
     Route::put('/staffrole/{id}/update', App\Http\Controllers\StaffRoleController::class . '@update')->name('admin.staffrole.update');
-                              //case type
+    //case type
     Route::get('/case_type', App\Http\Controllers\CaseTypeController::class . '@index')->name('admin.case_type.index');
     Route::get('/case_type/show/{id}', App\Http\Controllers\CaseTypeController::class . '@show')->name('admin.case_type.show');
     Route::get('/case_type/create', App\Http\Controllers\CaseTypeController::class . '@create')->name('admin.case_type.create');
@@ -114,7 +124,7 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/case_type/{id}/delete', App\Http\Controllers\CaseTypeController::class . '@delete')->name('admin.case_type.delete');
     Route::get('/case_type/{id}/edit', App\Http\Controllers\CaseTypeController::class . '@edit')->name('admin.case_type.edit');
     Route::put('/case_type/{id}/update', App\Http\Controllers\CaseTypeController::class . '@update')->name('admin.case_type.update');
-                              //party type
+    //party type
     Route::get('/party_type', App\Http\Controllers\PartyTypeController::class . '@index')->name('admin.party_type.index');
     Route::get('/party_type/show/{id}', App\Http\Controllers\PartyTypeController::class . '@show')->name('admin.party_type.show');
     Route::get('/party_type/create', App\Http\Controllers\PartyTypeController::class . '@create')->name('admin.party_type.create');
@@ -137,12 +147,7 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
 
 });
 
-                               //case
-Route::get('/case', App\Http\Controllers\CaseController::class . '@index')->name('case.index');
-Route::get('/case/show/{id}', App\Http\Controllers\CaseController::class . '@show')->name('case.detail');
-Route::get('/case/create', App\Http\Controllers\CaseController::class . '@create')->name('case.create');
-Route::post('/case/store', App\Http\Controllers\CourtController::class . '@store')->name('case.store');
-
+//case
 
 
 
