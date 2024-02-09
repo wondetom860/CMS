@@ -11,9 +11,39 @@ class Person extends Model
 
     public $table = "persons";
 
+    protected $stopOnFirstFailure = true;
+
+    public static function validate($request)
+    {
+        $request->validate([
+            'first_name' => "required|max:255",
+            'fat_name',
+            'gfath_name' => "required|max:255",
+            // 'gfath_name' => "required|max:255",
+            'dob' => 'required|date',
+            'gender' => 'required|max:6',
+            'id_number' => "required|max:8"
+        ]);
+    }
+
+    private function getLogins()
+    {
+        return User::where(['person_id' => $this->id])->first();
+    }
+
+    public function getLoginCreds()
+    {
+        $logins = $this->getLogins();
+        if ($logins) {
+            return "{$logins->username}@******";
+        } else {
+            return "<button class='btn btn-info text-right btn-xs' onclick='signupUser({$this->id})'>Signup</button>";
+        }
+    }
+
     public function getFullName()
     {
-        return $this->rank . " " . $this->f_name . " " . $this->m_name . " " . $this->l_name;
+        return $this->rank . " " . $this->first_name . " " . $this->fath_nam . " " . $this->gfath_name;
     }
 
     public function getAge()

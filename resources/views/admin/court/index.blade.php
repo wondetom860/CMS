@@ -1,45 +1,49 @@
 @extends('layout.admin')
 @section('title', $viewData['title'])
-@section('innerTitle', $viewData['title'])
+@section('innerTitle', $viewData['subtitle'])
 @section('content')
     <div class="container d-flix align-items-center flex-column">
         <div class="card">
             <h4 class="card-header">
-                Person - Admin Panel - MOD-CCMS
-                <a class="btn btn-primary btn-xs pull-right" href="{{ route('admin.person.create') }}"
-                    style="align-self: flex-end">Register Person Information</a>
+                Courts - Admin Panel - MOD-CCMS
+                <a class="btn btn-primary btn-xs pull-right" href="{{ route('admin.court.create') }}"
+                    style="align-self: flex-end">Register New Court</a>
             </h4>
             <div class="card-body">
                 <table class="table table-condensed table-hover table-sm table-bordered">
                     <thead>
                         <th>ID</th>
-                        <th>Full Name</th>
-                        <th>Age</th>
-                        <th>ID NUMBER</th>
+                        <th>Court Name</th>
+                        <th>State</th>
+                        <th>City</th>
+                        <th>Zip</th>
+                        <th>Active Cases</th>
                         <th>Show</th>
                         <th>Update</th>
                         <th>Delete</th>
                     </thead>
                     <tbody>
-                        @foreach ($viewData['person'] as $p)
+                        @foreach ($viewData['courts'] as $court)
                             <tr>
-                                <td>{{ $p->id }}</td>
-                                <td>{{ $p->getFullName() }}</td>
-                                <td>{{ $p->getAge() }}</td>
-                                <td>{{ $p->id_number }}</td>
-                                <td><a href="{{ route('admin.person.show', ['id' => $p->id]) }}">Show</a></td>
+                                <td>{{ $court->id }}</td>
+                                <td>{{ $court->name }}</td>
+                                <td>{{ $court->state }}</td>
+                                <td>{{ $court->city }}</td>
+                                <td>{{ $court->zip }}</td>
+                                <td>{{ $court->getActiveCases() }}</td>
+                                <td><a href="{{ route('admin.court.show', ['id' => $court->id]) }}">Show</a></td>
                                 <td>
-                                    {{-- <a href="{{ route('admin.person.edit', ['id' => $p->id]) }}">
+                                    {{-- <a href="{{ route('admin.court.edit', ['id' =>$court->id]) }}">
                                         <button class="btn btn-primary">
                                             <i class="bi-pencil"></i>
                                         </button>
                                     </a> --}}
                                 </td>
                                 <td>
-                                    {{-- <form action="{{ route('admin.person.delete', ['id' => $item->id]) }}" method="post">
+                                    {{-- <form action="{{ route('admin.court.delete', ['id' => $item->id]) }}" method="post">
                                         @csrf
                                         <button class="btn btn-cs btn-danger"
-                                            onclick="return confirm('Are you sure to delete person profile?');">
+                                            onclick="return confirm('Are you sure to delete court profile?');">
                                             <i class="bi-trash"></i>
                                         </button>
                                     </form> --}}

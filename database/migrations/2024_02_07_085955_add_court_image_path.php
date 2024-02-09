@@ -13,15 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('persons', function (Blueprint $table) {
-            $table->id();
-            $table->string('first_name');
-            $table->string('fath_name');
-            $table->string('gfath_name');
-            $table->integer('dob');
-            $table->string('gender');
-            $table->string('id_number');
-            $table->timestamps();
+        Schema::table('courts', function (Blueprint $table) {
+            $table->string('logo_image_path')->nullable();
         });
     }
 
@@ -32,6 +25,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('persons');
+        Schema::table('courts', function (Blueprint $table) {
+            //
+            $table->dropColumn('logo_image_path');
+        });
     }
 };

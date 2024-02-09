@@ -52,11 +52,24 @@
                     <li><a href="{{ route('admin.home.index') }}" class="nav-link text-white">Home</a></li>
                     <li><a href="{{ route('admin.document_type.index') }}" class="nav-link text-white">Document Type</a>
                     </li>
+                    <li><a href="{{ route('admin.event-type.index') }}" class="nav-link text-white">Event Type</a>
+                    </li>
+                    <li><a href="{{ route('admin.case_type.index') }}" class="nav-link text-white">Case Type</a>
+                    </li>
+                    <li><a href="{{ route('admin.party_type.index') }}" class="nav-link text-white">Party Type</a>
+                    </li>
+                    <li><a href="{{ route('admin.court.index') }}" class="nav-link text-white">Courts</a>
+                    </li>
+                    <li><a href="{{ route('admin.party.index') }}" class="nav-link text-white">Parties</a>
+
+                    <li><a href="{{ route('admin.staffrole.index') }}" class="nav-link text-white">Staff Role</a>
+                        </li>
+                    </li>
                     <li><a href="{{ route('admin.person.index') }}" class="nav-link text-white">People</a>
+                        
                     </li>
                     @can('product-list')
-                        <li><a href="{{ route('admin.document_type.index') }}" class="nav-link text-white">Document
-                                Type</a>
+                        <li><a href="{{ route('admin.document_type.index') }}" class="nav-link text-white">Document Type</a>
                         </li>
                         <li><a href="{{ route('admin.person.index') }}" class="nav-link text-white">People</a>
                         </li>
