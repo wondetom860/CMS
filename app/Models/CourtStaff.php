@@ -20,4 +20,13 @@ class CourtStaff extends Model
             
         ]);
     }
+    public function person(){
+        return $this->belongsTo(Person::class);
+    }
+    public function court(){
+        return $this->belongsTo(Court::class);
+    }
+    public function staffroler(){
+        return $this->belongsTo(Staffrole::class);
+    }
 }

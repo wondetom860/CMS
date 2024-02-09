@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Court;
 use App\Models\CourtStaff;
+use App\Models\Person;
+use App\Models\Staffrole;
 use Illuminate\Http\Request;
 
 class CourtStaffController extends Controller
@@ -24,6 +27,9 @@ class CourtStaffController extends Controller
     public function create()
     {
         $viewData['title'] = 'Admin Page - staff - CCMS';
+        $viewData['courts'] = Court::all();
+        $viewData['person'] = Person::all();
+        $viewData['staff_role'] = Staffrole::all();
         return view('admin.courtstaff.create')->with('viewData', $viewData);
     }
 
@@ -38,7 +44,7 @@ class CourtStaffController extends Controller
         CourtStaff::validate($request);
         $court_staff = new CourtStaff();
         $court_staff->id = $request->id;
-        $court_staff->court_id= $request->rocourt_idle_name;
+        $court_staff->court_id= $request->court_id;
         $court_staff->person_id= $request->person_id;
         $court_staff->staff_role_id = $request->staff_role_id;
         $court_staff->save();
@@ -55,9 +61,9 @@ class CourtStaffController extends Controller
    public function show($id)
     {
         $viewData['court_staff'] = CourtStaff::find($id);
-        $viewData['title'] = "Staff Role";
-        $viewData['subtitle'] = "Detail of Staff Role";
-        return view('admin.staffrole.detail')->with('viewData', $viewData);
+        $viewData['title'] = "Court Staff ";
+        $viewData['subtitle'] = "Detail of Court Staff ";
+        return view('admin.courtstaff.detail')->with('viewData', $viewData);
     }
 
     /**
@@ -72,7 +78,10 @@ class CourtStaffController extends Controller
         $viewData = [];
         $viewData['title'] = 'Admin Page - Edit staffrole - CCMS';
         $viewData['court_staff'] = CourtStaff::findOrFail($id);
-        return view('admin.courtstaf.edit')->with('viewData', $viewData);
+        $viewData['courts'] = Court::all();
+        $viewData['person'] = Person::all();
+        $viewData['staffrole'] = Staffrole::all();
+        return view('admin.courtstaff.edit')->with('viewData', $viewData);
        
     }
 
@@ -90,13 +99,13 @@ class CourtStaffController extends Controller
          //
 
          CourtStaff::validate($request);
-         $Staffrole = CourtStaff::findOrFail($id);
-         $Staffrole->role_name = $request->role_name;
-         $Staffrole->rank = $request->rank;
-         $Staffrole->description = $request->description;
-         $Staffrole->save();
-         notify()->success('Product Updateted Successfully', 'Update Success');
-         return redirect()->route('admin.courtstaf.index');
+         $CourtStaff = CourtStaff::findOrFail($id);
+         $CourtStaff->court->name = $request->name;
+         $CourtStaff->person->person_id = $request->person_id;
+         $CourtStaff->staff_role_id = $request->staff_role_id;
+         $CourtStaff->save();
+         notify()->success('Court Staff Updateted Successfully', 'Update Success');
+         return redirect()->route('admin.courtstaff.index');
     }
 
     /**

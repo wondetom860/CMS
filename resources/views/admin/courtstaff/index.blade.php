@@ -13,9 +13,9 @@
                 <table class="table table-condensed table-hover table-sm table-bordered">
                     <thead>
                         <th>ID</th>
-                        <th>court id</th>
-                        <th>person Id</th>
-                        <th>staff role id</th>
+                        <th>Court </th>
+                        <th>Person</th>
+                        <th>Staff Role name</th>
                         <th>Show</th>
                         <th>Update</th>
                         <th>Delete</th>
@@ -24,8 +24,8 @@
                         @foreach ($viewData['court_staff'] as $court_staff)
                             <tr>
                                 <td>{{ $court_staff->id }}</td>
-                                <td>{{ $court_staff->court_id }}</td>
-                                <td>{{ $court_staff->person_id }}</td>
+                                <td>{{ $court_staff->court->name }}</td>
+                                <td>{{ $court_staff->person->getFullName() }}</td>
                                 <td>{{ $court_staff->staff_role_id }}</td>
                                 <td><a href="{{ route('admin.courtstaff.show', ['id' => $court_staff->id]) }}">Show</a></td>
                                 <td>
