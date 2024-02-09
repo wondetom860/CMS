@@ -21,7 +21,6 @@ return new class extends Migration
             $table->integer('dob');
             $table->string('gender');
             $table->string('id_number');
-            $table->integer('court_id')->references('id')->on('court');
             $table->timestamps();
         });
     }
