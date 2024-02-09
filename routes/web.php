@@ -93,7 +93,12 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/court/show/{id}', App\Http\Controllers\CourtController::class . '@show')->name('admin.court.show');
     Route::get('/court/create', App\Http\Controllers\CourtController::class . '@create')->name('admin.court.create');
     Route::post('/court/store', App\Http\Controllers\CourtController::class . '@store')->name('admin.court.store');
-
+    // event
+    Route::get('/event', App\Http\Controllers\eventController::class . '@index')->name('admin.event.index');
+    Route::get('/event/show/{id}', App\Http\Controllers\eventController::class . '@show')->name('admin.event.show');
+    Route::get('/event/create', App\Http\Controllers\eventController::class . '@create')->name('admin.event.create');
+    Route::post('/event/store', App\Http\Controllers\eventController::class . '@store')->name('admin.event.store');
+    
     Route::get('/party', App\Http\Controllers\PartyController::class . '@index')->name('admin.party.index');
     Route::get('/party/show/{id}', App\Http\Controllers\CourtController::class . '@show')->name('admin.party.show');
     Route::get('/party/create', App\Http\Controllers\PartyController::class . '@create')->name('admin.party.create');
