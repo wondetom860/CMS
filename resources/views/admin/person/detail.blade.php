@@ -27,7 +27,9 @@
     </div>
     <script>
         window.signupUser = (person_id) => {
-            alert('....');
+            $.post("{{ route('admin.person.signup') }}",{}).done((resp) => {
+
+            });
         }
     </script>
 @endsection
