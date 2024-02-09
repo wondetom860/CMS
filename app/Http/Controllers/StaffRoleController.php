@@ -25,6 +25,7 @@ class StaffRoleController extends Controller
     public function create()
     {
         $viewData['title'] = 'Admin Page - staff - CCMS';
+        
         return view('admin.staffrole.create')->with('viewData', $viewData);
     }
 
