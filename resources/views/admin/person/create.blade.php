@@ -11,6 +11,20 @@
                 <div class="row">
                     <div class="col">
                         <div class="mb-4 row">
+                            <label class="text-right col-lg-4 col-md-6 col-sm-12 col-form-label">{{ __('Court') }}:</label>
+                            <div class="col-lg-8 col-md-6 col-sm-12">
+                                <select name="court_id" id="court_id" class="form-control">
+                                    @foreach ($viewData['courts'] as $court)
+                                        <option value="{{ $court->id }}">{{ $court->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-4 row">
                             <label
                                 class="text-right col-lg-4 col-md-6 col-sm-12 col-form-label">{{ __('ID Number') }}:</label>
                             <div class="col-lg-8 col-md-6 col-sm-12">
@@ -48,7 +62,8 @@
                             <label
                                 class="text-right col-lg-4 col-md-6 col-sm-12 col-form-label">{{ __('Grand Father\'s Name') }}:</label>
                             <div class="col-lg-8 col-md-6 col-sm-12">
-                                <input name="gfath_name" value="{{ old('gfath_name') }}" type="text" class="form-control">
+                                <input name="gfath_name" value="{{ old('gfath_name') }}" type="text"
+                                    class="form-control">
                             </div>
                         </div>
                     </div>
