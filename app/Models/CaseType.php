@@ -19,5 +19,9 @@ class CaseType extends Model
             'description' => "required",
         ]);
     }
+
+    public function CaseModel(){
+        return $this->hasMany(CaseModel::class);
+    }
     
 }
