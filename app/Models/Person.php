@@ -31,13 +31,14 @@ class Person extends Model
         return User::where(['person_id' => $this->id])->first();
     }
 
-    public function getLoginCreds()
+    public function getLoginCreds($withLink = null)
     {
         $logins = $this->getLogins();
         if ($logins) {
-            return "{$logins->username}@******";
+            return "{$logins->user_name}@******";
         } else {
-            return "<button class='btn btn-info text-right btn-xs' onclick='signupUser({$this->id})'>Signup</button>";
+            return $withLink ?  "<button class='btn btn-info text-right btn-sm' onclick='signupUser({$this->id})'>Create Login Account</button>"
+            :"<p class='bg-warning'>Login account doesn't exist.</p>";
         }
     }
 
@@ -51,11 +52,21 @@ class Person extends Model
         return 26;
     }
 
+    public function getRandomUserName()
+    {
+        return strtoupper($this->first_name[0] . $this->fath_name[0] . $this->gfath_name[0] . rand(999, 10000));
+    }
+
+    public function getDefaultPassword(){
+        return "younT@123";
+    }
+
     // public function person(){
     //     return $this->belongsTo(Person::class);
     // }
 
-    public function court(){
+    public function court()
+    {
         return $this->belongsTo(Court::class);
     }
 }
