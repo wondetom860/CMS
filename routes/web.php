@@ -95,13 +95,24 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/party/create', App\Http\Controllers\PartyController::class . '@create')->name('admin.party.create');
     Route::post('/party/store', App\Http\Controllers\PartyController::class . '@store')->name('admin.party.store');
 
-    Route::get('/staffrole', App\Http\Controllers\StaffRoleController::class . '@index')->name('admin.staffrole.index');
+    Route::get('/staffrole', App\Http\Controllers\CourtStaffController::class . '@index')->name('admin.staffrole.index');
     Route::get('/staffrole/show/{id}', App\Http\Controllers\StaffRoleController::class . '@show')->name('admin.staffrole.show');
     Route::get('/staffrole/create', App\Http\Controllers\StaffRoleController::class . '@create')->name('admin.staffrole.create');
     Route::post('/staffrole/store', App\Http\Controllers\StaffRoleController::class . '@store')->name('admin.staffrole.store');
     Route::get('/staffrole/{id}/edit',  App\Http\Controllers\StaffRoleController::class . '@edit')->name('admin.staffrole.edit');
     Route::post('/staffrole/{id}/delete', App\Http\Controllers\StaffRoleController::class . '@delete')->name('admin.staffrole.delete');
     Route::put('/staffrole/{id}/update', App\Http\Controllers\StaffRoleController::class . '@update')->name('admin.staffrole.update');
+
+
+
+                                //courtstaff
+    Route::get('/courtstaff', App\Http\Controllers\CourtStaffController::class . '@index')->name('admin.courtstaff.index');
+    Route::get('/courtstaff/show/{id}', App\Http\Controllers\CourtStaffController::class . '@show')->name('admin.courtstaff.show');
+    Route::get('/courtstaff/create', App\Http\Controllers\CourtStaffController::class . '@create')->name('admin.courtstaff.create');
+    Route::post('/courtstaff/store', App\Http\Controllers\CourtStaffController::class . '@store')->name('admin.courtstaff.store');
+    Route::get('/courtstaff/{id}/edit',  App\Http\Controllers\CourtStaffController::class . '@edit')->name('admin.courtstaff.edit');
+    Route::post('/courtstaff/{id}/delete', App\Http\Controllers\CourtStaffController::class . '@delete')->name('admin.courtstaff.delete');
+    Route::put('/courtstaff/{id}/update', App\Http\Controllers\CourtStaffController::class . '@update')->name('admin.courtstaff.update');
                               //case type
     Route::get('/case_type', App\Http\Controllers\CaseTypeController::class . '@index')->name('admin.case_type.index');
     Route::get('/case_type/show/{id}', App\Http\Controllers\CaseTypeController::class . '@show')->name('admin.case_type.show');

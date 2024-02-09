@@ -25,13 +25,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="mb-3">
-                            <label class="form-label">Description</label>
-                            <textarea class="form-control" name="description" rows="3">{{ old('description') }}</textarea>
-                        </div>
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-control" name="description" rows="3">{{ old('description') }}</textarea>
                     </div>
-                </div>
                 {{-- <div class="row m-2">
                     <div class="col">
                         <div class="mb-12 row">

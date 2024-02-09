@@ -60,6 +60,8 @@
                     </li>
                     <li><a href="{{ route('admin.court.index') }}" class="nav-link text-white">Courts</a>
                     </li>
+                    <li><a href="{{ route('admin.courtstaff.index') }}" class="nav-link text-white">Courts Staff</a>
+                    </li>
                     <li><a href="{{ route('admin.party.index') }}" class="nav-link text-white">Parties</a>
 
                     <li><a href="{{ route('admin.staffrole.index') }}" class="nav-link text-white">Staff Role</a>
