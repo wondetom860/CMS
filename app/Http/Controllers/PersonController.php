@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Court;
-use Illuminate\Contracts\View\View;
+use App\Models\User;
+// use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use App\Models\Person;
+use Illuminate\Support\Facades\Hash;
 
 class PersonController extends Controller
 {
@@ -54,13 +56,28 @@ class PersonController extends Controller
         $caseTypes->dob = strtotime($request->dob);
         $caseTypes->id_number = $request->id_number;
         $caseTypes->gender = $request->gender;
-
-        // dd($caseTypes);
-
-
         $caseTypes->save();
         notify()->success('Person Information Registered Successfully', 'Creation Success');
         return redirect()->route('admin.person.index');
+    }
+
+    public function signUp(Request $request)
+    {
+        $user = new User();
+        $user->user_name = $request->username;
+        $user->password = Hash::make($request->password);
+        $user->email = $request->email;
+        $user->person_id = intval($request->person_id);
+        $user->phone = $request->phone;
+
+        // var_dump($user);
+        // exit;
+
+        if ($user->save()) {
+            return 1;
+        } else {
+            return "signup failed";
+        }
     }
 
     /**

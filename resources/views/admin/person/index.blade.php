@@ -6,7 +6,7 @@
         <div class="card">
             <h4 class="card-header">
                 Person - Admin Panel - MOD-CCMS
-                <a class="btn btn-primary btn-xs pull-right" href="{{ route('admin.person.create') }}"
+                <a class="btn btn-primary btn-xs register-caseType-btn" href="{{ route('admin.person.create') }}"
                     style="align-self: flex-end">Register Person Information</a>
             </h4>
             <div class="card-body">
@@ -27,24 +27,25 @@
                                 <td>{{ $p->getFullName() }}</td>
                                 <td>{{ $p->getAge() }}</td>
                                 <td>{{ $p->id_number }}</td>
+                                <td><?= $p->getLoginCreds() ?></td>
                                 <td><a href="{{ route('admin.person.show', ['id' => $p->id]) }}">Show</a></td>
                                 <td>
-                                    {{-- <a href="{{ route('admin.person.edit', ['id' => $p->id]) }}">
+                                    <a href="{{ route('admin.person.edit', ['id' => $p->id]) }}">
                                         <button class="btn btn-primary">
                                             <i class="bi-pencil"></i>
                                         </button>
-                                    </a> --}}
+                                    </a>
                                 </td>
                                 <td>
-                                    {{-- <form action="{{ route('admin.person.delete', ['id' => $item->id]) }}" method="post">
+                                    <form action="{{ route('admin.person.delete', ['id' => $p->id]) }}" method="post">
                                         @csrf
                                         <button class="btn btn-cs btn-danger"
                                             onclick="return confirm('Are you sure to delete person profile?');">
                                             <i class="bi-trash"></i>
                                         </button>
-                                    </form> --}}
+                                    </form>
                                 </td>
-                                {{-- <td><a href="{{route('admin.product.delete',['id' => $item->id])}}" onclick="return confirm('Are you sure to remove an item?');">Delete</a></td> --}}
+                                {{-- <td><a href="{{route('admin.product.delete',['id' => $p->id])}}" onclick="return confirm('Are you sure to remove an item?');">Delete</a></td> --}}
                             </tr>
                         @endforeach
                     </tbody>

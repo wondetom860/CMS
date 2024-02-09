@@ -8,7 +8,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
         crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    {{-- <link href="/css/bootstrap.min.css" rel="stylesheet" /> --}}
+    {{--
+    <link href="/css/bootstrap.min.css" rel="stylesheet" /> --}}
     <title>: @yield('title', '')</title>
     <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
 </head>
@@ -30,24 +31,25 @@
                     <a class="nav-link active" href="/about">{{ __('About') }}</a>
                     <div class="vr bg-white mx-2 d-none d-lg-block"></div> --}}
                     @guest
-                        <a href="{{ route('login') }}" class="nav-link active">Login</a>
-                        {{-- <a href="{{ route('register') }}" class="nav-link active">Register</a> --}}
+                    <a href="{{ route('login') }}" class="nav-link active">Login</a>
+                    {{-- <a href="{{ route('register') }}" class="nav-link active">Register</a> --}}
                     @else
-                        {{-- <a href="{{ route('myaccount.orders') }}" class="nav-link active">{{ __('My Orders') }}</a> --}}
-                        <a href="{{ route('myaccount.profile') }}" class="nav-link active">{{ __('My Profile') }}</a>
-                        @if (Auth::user()->isAdmin())
-                            <a href="{{ route('admin.home.index') }}" class="nav-link active">{{ __('Dashboard') }}</a>
-                        @endif
-                        @if (Auth::user()->isSuperAdmin())
-                            <a href="{{ route('roles.index') }}" class="nav-link active text-warning">Roles</a>
-                            <a href="{{ route('users.index') }}" class="nav-link active text-warning">Users</a>
-                        @endif
-                        {{-- logged In user --}}
-                        <form action="{{ route('logout') }}" id="logout" method="POST">
-                            <a title="Logout" role="button" class="nav-link active text-center"
-                                onclick="document.getElementById('logout').submit();">Logout({{ Auth::user()->name }})</a>
-                            @csrf
-                        </form>
+                    {{-- <a href="{{ route('myaccount.orders') }}" class="nav-link active">{{ __('My Orders') }}</a>
+                    --}}
+                    <a href="{{ route('myaccount.profile') }}" class="nav-link active">{{ __('My Profile') }}</a>
+                    @if (Auth::user()->isAdmin())
+                    <a href="{{ route('admin.home.index') }}" class="nav-link active">{{ __('Dashboard') }}</a>
+                    @endif
+                    @if (Auth::user()->isSuperAdmin())
+                    <a href="{{ route('roles.index') }}" class="nav-link active text-warning">Roles</a>
+                    <a href="{{ route('users.index') }}" class="nav-link active text-warning">Users</a>
+                    @endif
+                    {{-- logged In user --}}
+                    <form action="{{ route('logout') }}" id="logout" method="POST">
+                        <a title="Logout" role="button" class="nav-link active text-center"
+                            onclick="document.getElementById('logout').submit();">Logout({{ Auth::user()->name }})</a>
+                        @csrf
+                    </form>
                     @endguest
                 </div>
             </div>
@@ -60,6 +62,17 @@
     </header>
     <!-- header -->
     <main class="py-4">
+        <div class="container-fluid">
+            @if ($errors->any())
+            <div class="col-12 alert alert-warning alert-dismissible">
+                <ul class="alert alert-danger list-unstyled">
+                    @foreach ($errors->all() as $error)
+                    <li>- {{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+        </div>
         @yield('content')
     </main>
     <br><br><br>
@@ -79,7 +92,8 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
     </script>
-    {{-- <script src="/css/bootstrap.min.js"></script> --}}
+    {{--
+    <script src="/css/bootstrap.min.js"></script> --}}
     @notifyJs
     @include('notify::components.notify')
 </body>

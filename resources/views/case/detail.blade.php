@@ -4,7 +4,7 @@
 @section('content')
     <div class="container">
         <h3 class="float-right">
-            Detail: {{ $product->name }} - Case page
+            Detail: {{ $case->name }} - Case page
         </h3>
         <div class="card mb-3">
             <div class="row g-0">
