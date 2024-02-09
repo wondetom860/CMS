@@ -54,13 +54,13 @@ class PersonController extends Controller
         $caseTypes->dob = strtotime($request->dob);
         $caseTypes->id_number = $request->id_number;
         $caseTypes->gender = $request->gender;
-
-        // dd($caseTypes);
-
-
         $caseTypes->save();
         notify()->success('Person Information Registered Successfully', 'Creation Success');
         return redirect()->route('admin.person.index');
+    }
+
+    public function signUp(Request $request){
+        dd($request);
     }
 
     /**

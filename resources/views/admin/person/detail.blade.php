@@ -25,10 +25,18 @@
             </div>
         </div>
     </div>
-    <script>
+    <script type="text/javascript">
         window.signupUser = (person_id) => {
-            $.post("{{ route('admin.person.signup') }}",{}).done((resp) => {
 
+            $.ajax({
+                url: "{{ route('admin.person.signup') }}",
+                type: "post",
+                data: $('#form_1').serialize(),
+                dataType: 'JSON',
+                success: function(data) {
+                    console.log(data);
+
+                }
             });
         }
     </script>

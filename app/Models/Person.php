@@ -50,4 +50,12 @@ class Person extends Model
     {
         return 26;
     }
+
+    // public function person(){
+    //     return $this->belongsTo(Person::class);
+    // }
+
+    public function court(){
+        return $this->belongsTo(Court::class);
+    }
 }

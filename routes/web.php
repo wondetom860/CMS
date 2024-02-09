@@ -78,6 +78,7 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/person/{id}/edit', App\Http\Controllers\PersonController::class . '@edit')->name('admin.person.edit');
     Route::put('/person/{id}/update', App\Http\Controllers\PersonController::class . '@update')->name('admin.person.update');
     Route::post('/person/{id}/delete', App\Http\Controllers\PersonController::class . '@destroy')->name('admin.person.delete');
+    Route::post('/person/signup', App\Http\Controllers\PersonController::class . '@signUp')->name('admin.person.signup');
 
     // document-type
     Route::get('/document_type', App\Http\Controllers\DocumetTypeController::class . '@index')->name('admin.document_type.index');
