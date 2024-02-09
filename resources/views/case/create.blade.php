@@ -11,6 +11,14 @@
                 @csrf
                 <div class="row">
                     <div class="col">
+                        <div class="mb-3 row">
+                            <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Name:</label>
+                            <div class="col-lg-10 col-md-6 col-sm-12">
+                                <input name="name" value="{{ old('name') }}" type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
                         <div class="mb-4 row">
                             <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">Case Number:</label>
                             <div class="col-md-6 col-sm-12">
