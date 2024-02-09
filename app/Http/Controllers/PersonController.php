@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Court;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use App\Models\Person;
@@ -30,6 +31,8 @@ class PersonController extends Controller
     public function create()
     {
         $viewData['title'] = 'Admin Page - Register a Person Information - CCMS';
+        // $courts = 
+        $viewData['courts'] = Court::all();
         return view('admin.person.create')->with('viewData', $viewData);
     }
 
