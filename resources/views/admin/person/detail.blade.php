@@ -19,9 +19,15 @@
                         </h5>
                         <p class="card-text">Age: {{ $viewData['person']->getAge() }}</p>
                         <p class="card-text">Rank: {{ $viewData['person']->rank }}</p>
+                        <p class="card-text">Login Credentials: <?= $viewData['person']->getLoginCreds() ?></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        window.signupUser = (person_id) => {
+            alert('....');
+        }
+    </script>
 @endsection
