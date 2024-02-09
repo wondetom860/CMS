@@ -70,10 +70,14 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     // Route::get('/users', App\Http\Controllers\RoleController::class . '@users')->name('users.index');
 
 
-    // CCMS - admin opeartions from this onward
+    // Person
     Route::get('/person', App\Http\Controllers\PersonController::class . '@index')->name('admin.person.index');
     Route::get('/person/show/{id}', App\Http\Controllers\PersonController::class . '@show')->name('admin.person.show');
     Route::get('/person/create', App\Http\Controllers\PersonController::class . '@create')->name('admin.person.create');
+    Route::post('/person/store', App\Http\Controllers\PersonController::class . '@store')->name('admin.person.store');
+    Route::get('/person/{id}/edit', App\Http\Controllers\PersonController::class . '@edit')->name('admin.person.edit');
+    Route::put('/person/{id}/update', App\Http\Controllers\PersonController::class . '@update')->name('admin.person.update');
+    Route::post('/person/{id}/delete', App\Http\Controllers\PersonController::class . '@destroy')->name('admin.person.delete');
 
     // document-type
     Route::get('/document_type', App\Http\Controllers\DocumetTypeController::class . '@index')->name('admin.document_type.index');
