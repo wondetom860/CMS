@@ -13,11 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('party_type', function (Blueprint $table) {
+        Schema::create('attorney', function (Blueprint $table) {
             $table->id();
-            $table->string('party_type_name')->unique;
-            $table->text('description')->nullable;
-            // $table->sta
+            $table->unsignedBigInteger('person_id');
+            $table->foreign('person_id')->references('id')->on('persons')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -29,8 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('party_type');
+        Schema::dropIfExists('attorney');
     }
 };
-
-///yoniiiiiiiiiiiiiiiiiiiiiiiiiiiiii

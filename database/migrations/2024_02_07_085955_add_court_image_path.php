@@ -13,12 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('party_type', function (Blueprint $table) {
-            $table->id();
-            $table->string('party_type_name')->unique;
-            $table->text('description')->nullable;
-            // $table->sta
-            $table->timestamps();
+        Schema::table('courts', function (Blueprint $table) {
+            $table->string('logo_image_path')->nullable();
         });
     }
 
@@ -29,8 +25,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('party_type');
+        Schema::table('courts', function (Blueprint $table) {
+            //
+            $table->dropColumn('logo_image_path');
+        });
     }
 };
-
-///yoniiiiiiiiiiiiiiiiiiiiiiiiiiiiii

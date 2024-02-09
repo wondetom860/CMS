@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DocumentType;
+use App\Models\EventType;
 use Illuminate\Http\Request;
 
 class DocumetTypeController extends Controller
@@ -56,7 +57,11 @@ class DocumetTypeController extends Controller
      */
     public function show($id)
     {
-        //
+        $docType = DocumentType::findOrFail($id);
+        $viewData['title'] = 'Admin Page - Document Type Detail - CCMS';
+        $viewData['subtitle'] = "Document Type Detail: ";
+        $viewData['docType'] = $docType;
+        return view('admin.document_type.detail')->with('viewData', $viewData);
     }
 
     /**
@@ -67,7 +72,10 @@ class DocumetTypeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $viewData = [];
+        $viewData['title'] = 'Admin Page - Edit Document Type Info - CCMS';
+        $viewData['documentType'] = DocumentType::findOrFail($id);
+        return view('admin.document-type.edit')->with('viewData', $viewData);
     }
 
     /**
@@ -79,7 +87,13 @@ class DocumetTypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DocumentType::validate($request);
+        $docType = DocumentType::findOrFail($id);
+        $docType->doc_type_name = $request->doc_type_name;
+        $docType->description = $request->description;
+        $docType->save();
+        notify()->success('Document Type Updateted Successfully', 'Update Success');
+        return redirect()->route('admin.document_type.index');
     }
 
     /**
@@ -90,6 +104,9 @@ class DocumetTypeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DocumentType::destroy($id);
+        notify()->success('Document Type Deleted Successfully', 'Delete Success');
+        // return back();
+        return redirect()->route('admin.document_type.index');
     }
 }

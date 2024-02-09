@@ -1,48 +1,50 @@
 @extends('layout.admin')
 @section('title', $viewData['title'])
-@section('innerTitle', $viewData['title'])
+@section('innerTitle', $viewData['subtitle'])
 @section('content')
     <div class="container d-flix align-items-center flex-column">
         <div class="card">
             <h4 class="card-header">
-                Document Types - Admin Panel - MOD-CCMS
-                <a class="btn btn-primary btn-xs register-caseType-btn" href="{{ route('admin.document_type.create') }}"
-                    style="align-self: flex-end">Register New Document Type</a>
+                Courts - Admin Panel - MOD-CCMS
+                <a class="btn btn-primary btn-xs pull-right" href="{{ route('admin.staffrole.create') }}"
+                    style="align-self: flex-end">Register Staff Role</a>
             </h4>
             <div class="card-body">
                 <table class="table table-condensed table-hover table-sm table-bordered">
                     <thead>
                         <th>ID</th>
-                        <th>Document Type</th>
-                        <th>Description</th>
+                        <th>Role Name</th>
+                        <th>Rank</th>
+                        <th>description</th>
                         <th>Show</th>
                         <th>Update</th>
                         <th>Delete</th>
                     </thead>
                     <tbody>
-                        @foreach ($viewData['document_type'] as $p)
+                        @foreach ($viewData['staff_role'] as $staff_role)
                             <tr>
-                                <td>{{ $p->id }}</td>
-                                <td>{{ $p->doc_type_name }}</td>
-                                <td>{{ $p->description }}</td>
-                                <td><a href="{{ route('admin.document_type.show', ['id' => $p->id]) }}">Show</a></td>
+                                <td>{{ $staff_role->id }}</td>
+                                <td>{{ $staff_role->role_name }}</td>
+                                <td>{{ $staff_role->rank }}</td>
+                                <td>{{ $staff_role->description }}</td>
+                                <td><a href="{{ route('admin.staffrole.show', ['id' => $staff_role->id]) }}">Show</a></td>
                                 <td>
-                                    <a href="{{ route('admin.document_type.edit', ['id' => $p->id]) }}">
+                                    <a href="{{ route('admin.staffrole.edit', ['id' =>$staff_role->id]) }}">
                                         <button class="btn btn-primary">
                                             <i class="bi-pencil"></i>
                                         </button>
                                     </a>
                                 </td>
                                 <td>
-                                    <form action="{{ route('admin.document_type.delete', ['id' => $p->id]) }}" method="post">
+                                    <form action="{{ route('admin.staffrole.delete', ['id' => $staff_role->id]) }}" method="post">
                                         @csrf
                                         <button class="btn btn-cs btn-danger"
-                                            onclick="return confirm('Are you sure to delete document_type profile?');">
+                                            onclick="return confirm('Are you sure to delete court profile?');">
                                             <i class="bi-trash"></i>
                                         </button>
                                     </form>
                                 </td>
-                                {{-- <td><a href="{{route('admin.product.delete',['id' => $p->id])}}" onclick="return confirm('Are you sure to remove an item?');">Delete</a></td> --}}
+                                {{-- <td><a href="{{route('admin.staffrole.delete',['id' => $staff_role->id])}}" onclick="return confirm('Are you sure to remove an item?');">Delete</a></td> --}}
                             </tr>
                         @endforeach
                     </tbody>
