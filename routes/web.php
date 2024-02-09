@@ -99,7 +99,7 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/party/create', App\Http\Controllers\PartyController::class . '@create')->name('admin.party.create');
     Route::post('/party/store', App\Http\Controllers\PartyController::class . '@store')->name('admin.party.store');
 
-    Route::get('/staffrole', App\Http\Controllers\CourtStaffController::class . '@index')->name('admin.staffrole.index');
+    Route::get('/staffrole', App\Http\Controllers\StaffRoleController::class . '@index')->name('admin.staffrole.index');
     Route::get('/staffrole/show/{id}', App\Http\Controllers\StaffRoleController::class . '@show')->name('admin.staffrole.show');
     Route::get('/staffrole/create', App\Http\Controllers\StaffRoleController::class . '@create')->name('admin.staffrole.create');
     Route::post('/staffrole/store', App\Http\Controllers\StaffRoleController::class . '@store')->name('admin.staffrole.store');

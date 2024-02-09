@@ -23,9 +23,10 @@
                         </select>
                       </div>
                       <div class="mb-3">
-                        <label class="form-label"> Staff Role Id </label>
+                        <label class="form-label"> Staff role id </label>
                         <select class="form-select">
                           <option>select</option>
+                          <option></option>
                         </select>
                       </div>
                       <button type="submit" class="btn btn-primary">Submit</button>
