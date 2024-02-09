@@ -26,7 +26,7 @@
                                 <td>{{ $p->id }}</td>
                                 <td>{{ $p->getFullName() }}</td>
                                 <td>{{ $p->getAge() }}</td>
-                                <td>{{ $p->id }}</td>
+                                <td>{{ $p->id_number }}</td>
                                 <td><a href="{{ route('admin.person.show', ['id' => $p->id]) }}">Show</a></td>
                                 <td>
                                     {{-- <a href="{{ route('admin.person.edit', ['id' => $p->id]) }}">
