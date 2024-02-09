@@ -63,16 +63,15 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-8">
+                        <div class="mb-4 row" style="float:right">
+                            <button type="submit" class="btn btn-primary ">Submit</button>
+                        </div>
+                    </div>
+                </div>
         </div>
         </form>
-        <div class="row">
-            <div class="col-8">
-                <div class="mb-4 row" style="float:right">
-                    <button type="submit" class="btn btn-primary ">Submit</button>
-                </div>
-            </div>
-        </div>
-
     </div>
 </div>
 </div>

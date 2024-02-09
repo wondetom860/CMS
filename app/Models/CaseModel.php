@@ -9,7 +9,7 @@ class CaseModel extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['case_number', 'cause_of_action', 'court_id', 'case_status','case_type_id','start_date','end_date'];
+    protected $fillable = ['case_number', 'cause_of_action', 'case_status','start_date','end_date'];
 
     public $table='case';
     public static function validate($request)

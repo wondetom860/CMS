@@ -43,7 +43,17 @@ class CaseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        CaseModel::validate($request);
+        $case = new CaseModel();
+        $case->case_number = $request->case_number;
+        $case->case_of_action = $request->case_of_action;
+       // $case->court_id = $request->court_id;
+        //$case->case_type_id = $request->case_type_id;
+        $case->start_date = $request->start_date;
+        $case->end_date = $request->end_date;
+        $case->save();
+        notify()->success('Case Created Successfully', 'Creation Success');
+        return redirect()->route('admin.case.index');
     }
 
     /**
