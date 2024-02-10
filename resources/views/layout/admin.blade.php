@@ -21,7 +21,7 @@
                 <a class="navbar-brand text-white fs-4" href="/">{{ __('MOD - CCMS') }}</a>
             </div>
             <div class="col-lg-10 col-md-9 col-sm-0 p-0 text-end">
-                {{-- <span class="fs-3 text-white">MOD - Course Case Management System</span> --}}
+                {{-- <spa*-n class="fs-3 text-white">MOD - Course Case Management System</spa*-n> --}}
                 <nav class="p-2 shadow text-end">
                     @guest
                         <a href="{{ route('login') }}" class="nav-link active">Login</a>
@@ -50,7 +50,9 @@
                 <hr />
                 <ul class="nav flex-column sidebar">
                     <li><a href="{{ route('admin.home.index') }}" class="nav-link text-white">Home</a></li>
-                    <li><a href="{{ route('admin.document_type.index') }}" class="nav-link text-white">Document Type</a>
+                    <li><a href="{{ route('admin.document.index') }}" class="nav-link text-white">Document</a>
+                    </li>
+                    <li><a href="{{ route('admin.documetype.index') }}" class="nav-link text-white">Document Type</a>
                     </li>
                     <li><a href="{{ route('admin.event.index') }}" class="nav-link text-white">Event</a>
                     </li>
@@ -67,14 +69,17 @@
                     <li><a href="{{ route('admin.party.index') }}" class="nav-link text-white">Parties</a>
 
                     <li><a href="{{ route('admin.staffrole.index') }}" class="nav-link text-white">Staff Role</a>
-                        </li>
+                    </li>
                     </li>
                     <li><a href="{{ route('admin.person.index') }}" class="nav-link text-white">People</a>
-                        
+
                     </li>
                     @can('product-list')
-                        <li><a href="{{ route('admin.document_type.index') }}" class="nav-link text-white">Document Type</a>
+                        <li><a href="{{ route('admin.document.index') }}" class="nav-link text-white">Document</a>
                         </li>
+                        <li><a href="{{ route('admin.document_type.index') }}" class="nav-link text-white">Document
+                                Type</a>
+                        </li>/
                         <li><a href="{{ route('admin.person.index') }}" class="nav-link text-white">People</a>
                         </li>
                     @endcan
