@@ -56,6 +56,9 @@ Route::middleware('auth')->group(function () {
     Route::put('/case/{id}/update', App\Http\Controllers\CaseController::class . '@update')->name('case.update');
     Route::post('/case/{id}/delete', App\Http\Controllers\CaseController::class . '@delete')->name('case.delete');
 
+
+    // for auth users - court
+    Route::get('/courts', App\Http\Controllers\CourtController::class . '@index')->name('courts.index');
 });
 
 Route::middleware('auth')->group(function () {
