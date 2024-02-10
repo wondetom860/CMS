@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class CourtStaff extends Model
 {
     use HasFactory;
@@ -29,4 +30,9 @@ class CourtStaff extends Model
     public function staffroler(){
         return $this->belongsTo(Staffrole::class);
     }
+  public function caseStaffAssignments()
+    {
+        return $this->hasMany(Caset::class, 'court_staff_id');
+    }
 }
+
