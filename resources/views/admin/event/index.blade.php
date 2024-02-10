@@ -5,46 +5,50 @@
     <div class="container d-flix align-items-center flex-column">
         <div class="card">
             <h4 class="card-header">
-                Courts - Admin Panel - MOD-CCMS
-                <a class="btn btn-primary btn-xs register-caseType-btn" href="{{ route('admin.staffrole.create') }}"
-                    style="align-self: flex-end">Register Staff Role</a>
+                events - Admin Panel - MOD-CCMS
+                <a class="btn btn-primary btn-xs pull-right" href="{{ route('admin.event.create') }}"
+                    style="align-self: flex-end">Register New event</a>
             </h4>
             <div class="card-body">
                 <table class="table table-condensed table-hover table-sm table-bordered">
                     <thead>
                         <th>ID</th>
-                        <th>Role Name</th>
-                        <th>Rank</th>
-                        <th>description</th>
+                        <th>case_id</th>
+                        <th>event_type_id</th>
+                        <th>date_time</th>
+                        <th>location</th>
+                        <th>out_come</th>
                         <th>Show</th>
                         <th>Update</th>
                         <th>Delete</th>
                     </thead>
                     <tbody>
-                        @foreach ($viewData['staff_role'] as $staff_role)
+                        @foreach ($viewData['event'] as $event)
                             <tr>
-                                <td>{{ $staff_role->id }}</td>
-                                <td>{{ $staff_role->role_name }}</td>
-                                <td>{{ $staff_role->rank }}</td>
-                                <td>{{ $staff_role->description }}</td>
-                                <td><a href="{{ route('admin.staffrole.show', ['id' => $staff_role->id]) }}">Show</a></td>
+                                <td>{{ $event->id }}</td>
+                                <td>{{ $event->case_id }}</td>
+                                <td>{{ $event->event_type_id }}</td>
+                                <td>{{ $event->date_time }}</td>
+                                <td>{{ $event->location }}</td>    
+                                <td>{{ $event->out_come }}</td>                            
+                                <td><a href="{{ route('admin.event.show', ['id' => $court->id]) }}">Show</a></td>
                                 <td>
-                                    <a href="{{ route('admin.staffrole.edit', ['id' =>$staff_role->id]) }}">
+                                    {{-- <a href="{{ route('admin.event.update', ['id' =>$court->id]) }}">
                                         <button class="btn btn-primary">
                                             <i class="bi-pencil"></i>
                                         </button>
-                                    </a>
+                                    </a> --}}
                                 </td>
                                 <td>
-                                    <form action="{{ route('admin.staffrole.delete', ['id' => $staff_role->id]) }}" method="post">
+                                    {{-- <form action="{{ route('admin.event.delete', ['id' => $item->id]) }}" method="post">
                                         @csrf
                                         <button class="btn btn-cs btn-danger"
                                             onclick="return confirm('Are you sure to delete court profile?');">
                                             <i class="bi-trash"></i>
                                         </button>
-                                    </form>
+                                    </form> --}}
                                 </td>
-                                {{-- <td><a href="{{route('admin.staffrole.delete',['id' => $staff_role->id])}}" onclick="return confirm('Are you sure to remove an item?');">Delete</a></td> --}}
+                                {{-- <td><a href="{{route('admin.event.delete',['id' => $item->id])}}" onclick="return confirm('Are you sure to remove an item?');">Delete</a></td> --}}
                             </tr>
                         @endforeach
                     </tbody>

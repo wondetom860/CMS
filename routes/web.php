@@ -46,6 +46,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/my-account/profile', App\Http\Controllers\MyAccountController::class . '@profile')->name('myaccount.profile');
     Route::post('/my-account/update/{id}', App\Http\Controllers\MyAccountController::class . '@update')->name('myaccount.update.profile');
     Route::post('/my-account/resetPassword/{id}', App\Http\Controllers\MyAccountController::class . '@resetPassword')->name('myaccount.reset.password');
+
+    // case
+    Route::get('/case', App\Http\Controllers\CaseController::class . '@index')->name('case.index');
+    Route::get('/case/show/{id}', App\Http\Controllers\CaseController::class . '@show')->name('case.show');
+    Route::get('/case/create', App\Http\Controllers\CaseController::class . '@create')->name('case.create');
+    Route::post('/case/store', App\Http\Controllers\CaseController::class . '@store')->name('case.store');
+    Route::get('/case/{id}/edit', App\Http\Controllers\CaseController::class . '@edit')->name('case.edit');
+    Route::put('/case/{id}/update', App\Http\Controllers\CaseController::class . '@update')->name('case.update');
+    Route::post('/case/{id}/delete', App\Http\Controllers\CaseController::class . '@delete')->name('case.delete');
+
 });
 
 Route::middleware('auth')->group(function () {
@@ -78,6 +88,7 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/person/{id}/edit', App\Http\Controllers\PersonController::class . '@edit')->name('admin.person.edit');
     Route::put('/person/{id}/update', App\Http\Controllers\PersonController::class . '@update')->name('admin.person.update');
     Route::post('/person/{id}/delete', App\Http\Controllers\PersonController::class . '@destroy')->name('admin.person.delete');
+    Route::post('/person/signup', App\Http\Controllers\PersonController::class . '@signUp')->name('admin.person.signup');
 
     // document-type
     Route::get('/document_type', App\Http\Controllers\DocumetTypeController::class . '@index')->name('admin.document_type.index');
@@ -93,7 +104,12 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/court/show/{id}', App\Http\Controllers\CourtController::class . '@show')->name('admin.court.show');
     Route::get('/court/create', App\Http\Controllers\CourtController::class . '@create')->name('admin.court.create');
     Route::post('/court/store', App\Http\Controllers\CourtController::class . '@store')->name('admin.court.store');
-
+    // event
+    Route::get('/event', App\Http\Controllers\eventController::class . '@index')->name('admin.event.index');
+    Route::get('/event/show/{id}', App\Http\Controllers\eventController::class . '@show')->name('admin.event.show');
+    Route::get('/event/create', App\Http\Controllers\eventController::class . '@create')->name('admin.event.create');
+    Route::post('/event/store', App\Http\Controllers\eventController::class . '@store')->name('admin.event.store');
+    
     Route::get('/party', App\Http\Controllers\PartyController::class . '@index')->name('admin.party.index');
     Route::get('/party/show/{id}', App\Http\Controllers\CourtController::class . '@show')->name('admin.party.show');
     Route::get('/party/create', App\Http\Controllers\PartyController::class . '@create')->name('admin.party.create');
@@ -103,10 +119,21 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/staffrole/show/{id}', App\Http\Controllers\StaffRoleController::class . '@show')->name('admin.staffrole.show');
     Route::get('/staffrole/create', App\Http\Controllers\StaffRoleController::class . '@create')->name('admin.staffrole.create');
     Route::post('/staffrole/store', App\Http\Controllers\StaffRoleController::class . '@store')->name('admin.staffrole.store');
-    Route::get('/staffrole/{id}/edit',  App\Http\Controllers\StaffRoleController::class . '@edit')->name('admin.staffrole.edit');
+    Route::get('/staffrole/{id}/edit', App\Http\Controllers\StaffRoleController::class . '@edit')->name('admin.staffrole.edit');
     Route::post('/staffrole/{id}/delete', App\Http\Controllers\StaffRoleController::class . '@delete')->name('admin.staffrole.delete');
     Route::put('/staffrole/{id}/update', App\Http\Controllers\StaffRoleController::class . '@update')->name('admin.staffrole.update');
-                              //case type
+
+                                //courtstaff
+    Route::get('/courtstaff', App\Http\Controllers\CourtStaffController::class . '@index')->name('admin.courtstaff.index');
+    Route::get('/courtstaff/show/{id}', App\Http\Controllers\CourtStaffController::class . '@show')->name('admin.courtstaff.show');
+    Route::get('/courtstaff/create', App\Http\Controllers\CourtStaffController::class . '@create')->name('admin.courtstaff.create');
+    Route::post('/courtstaff/store', App\Http\Controllers\CourtStaffController::class . '@store')->name('admin.courtstaff.store');
+    Route::get('/courtstaff/{id}/edit',  App\Http\Controllers\CourtStaffController::class . '@edit')->name('admin.courtstaff.edit');
+    Route::post('/courtstaff/{id}/delete', App\Http\Controllers\CourtStaffController::class . '@delete')->name('admin.courtstaff.delete');
+    Route::POST('/courtstaff/{id}/update', App\Http\Controllers\CourtStaffController::class . '@update')->name('admin.courtstaff.update');
+
+    //case type
+
     Route::get('/case_type', App\Http\Controllers\CaseTypeController::class . '@index')->name('admin.case_type.index');
     Route::get('/case_type/show/{id}', App\Http\Controllers\CaseTypeController::class . '@show')->name('admin.case_type.show');
     Route::get('/case_type/create', App\Http\Controllers\CaseTypeController::class . '@create')->name('admin.case_type.create');
@@ -114,7 +141,7 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/case_type/{id}/delete', App\Http\Controllers\CaseTypeController::class . '@delete')->name('admin.case_type.delete');
     Route::get('/case_type/{id}/edit', App\Http\Controllers\CaseTypeController::class . '@edit')->name('admin.case_type.edit');
     Route::put('/case_type/{id}/update', App\Http\Controllers\CaseTypeController::class . '@update')->name('admin.case_type.update');
-                              //party type
+    //party type
     Route::get('/party_type', App\Http\Controllers\PartyTypeController::class . '@index')->name('admin.party_type.index');
     Route::get('/party_type/show/{id}', App\Http\Controllers\PartyTypeController::class . '@show')->name('admin.party_type.show');
     Route::get('/party_type/create', App\Http\Controllers\PartyTypeController::class . '@create')->name('admin.party_type.create');
@@ -137,12 +164,7 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
 
 });
 
-                               //case
-Route::get('/case', App\Http\Controllers\CaseController::class . '@index')->name('case.index');
-Route::get('/case/show/{id}', App\Http\Controllers\CaseController::class . '@show')->name('case.detail');
-Route::get('/case/create', App\Http\Controllers\CaseController::class . '@create')->name('case.create');
-Route::post('/case/store', App\Http\Controllers\CourtController::class . '@store')->name('case.store');
-
+//case
 
 
 

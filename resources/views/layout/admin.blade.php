@@ -52,6 +52,8 @@
                     <li><a href="{{ route('admin.home.index') }}" class="nav-link text-white">Home</a></li>
                     <li><a href="{{ route('admin.document_type.index') }}" class="nav-link text-white">Document Type</a>
                     </li>
+                    <li><a href="{{ route('admin.event.index') }}" class="nav-link text-white">Event</a>
+                    </li>
                     <li><a href="{{ route('admin.event-type.index') }}" class="nav-link text-white">Event Type</a>
                     </li>
                     <li><a href="{{ route('admin.case_type.index') }}" class="nav-link text-white">Case Type</a>
@@ -60,6 +62,8 @@
                     <li><a href="{{ route('admin.party_type.index') }}" class="nav-link text-white">Party Type</a>
                     </li>
                     <li><a href="{{ route('admin.court.index') }}" class="nav-link text-white">Courts</a>
+                    </li>
+                    <li><a href="{{ route('admin.courtstaff.index') }}" class="nav-link text-white">Courts Staff</a>
                     </li>
                     <li><a href="{{ route('admin.party.index') }}" class="nav-link text-white">Parties</a>
 
@@ -139,6 +143,7 @@
     {{-- <script src="/css/bootstrap.min.js"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
     </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     @notifyJs
     @include('notify::components.notify')
 </body>

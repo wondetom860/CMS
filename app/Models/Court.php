@@ -29,4 +29,9 @@ class Court extends Model
         // returns counts of active cases
         return 0;
     }
+
+    public function CaseModel(){
+        return $this->hasMany(CaseModel::class);
+    }
+    
 }
