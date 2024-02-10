@@ -56,6 +56,7 @@
                     </li>
                     <li><a href="{{ route('admin.case_type.index') }}" class="nav-link text-white">Case Type</a>
                     </li>
+                    <li><a href="{{ route('admin.case_staff_assignments.index') }}" class="nav-link text-white">Case Assignment</a>
                     <li><a href="{{ route('admin.party_type.index') }}" class="nav-link text-white">Party Type</a>
                     </li>
                     <li><a href="{{ route('admin.court.index') }}" class="nav-link text-white">Courts</a>
