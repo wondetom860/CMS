@@ -60,7 +60,7 @@ class CourtStaffController extends Controller
      */
    public function show($id)
     {
-        $viewData['court_staff'] = CourtStaff::find($id);
+        $viewData['court_staff'] = CourtStaff::findOrFail($id);
         $viewData['title'] = "Court Staff ";
         $viewData['subtitle'] = "Detail of Court Staff ";
         return view('admin.courtstaff.detail')->with('viewData', $viewData);
@@ -112,7 +112,6 @@ class CourtStaffController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {

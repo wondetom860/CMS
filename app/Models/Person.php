@@ -10,6 +10,7 @@ class Person extends Model
     use HasFactory;
 
     public $table = "persons";
+    public $key = 'id';
 
     protected $stopOnFirstFailure = true;
 
@@ -26,6 +27,11 @@ class Person extends Model
         ]);
     }
 
+    public function getDate()
+    {
+        return date("Y-m-d", $this->dob);
+    }
+
     private function getLogins()
     {
         return User::where(['person_id' => $this->id])->first();
@@ -37,14 +43,14 @@ class Person extends Model
         if ($logins) {
             return "{$logins->user_name}@******";
         } else {
-            return $withLink ?  "<button class='btn btn-info text-right btn-sm' onclick='signupUser({$this->id})'>Create Login Account</button>"
-            :"<p class='bg-warning'>Login account doesn't exist.</p>";
+            return $withLink ? "<button class='btn btn-info text-right btn-sm' onclick='signupUser({$this->id})'>Create Login Account</button>"
+                : "<p class='bg-warning'>Login account doesn't exist.</p>";
         }
     }
 
     public function getFullName()
     {
-        return $this->rank . " " . $this->first_name . " " . $this->fath_nam . " " . $this->gfath_name;
+        return $this->rank . " " . $this->first_name . " " . $this->fath_name . " " . $this->gfath_name;
     }
 
     public function getAge()
@@ -57,7 +63,8 @@ class Person extends Model
         return strtoupper($this->first_name[0] . $this->fath_name[0] . $this->gfath_name[0] . rand(999, 10000));
     }
 
-    public function getDefaultPassword(){
+    public function getDefaultPassword()
+    {
         return "younT@123";
     }
 
