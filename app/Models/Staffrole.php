@@ -20,6 +20,11 @@ class Staffrole extends Model
             'description' => "required|max:255",
         ]);
     }
+
+    public function staffs()
+    {
+        return $this->hasMany(CourtStaff::class);
+    }
 }
 
 

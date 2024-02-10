@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Court;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -52,7 +53,8 @@ class HomeController extends Controller
     public function index()
     {
         $viewData = [];
-        $viewData["title"] = "Home Page - Online Store";
+        $viewData["title"] = "Home Page - CCMS";
+        $viewData['courts_count'] = Court::all()->count();
         return view('home.index')->with("viewData", $viewData);
     }
 
@@ -66,7 +68,8 @@ class HomeController extends Controller
         return view('home.testMenu');
     }
 
-    public function select(){
+    public function select()
+    {
         $records = DB::select('select * from posts');
         return view('home.posts')->with('contacts', $records);
     }
@@ -77,7 +80,7 @@ class HomeController extends Controller
             'Senior Programmer',
             'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam dolor maxime ipsa atque voluptatem est, ut ad quae aliquam odit error, repellat nam inventore veritatis excepturi fuga reiciendis in nobis!',
             3,
-            md5(serialize((object)[
+            md5(serialize((object) [
                 'Senior Programmer',
                 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam dolor maxime ipsa atque voluptatem est, ut ad quae aliquam odit error, repellat nam inventore veritatis excepturi fuga reiciendis in nobis!',
                 3
@@ -85,12 +88,13 @@ class HomeController extends Controller
         ]);
     }
 
-    public function update(){
-        $sig_data = md5(serialize((object)[
+    public function update()
+    {
+        $sig_data = md5(serialize((object) [
             'Web Developer',
             'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam dolor maxime ipsa atque voluptatem est, ut ad quae aliquam odit error, repellat nam inventore veritatis excepturi fuga reiciendis in nobis!',
             3
         ]));
-        DB::update('update posts set sig_data="'.$sig_data.'" where title="Web Developer"');
+        DB::update('update posts set sig_data="' . $sig_data . '" where title="Web Developer"');
     }
 }

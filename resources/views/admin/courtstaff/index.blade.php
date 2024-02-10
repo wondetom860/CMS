@@ -15,7 +15,7 @@
                         <th>ID</th>
                         <th>Court </th>
                         <th>Person</th>
-                        <th>Staff Role name</th>
+                        <th>Staff Role</th>
                         <th>Show</th>
                         <th>Update</th>
                         <th>Delete</th>
@@ -26,17 +26,18 @@
                                 <td>{{ $court_staff->id }}</td>
                                 <td>{{ $court_staff->court->name }}</td>
                                 <td>{{ $court_staff->person->getFullName() }}</td>
-                                <td>{{ $court_staff->staff_role_id }}</td>
+                                <td>{{ $court_staff->staffrole->role_name }}</td>
                                 <td><a href="{{ route('admin.courtstaff.show', ['id' => $court_staff->id]) }}">Show</a></td>
                                 <td>
-                                    <a href="{{ route('admin.courtstaff.edit', ['id' =>$court_staff->id]) }}">
+                                    <a href="{{ route('admin.courtstaff.edit', ['id' => $court_staff->id]) }}">
                                         <button class="btn btn-primary">
                                             <i class="bi-pencil"></i>
                                         </button>
                                     </a>
                                 </td>
                                 <td>
-                                    <form action="{{ route('admin.courtstaff.delete', ['id' => $court_staff->id]) }}" method="post">
+                                    <form action="{{ route('admin.courtstaff.delete', ['id' => $court_staff->id]) }}"
+                                        method="post">
                                         @csrf
                                         <button class="btn btn-cs btn-danger"
                                             onclick="return confirm('Are you sure to delete court profile?');">

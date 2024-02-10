@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('user_name');
             $table->string('password');
             $table->string('email');
-            $table->unsignedBigInteger('phone');
+            $table->atring('phone');
             $table->unsignedBigInteger('person_id');
             $table->foreign('person_id')->references('id')->on('persons');
             $table->timestamps();

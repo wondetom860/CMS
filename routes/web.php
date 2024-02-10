@@ -56,6 +56,9 @@ Route::middleware('auth')->group(function () {
     Route::put('/case/{id}/update', App\Http\Controllers\CaseController::class . '@update')->name('case.update');
     Route::post('/case/{id}/delete', App\Http\Controllers\CaseController::class . '@delete')->name('case.delete');
 
+
+    // for auth users - court
+    Route::get('/courts', App\Http\Controllers\CourtController::class . '@index')->name('courts.index');
 });
 
 Route::middleware('auth')->group(function () {
@@ -104,6 +107,7 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/court/show/{id}', App\Http\Controllers\CourtController::class . '@show')->name('admin.court.show');
     Route::get('/court/create', App\Http\Controllers\CourtController::class . '@create')->name('admin.court.create');
     Route::post('/court/store', App\Http\Controllers\CourtController::class . '@store')->name('admin.court.store');
+    
     // event
     Route::get('/event', App\Http\Controllers\eventController::class . '@index')->name('admin.event.index');
     Route::get('/event/show/{id}', App\Http\Controllers\eventController::class . '@show')->name('admin.event.show');

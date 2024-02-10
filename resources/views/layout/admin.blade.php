@@ -15,7 +15,7 @@
 
 <body>
     <div class="container-fluid">
-        <div class="row bg-success">
+        <div class="row bg-info">
             {{-- header and NavBar --}}
             <div class="col-lg-2 col-md-3 col-sm-0 text-white">
                 <a class="navbar-brand text-white fs-4" href="/">{{ __('MOD - CCMS') }}</a>
