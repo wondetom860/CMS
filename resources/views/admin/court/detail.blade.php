@@ -9,7 +9,7 @@
         <div class="card mb-3">
             <div class="row g-0">
                 <div class="col-md-4 p-2">
-                    <img src="{{ asset('/storage' . '/' . $viewData['court']->logo_image_path) }}" class="img-fluid rounded-start" style="width: 350px; height:auto">
+                    <img src="{{ asset('/images' . $viewData['court']->getLogoPath()) }}" class="img-fluid rounded-start" style="width: 320px; height:auto">
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
