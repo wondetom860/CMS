@@ -6,7 +6,7 @@
         <div class="card">
             <h4 class="card-header">
                 Documents - Admin Panel - CCMS
-                <a class="btn btn-primary btn-xs register-document-btn" href="{{ route('Document.create') }}"
+                <a class="btn btn-primary btn-xs register-document-btn" href="{{ route('admin.document.create') }}"
                     style="align-self: flex-end">Register Document</a>
             </h4>
             <div class="card-body">

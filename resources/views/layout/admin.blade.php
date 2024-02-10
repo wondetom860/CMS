@@ -52,7 +52,8 @@
                     <li><a href="{{ route('admin.home.index') }}" class="nav-link text-white">Home</a></li>
                     <li><a href="{{ route('admin.document.index') }}" class="nav-link text-white">Document</a>
                     </li>
-                    <li><a href="{{ route('admin.documetype.index') }}" class="nav-link text-white">Document Type</a>
+                    <li><a href="{{ route('admin.document_type.index') }}" class="nav-link text-white">Document
+                            Type</a>
                     </li>
                     <li><a href="{{ route('admin.event.index') }}" class="nav-link text-white">Event</a>
                     </li>
