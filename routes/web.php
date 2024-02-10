@@ -205,3 +205,11 @@ Route::get('/{locale?}', function ($locale = null) {
 });
 
 Route::get("language/{locale}", App\Http\Controllers\LocalizationController::class . '@changeLocale')->name('locale');
+
+
+
+use App\Http\Controllers\CaseStaffAssignmentController;
+Route::get('/admin/case_staff_assignments', App\Http\Controllers\CaseStaffAssignmentController::class . '@index')->name('admin.case_staff_assignments.index');
+Route::get('/case_staff_assignments/show/{id}', App\Http\Controllers\CaseStaffAssignmentController::class . '@show')->name('admin.case_staff_assignments.show');
+Route::get('/case_staff_assignments/create', App\Http\Controllers\CaseStaffAssignmentController::class . '@create')->name('admin.case_staff_assignments.create');
+Route::post('/case_staff_assignments/store', App\Http\Controllers\CaseStaffAssignmentController::class . '@store')->name('admin.case_staff_assignments.store');
