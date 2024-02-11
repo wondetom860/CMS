@@ -4,20 +4,27 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Court;
+use Itstructure\GridView\DataProviders\EloquentDataProvider;
 
 class CourtController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
         $viewData['title'] = "Courts";
         $viewData['subtitle'] = "Lists Courts";
         $viewData['courts'] = Court::all();
-        return view('admin.court.index')->with('viewData', $viewData);
+        $dataProvider = new EloquentDataProvider(Court::query());
+        return view('admin.court.index', [
+            'dataProvider' => $dataProvider,
+            'viewData' => $viewData
+        ]);
+
+        // 
+        // return view('admin.court.index')->with('viewData', $viewData);
     }
 
     /**

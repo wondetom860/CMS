@@ -13,13 +13,12 @@
                 <table class="table table-condensed table-hover table-sm table-bordered">
                     <thead>
                         <th>ID</th>
-                        <th>case_number</th>
-                        <th>cause_of_action</th>
-                        <th>court</th>
-                        <th>case_status</th>
-                        <th>case_type</th>
-                        <th>start_date</th>
-                        <th>end_date</th>
+                        <th>Case Numner</th>
+                        <th>Court</th>
+                        <th>Cause</th>
+                        <th>Case Type</th>
+                        <th>Date reported</th>
+                        <th>Status</th>
                         <th>Show</th>
                         <th>Update</th>
                         <th>Delete</th>
@@ -29,12 +28,11 @@
                             <tr>
                                 <td>{{ $c->id }}</td>
                                 <td>{{ $c->case_number }}</td>
+                                <td>{{ $c->court->name }}</td>
                                 <td>{{ $c->cause_of_action }}</td>
-                                <td>{{ $c->court_id }}</td>
-                                <td>{{ $c->case_status }}</td>
-                                <td>{{ $c->case_type_id }}</td>
+                                <td>{{ $c->caseType->case_type_name }}</td>
                                 <td>{{ $c->start_date }}</td>
-                                <td>{{ $c->end_date }}</td>
+                                <td>{{ $c->case_status }}</td>
                                 <td><a href="{{ route('case.show', ['id' => $c->id]) }}">Show</a></td>
                                 <td>
                                     <a href="{{ route('case.edit', ['id' => $c->id]) }}">
