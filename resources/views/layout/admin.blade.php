@@ -58,7 +58,8 @@
                     </li>
                     <li><a href="{{ route('admin.case_type.index') }}" class="nav-link text-white">Case Type</a>
                     </li>
-                    <li><a href="{{ route('admin.case_staff_assignments.index') }}" class="nav-link text-white">Case Assignment</a>
+                    <li><a href="{{ route('admin.case_staff_assignments.index') }}" class="nav-link text-white">Case
+                            Assignment</a>
                     <li><a href="{{ route('admin.party_type.index') }}" class="nav-link text-white">Party Type</a>
                     </li>
                     <li><a href="{{ route('admin.court.index') }}" class="nav-link text-white">Courts</a>
@@ -68,13 +69,14 @@
                     <li><a href="{{ route('admin.party.index') }}" class="nav-link text-white">Parties</a>
 
                     <li><a href="{{ route('admin.staffrole.index') }}" class="nav-link text-white">Staff Role</a>
-                        </li>
+                    </li>
                     </li>
                     <li><a href="{{ route('admin.person.index') }}" class="nav-link text-white">People</a>
-                        
                     </li>
+                    <li><a class="nav-link text-white" href="{{ route('users.index') }}">Manage Users</a></li>
                     @can('product-list')
-                        <li><a href="{{ route('admin.document_type.index') }}" class="nav-link text-white">Document Type</a>
+                        <li><a href="{{ route('admin.document_type.index') }}" class="nav-link text-white">Document
+                                Type</a>
                         </li>
                         <li><a href="{{ route('admin.person.index') }}" class="nav-link text-white">People</a>
                         </li>
@@ -110,7 +112,7 @@
                         <div class="col-12 alert alert-warning alert-dismissible">
                             <ul class="alert alert-danger list-unstyled">
                                 @foreach ($errors->all() as $error)
-                                    <li>- {{ $error }}</li>
+                                    <li>{{ $error }}</li>
                                 @endforeach
                             </ul>
                         </div>
@@ -125,11 +127,11 @@
         <div style="clear: both"></div>
         <div class="row">
             {{-- footer location --}}
-            <div class="copyright py-4 text-center text-white">
+            <div class="copyright py-3 text-center text-white">
                 <div class="container">
                     <small class="copyright">
                         Copyright - <a class="text-reset fw-bold text-decoration-none" target="_blank"
-                            href="https://twitter.com/user">
+                            href="#">
                             MOD
                         </a> - <b>ICT <i>YoungTigers</i></b>
                     </small>
@@ -137,7 +139,6 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
     {{-- include JS file here --}}
     {{-- <script src="/css/bootstrap.min.js"></script> --}}

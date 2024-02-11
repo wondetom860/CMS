@@ -7,6 +7,7 @@ use App\Models\User;
 // use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use App\Models\Person;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class PersonController extends Controller
@@ -69,8 +70,7 @@ class PersonController extends Controller
         $user->person_id = intval($request->person_id);
         $user->phone = $request->phone;
 
-        // var_dump($user);
-        // exit;
+        $user->assignRole('Client');
 
         if ($user->save()) {
             return 1;
@@ -141,10 +141,16 @@ class PersonController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     *
      */
     public function destroy($id)
     {
         //
+    }
+
+    public function findPerson(Request $request)
+    {
+        // $person = ;
+        return json_encode(DB::table('persons')->where('id_number', $request->personId)->first());
     }
 }

@@ -33,8 +33,8 @@ class Court extends Model
 
     public function getActiveCases()
     {
-        // returns counts of active cases
-        return 0;
+        // returns counts of active cases - non-terminated
+        return count($this->CaseModel()->where('case_status','<>',2)->get());
     }
 
     public function CaseModel()

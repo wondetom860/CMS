@@ -40,7 +40,7 @@
                             <div class=" col-md-6 col-sm-12">
                                 <select name="court_id" id="court_id" class="form-control">
                                     @foreach ($viewData['courts'] as $court)
-                                    <option value="{{ $viewData['case']->court_id }}">{{ $viewData['case']->court_name}}</option>
+                                    <option value="{{ $court->id }}">{{ $court->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -55,8 +55,8 @@
                             <div class=" col-md-6 col-sm-12">
                                 <select name="case_type_id" id="case_type_id" class="form-control">
                                     @foreach ($viewData['case_type'] as $case_t)
-                                    <option value="{{ $viewData['case']->case_type_id }}">{{
-                                        $viewData['case']->case_type_name }}</option>
+                                    <option value="{{ $case_t->id }}">{{
+                                        $case_t->case_type_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
