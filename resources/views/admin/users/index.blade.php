@@ -5,17 +5,17 @@
             <div class="pull-left">
                 <h2>Users Management</h2>
             </div>
-            <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('users.create') }}"> Create New User</a>
+            <div class="">
+                <a class="btn btn-success register-caseType-btn" href="{{ route('users.create') }}"> Create New User</a>
             </div>
         </div>
     </div>
-
+{{-- 
     @if ($message = Session::get('success'))
         <div class="alert alert-success">
             <p>{{ $message }}</p>
         </div>
-    @endif
+    @endif --}}
 
     <table class="table table-bordered">
         <tr>

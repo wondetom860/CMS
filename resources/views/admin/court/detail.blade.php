@@ -14,12 +14,14 @@
                 <div class="col-md-8">
                     <div class="card-body">
                         <h5 class="card-title">
-                            {{ $viewData['court']['name'] }} (${{ $viewData['court']->name }})
+                            {{ $viewData['court']['name'] }} ({{ $viewData['court']->name }})
                         </h5>
                         <p class="card-text">{{ $viewData['court']->state }}</p>
                         <p class="card-text">{{ $viewData['court']->city }}</p>
                         <p class="card-text">{{ $viewData['court']->zip }}</p>
-                        <p class="card-text"><small class="text-muted">Register Case</small></p>
+                        <div class="container-fluid">
+                            @include('admin.court.partials.cases_in_court',['court' => $viewData['court']])
+                        </div>
                     </div>
                 </div>
             </div>
