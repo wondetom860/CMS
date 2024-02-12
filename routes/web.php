@@ -30,7 +30,7 @@ Route::get('/test', function () {
 Route::get('/error/{message}', function ($message) {
     return view('error')->with('message', $message);
 })->name('error');
-// 
+//
 Route::get('/home/insert', App\Http\Controllers\HomeController::class . '@insert')->name('sample.insert');
 Route::get('/home/select', App\Http\Controllers\HomeController::class . '@select')->name('sample.select');
 Route::get('/home/update', App\Http\Controllers\HomeController::class . '@update')->name('sample.edit');
@@ -110,6 +110,17 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/court/show/{id}', App\Http\Controllers\CourtController::class . '@show')->name('admin.court.show');
     Route::get('/court/create', App\Http\Controllers\CourtController::class . '@create')->name('admin.court.create');
     Route::post('/court/store', App\Http\Controllers\CourtController::class . '@store')->name('admin.court.store');
+
+
+    //Document
+    Route::get('/document', App\Http\Controllers\DocumentController::class . '@index')->name('admin.document.index');
+    Route::get('/document/show/{id}', App\Http\Controllers\DocumentController::class . '@show')->name('admin.document.show');
+    Route::get('/document/create', App\Http\Controllers\DocumentController::class . '@create')->name('admin.document.create');
+    Route::post('/document/store', App\Http\Controllers\DocumentController::class . '@store')->name('admin.document.store');
+    Route::get('/document/{id}/edit', App\Http\Controllers\DocumentController::class . '@edit')->name('admin.document.edit');
+    Route::put('/document/{id}/update', App\Http\Controllers\DocumentController::class . '@update')->name('admin.document.update');
+    Route::post('/document/{id}/delete', App\Http\Controllers\DocumentController::class . '@destroy')->name('admin.document.delete');
+
 
     // event
     Route::get('/event', App\Http\Controllers\eventController::class . '@index')->name('admin.event.index');
