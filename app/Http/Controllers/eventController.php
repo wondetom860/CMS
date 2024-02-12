@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\CaseModel;
 use App\Models\event;
 
  
 
+use App\Models\EventType;
 use Illuminate\Http\Request;
 
 class eventController extends Controller
@@ -30,6 +32,8 @@ class eventController extends Controller
     public function create()
     {
         $viewData['title'] = 'Admin Page - events - CCMS';
+        $viewData['eventTypes'] = EventType::all();
+        $viewData['cases'] = CaseModel::all();
         return view('admin.event.create')->with('viewData', $viewData);
     }
 
