@@ -52,8 +52,7 @@
                     <li><a href="{{ route('admin.home.index') }}" class="nav-link text-white">Home</a></li>
                     <li><a href="{{ route('admin.document.index') }}" class="nav-link text-white">Document</a>
                     </li>
-                    <li><a href="{{ route('admin.document_type.index') }}" class="nav-link text-white">Document
-                            Type</a>
+                    <li><a href="{{ route('admin.document_type.index') }}" class="nav-link text-white">DocumentType</a>
                     </li>
                     <li><a href="{{ route('admin.event.index') }}" class="nav-link text-white">Event</a>
                     </li>
@@ -62,7 +61,7 @@
                     <li><a href="{{ route('admin.case_type.index') }}" class="nav-link text-white">Case Type</a>
                     </li>
                     <li><a href="{{ route('admin.case_staff_assignments.index') }}" class="nav-link text-white">Case
-                            Assignment</a>
+                            Staff Assignment</a></li>
                     <li><a href="{{ route('admin.party_type.index') }}" class="nav-link text-white">Party Type</a>
                     </li>
                     <li><a href="{{ route('admin.court.index') }}" class="nav-link text-white">Courts</a>
@@ -75,27 +74,27 @@
                     </li>
                     </li>
                     <li><a href="{{ route('admin.person.index') }}" class="nav-link text-white">People</a>
-
                     </li>
-                    <li><a class="nav-link text-white" href="{{ route('users.index') }}">Manage Users</a></li>
-                    @can('product-list')
-                        <li><a href="{{ route('admin.document.index') }}" class="nav-link text-white">Document</a>
-                        </li>
-                        <li><a href="{{ route('admin.document_type.index') }}" class="nav-link text-white">Document
-                                Type</a>
-                        </li>/
-                        <li><a href="{{ route('admin.person.index') }}" class="nav-link text-white">People</a>
-                        </li>
-                    @endcan
                     @can('user-list')
-                        <li><a class="nav-link text-white" href="{{ route('users.index') }}">Manage Users</a></li>
+                        <li><a class="nav-link text-white" href="{{ route('admin.users.index') }}">Manage Users</a></li>
                     @endcan
                     @can('role-list')
-                        <li><a class="nav-link text-white" href="{{ route('roles.index') }}">Manage Role</a></li>
+                        <li><a class="nav-link text-white" href="{{ route('admin.roles.index') }}">Manage Role</a></li>
                     @endcan
-                    {{-- @if (Auth::user()->isAdmin())
-                        <a class="nav-link text-white" href="{{ route('orders.index') }}">{{ __('Orders') }}</a>
-                    @endif --}}
+                    <li>
+                        <ul class="nav flex-column sidebar">
+                            <h5 class="nav-link-header text-white">RBAC</h5>
+                            <li><a href="{{ route('admin.roles.index') }}" class="nav-link text-white">Roles</a></li>
+                            <li><a href="{{ route('admin.users.index') }}" class="nav-link text-white">Users</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <ul class="nav flex-column sidebar">
+                            <h5 class="nav-link-header text-white">RBAC</h5>
+                            <li><a href="{{ route('admin.users.changeUserName') }}" class="nav-link text-white">Change User Name</a></li>
+                            <li><a href="{{ route('admin.users.changePassword') }}" class="nav-link text-white">Change password</a></li>
+                        </ul>
+                    </li>
                     <li>
                         <a href="{{ route('home.index') }}" class="mt-2 btn bg-primary text-white">Go back to the home
                             page</a>
@@ -136,8 +135,7 @@
             <div class="copyright py-3 text-center text-white">
                 <div class="container">
                     <small class="copyright">
-                        Copyright - <a class="text-reset fw-bold text-decoration-none" target="_blank"
-                            href="#">
+                        Copyright - <a class="text-reset fw-bold text-decoration-none" target="_blank" href="#">
                             MOD
                         </a> - <b>ICT <i>YoungTigers</i></b>
                     </small>

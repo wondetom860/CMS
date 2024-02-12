@@ -61,7 +61,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/courts', App\Http\Controllers\CourtController::class . '@index')->name('courts.index');
 
     // seach for person by ID
-    Route::post('/person/findPerson',App\Http\Controllers\PersonController::class . '@findPerson')->name('person.findPerson');
+    Route::post('/person/findPerson', App\Http\Controllers\PersonController::class . '@findPerson')->name('person.findPerson');
 });
 
 Route::middleware('auth')->group(function () {
@@ -159,7 +159,7 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/case_type/{id}/delete', App\Http\Controllers\CaseTypeController::class . '@delete')->name('admin.case_type.delete');
     Route::get('/case_type/{id}/edit', App\Http\Controllers\CaseTypeController::class . '@edit')->name('admin.case_type.edit');
     Route::put('/case_type/{id}/update', App\Http\Controllers\CaseTypeController::class . '@update')->name('admin.case_type.update');
-    
+
     //party type
 
     Route::get('/party_type', App\Http\Controllers\PartyTypeController::class . '@index')->name('admin.party_type.index');
@@ -189,8 +189,15 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::post('/case_staff_assignments/store', App\Http\Controllers\CaseStaffAssignmentController::class . '@store')->name('admin.case_staff_assignments.store');
 
     // User roles and assignment
-    Route::resource('/roles', App\Http\Controllers\Admin\RoleController::class);
-    Route::resource('/users', App\Http\Controllers\Admin\UserController::class);
+    Route::get('/roles', App\Http\Controllers\Admin\RoleController::class . '@index')->name('admin.roles.index');
+    Route::get('/users', App\Http\Controllers\Admin\UserController::class . '@index')->name('admin.users.index');
+    Route::get('/users/show/{id}', App\Http\Controllers\Admin\UserController::class . '@show')->name('admin.users.show');
+    Route::get('/users/{id}/edit', App\Http\Controllers\Admin\UserController::class . '@edit')->name('admin.users.edit');
+    Route::get('/users/{id}/destroy', App\Http\Controllers\Admin\UserController::class . '@destroy')->name('admin.users.destroy');
+
+    // Manage Account
+    Route::get('/users/changeUserName', App\Http\Controllers\Admin\UserController::class . '@changeUserName')->name('admin.users.changeUserName');
+    Route::get('/users/changePassword', App\Http\Controllers\Admin\UserController::class . '@changePassword')->name('admin.users.changePassword');
 });
 
 //case

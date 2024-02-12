@@ -26,8 +26,8 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <label for="name"><strong>Name:</strong></label>
-                    <input type="text" name="name" id="name" placeholder="Name" class="form-control"
-                        value="{{ old('name') }}">
+                    <input type="text" name="user_name" id="user_name" placeholder="User Name" class="form-control"
+                        value="{{ old('user_name') }}">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">

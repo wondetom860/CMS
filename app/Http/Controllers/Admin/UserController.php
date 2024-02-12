@@ -15,11 +15,10 @@ use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-
-
     // function __construct()
     // {
     //     $this->middleware('permission:user-list|user-create|user-edit|user-delete', ['only' => ['index', 'store']]);
@@ -61,14 +60,16 @@ class UserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $this->validate($request, [
-            'name' => 'required',
+            'user_name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirm-password',
             'roles' => 'required'
         ]);
-
-
         $input = $request->all();
+
+        // var_dump($input);
+        // exit;
+
         $input['password'] = Hash::make($input['password']);
 
 
@@ -78,6 +79,10 @@ class UserController extends Controller
 
         return redirect()->route('users.index')
             ->with('success', 'User created successfully');
+    }
+
+    public function changeUserName(){
+        $user = Auth::user();
     }
 
 
@@ -120,12 +125,12 @@ class UserController extends Controller
      */
     public function update(Request $request, $id): RedirectResponse
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email,' . $id,
-            'password' => 'same:confirm-password',
-            'roles' => 'required'
-        ]);
+        // $this->validate($request, [
+        //     'user_name' => 'required',
+        //     'email' => 'required|email|unique:users,email,' . $id,
+        //     'password' => 'same:confirm-password',
+        //     'roles' => 'required'
+        // ]);
 
 
         $input = $request->all();
