@@ -56,11 +56,17 @@ Route::middleware('auth')->group(function () {
     Route::put('/case/{id}/update', App\Http\Controllers\CaseController::class . '@update')->name('case.update');
     Route::post('/case/{id}/delete', App\Http\Controllers\CaseController::class . '@delete')->name('case.delete');
 
+
+    // for auth users - court
+    Route::get('/courts', App\Http\Controllers\CourtController::class . '@index')->name('courts.index');
+
+    // seach for person by ID
+    Route::post('/person/findPerson',App\Http\Controllers\PersonController::class . '@findPerson')->name('person.findPerson');
 });
 
 Route::middleware('auth')->group(function () {
-    Route::resource('/roles', App\Http\Controllers\Admin\RoleController::class);
-    Route::resource('/users', App\Http\Controllers\Admin\UserController::class);
+    // Route::resource('/roles', App\Http\Controllers\Admin\RoleController::class);
+    // Route::resource('/users', App\Http\Controllers\Admin\UserController::class);
 });
 // Route::middleware('hasrole:superAdmin')->group(function () {
 //     Route::get('/roles', App\Http\Controllers\RoleController::class . '@index')->name('roles.index');
@@ -105,6 +111,7 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/court/create', App\Http\Controllers\CourtController::class . '@create')->name('admin.court.create');
     Route::post('/court/store', App\Http\Controllers\CourtController::class . '@store')->name('admin.court.store');
 
+
     //Document
     Route::get('/document', App\Http\Controllers\DocumentController::class . '@index')->name('admin.document.index');
     Route::get('/document/show/{id}', App\Http\Controllers\DocumentController::class . '@show')->name('admin.document.show');
@@ -113,6 +120,7 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/document/{id}/edit', App\Http\Controllers\DocumentController::class . '@edit')->name('admin.document.edit');
     Route::put('/document/{id}/update', App\Http\Controllers\DocumentController::class . '@update')->name('admin.document.update');
     Route::post('/document/{id}/delete', App\Http\Controllers\DocumentController::class . '@destroy')->name('admin.document.delete');
+
 
     // event
     Route::get('/event', App\Http\Controllers\eventController::class . '@index')->name('admin.event.index');
@@ -133,12 +141,12 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::post('/staffrole/{id}/delete', App\Http\Controllers\StaffRoleController::class . '@delete')->name('admin.staffrole.delete');
     Route::put('/staffrole/{id}/update', App\Http\Controllers\StaffRoleController::class . '@update')->name('admin.staffrole.update');
 
-                                //courtstaff
+    //courtstaff
     Route::get('/courtstaff', App\Http\Controllers\CourtStaffController::class . '@index')->name('admin.courtstaff.index');
     Route::get('/courtstaff/show/{id}', App\Http\Controllers\CourtStaffController::class . '@show')->name('admin.courtstaff.show');
     Route::get('/courtstaff/create', App\Http\Controllers\CourtStaffController::class . '@create')->name('admin.courtstaff.create');
     Route::post('/courtstaff/store', App\Http\Controllers\CourtStaffController::class . '@store')->name('admin.courtstaff.store');
-    Route::get('/courtstaff/{id}/edit',  App\Http\Controllers\CourtStaffController::class . '@edit')->name('admin.courtstaff.edit');
+    Route::get('/courtstaff/{id}/edit', App\Http\Controllers\CourtStaffController::class . '@edit')->name('admin.courtstaff.edit');
     Route::post('/courtstaff/{id}/delete', App\Http\Controllers\CourtStaffController::class . '@delete')->name('admin.courtstaff.delete');
     Route::POST('/courtstaff/{id}/update', App\Http\Controllers\CourtStaffController::class . '@update')->name('admin.courtstaff.update');
 
@@ -151,7 +159,9 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/case_type/{id}/delete', App\Http\Controllers\CaseTypeController::class . '@delete')->name('admin.case_type.delete');
     Route::get('/case_type/{id}/edit', App\Http\Controllers\CaseTypeController::class . '@edit')->name('admin.case_type.edit');
     Route::put('/case_type/{id}/update', App\Http\Controllers\CaseTypeController::class . '@update')->name('admin.case_type.update');
+    
     //party type
+
     Route::get('/party_type', App\Http\Controllers\PartyTypeController::class . '@index')->name('admin.party_type.index');
     Route::get('/party_type/show/{id}', App\Http\Controllers\PartyTypeController::class . '@show')->name('admin.party_type.show');
     Route::get('/party_type/create', App\Http\Controllers\PartyTypeController::class . '@create')->name('admin.party_type.create');
@@ -172,6 +182,15 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::put('/event-type/{id}/update', App\Http\Controllers\EventTypeController::class . '@update')->name('admin.event-type.update');
     Route::post('/event-type/{id}/delete', App\Http\Controllers\EventTypeController::class . '@destroy')->name('admin.event-type.delete');
 
+    // case staff assignment 
+    Route::get('/admin/case_staff_assignments', App\Http\Controllers\CaseStaffAssignmentController::class . '@index')->name('admin.case_staff_assignments.index');
+    Route::get('/case_staff_assignments/show/{id}', App\Http\Controllers\CaseStaffAssignmentController::class . '@show')->name('admin.case_staff_assignments.show');
+    Route::get('/case_staff_assignments/create', App\Http\Controllers\CaseStaffAssignmentController::class . '@create')->name('admin.case_staff_assignments.create');
+    Route::post('/case_staff_assignments/store', App\Http\Controllers\CaseStaffAssignmentController::class . '@store')->name('admin.case_staff_assignments.store');
+
+    // User roles and assignment
+    Route::resource('/roles', App\Http\Controllers\Admin\RoleController::class);
+    Route::resource('/users', App\Http\Controllers\Admin\UserController::class);
 });
 
 //case
@@ -215,3 +234,7 @@ Route::get('/{locale?}', function ($locale = null) {
 });
 
 Route::get("language/{locale}", App\Http\Controllers\LocalizationController::class . '@changeLocale')->name('locale');
+
+
+
+// use App\Http\Controllers\CaseStaffAssignmentController;

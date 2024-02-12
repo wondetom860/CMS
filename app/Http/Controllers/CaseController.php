@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CaseModel;
 use App\Models\CaseType;
 use App\Models\Court;
+use App\Models\Person;
 use Illuminate\Http\Request;
 
 class CaseController extends Controller
@@ -20,22 +21,23 @@ class CaseController extends Controller
         $viewData = [];
         $viewData["title"] = "Register_Case - CCMS";
         $viewData["subtitle"] = "List of Cases";
-        $viewData["case"] =CaseModel::all();
+        $viewData["case"] = CaseModel::all();
         return view('case.index')->with('viewData', $viewData);
     }
 
-    
+
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($clientId = null)
     {
         $viewData['title'] = 'Register Case - CCMS';
         $viewData['courts'] = Court::all();
         $viewData['case_type'] = CaseType::all();
+        $viewData['clients'] = $clientId ? ([Person::findOrFail($clientId)]) : (Person::all());
         return view('case.create')->with('viewData', $viewData);
     }
 
@@ -47,14 +49,14 @@ class CaseController extends Controller
      */
     public function store(Request $request)
     {
-        CaseModel::validate($request);
+        // CaseModel::validate($request);
         $case = new CaseModel();
-        $case->case_number = $request->case_number;
-        $case->cause_of_action = $request->cause_of_action;
         $case->court_id = $request->court_id;
+        $case->case_number =$case->getCaseNumber();
+        $case->cause_of_action = $request->cause_of_action;
         $case->case_status = 0;
         $case->case_type_id = $request->case_type_id;
-        $case->start_date = $request->start_date;
+        $case->start_date = date('Y-m-d');
         //$case->end_date = $request->end_date;
         $case->save();
         notify()->success('Case Created Successfully', 'Creation Success');
@@ -103,9 +105,9 @@ class CaseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        CaseModel::validate($request);
+        // CaseModel::validate($request);
         $case = CaseModel::findOrFail($id);
-        $case->case_number = $request->case_number;
+        // $case->case_number = $request->case_number;
         $case->cause_of_action = $request->cause_of_action;
         $case->court_id = $request->court_id;
         $case->case_type_id = $request->case_type_id;
