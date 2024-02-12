@@ -54,7 +54,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/case/store', App\Http\Controllers\CaseController::class . '@store')->name('case.store');
     Route::get('/case/{id}/edit', App\Http\Controllers\CaseController::class . '@edit')->name('case.edit');
     Route::put('/case/{id}/update', App\Http\Controllers\CaseController::class . '@update')->name('case.update');
-    Route::post('/case/{id}/delete', App\Http\Controllers\CaseController::class . '@delete')->name('case.delete');
+    Route::get('/case/{id}/delete', App\Http\Controllers\CaseController::class . '@delete')->name('case.delete');
 
 
     // for auth users - court

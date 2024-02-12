@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('case', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('case_number')->unique;
+            $table->String('case_number')->unique;
             $table->string('cause_of_action');
             $table->unsignedBigInteger('court_id');
             $table->smallInteger('case_status');
