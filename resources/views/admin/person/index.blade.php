@@ -16,6 +16,7 @@
                         <th>Full Name</th>
                         <th>Age</th>
                         <th>ID NUMBER</th>
+                        <th>Login Account</th>
                         <th>Show</th>
                         <th>Update</th>
                         <th>Delete</th>
