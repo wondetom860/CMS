@@ -21,12 +21,25 @@ class Court extends Model
         ]);
     }
 
-    public function getDetail(){
+    public function getLogoPath()
+    {
+        return $this->logo_image_path ? $this->logo_image_path : '/court2.jpg';
+    }
+
+    public function getDetail()
+    {
         return $this->name;
     }
 
-    public function getActiveCases(){
-        // returns counts of active cases
-        return 0;
+    public function getActiveCases()
+    {
+        // returns counts of active cases - non-terminated
+        return count($this->CaseModel()->where('case_status','<>',2)->get());
     }
+
+    public function CaseModel()
+    {
+        return $this->hasMany(CaseModel::class);
+    }
+
 }

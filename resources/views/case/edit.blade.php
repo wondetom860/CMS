@@ -1,36 +1,20 @@
 @extends('layout.mystore')
 @section('title', $viewData['title'])
 @section('content')
+<div class="container">
     <div class="card mb-4">
-        <div class="card-header"> Edit Case
+        <div class="card-header"> Update Case
         </div>
         <div class="card-body">
-            @if ($errors->any())
-                <ul class="alert alert-danger list-unstyled">
-                    @foreach ($errors->all() as $error)
-                        <li>- {{ $error }}</li>
-                    @endforeach
-                </ul>
-            @endif
-            <form method="POST" action="{{ route('case.update', ['id' => $viewData['case']->id]) }}"
-                enctype="multipart/form-data">
+            <form method="POST" action="{{ route('case.update' , ['id' => $viewData['case']->id])}}">
                 @csrf
                 @method('PUT')
                 <div class="row">
                     <div class="col">
-                        <div class="mb-3 row">
-                            <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Name:</label>
-                            <div class="col-lg-10 col-md-6 col-sm-12">
-                                <input name="name" value="{{ $viewData['product']->name }}" type="text"
-                                    class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="mb-3 row">
-                            <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Price:</label>
-                            <div class="col-lg-10 col-md-6 col-sm-12">
-                                <input name="price" value="{{ $viewData['product']->price }}" type="number"
+                        <div class="mb-4 row">
+                            <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">Case Number:</label>
+                            <div class="col-md-6 col-sm-12">
+                                <input name="case_number" value="{{ $viewData['case']->case_number }}" type="text"
                                     class="form-control">
                             </div>
                         </div>
@@ -38,22 +22,67 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <div class="mb-3 row">
-                            <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Image:</label>
-                            <div class="col-lg-10 col-md-6 col-sm-12">
-                                <input class="form-control" type="file" name="image">
+                        <div class="mb-4 row">
+                            <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">Cause Of
+                                Action:</label>
+                            <div class="col-md-6 col-sm-12">
+                                <textarea name="cause_of_action" rows="2"
+                                    class="form-control">{{ $viewData['case']->cause_of_action }}</textarea>
                             </div>
                         </div>
                     </div>
-                    <div class="col"> &nbsp;
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-4 row">
+                            <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">{{ __('Court')
+                                }}:</label>
+                            <div class=" col-md-6 col-sm-12">
+                                <select name="court_id" id="court_id" class="form-control">
+                                    @foreach ($viewData['courts'] as $court)
+                                    <option value="{{ $court->id }}">{{ $court->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label">Description</label>
-                    <textarea class="form-control" name="description" rows="3">{{ $viewData['product']->description }}</textarea>
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-4 row">
+                            <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">{{ __('CaseType')
+                                }}:</label>
+                            <div class=" col-md-6 col-sm-12">
+                                <select name="case_type_id" id="case_type_id" class="form-control">
+                                    @foreach ($viewData['case_type'] as $case_t)
+                                    <option value="{{ $case_t->id }}">{{
+                                        $case_t->case_type_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Edit</button>
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-4 row">
+                            <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">Start Date:</label>
+                            <div class="col-md-6 col-sm-12">
+                                <input name="start_date" value="{{ $viewData['case']->start_date }}" type="date"
+                                    class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8">
+                        <div class="mb-4 row" style="float:right">
+                            <button type="submit" class="btn btn-primary ">Edit</button>
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
+</div>
 @endsection

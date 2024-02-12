@@ -5,7 +5,7 @@
     <div class="container d-flix align-items-center flex-column">
         <div class="card">
             <h4 class="card-header">
-                Cases - Admin Panel - CCMS
+                Cases - CCMS
                 <a class="btn btn-primary btn-xs register-case-btn" href="{{ route('case.create') }}"
                     style="align-self: flex-end">Register Case</a>
             </h4>
@@ -13,13 +13,12 @@
                 <table class="table table-condensed table-hover table-sm table-bordered">
                     <thead>
                         <th>ID</th>
-                        <th>case_number</th>
-                        <th>case_of_action</th>
-                        <th>court_id</th>
-                        <th>case_status</th>
-                        <th>case_type_id</th>
-                        <th>start_date</th>
-                        <th>end_date</th>
+                        <th>Case Numner</th>
+                        <th>Court</th>
+                        <th>Cause</th>
+                        <th>Case Type</th>
+                        <th>Date reported</th>
+                        <th>Status</th>
                         <th>Show</th>
                         <th>Update</th>
                         <th>Delete</th>
@@ -29,21 +28,21 @@
                             <tr>
                                 <td>{{ $c->id }}</td>
                                 <td>{{ $c->case_number }}</td>
-                                <td>${{ $c->case_of_action }}</td>
-                                <td>{{ $c->case_status }}</td>
-                                <td>{{ $c->case_type_id }}</td>
+                                <td>{{ $c->court->name }}</td>
+                                <td>{{ $c->cause_of_action }}</td>
+                                <td>{{ $c->caseType->case_type_name }}</td>
                                 <td>{{ $c->start_date }}</td>
-                                <td>{{ $c->end_date }}</td>
-                                <td><a href="{{ route('case.show', ['id' => $case->id]) }}">Show</a></td>
+                                <td>{{ $c->case_status }}</td>
+                                <td><a href="{{ route('case.show', ['id' => $c->id]) }}">Show</a></td>
                                 <td>
-                                    <a href="{{ route('case.edit', ['id' => $case->id]) }}">
+                                    <a href="{{ route('case.edit', ['id' => $c->id]) }}">
                                         <button class="btn btn-primary">
                                             <i class="bi-pencil"></i>
                                         </button>
                                     </a>
                                 </td>
                                 <td>
-                                    <form action="{{ route('case.delete', ['id' => $case->id]) }}" method="post">
+                                    <form action="{{ route('case.delete', ['id' => $c->id]) }}" method="post">
                                         @csrf
                                         <button class="btn btn-cs btn-danger"
                                             onclick="return confirm('Are you sure to remove an case?');">
@@ -51,7 +50,6 @@
                                         </button>
                                     </form>
                                 </td>
-                                {{-- <td><a href="{{route('case.delete',['id' => $item->id])}}" onclick="return confirm('Are you sure to remove an item?');">Delete</a></td> --}}
                             </tr>
                         @endforeach
                     </tbody>

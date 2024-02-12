@@ -6,7 +6,7 @@
         <div class="card">
             <h4 class="card-header">
                 Party - Admin Panel - MOD-CCMS
-                <a class="btn btn-primary btn-xs pull-right" href="{{ route('admin.party.create') }}"
+                <a class="btn btn-primary btn-xs register-caseType-btn" href="{{ route('admin.party.create') }}"
                     style="align-self: flex-end">Register New party</a>
             </h4>
             <div class="card-body">
