@@ -95,7 +95,14 @@ class CourtController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $court = Court::findOrFail($id);
+        $court->name = $request->name;
+        $court->state = $request->state;
+        $court->city = $request->city;
+        $court->zip = $request->zip;
+        $court->save();
+        notify()->success('Court Updated Successfully', 'Update Success');
+        return redirect()->route('admin.court.index');
     }
 
     /**

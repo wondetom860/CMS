@@ -7,13 +7,15 @@ use App\Models\CaseType;
 use App\Models\Court;
 use App\Models\Person;
 use Illuminate\Http\Request;
+use Itstructure\GridView\DataProviders\EloquentDataProvider;
 
 class CaseController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * 
+     * 
      */
     public function index()
     {
@@ -22,7 +24,11 @@ class CaseController extends Controller
         $viewData["title"] = "Register_Case - CCMS";
         $viewData["subtitle"] = "List of Cases";
         $viewData["case"] = CaseModel::all();
-        return view('case.index')->with('viewData', $viewData);
+        $dataProvider = new EloquentDataProvider(CaseModel::query());
+        return view('case.index', [
+            'dataProvider' => $dataProvider,
+            'viewData' => $viewData
+        ]);
     }
 
 
@@ -71,13 +77,11 @@ class CaseController extends Controller
      */
     public function show($id)
     {
-        $case = CaseModel::find($id); //findOrFail
-        if (is_null($case)) {
-            return view('error')
-                ->with('title', 'Case not found')
-                ->with('message', 'Such cases does NOT exist');
-        }
-        return view('case.show')->with('case', $case);
+        $case = CaseModel::findOrFail($id);
+        $viewData['title'] = 'Case Page - Case Detail - CCMS';
+        $viewData['subtitle'] = "Case Detail: " . $case->getDetail();
+        $viewData['case'] = $case;
+        return view('case.detail')->with('viewData', $viewData);
     }
 
     /**

@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\CaseModel;
 use App\Models\event;
 
  
 
+use App\Models\EventType;
 use Illuminate\Http\Request;
 
 class eventController extends Controller
@@ -30,6 +32,8 @@ class eventController extends Controller
     public function create()
     {
         $viewData['title'] = 'Admin Page - events - CCMS';
+        $viewData['eventTypes'] = EventType::all();
+        $viewData['cases'] = CaseModel::all();
         return view('admin.event.create')->with('viewData', $viewData);
     }
 
@@ -76,10 +80,10 @@ class eventController extends Controller
      */
     public function edit($id)
     {
-        // $viewData = [];
-        // $viewData['title'] = 'Admin Page - Edit event Info - CCMS';
-        // $viewData['event'] = event::findOrFail($id);
-        // return view('admin.event.edit')->with('viewData', $viewData);
+        $viewData = [];
+        $viewData['title'] = 'Admin Page - Edit event Info - CCMS';
+        $viewData['event'] = event::findOrFail($id);
+        return view('admin.event.edit')->with('viewData', $viewData);
     }
 
     /**
@@ -113,7 +117,7 @@ class eventController extends Controller
     {
         event::destroy($id);
         notify()->success('event Deleted Successfully', 'Delete Success');
-        // return back();
-        return redirect()->route('admin.event.index');
+         return back();
+       // return redirect()->route('admin.event.index');
     }
 }
