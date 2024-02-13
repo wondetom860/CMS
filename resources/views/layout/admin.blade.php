@@ -90,9 +90,9 @@
                     </li>
                     <li>
                         <ul class="nav flex-column sidebar">
-                            <h5 class="nav-link-header text-white">RBAC</h5>
-                            <li><a href="{{ route('admin.users.changeUserName') }}" class="nav-link text-white">Change User Name</a></li>
-                            <li><a href="{{ route('admin.users.changePassword') }}" class="nav-link text-white">Change password</a></li>
+                            <h5 class="nav-link-header text-white">Manage Account</h5>
+                            <li><a href="{{ route('myaccount.changeUserName') }}" class="nav-link text-white">Change User Name</a></li>
+                            <li><a href="{{ route('myaccount.changePassword') }}" class="nav-link text-white">Change password</a></li>
                         </ul>
                     </li>
                     <li>
