@@ -31,9 +31,9 @@
                                 <td>{{ $event->date_time }}</td>
                                 <td>{{ $event->location }}</td>    
                                 <td>{{ $event->out_come }}</td>                            
-                                <td><a href="{{ route('admin.event.show', ['id' => $court->id]) }}">Show</a></td>
+                                <td><a href="{{ route('admin.event.show', ['id' => $event->id]) }}">Show</a></td>
                                 <td>
-                                    {{-- <a href="{{ route('admin.event.update', ['id' =>$court->id]) }}">
+                                    {{-- <a href="{{ route('admin.event.update', ['id' =>$event->id]) }}">
                                         <button class="btn btn-primary">
                                             <i class="bi-pencil"></i>
                                         </button>
