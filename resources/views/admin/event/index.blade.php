@@ -13,11 +13,11 @@
                 <table class="table table-condensed table-hover table-sm table-bordered">
                     <thead>
                         <th>ID</th>
-                        <th>case_id</th>
-                        <th>event_type_id</th>
-                        <th>date_time</th>
-                        <th>location</th>
-                        <th>out_come</th>
+                        <th>Case number</th>
+                        <th>Event type</th>
+                        <th>Date </th>
+                        <th>Location</th>
+                        <th>Outcome</th>
                         <th>Show</th>
                         <th>Update</th>
                         <th>Delete</th>
@@ -26,7 +26,7 @@
                         @foreach ($viewData['event'] as $event)
                             <tr>
                                 <td>{{ $event->id }}</td>
-                                <td>{{ $event->case_id }}</td>
+                                <td>{{ $event->case->case_number }}</td>
                                 <td>{{ $event->event_type_id }}</td>
                                 <td>{{ $event->date_time }}</td>
                                 <td>{{ $event->location }}</td>    
