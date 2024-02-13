@@ -24,6 +24,8 @@ class CaseModel extends Model
     {
         return "MODCCMS/" . $this->court_id . "/" . str_pad(rand(99, 10000), 4, "0");
     }
+
+    
     public function caseType()
     {
         return $this->belongsTo(CaseType::class);

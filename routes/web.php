@@ -61,7 +61,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/courts', App\Http\Controllers\CourtController::class . '@index')->name('courts.index');
 
     // seach for person by ID
-    Route::post('/person/findPerson',App\Http\Controllers\PersonController::class . '@findPerson')->name('person.findPerson');
+    Route::post('/person/findPerson', App\Http\Controllers\PersonController::class . '@findPerson')->name('person.findPerson');
 });
 
 Route::middleware('auth')->group(function () {
@@ -159,7 +159,7 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/case_type/{id}/delete', App\Http\Controllers\CaseTypeController::class . '@delete')->name('admin.case_type.delete');
     Route::get('/case_type/{id}/edit', App\Http\Controllers\CaseTypeController::class . '@edit')->name('admin.case_type.edit');
     Route::put('/case_type/{id}/update', App\Http\Controllers\CaseTypeController::class . '@update')->name('admin.case_type.update');
-    
+
     //party type
 
     Route::get('/party_type', App\Http\Controllers\PartyTypeController::class . '@index')->name('admin.party_type.index');
@@ -188,9 +188,7 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/case_staff_assignments/create', App\Http\Controllers\CaseStaffAssignmentController::class . '@create')->name('admin.case_staff_assignments.create');
     Route::post('/case_staff_assignments/store', App\Http\Controllers\CaseStaffAssignmentController::class . '@store')->name('admin.case_staff_assignments.store');
     // routes/web.php
-Route::get('/admin/assign-case/create', App\Http\Controllers\CaseAssignmentController::class. '@create')->name('admin.assign-case.create');
-Route::post('/admin/assign-case', App\Http\Controllers\CaseAssignmentController::class.'@store')->name('admin.assign-case.store');
-
+    
     // User roles and assignment
     Route::resource('/roles', App\Http\Controllers\Admin\RoleController::class);
     Route::resource('/users', App\Http\Controllers\Admin\UserController::class);
