@@ -20,7 +20,7 @@
             </ul>
         </div>
     @endif
-    <form action="{{ route('users.update', $user->id) }}" method="POST">
+    <form action="{{ route('admin.users.update', $user->id) }}" method="POST">
         @csrf
         @method('PATCH')
         <input type="hidden" value="{{$user->person_id}}" name="person_id" class="hidden">

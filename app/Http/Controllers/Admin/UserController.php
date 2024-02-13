@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 
 
 // use DB;
+use App\Models\ChangeUserNameModel;
 use App\Models\User;
 use Illuminate\View\View;
 use Illuminate\Support\Arr;
@@ -82,7 +83,13 @@ class UserController extends Controller
     }
 
     public function changeUserName(){
-        $user = Auth::user();
+        $chunModel = new ChangeUserNameModel();
+        return view('admin.users.change_user_name', compact('chunModel'));
+    }
+
+    public function updateUserName(Request $request){
+        // $chunModel = new ChangeUserName();
+        // return view('admin.users.change_user_name', compact('user'));
     }
 
 

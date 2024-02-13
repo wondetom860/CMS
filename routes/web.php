@@ -194,7 +194,10 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/users/show/{id}', App\Http\Controllers\Admin\UserController::class . '@show')->name('admin.users.show');
     Route::get('/users/{id}/edit', App\Http\Controllers\Admin\UserController::class . '@edit')->name('admin.users.edit');
     Route::get('/users/{id}/destroy', App\Http\Controllers\Admin\UserController::class . '@destroy')->name('admin.users.destroy');
+    Route::get('/users/{id}/changeUserName', App\Http\Controllers\Admin\UserController::class . '@changeUserName')->name('admin.users.changeUserName');
+    Route::post('/users/updateUserName', App\Http\Controllers\Admin\UserController::class . '@updateUserName')->name('admin.users.updateUserName');
 
+    // 
     // Manage Account
     Route::get('/users/changeUserName', App\Http\Controllers\Admin\UserController::class . '@changeUserName')->name('admin.users.changeUserName');
     Route::get('/users/changePassword', App\Http\Controllers\Admin\UserController::class . '@changePassword')->name('admin.users.changePassword');

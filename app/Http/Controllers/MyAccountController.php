@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ChangePasswordModel;
+use App\Models\ChangeUserNameModel;
 use App\Models\User;
 use App\Models\Order;
 use Illuminate\Http\Request;
@@ -44,13 +46,23 @@ class MyAccountController extends Controller
         }
     }
 
+    public function changeUserName(){
+        $chunModel = new ChangeUserNameModel();
+        return view('admin.users.change_user_name', compact('chunModel'));
+    }
+
+    public function changePassword(){
+        $chunModel = new ChangePasswordModel();
+        return view('admin.users.change_password', compact('chunModel'));
+    }
+
     public function resetPassword($id)
     {
         $user = User::find($id);
         if (Auth::user()->id != $user->id) {
             notify()->error("Reset Password request declined", "You can reset your own password only.");
         } else {
-            $dpwd = 'P@$$W)RD';
+            $dpwd = $user->getDefaultPassword();//'P@$$W)RD';
             $user->password = Hash::make($dpwd);
             if ($user->save()) {
                 notify()->success('Your login password resetted to ' . $dpwd, 'Password reset success');
