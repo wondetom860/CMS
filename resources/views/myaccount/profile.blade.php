@@ -7,16 +7,10 @@
             <div class="col-md-7 col-lg-7 col-sm-6">
                 <div class="card">
                     <div class="card-header">
-                        Profile
+                        Manage login account
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('myaccount.update.profile', ['id' => $viewData['profile']->id]) }}"
-                            method="post">
-                            @csrf
-                            <input type="text" class="form-control" name="name" value="{{ $viewData['profile']->name }}">
-                            <br>
-                            <button class="btn bg-primary" type="submit">Update</button>
-                        </form>
+                        @include('myaccount.partials._change_user_name_form')
                     </div>
                 </div>
             </div>
@@ -26,9 +20,11 @@
                         More
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('myaccount.reset.password', ['id' => $viewData['profile']->id]) }}" method="post">
+                        <form action="{{ route('myaccount.update.password', ['id' => $viewData['profile']->id]) }}"
+                            method="post">
                             @csrf
-                            <button onclick="return confirm('Are you sure to reset your password?')" class="btn bg-warning" type="submit">Reset Password</button>
+                            <button onclick="return confirm('Are you sure to reset your password?')" class="btn bg-warning"
+                                type="submit">Reset Password</button>
                         </form>
                     </div>
                 </div>
