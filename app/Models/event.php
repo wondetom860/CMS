@@ -28,4 +28,18 @@ class event extends Model
     public function case(){
         return $this->belongsTo(CaseModel::class);
     }
+
+    public function eventType(){
+        return $this->belongsTo(EventType::class);
+    }
+
+    public function getLogoPath()
+    {
+        return $this->logo_image_path ? $this->logo_image_path : '/court2.jpg';
+    }
+
+    public function getDetail()
+    {
+        return $this->case->case_number;
+    }
 }

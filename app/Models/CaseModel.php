@@ -59,16 +59,16 @@ class CaseModel extends Model
 
     public function documents()
     {
-        return $this->hasMany(DocumentType::class,'id');
+        return $this->hasMany(Document::class,'case_id');
     }
     public function events()
     {
-        return $this->hasMany(event::class,'id');
+        return $this->hasMany(event::class,'case_id');
     }
 
     public function staffs()
     {
-        return $this->hasMany(Case_Staff_Assignment::class,'id');
+        return $this->hasMany(Case_Staff_Assignment::class,'case_id');
     }
    
     public function eventType()

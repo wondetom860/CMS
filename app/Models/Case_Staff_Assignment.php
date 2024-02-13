@@ -36,7 +36,7 @@ public $table= 'case_staff_assignment';
     }
 
     public function assignedBy(){
-        return $this->belongsTo(User::class,'id');
+        return $this->belongsTo(User::class,'assigned_by');
     }
 
     public function courtStaff()
