@@ -28,4 +28,8 @@ class event extends Model
     public function case(){
         return $this->belongsTo(CaseModel::class);
     }
+
+    public function eventType(){
+        return $this->belongsTo(EventType::class);
+    }
 }
