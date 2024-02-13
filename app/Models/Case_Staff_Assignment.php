@@ -25,17 +25,18 @@ public $table= 'case_staff_assignment';
             'court_staff_id'=>"required|:255",
             'assigned_as' => "required|max:255",
             'assigned_at'=> "required|date",
-            'assigned_by'=> "max:255",
+            'assigned_by'=> "numeric|gt:0",
         ]);
     }
 
-
-
     // Define relationships
-    public function caset()
+    public function case()
     {
+        return $this->belongsTo(CaseModel::class);
+    }
 
-        return $this->belongsTo(Caset::class);
+    public function assignedBy(){
+        return $this->belongsTo(User::class,'id');
     }
 
     public function courtStaff()
