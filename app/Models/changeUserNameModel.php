@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Validator;
 class ChangeUserNameModel extends Model
 {
 
-    public $prevUserName, $newUserName, $newUserNameConfirm;
+    public $prevUserName, $newUserName, $newUserNameConfirm, $id;
 
 
     // public $table = 'case';
@@ -25,12 +25,12 @@ class ChangeUserNameModel extends Model
         ]);
     }
 
-    public function changeUserName($id, $old, $new1, $new2)
+    public function changeUserName()
     {
-        $user = User::findOrFail($id);
-        if ($user->user_name == $old) {
-            if ($new1 == $new2) {
-                $user->user_name = $new1;
+        $user = User::findOrFail($this->id);
+        if ($user->user_name == $this->old) {
+            if ($this->new1 == $this->new2) {
+                $user->user_name = $this->new1;
                 $user->update();
                 return [1, "Username changed"];
             } else {
