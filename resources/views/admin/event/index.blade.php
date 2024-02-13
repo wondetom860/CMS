@@ -6,7 +6,7 @@
         <div class="card">
             <h4 class="card-header">
                 events - Admin Panel - MOD-CCMS
-                <a class="btn btn-primary btn-xs pull-right" href="{{ route('admin.event.create') }}"
+                <a class="btn btn-primary btn-xs register-caseType-btn" href="{{ route('admin.event.create') }}"
                     style="align-self: flex-end">Register New event</a>
             </h4>
             <div class="card-body">

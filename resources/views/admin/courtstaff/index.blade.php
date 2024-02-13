@@ -6,7 +6,7 @@
         <div class="card">
             <h4 class="card-header">
                 Courts - Admin Panel - MOD-CCMS
-                <a class="btn btn-primary btn-xs pull-right" href="{{ route('admin.courtstaff.create') }}"
+                <a class="btn btn-primary btn-xs register-caseType-btn" href="{{ route('admin.courtstaff.create') }}"
                     style="align-self: flex-end">Register Court Staff </a>
             </h4>
             <div class="card-body">
