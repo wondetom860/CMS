@@ -41,7 +41,7 @@
                     <div class="mb-4 row">
                         <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">Date:</label>
                         <div class="col-lg-6 col-md-6 col-sm-12 text-left">
-                            <input type="date" class="form-control">
+                            <input name="date_time" type="date" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                             <div class="mb-4 row">
                                 <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">Location:</label>
                                 <div class="col-lg-6 col-md-6 col-sm-12 text-left">
-                                    <input name="Location" value="{{ old('Location') }}" type="text"
+                                    <input name="location" value="{{ old('location') }}" type="text"
                                         class="form-control">
                                 </div>
                             </div>
@@ -63,7 +63,7 @@
                             <div class="mb-4 row">
                                 <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">Outcome:</label>
                                 <div class="col-lg-6 col-md-6 col-sm-12 text-left">
-                                    <input name="Outcome" value="{{ old('Outcome') }}" type="text"
+                                    <input name="out_come" value="{{ old('out_come') }}" type="text"
                                         class="form-control">
                                 </div>
                             </div>
