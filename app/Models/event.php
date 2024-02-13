@@ -24,4 +24,8 @@ class event extends Model
             'out_come' => "max:255",
         ]);
     }
+
+    public function case(){
+        return $this->belongsTo(CaseModel::class);
+    }
 }
