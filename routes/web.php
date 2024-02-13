@@ -127,6 +127,8 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/event/show/{id}', App\Http\Controllers\eventController::class . '@show')->name('admin.event.show');
     Route::get('/event/create', App\Http\Controllers\eventController::class . '@create')->name('admin.event.create');
     Route::post('/event/store', App\Http\Controllers\eventController::class . '@store')->name('admin.event.store');
+    Route::put('/event/{id}/update', App\Http\Controllers\eventController::class . '@update')->name('admin.event.update');
+    Route::post('/event/{id}/delete', App\Http\Controllers\eventController::class . '@destroy')->name('admin.event.delete');
 
     Route::get('/party', App\Http\Controllers\PartyController::class . '@index')->name('admin.party.index');
     Route::get('/party/show/{id}', App\Http\Controllers\CourtController::class . '@show')->name('admin.party.show');
@@ -187,7 +189,8 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/case_staff_assignments/show/{id}', App\Http\Controllers\CaseStaffAssignmentController::class . '@show')->name('admin.case_staff_assignments.show');
     Route::get('/case_staff_assignments/create', App\Http\Controllers\CaseStaffAssignmentController::class . '@create')->name('admin.case_staff_assignments.create');
     Route::post('/case_staff_assignments/store', App\Http\Controllers\CaseStaffAssignmentController::class . '@store')->name('admin.case_staff_assignments.store');
-
+    // routes/web.php
+    
     // User roles and assignment
     Route::get('/roles', App\Http\Controllers\Admin\RoleController::class . '@index')->name('admin.roles.index');
     Route::get('/users', App\Http\Controllers\Admin\UserController::class . '@index')->name('admin.users.index');

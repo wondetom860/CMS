@@ -21,6 +21,10 @@ class CourtStaff extends Model
 
         ]);
     }
+    public function getStaffDetail()
+    {
+        return $this->person->getFullName();
+    }
     public function person()
     {
         return $this->belongsTo(Person::class);
@@ -38,4 +42,3 @@ class CourtStaff extends Model
         return $this->hasMany(Caset::class, 'court_staff_id');
     }
 }
-
