@@ -189,14 +189,18 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/case_staff_assignments/show/{id}', App\Http\Controllers\CaseStaffAssignmentController::class . '@show')->name('admin.case_staff_assignments.show');
     Route::get('/case_staff_assignments/create', App\Http\Controllers\CaseStaffAssignmentController::class . '@create')->name('admin.case_staff_assignments.create');
     Route::post('/case_staff_assignments/store', App\Http\Controllers\CaseStaffAssignmentController::class . '@store')->name('admin.case_staff_assignments.store');
-
+    // routes/web.php
+    
     // User roles and assignment
     Route::get('/roles', App\Http\Controllers\Admin\RoleController::class . '@index')->name('admin.roles.index');
     Route::get('/users', App\Http\Controllers\Admin\UserController::class . '@index')->name('admin.users.index');
     Route::get('/users/show/{id}', App\Http\Controllers\Admin\UserController::class . '@show')->name('admin.users.show');
     Route::get('/users/{id}/edit', App\Http\Controllers\Admin\UserController::class . '@edit')->name('admin.users.edit');
     Route::get('/users/{id}/destroy', App\Http\Controllers\Admin\UserController::class . '@destroy')->name('admin.users.destroy');
+    Route::get('/users/{id}/changeUserName', App\Http\Controllers\Admin\UserController::class . '@changeUserName')->name('admin.users.changeUserName');
+    Route::post('/users/updateUserName', App\Http\Controllers\Admin\UserController::class . '@updateUserName')->name('admin.users.updateUserName');
 
+    // 
     // Manage Account
     Route::get('/users/changeUserName', App\Http\Controllers\Admin\UserController::class . '@changeUserName')->name('admin.users.changeUserName');
     Route::get('/users/changePassword', App\Http\Controllers\Admin\UserController::class . '@changePassword')->name('admin.users.changePassword');

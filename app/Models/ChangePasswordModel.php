@@ -4,24 +4,23 @@ namespace App\Models;
 
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Validator;
 
-class ChangeUserNameModel extends Model
+class ChangePasswordModel extends Model
 {
 
-    public $prevUserName, $newUserName, $newUserNameConfirm;
+    public $prevPassword, $newPassword, $newPasswordConfirm;
 
 
     // public $table = 'case';
     public static function validate($request)
     {
         return Validator::make($request, [
-            'prevUserName' => ['required', 'string', 'max:255'],
-            'NewUserName' =>  ['required', 'string', 'max:255'],
-            'NewUserNameConfirm' => ['required', 'string', 'max:255'],
-            'newUserName' => ['unique:web_user', 'confirmed'],
-            // 'newUserName' => ['required', 'string', 'min:8', 'confirmed'],
+            'prevPassword' => ['required', 'string', 'max:255'],
+            'NewPassword' =>  ['required', 'string', 'max:255'],
+            'NewPasswordConfirm' => ['required', 'string', 'max:255'],
+            'newPassword' => ['unique:web_user', 'confirmed'],
+            // 'newPassword' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
 
