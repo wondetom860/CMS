@@ -35,7 +35,7 @@ class CourtStaff extends Model
     }
     public function staffrole()
     {
-        return $this->belongsTo(Staffrole::class, 'id');
+        return $this->belongsTo(Staffrole::class, 'staff_role_id');
     }
     public function caseStaffAssignments()
     {
