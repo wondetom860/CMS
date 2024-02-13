@@ -127,8 +127,9 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/event/show/{id}', App\Http\Controllers\eventController::class . '@show')->name('admin.event.show');
     Route::get('/event/create', App\Http\Controllers\eventController::class . '@create')->name('admin.event.create');
     Route::post('/event/store', App\Http\Controllers\eventController::class . '@store')->name('admin.event.store');
+    Route::get('/event/{id}/edit', App\Http\Controllers\eventController::class . '@edit')->name('admin.event.edit');
     Route::put('/event/{id}/update', App\Http\Controllers\eventController::class . '@update')->name('admin.event.update');
-    Route::post('/event/{id}/delete', App\Http\Controllers\eventController::class . '@destroy')->name('admin.event.delete');
+    Route::get('/event/{id}/delete', App\Http\Controllers\eventController::class . '@destroy')->name('admin.event.delete');
 
     Route::get('/party', App\Http\Controllers\PartyController::class . '@index')->name('admin.party.index');
     Route::get('/party/show/{id}', App\Http\Controllers\CourtController::class . '@show')->name('admin.party.show');

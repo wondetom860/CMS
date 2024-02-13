@@ -60,7 +60,7 @@ class CaseStaffAssignmentController extends Controller
         $case_staff_assignment->case_id = $request->case_id;
         $case_staff_assignment->court_staff_id = $request->court_staff_id;
         $case_staff_assignment->assigned_as = $case_staff_assignment->courtStaff->staffrole->role_name;
-        $case_staff_assignment->assigned_by = Auth::user()->user_name;
+        $case_staff_assignment->assigned_by = Auth::user()->id;
         $case_staff_assignment->assigned_at = date("Y-m-d");
         // $case_staff_assignment->updated_at = $request->updated_at;
         $case_staff_assignment->save();
