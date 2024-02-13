@@ -187,6 +187,9 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/case_staff_assignments/show/{id}', App\Http\Controllers\CaseStaffAssignmentController::class . '@show')->name('admin.case_staff_assignments.show');
     Route::get('/case_staff_assignments/create', App\Http\Controllers\CaseStaffAssignmentController::class . '@create')->name('admin.case_staff_assignments.create');
     Route::post('/case_staff_assignments/store', App\Http\Controllers\CaseStaffAssignmentController::class . '@store')->name('admin.case_staff_assignments.store');
+    // routes/web.php
+Route::get('/admin/assign-case/create', App\Http\Controllers\CaseAssignmentController::class. '@create')->name('admin.assign-case.create');
+Route::post('/admin/assign-case', App\Http\Controllers\CaseAssignmentController::class.'@store')->name('admin.assign-case.store');
 
     // User roles and assignment
     Route::resource('/roles', App\Http\Controllers\Admin\RoleController::class);
