@@ -138,9 +138,13 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/event/{id}/delete', App\Http\Controllers\eventController::class . '@destroy')->name('admin.event.delete');
 
     Route::get('/party', App\Http\Controllers\PartyController::class . '@index')->name('admin.party.index');
-    Route::get('/party/show/{id}', App\Http\Controllers\CourtController::class . '@show')->name('admin.party.show');
+    Route::get('/party/show/{id}', App\Http\Controllers\PartyController::class . '@show')->name('admin.party.show');
     Route::get('/party/create', App\Http\Controllers\PartyController::class . '@create')->name('admin.party.create');
     Route::post('/party/store', App\Http\Controllers\PartyController::class . '@store')->name('admin.party.store');
+    Route::get('/party/{id}/edit', App\Http\Controllers\PartyController::class . '@edit')->name('admin.party.edit');
+    Route::put('/party/{id}/update', App\Http\Controllers\PartyController::class . '@update')->name('admin.party.update');
+    Route::get('/party/{id}/delete',  App\Http\Controllers\PartyController::class . '@destroy')->name('admin.party.delete');
+
 
     Route::get('/staffrole', App\Http\Controllers\StaffRoleController::class . '@index')->name('admin.staffrole.index');
     Route::get('/staffrole/show/{id}', App\Http\Controllers\StaffRoleController::class . '@show')->name('admin.staffrole.show');
