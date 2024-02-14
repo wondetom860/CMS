@@ -4,7 +4,7 @@
 @section('content')
 <div class="container">
         <h3 class="float-right">
-            Detail: 
+            Detail: {{ $viewData['party']->getDetail() }} 
         </h3>
         <div class="card mb-3">
             <div class="row g-0">
@@ -16,7 +16,7 @@
                         <p class="card-text"><b>Case number : </b>{{ $viewData['party']->case->case_number }}</p>
                         <p class="card-text"><b>Person : </b>{{ $viewData['party']->person->getFullName() }}</p>
                         <p class="card-text"><b>Party Type : </b>{{ $viewData['party']->partyType->party_type_name}}</p>
-                        <p class="card-text"><b>Date : </b>{{ $viewData['party']->date_time }}</p>
+                        <p class="card-text"><b>Date : </b>{{ $viewData['party']->created_at }}</p>
                         <div class="container-fluid">
                             @include('admin.party.partials._docs',['party' => $viewData['party']])
                         </div>

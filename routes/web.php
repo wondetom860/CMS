@@ -143,7 +143,7 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::post('/party/store', App\Http\Controllers\PartyController::class . '@store')->name('admin.party.store');
     Route::get('/party/{id}/edit', App\Http\Controllers\PartyController::class . '@edit')->name('admin.party.edit');
     Route::put('/party/{id}/update', App\Http\Controllers\PartyController::class . '@update')->name('admin.party.update');
-    Route::get('/party/{id}/delete',  App\Http\Controllers\PartyController::class . '@destroy')->name('admin.party.delete');
+    Route::get('/party/{id}/delete',  App\Http\Controllers\PartyController::class . '@delete')->name('admin.party.delete');
 
 
     Route::get('/staffrole', App\Http\Controllers\StaffRoleController::class . '@index')->name('admin.staffrole.index');
