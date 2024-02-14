@@ -23,6 +23,9 @@ protected $table = 'case_staff_assignment';
     {
         return $this->belongsTo(StaffModel::class, 'staff_id');
     }
+
+    
+
 }
 
 
