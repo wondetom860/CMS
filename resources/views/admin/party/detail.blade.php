@@ -17,6 +17,15 @@
                         <p class="card-text"><b>Person : </b>{{ $viewData['party']->person->getFullName() }}</p>
                         <p class="card-text"><b>Party Type : </b>{{ $viewData['party']->partyType->party_type_name}}</p>
                         <p class="card-text"><b>Date : </b>{{ $viewData['party']->date_time }}</p>
+                        <div class="container-fluid">
+                            @include('admin.party.partials._docs',['party' => $viewData['party']])
+                        </div>
+                        <div class="container-fluid">
+                            @include('admin.party.partials._events',['party' => $viewData['party']])
+                        </div>
+                        <div class="container-fluid">
+                            @include('admin.party.partials._staffs',['party' => $viewData['party']])
+                        </div>
                         
                     </div>
                 </div>
