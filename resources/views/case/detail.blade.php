@@ -26,6 +26,9 @@
                         <div class="container-fluid">
                             @include('case.partials._staffs',['case' => $viewData['case']])
                         </div>
+                        <div class="container-fluid">
+                            @include('case.partials._parties',['case' => $viewData['case']])
+                        </div>
                     </div>
                 </div>
             </div>

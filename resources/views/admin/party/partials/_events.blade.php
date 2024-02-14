@@ -1,5 +1,5 @@
 @php
-    $events = $case->events;
+    $events = $party->events;
     if ($events) {
         echo "<h6>Events Attached To This Case</h6>
         <table class='table table-condensed table-sm table-bordered' style='font-size: 9pt;'>

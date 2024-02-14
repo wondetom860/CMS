@@ -14,7 +14,7 @@
                         <div class="mb-4 row">
                             <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">Case Number:</label>
                             <div class="col-md-6 col-sm-12">
-                                <input name="case_number" value="{{ $viewData['case']->case_number }}" type="text"
+                                <input name="case_number" @readonly(true) value="{{ $viewData['case']->case_number }}" type="text"
                                     class="form-control">
                             </div>
                         </div>
@@ -40,7 +40,8 @@
                             <div class=" col-md-6 col-sm-12">
                                 <select name="court_id" id="court_id" class="form-control">
                                     @foreach ($viewData['courts'] as $court)
-                                    <option value="{{ $court->id }}">{{ $court->name}}</option>
+                                    <option value="{{ $court->id }}" @selected($court->id == $viewData['case']->court_id)>
+                                        {{ $court->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -55,7 +56,7 @@
                             <div class=" col-md-6 col-sm-12">
                                 <select name="case_type_id" id="case_type_id" class="form-control">
                                     @foreach ($viewData['case_type'] as $case_t)
-                                    <option value="{{ $case_t->id }}">{{
+                                    <option value="{{ $case_t->id }}" @selected($case_t->id == $viewData['case']->case_type_id)>{{
                                         $case_t->case_type_name }}</option>
                                     @endforeach
                                 </select>

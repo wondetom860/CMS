@@ -1,5 +1,5 @@
 @php
-    $staffs = $case->staffs;
+    $staffs = $party->staffs;
     if ($staffs) {
         echo "<h6>Staffs Assign To This Case</h6>
         <table class='table table-condensed table-sm table-bordered' style='font-size: 9pt;'>

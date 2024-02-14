@@ -44,4 +44,14 @@ class Case_Staff_Assignment extends Model
     {
         return $this->belongsTo(CourtStaff::class, 'court_staff_id');
     }
+
+    public function getLogoPath()
+    {
+        return $this->logo_image_path ? $this->logo_image_path : '/court2.jpg';
+    }
+
+    public function getDetail()
+    {
+        return $this->case->case_number;
+    }
 }
