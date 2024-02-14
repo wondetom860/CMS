@@ -16,7 +16,8 @@
                         <th>Full Name</th>
                         <th>Age</th>
                         <th>ID NUMBER</th>
-                        <th>Show</th>
+                        <th>description</th>
+                        <th>show</th>
                         <th>Update</th>
                         <th>Delete</th>
                     </thead>
