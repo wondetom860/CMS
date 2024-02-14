@@ -76,10 +76,10 @@
                     <li><a href="{{ route('admin.person.index') }}" class="nav-link text-white">People</a>
                     </li>
                     @can('user-list')
-                        <li><a class="nav-link text-white" href="{{ route('admin.users.index') }}">Manage Users</a></li>
+                       // <li><a class="nav-link text-white" href="{{ route('admin.users.index') }}">Manage Users</a></li>
                     @endcan
                     @can('role-list')
-                        <li><a class="nav-link text-white" href="{{ route('admin.roles.index') }}">Manage Role</a></li>
+                       // <li><a class="nav-link text-white" href="{{ route('admin.roles.index') }}">Manage Role</a></li>
                     @endcan
                     <li>
                         <ul class="nav flex-column sidebar">
@@ -91,8 +91,8 @@
                     <li>
                         <ul class="nav flex-column sidebar">
                             <h5 class="nav-link-header text-white">Manage Account</h5>
-                            <li><a href="{{ route('myaccount.changeUserName') }}" class="nav-link text-white">Change User Name</a></li>
-                            <li><a href="{{ route('myaccount.changePassword') }}" class="nav-link text-white">Change password</a></li>
+                            <li><a href="{{ route('myaccount.change.username') }}" class="nav-link text-white">Change User Name</a></li>
+                            <li><a href="{{ route('myaccount.change.password') }}" class="nav-link text-white">Change password</a></li>
                         </ul>
                     </li>
                     <li>

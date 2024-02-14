@@ -43,4 +43,14 @@ public $table= 'case_staff_assignment';
     {
         return $this->belongsTo(CourtStaff::class);
     }
+
+    public function getLogoPath()
+    {
+        return $this->logo_image_path ? $this->logo_image_path : '/court2.jpg';
+    }
+
+    public function getDetail()
+    {
+        return $this->case->case_number;
+    }
 }

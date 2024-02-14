@@ -14,7 +14,7 @@
                         <div class="mb-4 row">
                             <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">Case Number:</label>
                             <div class="col-md-6 col-sm-12">
-                                <input name="case_number" value="{{ $viewData['case']->case_number }}" type="text"
+                                <input name="case_number" @readonly(true) value="{{ $viewData['case']->case_number }}" type="text"
                                     class="form-control">
                             </div>
                         </div>
