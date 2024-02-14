@@ -6,7 +6,7 @@
                 <h2>Edit New User</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('users.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('admin.users.index') }}"> Back</a>
             </div>
         </div>
     </div>
@@ -20,7 +20,7 @@
             </ul>
         </div>
     @endif
-    <form action="{{ route('users.update', $user->id) }}" method="POST">
+    <form action="{{ route('admin.users.update', $user->id) }}" method="POST">
         @csrf
         @method('PATCH')
         <input type="hidden" value="{{$user->person_id}}" name="person_id" class="hidden">
