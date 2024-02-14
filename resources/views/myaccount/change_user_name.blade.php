@@ -22,7 +22,7 @@
                         </ul>
                     </div>
                 @endif
-                <form action="{{ route('myaccount.updateUserName') }}" method="POST">
+                <form action="{{ route('myaccount.update.username') }}" method="POST">
                     @csrf
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12">

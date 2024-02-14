@@ -200,6 +200,9 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     
     // User roles and assignment
     Route::get('/roles', App\Http\Controllers\Admin\RoleController::class . '@index')->name('admin.roles.index');
+    Route::get('/roles/create', App\Http\Controllers\Admin\RoleController::class . '@create')->name('admin.roles.create');
+    Route::get('/roles/show/{id}', App\Http\Controllers\Admin\UserController::class . '@show')->name('admin.roles.show');
+    Route::get('/roles/{id}/edit', App\Http\Controllers\Admin\UserController::class . '@edit')->name('admin.roles.edit');
     Route::get('/users', App\Http\Controllers\Admin\UserController::class . '@index')->name('admin.users.index');
     Route::get('/users/show/{id}', App\Http\Controllers\Admin\UserController::class . '@show')->name('admin.users.show');
     Route::get('/users/{id}/edit', App\Http\Controllers\Admin\UserController::class . '@edit')->name('admin.users.edit');
