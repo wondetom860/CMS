@@ -3,7 +3,7 @@
 @section('innerTitle', 'edit Party Detail')
 @section('content')
 <div class="card mb-4">
-    <div class="card-header">Edit Staffrole
+    <div class="card-header">Edit Parties 
     </div>
     <div class="card-body">
         <form method="POST" action="{{ route('admin.party.update', ['id' => $viewData['party']->id]) }}"

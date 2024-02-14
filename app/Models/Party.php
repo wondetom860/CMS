@@ -46,7 +46,28 @@ class Party extends Model
     {
         return $this->case->case_number;
     }
+    public function documents()
+    {
+        return $this->hasMany(Document::class,'case_id');
+    }
+    public function events()
+    {
+        return $this->hasMany(event::class,'case_id');
+    }
+
+    public function staffs()
+    {
+        return $this->hasMany(Case_Staff_Assignment::class,'case_id');
+    }
+   
+    public function eventType()
+    {
+        return $this->hasMany(EventType::class);
+    }
+
 }
+
+
     
    
 
