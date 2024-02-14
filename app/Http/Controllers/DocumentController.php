@@ -2,8 +2,12 @@
 
 
 namespace App\Http\Controllers;
+
+use App\Models\Case_Staff_Assignment;
+use App\Models\CaseModel;
 use App\Models\Document;
 use App\Models\DocumentType;
+use Itstructure\GridView\DataProviders\EloquentDataProvider;
 
 use Illuminate\Http\Request;
 
@@ -22,7 +26,11 @@ class DocumentController extends Controller
         $viewData['title'] = "MOD_CCMS";
         $viewData['subtitle'] = "Lists Documents";
         $viewData['Document'] = Document::all();
-        return view('admin.Document.index')->with('viewData', $viewData);
+        $dataProvider = new EloquentDataProvider(Document::query());
+        return view('admin.Document.index', [
+            'dataProvider' => $dataProvider,
+            'viewData' => $viewData
+        ]);
     }
 
 
@@ -34,6 +42,9 @@ class DocumentController extends Controller
     public function create()
     {
         $viewData['title'] = 'Admin Page - Documents - CCMS';
+        $viewData['cases'] = CaseModel::all();
+        $viewData['documentTypes'] = DocumentType::all();
+        $viewData['csas'] = Case_Staff_Assignment::all();
         return view('admin.Document.create')->with('viewData', $viewData);
     }
 
@@ -45,14 +56,17 @@ class DocumentController extends Controller
      */
     public function store(Request $request)
     {
+        // $viewData['case'] = CaseModel::all();
+        // $dataProvider = new EloquentDataProvider(Document::query());
+
         Document::validate($request);
         $Document = new Document();
         $Document->case_id = $request->case_id;
         $Document->csa_id = $request->csa_id;
         $Document->document_type_id = $request->document_type_id;
-        $Document->date_filed = $request->date_filed;
-        $Document->decription = $request->decription;
-        $Document->doc_storage_path = $request->doc_storage_path;
+        $Document->date_filed = date("Y-m-d");
+        $Document->description = $request->description;
+        // $Document->doc_storage_path = $request->doc_storage_path;
         $Document->save();
         notify()->success('Document registered Successfully', 'Creation Success');
         return redirect()->route('admin.document.index');

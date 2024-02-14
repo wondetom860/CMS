@@ -2,6 +2,7 @@
 @section('title', $viewData['title'])
 @section('innerTitle', 'Register New event')
 @section('content')
+
 <div class="card mb-4">
     <div class="card-header"> Register New event
     </div>
@@ -35,43 +36,42 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="mb-4 row">
-                        <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">Date:</label>
-                        <div class="col-lg-6 col-md-6 col-sm-12 text-left">
-                            <input name="date_time" type="date" class="form-control">
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-4 row">
+                            <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">Date:</label>
+                            <div class="col-lg-6 col-md-6 col-sm-12 text-left">
+                                <input name="date_time" type="date" class="form-control">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="mb-4 row">
-                        <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">Location:</label>
-                        <div class="col-lg-6 col-md-6 col-sm-12 text-left">
-                            <input name="location" value="{{ old('location') }}" type="text" class="form-control">
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-4 row">
+                            <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">Location:</label>
+                            <div class="col-lg-6 col-md-6 col-sm-12 text-left">
+                                <input name="location" value="{{ old('location') }}" type="text" class="form-control">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="mb-4 row">
-                        <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">Outcome:</label>
-                        <div class="col-lg-6 col-md-6 col-sm-12 text-left">
-                            <input name="out_come" value="{{ old('out_come') }}" type="text" class="form-control">
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-4 row">
+                            <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">Outcome:</label>
+                            <div class="col-lg-6 col-md-6 col-sm-12 text-left">
+                                <input name="out_come" value="{{ old('out_come') }}" type="text" class="form-control">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-8">
-                    <button type="submit" class="btn btn-primary register-caseType-btn">Submit</button>
+                <div class="row">
+                    <div class="col-8">
+                        <button type="submit" class="btn btn-primary register-caseType-btn">Submit</button>
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
-</div>
 @endsection

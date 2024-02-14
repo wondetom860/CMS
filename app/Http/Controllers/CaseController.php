@@ -14,8 +14,8 @@ class CaseController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * 
-     * 
+     *
+     *
      */
     public function index()
     {
@@ -42,6 +42,7 @@ class CaseController extends Controller
     {
         $viewData['title'] = 'Register Case - CCMS';
         $viewData['courts'] = Court::all();
+        $viewData['case'] = CaseModel::all();
         $viewData['case_type'] = CaseType::all();
         $viewData['clients'] = $clientId ? ([Person::findOrFail($clientId)]) : (Person::all());
         return view('case.create')->with('viewData', $viewData);
@@ -75,7 +76,7 @@ class CaseController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     
+
      */
     public function show($id)
     {

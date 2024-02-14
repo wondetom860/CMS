@@ -2,10 +2,10 @@
 @section('title', $viewData['title'])
 @section('innerTitle', $viewData['subtitle'])
 @section('content')
-<div class="container d-flix align-items-center flex-column">
+    <div class="container d-flix align-items-center flex-column">
         <div class="card">
             <h4 class="card-header">
-            Events - Admin Panel - MOD-CCMS
+                Events - Admin Panel - MOD-CCMS
                 <a class="btn btn-primary btn-xs register-caseType-btn" href="{{ route('admin.event.create') }}"
                     style="align-self: flex-end">Register New Event</a>
             </h4>
@@ -91,23 +91,24 @@
                                     return $row->location;
                                 },
                             ],
-                            [   'label' => 'Outcome', // Column label.
+                            [
+                                'label' => 'Outcome', // Column label.
                                 'attribute' => 'out_come',
-                                'value' => function($row){
+                                'value' => function ($row) {
                                     return $row->out_come;
-                                }
+                                },
                             ],
-                           
+
                             [
                                 // Set Action Buttons.
                                 'class' => Itstructure\GridView\Columns\ActionColumn::class, // REQUIRED.
                                 'options' => [
-                                    'style' => 'background-color: red;'
+                                    'style' => 'background-color: red;',
                                 ],
                                 'actionTypes' => [
                                     // REQUIRED.
                                     'view' => function ($data) {
-                                        return '/admin/event/show/' . $data->id ;
+                                        return '/admin/event/show/' . $data->id;
                                     },
                                     'edit' => function ($data) {
                                         return '/admin/event/' . $data->id . '/edit';
@@ -115,7 +116,7 @@
                                     [
                                         'class' => Itstructure\GridView\Actions\Delete::class, // REQUIRED
                                         'url' => function ($data) {
-                                            return '/admin/event/'. $data->id . '/delete';
+                                            return '/admin/event/' . $data->id . '/delete';
                                         },
                                         'htmlAttributes' => [
                                             'target' => '_blank',
