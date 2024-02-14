@@ -11,7 +11,7 @@
                 <div class="row">
                     <div class="col">
                         <div class="mb-4 row">
-                            <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">Case:</label>
+                            <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">Case Number:</label>
                             <div class="col-lg-6 col-md-6 col-sm-12 text-left">
                                 <select name="case_id" id="case_id" class="form-control">
                                     @foreach ($viewData['cases'] as $case)
@@ -56,19 +56,22 @@
                         </div>
                     </div>
                 </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="mb-4 row">
-                    <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">Outcome:</label>
-                    <div class="col-lg-6 col-md-6 col-sm-12 text-left">
-                        <input name="out_come" value="{{ old('out_come') }}" type="text" class="form-control">
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-4 row">
+                            <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">Outcome:</label>
+                            <div class="col-lg-6 col-md-6 col-sm-12 text-left">
+                                <input name="out_come" value="{{ old('out_come') }}" type="text" class="form-control">
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+                <div class="row">
+                    <div class="col-8">
+                        <button type="submit" class="btn btn-primary register-caseType-btn">Submit</button>
+                    </div>
+                </div>
+            </form>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-    </div>
     </div>
 @endsection

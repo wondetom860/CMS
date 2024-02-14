@@ -6,8 +6,17 @@
         <div class="card">
             <h4 class="card-header">
                 Courts - Admin Panel - MOD-CCMS
-                <a class="btn btn-primary btn-xs pull-right" href="{{ route('admin.courtstaff.create') }}"
+                <a class="btn btn-primary btn-xs register-caseType-btn" href="{{ route('admin.courtstaff.create') }}"
                     style="align-self: flex-end">Register Court Staff </a>
+                    <form action="admin.courtstaff.detail" method="post" enctype="multipart/data-form">
+                        <table align="center">
+                           <tr>
+                              <td>
+                                  <input type="text" name="query"> <input type="submit" value="search" name="search"3>
+                              </td>
+                           </tr>
+                        </table>
+                     </form>
             </h4>
             <div class="card-body">
                 <table class="table table-condensed table-hover table-sm table-bordered">
