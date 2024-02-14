@@ -4,7 +4,8 @@
         <div class="col-lg-12 margin-tb">
             <div class="">
                 <h2>Role Management
-                    <a class="btn btn-success register-caseType-btn" href="{{ route('roles.create') }}"> Create New Role</a>
+                    <a class="btn btn-success register-caseType-btn" href="{{ route('admin.roles.create') }}"> Create New
+                        Role</a>
                 </h2>
             </div>
             {{-- <div class="pull-right">

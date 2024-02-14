@@ -45,7 +45,7 @@
                                     <form action="{{ route('Document.delete', ['id' => $document->id]) }}" method="post">
                                         @csrf
                                         <button class="btn btn-cs btn-danger"
-                                            onclick="return confirm('Are you sure to remove an document?');">
+                                            onclick="return confirm('Are you sure to delete document profile?');">
                                             <i class="bi-trash"></i>
                                         </button>
                                     </form>

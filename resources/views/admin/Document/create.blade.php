@@ -1,13 +1,13 @@
 @extends('layout.mystore')
 @section('title', $viewData['title'])
-@section('innerTitle', 'Register Document')
+@section('innerTitle', 'Register New Document')
 @section('content')
     <div class="container">
         <div class="card mb-4">
             <div class="card-header"> Register New Document
             </div>
             <div class="card-body">
-                <form method="POST" action="{{ route('case.store') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('admin.document.store') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col">
