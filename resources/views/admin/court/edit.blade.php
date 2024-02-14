@@ -39,18 +39,18 @@
                 <div class="row">
                     <div class="col">
                         <div class="mb-3 row">
-                            <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Name:</label>
+                            <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">City:</label>
                             <div class="col-lg-10 col-md-6 col-sm-12">
-                                <input name="name" value="{{ $viewData['court']->name }}" type="text"
+                                <input name="city" value="{{ $viewData['court']->city }}" type="text"
                                     class="form-control">
                             </div>
                         </div>
                     </div>
                     <div class="col">
                         <div class="mb-3 row">
-                            <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">State:</label>
+                            <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Zip:</label>
                             <div class="col-lg-10 col-md-6 col-sm-12">
-                                <input name="state" value="{{ $viewData['court']->state }}" type="text"
+                                <input name="zip" value="{{ $viewData['court']->zip }}" type="text"
                                     class="form-control">
                             </div>
                         </div>

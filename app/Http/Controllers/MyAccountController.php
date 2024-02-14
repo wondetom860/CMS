@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ChangePasswordModel;
+use App\Models\ChangeUserNameModel;
 use App\Models\User;
 use App\Models\Order;
 use Illuminate\Http\Request;
@@ -33,6 +35,7 @@ class MyAccountController extends Controller
 
     public function update(Request $request, $id)
     {
+        // User::Validate($request);
         $user = User::find($id);
         $user->name = $request->name;
         if ($user->save()) {
@@ -44,13 +47,43 @@ class MyAccountController extends Controller
         }
     }
 
+    public function updateUserName(Request $request)
+    {
+        $user = User::findOrFail($request->id);
+        if ($user->user_name == $request->old) {
+            $chunModel = new ChangeUserNameModel();
+            $chunModel->old = $request->old;
+            $chunModel->new1 = $request->new1;
+            $chunModel->new2 = $request->new2;
+            // ChangeUserNameModel::validate($chunModel);
+            $chunModel->changeUserName();
+            notify()->success('User name changed to ' . $chunModel->new1);
+        } else {
+            notify()->error('Old User Name is not correct');
+            return;
+        }
+    }
+
+    public function changeUserName()
+    {
+        $chunModel = new ChangeUserNameModel();
+        $chunModel->id = Auth::user()->id;
+        return view('myaccount.change_user_name', compact('chunModel'));
+    }
+
+    public function changePassword()
+    {
+        $chunModel = new ChangePasswordModel();
+        return view('myaccount.change_password', compact('chunModel'));
+    }
+
     public function resetPassword($id)
     {
         $user = User::find($id);
         if (Auth::user()->id != $user->id) {
             notify()->error("Reset Password request declined", "You can reset your own password only.");
         } else {
-            $dpwd = 'P@$$W)RD';
+            $dpwd = $user->getDefaultPassword(); //'P@$$W)RD';
             $user->password = Hash::make($dpwd);
             if ($user->save()) {
                 notify()->success('Your login password resetted to ' . $dpwd, 'Password reset success');

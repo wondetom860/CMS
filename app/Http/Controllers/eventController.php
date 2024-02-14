@@ -1,25 +1,32 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\CaseModel;
 use App\Models\event;
 
  
 
+use App\Models\EventType;
 use Illuminate\Http\Request;
+use Itstructure\GridView\DataProviders\EloquentDataProvider;
 
 class eventController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     *
      */
     public function index()
     {
         $viewData['title'] = "events";
         $viewData['subtitle'] = "Lists events";
         $viewData['event'] = event::all();
-        return view('admin.event.index')->with('viewData', $viewData);
+        $dataProvider = new EloquentDataProvider(event::query());
+        return view('admin.event.index', [
+            'dataProvider' => $dataProvider,
+            'viewData' => $viewData
+        ]);
     }
 
     /**
@@ -30,6 +37,8 @@ class eventController extends Controller
     public function create()
     {
         $viewData['title'] = 'Admin Page - events - CCMS';
+        $viewData['eventTypes'] = EventType::all();
+        $viewData['cases'] = CaseModel::all();
         return view('admin.event.create')->with('viewData', $viewData);
     }
 
@@ -76,10 +85,12 @@ class eventController extends Controller
      */
     public function edit($id)
     {
-        // $viewData = [];
-        // $viewData['title'] = 'Admin Page - Edit event Info - CCMS';
-        // $viewData['event'] = event::findOrFail($id);
-        // return view('admin.event.edit')->with('viewData', $viewData);
+        $viewData = [];
+        $viewData['title'] = 'Admin Page - Edit event Info - CCMS';
+        $viewData['event'] = event::findOrFail($id);
+        $viewData['eventTypes'] = EventType::all();
+        $viewData['cases'] = CaseModel::all();
+        return view('admin.event.edit')->with('viewData', $viewData);
     }
 
     /**
@@ -113,7 +124,7 @@ class eventController extends Controller
     {
         event::destroy($id);
         notify()->success('event Deleted Successfully', 'Delete Success');
-        // return back();
-        return redirect()->route('admin.event.index');
+         return back();
+       // return redirect()->route('admin.event.index');
     }
 }

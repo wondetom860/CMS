@@ -44,8 +44,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/cart/purchase', App\Http\Controllers\CartController::class . '@purchase')->name('cart.purchase');
     Route::get('/my-account/orders', App\Http\Controllers\MyAccountController::class . '@orders')->name('myaccount.orders');
     Route::get('/my-account/profile', App\Http\Controllers\MyAccountController::class . '@profile')->name('myaccount.profile');
-    Route::post('/my-account/update/{id}', App\Http\Controllers\MyAccountController::class . '@update')->name('myaccount.update.profile');
-    Route::post('/my-account/resetPassword/{id}', App\Http\Controllers\MyAccountController::class . '@resetPassword')->name('myaccount.reset.password');
+    // Route::post('/my-account/update/{id}', App\Http\Controllers\MyAccountController::class . '@update')->name('myaccount.update.profile');
+    // Route::post('/my-account/resetPassword/{id}', App\Http\Controllers\MyAccountController::class . '@resetPassword')->name('myaccount.reset.password');
+
+    Route::get('/my-account/changeUserName', App\Http\Controllers\MyAccountController::class . '@changeUserName')->name('myaccount.change.username');
+    Route::post('/my-account/updateUserName', App\Http\Controllers\MyAccountController::class . '@updateUserName')->name('myaccount.update.username');
+
+    Route::get('/my-account/changePassword', App\Http\Controllers\MyAccountController::class . '@changePassword')->name('myaccount.change.password');
+    Route::post('/my-account/updatePassword', App\Http\Controllers\MyAccountController::class . '@updatePassword')->name('myaccount.update.password');
 
     // case
     Route::get('/case', App\Http\Controllers\CaseController::class . '@index')->name('case.index');
@@ -54,14 +60,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/case/store', App\Http\Controllers\CaseController::class . '@store')->name('case.store');
     Route::get('/case/{id}/edit', App\Http\Controllers\CaseController::class . '@edit')->name('case.edit');
     Route::put('/case/{id}/update', App\Http\Controllers\CaseController::class . '@update')->name('case.update');
-    Route::post('/case/{id}/delete', App\Http\Controllers\CaseController::class . '@delete')->name('case.delete');
+    Route::get('/case/{id}/delete', App\Http\Controllers\CaseController::class . '@delete')->name('case.delete');
 
 
     // for auth users - court
     Route::get('/courts', App\Http\Controllers\CourtController::class . '@index')->name('courts.index');
 
     // seach for person by ID
-    Route::post('/person/findPerson',App\Http\Controllers\PersonController::class . '@findPerson')->name('person.findPerson');
+    Route::post('/person/findPerson', App\Http\Controllers\PersonController::class . '@findPerson')->name('person.findPerson');
 });
 
 Route::middleware('auth')->group(function () {
@@ -127,6 +133,9 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/event/show/{id}', App\Http\Controllers\eventController::class . '@show')->name('admin.event.show');
     Route::get('/event/create', App\Http\Controllers\eventController::class . '@create')->name('admin.event.create');
     Route::post('/event/store', App\Http\Controllers\eventController::class . '@store')->name('admin.event.store');
+    Route::get('/event/{id}/edit', App\Http\Controllers\eventController::class . '@edit')->name('admin.event.edit');
+    Route::put('/event/{id}/update', App\Http\Controllers\eventController::class . '@update')->name('admin.event.update');
+    Route::get('/event/{id}/delete', App\Http\Controllers\eventController::class . '@destroy')->name('admin.event.delete');
 
     Route::get('/party', App\Http\Controllers\PartyController::class . '@index')->name('admin.party.index');
     Route::get('/party/show/{id}', App\Http\Controllers\CourtController::class . '@show')->name('admin.party.show');
@@ -159,7 +168,7 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/case_type/{id}/delete', App\Http\Controllers\CaseTypeController::class . '@delete')->name('admin.case_type.delete');
     Route::get('/case_type/{id}/edit', App\Http\Controllers\CaseTypeController::class . '@edit')->name('admin.case_type.edit');
     Route::put('/case_type/{id}/update', App\Http\Controllers\CaseTypeController::class . '@update')->name('admin.case_type.update');
-    
+
     //party type
 
     Route::get('/party_type', App\Http\Controllers\PartyTypeController::class . '@index')->name('admin.party_type.index');
@@ -187,10 +196,19 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/case_staff_assignments/show/{id}', App\Http\Controllers\CaseStaffAssignmentController::class . '@show')->name('admin.case_staff_assignments.show');
     Route::get('/case_staff_assignments/create', App\Http\Controllers\CaseStaffAssignmentController::class . '@create')->name('admin.case_staff_assignments.create');
     Route::post('/case_staff_assignments/store', App\Http\Controllers\CaseStaffAssignmentController::class . '@store')->name('admin.case_staff_assignments.store');
-
+    // routes/web.php
+    
     // User roles and assignment
-    Route::resource('/roles', App\Http\Controllers\Admin\RoleController::class);
-    Route::resource('/users', App\Http\Controllers\Admin\UserController::class);
+    Route::get('/roles', App\Http\Controllers\Admin\RoleController::class . '@index')->name('admin.roles.index');
+    Route::get('/users', App\Http\Controllers\Admin\UserController::class . '@index')->name('admin.users.index');
+    Route::get('/users/show/{id}', App\Http\Controllers\Admin\UserController::class . '@show')->name('admin.users.show');
+    Route::get('/users/{id}/edit', App\Http\Controllers\Admin\UserController::class . '@edit')->name('admin.users.edit');
+    Route::get('/users/{id}/destroy', App\Http\Controllers\Admin\UserController::class . '@destroy')->name('admin.users.destroy');
+    
+    // 
+    // Manage Account
+    // Route::get('/users/changeUserName', App\Http\Controllers\Admin\UserController::class . '@changeUserName')->name('admin.users.changeUserName');
+    Route::get('/users/resetPassword/{id}', App\Http\Controllers\Admin\UserController::class . '@resetPassword')->name('admin.users.resetPassword');
 });
 
 //case

@@ -55,9 +55,9 @@
                     <div class="row">
                         <div class="col">
                             <div class="mb-4 row">
-                                <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">description:</label>
-                                <div class="col-md-6 col-sm-12">
-                                    <input name="description" value="{{ old('price') }}" type="description"
+                                <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">Description:</label>
+                                <div class="col-lg-6 col-md-6 col-sm-12 text-left">
+                                    <input name="description" value="{{ old('price') }}" type="text"
                                         class="form-control">
                                 </div>
                             </div>

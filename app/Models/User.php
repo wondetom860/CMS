@@ -39,6 +39,17 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    public function person()
+    {
+        return $this->belongsTo(Person::class, 'id');
+    }
+
+    public function getFullName()
+    {
+        $person = $this->person;
+        return $person ? $person->getFullName() : '-';
+    }
+
     /**
      * The attributes that should be cast.
      *
@@ -76,6 +87,10 @@ class User extends Authenticatable
     // {
     //     return $this->belongsToMany(Role::class);
     // }
+
+    public function getDefaultPassword(){
+        return "younT@123";
+    }
 
     public function orders()
     {

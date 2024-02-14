@@ -20,15 +20,16 @@
             </ul>
         </div>
     @endif
-    <form action="{{ route('users.update', $user->id) }}" method="POST">
+    <form action="{{ route('admin.users.update', $user->id) }}" method="POST">
         @csrf
         @method('PATCH')
+        <input type="hidden" value="{{$user->person_id}}" name="person_id" class="hidden">
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <label for="name"><strong>Name:</strong></label>
-                    <input type="text" name="name" id="name" placeholder="Name" class="form-control"
-                        value="{{ $user->name }}">
+                    <label for="name"><strong>User Name:</strong></label>
+                    <input type="text" user_name="user_name" id="name" placeholder="Name" class="form-control"
+                        value="{{ $user->user_name }}">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
