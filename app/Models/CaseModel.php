@@ -70,6 +70,12 @@ class CaseModel extends Model
     {
         return $this->hasMany(Case_Staff_Assignment::class,'case_id');
     }
+
+    public function parties()
+    {
+        return $this->hasMany(Party::class,'case_id');
+    }
+   
    
     public function eventType()
     {
