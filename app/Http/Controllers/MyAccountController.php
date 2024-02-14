@@ -60,8 +60,10 @@ class MyAccountController extends Controller
             notify()->success('User name changed to ' . $chunModel->new1);
         } else {
             notify()->error('Old User Name is not correct');
-            return;
+            // return;
         }
+
+        return redirect()->route('myaccount.profile');
     }
 
     public function changeUserName()
