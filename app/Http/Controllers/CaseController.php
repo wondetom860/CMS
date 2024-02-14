@@ -139,6 +139,6 @@ class CaseController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
     }
 }

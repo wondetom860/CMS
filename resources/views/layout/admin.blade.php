@@ -76,10 +76,10 @@
                     <li><a href="{{ route('admin.person.index') }}" class="nav-link text-white">People</a>
                     </li>
                     @can('user-list')
-                        <li><a class="nav-link text-white" href="{{ route('admin.users.index') }}">Manage Users</a></li>
+                       // <li><a class="nav-link text-white" href="{{ route('admin.users.index') }}">Manage Users</a></li>
                     @endcan
                     @can('role-list')
-                        <li><a class="nav-link text-white" href="{{ route('admin.roles.index') }}">Manage Role</a></li>
+                       // <li><a class="nav-link text-white" href="{{ route('admin.roles.index') }}">Manage Role</a></li>
                     @endcan
                     <li>
                         <ul class="nav flex-column sidebar">

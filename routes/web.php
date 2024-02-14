@@ -80,15 +80,15 @@ Route::middleware('auth')->group(function () {
 // });
 
 Route::middleware('auth')->prefix('/admin')->group(function () {
-    Route::get('', App\Http\Controllers\Admin\AdminHomeController::class . '@index')->name('admin.home.index');
-    Route::get('/products', App\Http\Controllers\Admin\AdminProductController::class . '@index')->name('admin.products.index');
-    Route::get('/products/create', App\Http\Controllers\Admin\AdminProductController::class . '@create')->name('admin.products.create');
-    Route::post('/products/store', App\Http\Controllers\Admin\AdminProductController::class . '@store')->name('admin.products.store');
-    Route::get('/products/show/{id}', App\Http\Controllers\Admin\AdminProductController::class . '@show')->name('admin.products.show');
-    Route::post('/products/{id}/delete', App\Http\Controllers\Admin\AdminProductController::class . '@delete')->name('admin.product.delete');
-    Route::get('/products/{id}/edit', App\Http\Controllers\Admin\AdminProductController::class . '@edit')->name('admin.product.edit');
-    Route::put('/products/{id}/update', App\Http\Controllers\Admin\AdminProductController::class . '@update')->name('admin.product.update');
-    Route::get('/orders', App\Http\Controllers\OrderController::class . '@index')->name('orders.index');
+    // Route::get('', App\Http\Controllers\Admin\AdminHomeController::class . '@index')->name('admin.home.index');
+    // Route::get('/products', App\Http\Controllers\Admin\AdminProductController::class . '@index')->name('admin.products.index');
+    // Route::get('/products/create', App\Http\Controllers\Admin\AdminProductController::class . '@create')->name('admin.products.create');
+    // Route::post('/products/store', App\Http\Controllers\Admin\AdminProductController::class . '@store')->name('admin.products.store');
+    // Route::get('/products/show/{id}', App\Http\Controllers\Admin\AdminProductController::class . '@show')->name('admin.products.show');
+    // Route::post('/products/{id}/delete', App\Http\Controllers\Admin\AdminProductController::class . '@delete')->name('admin.product.delete');
+    // Route::get('/products/{id}/edit', App\Http\Controllers\Admin\AdminProductController::class . '@edit')->name('admin.product.edit');
+    // Route::put('/products/{id}/update', App\Http\Controllers\Admin\AdminProductController::class . '@update')->name('admin.product.update');
+    // Route::get('/orders', App\Http\Controllers\OrderController::class . '@index')->name('orders.index');
     // Route::get('/users', App\Http\Controllers\RoleController::class . '@users')->name('users.index');
 
 
@@ -200,6 +200,9 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/case_staff_assignments/show/{id}', App\Http\Controllers\CaseStaffAssignmentController::class . '@show')->name('admin.case_staff_assignments.show');
     Route::get('/case_staff_assignments/create', App\Http\Controllers\CaseStaffAssignmentController::class . '@create')->name('admin.case_staff_assignments.create');
     Route::post('/case_staff_assignments/store', App\Http\Controllers\CaseStaffAssignmentController::class . '@store')->name('admin.case_staff_assignments.store');
+    Route::get('/case_staff_assignments/{id}/edit', App\Http\Controllers\CaseStaffAssignmentController::class . '@edit')->name('admin.case_staff_assignments.edit');
+    Route::put('/case_staff_assignments/{id}/update', App\Http\Controllers\CaseStaffAssignmentController::class . '@update')->name('admin.case_staff_assignments.update');
+    Route::get('/case_staff_assignments/{id}/delete', App\Http\Controllers\CaseStaffAssignmentController::class . '@destroy')->name('admin.case_staff_assignments.delete');
     // routes/web.php
     
     // User roles and assignment
