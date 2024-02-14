@@ -10,16 +10,13 @@ use App\Models\DocumentType;
 use Itstructure\GridView\DataProviders\EloquentDataProvider;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Storage;
 
 class DocumentController extends Controller
 {
         /**
      * Display a listing of the resource.
      * @param  \Illuminate\Http\Request  $request
-
-
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -60,14 +57,23 @@ class DocumentController extends Controller
         // $dataProvider = new EloquentDataProvider(Document::query());
 
         Document::validate($request);
-        $Document = new Document();
-        $Document->case_id = $request->case_id;
-        $Document->csa_id = $request->csa_id;
-        $Document->document_type_id = $request->document_type_id;
-        $Document->date_filed = date("Y-m-d");
-        $Document->description = $request->description;
+        $document = new Document();
+        $document->case_id = $request->case_id;
+        $document->csa_id = $request->csa_id;
+        $document->document_type_id = $request->document_type_id;
+        $document->date_filed = date("Y-m-d");
+        $document->description = $request->description;
         // $Document->doc_storage_path = $request->doc_storage_path;
-        $Document->save();
+        $document->save();
+        if ($request->hasFile('file')) {
+            $imageName = $document->id . '_' . $request->file('file')->getFilename() . "_" . date('Y_m_d_h_i') . "." . $request->file('file')->extension();
+            Storage::disk('public')->put(
+                $imageName, 
+                file_get_contents($request->file('file')->getRealPath())
+            );
+            $document->doc_storage_path = $imageName;
+            $document->save();
+        }
         notify()->success('Document registered Successfully', 'Creation Success');
         return redirect()->route('admin.document.index');
     }

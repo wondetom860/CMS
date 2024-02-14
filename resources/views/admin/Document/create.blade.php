@@ -59,7 +59,7 @@
                             <div class="mb-4 row">
                                 <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">Attach File:</label>
                                 <div class="col-lg-6 col-md-6 col-sm-12 text-left">
-                                    <input type="file" name="file" class="form-control" accept=".jpg,.doc,.txt">
+                                    <input type="file" name="file" class="form-control" accept=".jpg,.doc,.pdf">
                                 </div>
                             </div>
                         </div>
