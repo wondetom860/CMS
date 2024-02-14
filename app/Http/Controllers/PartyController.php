@@ -8,6 +8,7 @@ use App\Models\Person;
 use App\Models\CaseModel;
 use Itstructure\GridView\DataProviders\EloquentDataProvider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PartyController extends Controller
 {
@@ -35,7 +36,7 @@ class PartyController extends Controller
     {
         $viewData['title'] = 'Admin Page - parties - CCMS';
         $viewData['parttype'] = PartyType::all();
-        $viewData['person'] = Person::all();
+        $viewData['person'] = Person::getAllClients();
         $viewData['cases'] = CaseModel::all();
         return view('admin.party.create')->with('viewData', $viewData);
     }
@@ -80,7 +81,7 @@ class PartyController extends Controller
      */
     public function edit($id)
     {
-        
+
         $viewData = [];
         $viewData['title'] = 'Admin Page - Edit staffrole - CCMS';
         $viewData['party'] = Party::findOrFail($id);
@@ -88,7 +89,6 @@ class PartyController extends Controller
         $viewData['person'] = Person::all();
         $viewData['cases'] = CaseModel::all();
         return view('admin.party.edit')->with('viewData', $viewData);
-       
     }
 
     /**
@@ -102,7 +102,7 @@ class PartyController extends Controller
     {
         //
 
-         //
+        //
 
          Party::validate($request);
          $party = Party::findOrFail($id);
@@ -129,8 +129,4 @@ class PartyController extends Controller
         notify()->success('Party Deleted Successfully', 'Delete Success');
         return back();
     }
-
-    
 }
-
-

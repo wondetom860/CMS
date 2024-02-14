@@ -49,27 +49,41 @@ class MyAccountController extends Controller
 
     public function updateUserName(Request $request)
     {
-        $user = User::findOrFail($request->id);
+        $user = Auth::user();
         if ($user->user_name == $request->old) {
             $chunModel = new ChangeUserNameModel();
             $chunModel->old = $request->old;
+            $chunModel->id = $user->id;
             $chunModel->new1 = $request->new1;
             $chunModel->new2 = $request->new2;
-            // ChangeUserNameModel::validate($chunModel);
             $chunModel->changeUserName();
             notify()->success('User name changed to ' . $chunModel->new1);
         } else {
             notify()->error('Old User Name is not correct');
-            // return;
         }
+        return redirect()->route('myaccount.profile');
+    }
 
+    public function updatePassword(Request $request)
+    {
+        $user = Auth::user();
+        $user = User::findOrFail($user->id);
+
+        // dd($user->password_hash, Hash::make($request->oldp));
+
+        if ($user && password_verify($request->oldp, $user->password)) {
+            $chpwdModel = new ChangePasswordModel();
+            $chpwdModel->changePassword($user->id, $request->oldp, $request->newp1, $request->newp2);
+            notify()->success('Password changed.');
+        } else {
+            notify()->error('Old Password is not correct');
+        }
         return redirect()->route('myaccount.profile');
     }
 
     public function changeUserName()
     {
         $chunModel = new ChangeUserNameModel();
-        $chunModel->id = Auth::user()->id;
         return view('myaccount.change_user_name', compact('chunModel'));
     }
 

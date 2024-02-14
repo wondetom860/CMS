@@ -6,7 +6,7 @@
                 <h2>Create New Role</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('roles.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('admin.roles.index') }}"> Back</a>
             </div>
         </div>
     </div>
@@ -20,7 +20,7 @@
             </ul>
         </div>
     @endif
-    <form action="{{ route('roles.store') }}" method="POST">
+    <form action="{{ route('admin.roles.store') }}" method="POST">
         @csrf
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">

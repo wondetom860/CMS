@@ -50,6 +50,7 @@
                 <hr />
                 <ul class="nav flex-column sidebar">
                     <li><a href="{{ route('admin.home.index') }}" class="nav-link text-white">Home</a></li>
+                    {{--  --}}
                     <li><a href="{{ route('admin.document.index') }}" class="nav-link text-white">Document</a>
                     </li>
                     <li><a href="{{ route('admin.document_type.index') }}" class="nav-link text-white">DocumentType</a>

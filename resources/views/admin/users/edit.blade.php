@@ -2,11 +2,8 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Edit New User</h2>
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('users.index') }}"> Back</a>
+            <div class="">
+                <h2>Edit New User<a class="btn btn-primary register-caseType-btn" href="{{ route('admin.users.index') }}"> Back</a></h2>
             </div>
         </div>
     </div>
@@ -22,7 +19,7 @@
     @endif
     <form action="{{ route('admin.users.update', $user->id) }}" method="POST">
         @csrf
-        @method('PATCH')
+        @method('PUT')
         <input type="hidden" value="{{$user->person_id}}" name="person_id" class="hidden">
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
@@ -39,7 +36,7 @@
                         value="{{ $user->email }}">
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
+            {{-- <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <label for="password"><strong>Password:</strong></label>
                     <input type="password" name="password" id="password" placeholder="Password" class="form-control">
@@ -51,7 +48,7 @@
                     <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm Password"
                         class="form-control">
                 </div>
-            </div>
+            </div> --}}
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <label for="roles"><strong>Role:</strong></label>
