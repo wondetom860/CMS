@@ -7,16 +7,21 @@ use App\Models\CourtStaff;
 use App\Models\Person;
 use App\Models\Staffrole;
 use Illuminate\Http\Request;
+use Itstructure\GridView\DataProviders\EloquentDataProvider;
 
 class CourtStaffController extends Controller
 {
     //
     public function index()
     {
-        $viewData['title'] = "staff role";
-        $viewData['subtitle'] = "Lists staff role";
+        $viewData['title'] = "Court staff";
+        $viewData['subtitle'] = "Lists Court Staff";
         $viewData['court_staff'] = CourtStaff::all();
-        return view('admin.courtstaff.index')->with('viewData', $viewData);
+        $dataProvider = new EloquentDataProvider(CourtStaff::query());
+        return view('admin.courtstaff.index', [
+            'dataProvider' => $dataProvider,
+            'viewData' => $viewData
+        ]);
     }
 
     /**

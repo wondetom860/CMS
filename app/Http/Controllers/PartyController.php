@@ -104,14 +104,14 @@ class PartyController extends Controller
 
         //
 
-        Party::validate($request);
-        $party = Party::findOrFail($id);
-        $party->case->case_number = $request->case_number;
-        $party->person->person_id = $request->person_id;
-        $party->party_type_name = $request->party_type_name;
-        $party->save();
-        notify()->success('Court Staff Updateted Successfully', 'Update Success');
-        return redirect()->route('admin.party.index');
+         Party::validate($request);
+         $party = Party::findOrFail($id);
+         $party->case->case_number = $request->case_number;
+         $party->person->person_id = $request->person_id;
+         $party->party_type_name = $request->party_type_name;
+         $party->save();
+         notify()->success('Party Updateted Successfully', 'Update Success');
+         return redirect()->route('admin.party.index');
     }
 
     /**
@@ -126,7 +126,7 @@ class PartyController extends Controller
     public function delete($id)
     {
         Party::destroy($id);
-        notify()->success('Product Deleted Successfully', 'Delete Success');
+        notify()->success('Party Deleted Successfully', 'Delete Success');
         return back();
     }
 }
