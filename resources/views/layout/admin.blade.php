@@ -89,11 +89,11 @@
                         </ul>
                     </li>
                     <li>
-                        {{-- <ul class="nav flex-column sidebar">
+                        <ul class="nav flex-column sidebar">
                             <h5 class="nav-link-header text-white">Manage Account</h5>
                             <li><a href="{{ route('myaccount.change.username') }}" class="nav-link text-white">Change User Name</a></li>
                             <li><a href="{{ route('myaccount.change.password') }}" class="nav-link text-white">Change password</a></li>
-                        </ul> --}}
+                        </ul>
                     </li>
                     <li>
                         <a href="{{ route('home.index') }}" class="mt-2 btn bg-primary text-white">Go back to the home
