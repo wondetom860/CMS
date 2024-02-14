@@ -35,7 +35,7 @@ class PartyController extends Controller
     {
         $viewData['title'] = 'Admin Page - parties - CCMS';
         $viewData['parttype'] = PartyType::all();
-        $viewData['person'] = Person::all();
+        $viewData['person'] = Person::all();//needs to be purified -> list those clients which are not in courtStaff relation
         $viewData['cases'] = CaseModel::all();
         return view('admin.party.create')->with('viewData', $viewData);
     }

@@ -62,7 +62,6 @@ class MyAccountController extends Controller
         } else {
             notify()->error('Old User Name is not correct');
         }
-
         return redirect()->route('myaccount.profile');
     }
 
