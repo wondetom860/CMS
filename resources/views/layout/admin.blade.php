@@ -50,38 +50,49 @@
                 <hr />
                 <ul class="nav flex-column sidebar">
                     <li><a href="{{ route('admin.home.index') }}" class="nav-link text-white">Home</a></li>
-                    {{--  --}}
-                    <li><a href="{{ route('admin.document.index') }}" class="nav-link text-white">Document</a>
+                    <li>
+                        <ul class="nav flex-column sidebar">
+                            <h5 class="nav-link-header text-white">Setup Entries</h5>
+                            <li><a href="{{ route('admin.staffrole.index') }}" class="nav-link text-white">Staff Role</a>
+                            </li>
+                            <li><a href="{{ route('admin.case_type.index') }}" class="nav-link text-white">Case Type</a>
+                            </li>
+                            <li><a href="{{ route('admin.event-type.index') }}" class="nav-link text-white">Event Type</a>
+                            </li>
+                            <li><a href="{{ route('admin.document_type.index') }}" class="nav-link text-white">DocumentType</a>
+                            </li>
+                            <li><a href="{{ route('admin.party_type.index') }}" class="nav-link text-white">Party Type</a>
+                            </li>
+                        </ul>
                     </li>
-                    <li><a href="{{ route('admin.document_type.index') }}" class="nav-link text-white">DocumentType</a>
+                    <li>
+                        <ul class="nav flex-column sidebar">
+                            <h5 class="nav-link-header text-white">Court and Staff</h5>
+                            <li><a href="{{ route('admin.court.index') }}" class="nav-link text-white">Courts</a>
+                            </li>
+                            <li><a href="{{ route('admin.person.index') }}" class="nav-link text-white">Profile</a>
+                            </li>
+                            <li><a href="{{ route('admin.courtstaff.index') }}" class="nav-link text-white">Courts Staff</a>
+                            </li>
+                        </ul>
                     </li>
-                    <li><a href="{{ route('admin.event.index') }}" class="nav-link text-white">Event</a>
-                    </li>
-                    <li><a href="{{ route('admin.event-type.index') }}" class="nav-link text-white">Event Type</a>
-                    </li>
-                    <li><a href="{{ route('admin.case_type.index') }}" class="nav-link text-white">Case Type</a>
-                    </li>
-                    <li><a href="{{ route('admin.case_staff_assignments.index') }}" class="nav-link text-white">Case
+                    <li>
+                        <ul class="nav flex-column sidebar">
+                            <h5 class="nav-link-header text-white">Case Management</h5>
+                            <li><a href="{{ route('admin.case_staff_assignments.index') }}" class="nav-link text-white">Case
                             Staff Assignment</a></li>
-                    <li><a href="{{ route('admin.party_type.index') }}" class="nav-link text-white">Party Type</a>
+                            <li><a href="{{ route('admin.party.index') }}" class="nav-link text-white">Parties</a></li>
+                            <li><a href="{{ route('admin.event.index') }}" class="nav-link text-white">Event</a></li>
+                            <li><a href="{{ route('admin.document.index') }}" class="nav-link text-white">Document</a>
+                            </li>
+                        </ul>
                     </li>
-                    <li><a href="{{ route('admin.court.index') }}" class="nav-link text-white">Courts</a>
-                    </li>
-                    <li><a href="{{ route('admin.courtstaff.index') }}" class="nav-link text-white">Courts Staff</a>
-                    </li>
-                    <li><a href="{{ route('admin.party.index') }}" class="nav-link text-white">Parties</a>
-
-                    <li><a href="{{ route('admin.staffrole.index') }}" class="nav-link text-white">Staff Role</a>
-                    </li>
-                    </li>
-                    <li><a href="{{ route('admin.person.index') }}" class="nav-link text-white">People</a>
-                    </li>
-                    @can('user-list')
-                       // <li><a class="nav-link text-white" href="{{ route('admin.users.index') }}">Manage Users</a></li>
+                    {{-- @can('user-list')
+                       <li><a class="nav-link text-white" href="{{ route('admin.users.index') }}">Manage Users</a></li>
                     @endcan
                     @can('role-list')
-                       // <li><a class="nav-link text-white" href="{{ route('admin.roles.index') }}">Manage Role</a></li>
-                    @endcan
+                       <li><a class="nav-link text-white" href="{{ route('admin.roles.index') }}">Manage Role</a></li>
+                    @endcan --}}
                     <li>
                         <ul class="nav flex-column sidebar">
                             <h5 class="nav-link-header text-white">RBAC</h5>
