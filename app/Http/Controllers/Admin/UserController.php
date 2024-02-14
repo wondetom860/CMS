@@ -62,7 +62,7 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'user_name' => 'required',
-            'email' => 'required|email|unique:users,email',
+            'email' => 'required|email|unique:web_user,email',
             'password' => 'required|same:confirm-password',
             'roles' => 'required'
         ]);
@@ -156,7 +156,7 @@ class UserController extends Controller
         $user->assignRole($request->input('roles'));
 
 
-        return redirect()->route('users.index')
+        return redirect()->route('admin.users.index')
             ->with('success', 'User updated successfully');
     }
 
@@ -170,7 +170,7 @@ class UserController extends Controller
     public function destroy($id): RedirectResponse
     {
         User::find($id)->delete();
-        return redirect()->route('users.index')
+        return redirect()->route('admin.users.index')
             ->with('success', 'User deleted successfully');
     }
 }

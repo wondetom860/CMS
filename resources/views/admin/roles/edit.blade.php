@@ -2,11 +2,8 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Edit Role</h2>
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('roles.index') }}"> Back</a>
+            <div class="">
+                <h2>Edit Role<a class="btn btn-primary register-caseType-btn" href="{{ route('admin.roles.index') }}"> Back</a></h2>
             </div>
         </div>
     </div>
@@ -20,7 +17,7 @@
             </ul>
         </div>
     @endif
-    <form action="{{ route('roles.update', $role->id) }}" method="POST">
+    <form action="{{ route('admin.roles.update', $role->id) }}" method="POST">
         @csrf
         @method('PATCH')
         <div class="row">

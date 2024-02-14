@@ -201,14 +201,18 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     // User roles and assignment
     Route::get('/roles', App\Http\Controllers\Admin\RoleController::class . '@index')->name('admin.roles.index');
     Route::get('/roles/create', App\Http\Controllers\Admin\RoleController::class . '@create')->name('admin.roles.create');
-    Route::get('/roles/show/{id}', App\Http\Controllers\Admin\UserController::class . '@show')->name('admin.roles.show');
-    Route::get('/roles/{id}/edit', App\Http\Controllers\Admin\UserController::class . '@edit')->name('admin.roles.edit');
+    Route::post('/roles/store', App\Http\Controllers\Admin\RoleController::class . '@store')->name('admin.roles.store');
+    Route::get('/roles/show/{id}', App\Http\Controllers\Admin\RoleController::class . '@show')->name('admin.roles.show');
+    Route::get('/roles/{id}/edit', App\Http\Controllers\Admin\RoleController::class . '@edit')->name('admin.roles.edit');
+    Route::get('/roles/{id}/destroy', App\Http\Controllers\Admin\RoleController::class . '@destroy')->name('admin.roles.destroy');
+    Route::put('/roles/{id}/update', App\Http\Controllers\Admin\RoleController::class . '@update')->name('admin.roles.update');
+
     Route::get('/users', App\Http\Controllers\Admin\UserController::class . '@index')->name('admin.users.index');
     Route::get('/users/show/{id}', App\Http\Controllers\Admin\UserController::class . '@show')->name('admin.users.show');
     Route::get('/users/{id}/edit', App\Http\Controllers\Admin\UserController::class . '@edit')->name('admin.users.edit');
     Route::get('/users/{id}/destroy', App\Http\Controllers\Admin\UserController::class . '@destroy')->name('admin.users.destroy');
+    Route::put('/users/{id}/update', App\Http\Controllers\Admin\UserController::class . '@update')->name('admin.users.update');
     
-    // 
     // Manage Account
     // Route::get('/users/changeUserName', App\Http\Controllers\Admin\UserController::class . '@changeUserName')->name('admin.users.changeUserName');
     Route::get('/users/resetPassword/{id}', App\Http\Controllers\Admin\UserController::class . '@resetPassword')->name('admin.users.resetPassword');

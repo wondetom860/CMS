@@ -1,5 +1,6 @@
 <form action="{{ route('myaccount.update.username') }}" method="POST">
     @csrf
+    <input type="text" name="id" value="{{ $id }}" class="hidden">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
