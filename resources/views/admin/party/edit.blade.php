@@ -22,7 +22,7 @@
             <label class="form-label">Person</label>
             <select name="person_id" id="person_id" class="form-control">
                 @foreach ($viewData['person'] as $persons)
-                    <option value="{{ $persons->id }}">{{ $persons->getFullName() }}</option>
+                    <option value="{{ $persons->id }}" @selected($persons->id == $viewData['party']->person_id)>{{ $persons->getFullName() }}</option>
                 @endforeach
             </select>
         </div>
