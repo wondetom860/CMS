@@ -16,8 +16,13 @@
                         <th>Full Name</th>
                         <th>Age</th>
                         <th>ID NUMBER</th>
+<<<<<<< HEAD
+                        <th>description</th>
+                        <th>show</th>
+=======
                         <th>Login Account</th>
                         <th>Show</th>
+>>>>>>> da4670bdfc50c0a7a5bacd3145f753d077f6f3f8
                         <th>Update</th>
                         <th>Delete</th>
                     </thead>

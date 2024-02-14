@@ -67,6 +67,8 @@ class CaseController extends Controller
         $case->save();
         notify()->success('Case Created Successfully', 'Creation Success');
         return redirect()->route('case.index');
+
+        // kjhfkh
     }
 
     /**

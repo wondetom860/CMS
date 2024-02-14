@@ -4,14 +4,9 @@
         <div class="col-lg-12 margin-tb">
             <div class="">
                 <h2>Role Management
-                    <a class="btn btn-success register-caseType-btn" href="{{ route('roles.create') }}"> Create New Role</a>
+                    <a class="btn btn-success register-caseType-btn" href="{{ route('admin.roles.create') }}"> Create New Role</a>
                 </h2>
             </div>
-            {{-- <div class="pull-right">
-                @can('role-create')
-                    <a class="btn btn-success" href="{{ route('roles.create') }}"> Create New Role</a>
-                @endcan
-            </div> --}}
         </div>
     </div>
     @if ($message = Session::get('success'))
@@ -30,12 +25,12 @@
                 <td>{{ ++$i }}</td>
                 <td>{{ $role->name }}</td>
                 <td>
-                    <a class="btn btn-info" href="{{ route('roles.show', $role->id) }}">Show</a>
+                    <a class="btn btn-info" href="{{ route('admin.roles.show', $role->id) }}">Show</a>
                     @can('role-edit')
-                        <a class="btn btn-primary" href="{{ route('roles.edit', $role->id) }}">Edit</a>
+                        <a class="btn btn-primary" href="{{ route('admin.roles.edit', $role->id) }}">Edit</a>
                     @endcan
                     @can('role-delete')
-                        <form style="display:inline" action="{{ route('roles.destroy', $role->id) }}" method="POST">
+                        <form style="display:inline" action="{{ route('admin.roles.destroy', $role->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-danger">

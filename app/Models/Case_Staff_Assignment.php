@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Case_Staff_Assignment extends Model
 {
     use HasFactory;
-public $table= 'case_staff_assignment';
+    public $table = 'case_staff_assignment';
     protected $fillable = [
         'case_id',
         'court_staff_id',
@@ -18,30 +18,31 @@ public $table= 'case_staff_assignment';
     ];
 
 
- public static function validate($request)
+    public static function validate($request)
     {
         $request->validate([
             'case_id' => "required|max:255",
-            'court_staff_id'=>"required|:255",
+            'court_staff_id' => "required|:255",
             'assigned_as' => "required|max:255",
-            'assigned_at'=> "required|date",
-            'assigned_by'=> "numeric|gt:0",
+            'assigned_at' => "required|date",
+            'assigned_by' => "numeric|gt:0",
         ]);
     }
 
     // Define relationships
     public function case()
     {
-        return $this->belongsTo(CaseModel::class);
+        return $this->belongsTo(CaseModel::class, 'case_id');
     }
 
-    public function assignedBy(){
-        return $this->belongsTo(User::class,'assigned_by');
+    public function assignedBy()
+    {
+        return $this->belongsTo(User::class, 'assigned_by');
     }
 
     public function courtStaff()
     {
-        return $this->belongsTo(CourtStaff::class);
+        return $this->belongsTo(CourtStaff::class, 'court_staff_id');
     }
 
     public function getLogoPath()
