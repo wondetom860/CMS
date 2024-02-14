@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PartyType;
 use App\Models\Party;
+use App\Models\Person;
+use App\Models\CaseModel;
+use Itstructure\GridView\DataProviders\EloquentDataProvider;
 use Illuminate\Http\Request;
 
 class PartyController extends Controller
@@ -16,9 +20,12 @@ class PartyController extends Controller
         $viewData['title'] = "Parties";
         $viewData['subtitle'] = "Lists parties";
         $viewData['party'] = Party::all();
-        return view('admin.party.index')->with('viewData', $viewData);
+        $dataProvider = new EloquentDataProvider(Party::query());
+        return view('admin.party.index', [
+            'dataProvider' => $dataProvider,
+            'viewData' => $viewData
+        ]);
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -27,6 +34,9 @@ class PartyController extends Controller
     public function create()
     {
         $viewData['title'] = 'Admin Page - parties - CCMS';
+        $viewData['parttype'] = PartyType::all();
+        $viewData['person'] = Person::all();
+        $viewData['cases'] = CaseModel::all();
         return view('admin.party.create')->with('viewData', $viewData);
     }
 
@@ -56,7 +66,10 @@ class PartyController extends Controller
      */
     public function show($id)
     {
-        //
+        $viewData['party'] = Party::findOrFail($id);
+        $viewData['title'] = "Party   ";
+        $viewData['subtitle'] = "Detail of Party ";
+        return view('admin.party.detail')->with('viewData', $viewData);
     }
 
     /**
@@ -67,7 +80,15 @@ class PartyController extends Controller
      */
     public function edit($id)
     {
-        //
+        
+        $viewData = [];
+        $viewData['title'] = 'Admin Page - Edit staffrole - CCMS';
+        $viewData['party'] = Party::findOrFail($id);
+        $viewData['parttype'] = PartyType::all();
+        $viewData['person'] = Person::all();
+        $viewData['cases'] = CaseModel::all();
+        return view('admin.party.edit')->with('viewData', $viewData);
+       
     }
 
     /**
@@ -80,17 +101,36 @@ class PartyController extends Controller
     public function update(Request $request, $id)
     {
         //
+
+         //
+
+         Party::validate($request);
+         $party = Party::findOrFail($id);
+         $party->case->case_number = $request->case_number;
+         $party->person->person_id = $request->person_id;
+         $party->party_type_name = $request->party_type_name;
+         $party->save();
+         notify()->success('Court Staff Updateted Successfully', 'Update Success');
+         return redirect()->route('admin.party.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         //
     }
+    public function delete($id)
+    {
+        Party::destroy($id);
+        notify()->success('Product Deleted Successfully', 'Delete Success');
+        return back();
+    }
+
+    
 }
+
 

@@ -19,4 +19,35 @@ class Party extends Model
             'party_type_id' => "required|max:255",
         ]);
     }
+
+
+    public function getPartyDetail()
+    {
+        return $this->person->getFullName();
+    }
+    public function person()
+    {
+        return $this->belongsTo(Person::class);
+    }
+    public function partyType()
+    {
+        return $this->belongsTo(PartyType::class);
+    }
+    public function case()
+    {
+        return $this->belongsTo(CaseModel::class);
+    }
+    public function getLogoPath()
+    {
+        return $this->logo_image_path ? $this->logo_image_path : '/court2.jpg';
+    }
+
+    public function getDetail()
+    {
+        return $this->case->case_number;
+    }
 }
+    
+   
+
+
