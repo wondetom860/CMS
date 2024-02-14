@@ -14,11 +14,11 @@
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h5 class="card-title">
-                            {{ $product['name'] }} (${{ $product->price }})
-                        </h5>
-                        <p class="card-text">{{ $product->description }}</p>
-                        <p class="card-text"><small class="text-muted">Add to Cart</small></p>
+                        <p class="card-text"><b>Case number : </b>{{ $viewData['document']->case->case_number }}</p>
+                        <p class="card-text"><b>Csa number : </b>{{ $viewData['document']->csa->csa_number }}</p>
+                        <p class="card-text"><b>Date : </b>{{ $viewData['event']->date_filed }}</p>
+                        <p class="card-text"><b>description : </b>{{ $viewData['event']->description }}</p>
+                        <p class="card-text"><b>doc storage path : </b>{{ $viewData['event']->doc->doc_storage_path }}</p>
                     </div>
                 </div>
             </div>
