@@ -50,6 +50,7 @@
                 <hr />
                 <ul class="nav flex-column sidebar">
                     <li><a href="{{ route('admin.home.index') }}" class="nav-link text-white">Home</a></li>
+                    {{--  --}}
                     <li><a href="{{ route('admin.document.index') }}" class="nav-link text-white">Document</a>
                     </li>
                     <li><a href="{{ route('admin.document_type.index') }}" class="nav-link text-white">DocumentType</a>
@@ -76,10 +77,10 @@
                     <li><a href="{{ route('admin.person.index') }}" class="nav-link text-white">People</a>
                     </li>
                     @can('user-list')
-                        <li><a class="nav-link text-white" href="{{ route('admin.users.index') }}">Manage Users</a></li>
+                       // <li><a class="nav-link text-white" href="{{ route('admin.users.index') }}">Manage Users</a></li>
                     @endcan
                     @can('role-list')
-                        <li><a class="nav-link text-white" href="{{ route('admin.roles.index') }}">Manage Role</a></li>
+                       // <li><a class="nav-link text-white" href="{{ route('admin.roles.index') }}">Manage Role</a></li>
                     @endcan
                     <li>
                         <ul class="nav flex-column sidebar">
@@ -90,9 +91,9 @@
                     </li>
                     <li>
                         <ul class="nav flex-column sidebar">
-                            <h5 class="nav-link-header text-white">RBAC</h5>
-                            <li><a href="{{ route('admin.users.changeUserName') }}" class="nav-link text-white">Change User Name</a></li>
-                            <li><a href="{{ route('admin.users.changePassword') }}" class="nav-link text-white">Change password</a></li>
+                            <h5 class="nav-link-header text-white">Manage Account</h5>
+                            <li><a href="{{ route('myaccount.change.username') }}" class="nav-link text-white">Change User Name</a></li>
+                            <li><a href="{{ route('myaccount.change.password') }}" class="nav-link text-white">Change password</a></li>
                         </ul>
                     </li>
                     <li>

@@ -14,8 +14,8 @@ class CaseController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * 
-     * 
+     *
+     *
      */
     public function index()
     {
@@ -42,6 +42,7 @@ class CaseController extends Controller
     {
         $viewData['title'] = 'Register Case - CCMS';
         $viewData['courts'] = Court::all();
+        $viewData['case'] = CaseModel::all();
         $viewData['case_type'] = CaseType::all();
         $viewData['clients'] = $clientId ? ([Person::findOrFail($clientId)]) : (Person::all());
         return view('case.create')->with('viewData', $viewData);
@@ -67,13 +68,15 @@ class CaseController extends Controller
         $case->save();
         notify()->success('Case Created Successfully', 'Creation Success');
         return redirect()->route('case.index');
+
+        // kjhfkh
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
-     
+
      */
     public function show($id)
     {
@@ -137,6 +140,6 @@ class CaseController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
     }
 }

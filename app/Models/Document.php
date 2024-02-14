@@ -15,19 +15,32 @@ class Document extends Model
     {
         $request->validate([
             'case_id' => "required|exists:case,id",
-            'csa_id' => "required |exists:csa,id",
+            'csa_id' => "required|exists:case_staff_assignment,id",
             'document_type_id' => "required|exists:document_type,id",
-            'date_filed' => "required",
+            // 'date_filed' => "required",
             'description' => "required",
-            'doc_storage_path' => "required",
+            // 'doc_storage_path' => "required",
         ]);
     }
-    public function getDetail(){
-        return $this->name;
+
+    public function caseStaffAssignemnt(){
+        return $this->belongsTo(Case_Staff_Assignment::class,'csa_id');
+    }
+    public function case(){
+        return $this->belongsTo(CaseModel::class);
     }
 
-    public function getActiveCases(){
-        return 0;
+    public function documentType(){
+        return $this->belongsTo(DocumentType::class);
     }
 
+    public function getLogoPath()
+    {
+        return $this->logo_image_path ? $this->logo_image_path : '/court2.jpg';
+    }
+
+    public function getDetail()
+    {
+        return $this->case->case_number;
+    }
 }

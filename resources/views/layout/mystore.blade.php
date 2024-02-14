@@ -26,11 +26,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ms-auto">
-                    {{-- <a class="nav-link active" href="/">{{ __('Home') }}</a>
-                    <a class="nav-link active" href="/products">{{ __('Products') }}</a>
-                    <a class="nav-link active" href="/cart">{{ __('Cart') }}</a>
-                    <a class="nav-link active" href="/about">{{ __('About') }}</a>
-                    <div class="vr bg-white mx-2 d-none d-lg-block"></div> --}}
+                    <a class="nav-link active" href="/">{{ __('Home') }}</a>
+                    <a class="nav-link active" href="/case">{{ __('Cases') }}</a>
+                    {{-- <a class="nav-link active" href="/cart">{{ __('Cart') }}</a>
+                    <a class="nav-link active" href="/about">{{ __('About') }}</a> --}}
+                    <div class="vr bg-white mx-2 d-none d-lg-block"></div>
                     @guest
                         <a href="{{ route('login') }}" class="nav-link active">Login</a>
                         {{-- <a href="{{ route('register') }}" class="nav-link active">Register</a> --}}
@@ -48,7 +48,7 @@
                         {{-- logged In user --}}
                         <form action="{{ route('logout') }}" id="logout" method="POST">
                             <a title="Logout" role="button" class="nav-link active text-center"
-                                onclick="document.getElementById('logout').submit();">Logout({{ Auth::user()->name }})</a>
+                                onclick="document.getElementById('logout').submit();">Logout({{ Auth::user()->user_name }})</a>
                             @csrf
                         </form>
                     @endguest

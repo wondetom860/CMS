@@ -15,7 +15,7 @@
                     <td>" .
                 ++$count .
                 "</td>
-                    <td>{$staff->assigned_by}</td>
+                    <td>{$staff->courtStaff->person->getFullName()}</td>
                     <td>{$staff->assigned_at}</td>
                     <td>{$staff->assigned_as}</td>
                 </tr>";

@@ -19,9 +19,10 @@ return new class extends Migration
             $table->unsignedBigInteger('court_staff_id');
             $table->string('assigned_as');
             $table->string('assigned_at');
-            $table->string('assigned_by');
+            $table->unsignedBigInteger('assigned_by');
             $table->foreign('case_id')->references('id')->on('case');
             $table->foreign('court_staff_id')->references('id')->on('court_staff');
+            $table->unique('case_id','court_staff_id');
             $table->timestamps();
         });
     }

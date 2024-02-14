@@ -48,7 +48,7 @@ class PersonController extends Controller
     {
         // Person::validate($request);
         $caseTypes = new Person();
-        //$caseTypes->court_id = $request->court_id;
+        $caseTypes->court_id = $request->court_id;
         $caseTypes->first_name = ucfirst(strtolower($request->first_name));
         $caseTypes->fath_name = ucfirst(strtolower($request->fath_name));
         // $caseTypes->fat_name = $request->fat_name;

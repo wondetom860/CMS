@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Staffrole;
 use Illuminate\Http\Request;
 use App\Models\case_staff_assignment;
+use App\Models\CaseModel;
 use App\Models\Caset;
+use App\Models\CourtStaff;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
+use Itstructure\GridView\DataProviders\EloquentDataProvider;
 
 class CaseStaffAssignmentController extends Controller
 
@@ -14,14 +20,18 @@ class CaseStaffAssignmentController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * 
      */
     public function index()
     {
         $viewData['title'] = "Case Assignment";
         $viewData['subtitle'] = "Lists of cases Assigned";
         $viewData['case_staff_assignment'] = case_staff_assignment::all();
-        return view('admin.Case_staff_assignments.index')->with('viewData', $viewData);
+        $dataProvider = new EloquentDataProvider(Case_Staff_Assignment::query());
+        return view('admin.case_staff_assignments.index', [
+            'dataProvider' => $dataProvider,
+            'viewData' => $viewData
+        ]);
     }
 
     /**
@@ -35,6 +45,8 @@ class CaseStaffAssignmentController extends Controller
         $viewData['subtitle'] = "Assign The Case to Staff";
         $viewData['innerTitle']= "Assign The Case";
         // $viewData['case_staff_assignment'] = case_staff_assignment::all();
+        $viewData['cases'] = CaseModel::all();
+        $viewData['court_staffs'] = CourtStaff::all(); 
         return view('admin.case_staff_assignments.create')->with('viewData', $viewData);
     }
 
@@ -48,13 +60,14 @@ class CaseStaffAssignmentController extends Controller
 
     public function store(Request $request)
     {
-        Case_staff_assignment::validate($request);
+        // $request->assign_as = ;
+        // Case_staff_assignment::validate($request);
         $case_staff_assignment = new Case_staff_assignment();
         $case_staff_assignment->case_id = $request->case_id;
         $case_staff_assignment->court_staff_id = $request->court_staff_id;
-        $case_staff_assignment->assigned_as = $request->assigned_as;
-        $case_staff_assignment->assigned_by = $request->assigned_by;
-        $case_staff_assignment->assigned_at = $request->assigned_at;
+        $case_staff_assignment->assigned_as = $case_staff_assignment->courtStaff->staffrole->role_name;
+        $case_staff_assignment->assigned_by = Auth::user()->id;
+        $case_staff_assignment->assigned_at = date("Y-m-d");
         // $case_staff_assignment->updated_at = $request->updated_at;
         $case_staff_assignment->save();
         notify()->success('Case is Assigned Successfully', 'Creation Success');
@@ -76,7 +89,7 @@ class CaseStaffAssignmentController extends Controller
         $viewData['title'] = ' Case Staff Assignment-MOD-CMS';
         $viewData['subtitle'] = "Course Detail: ".$case->$id;
         $viewData['case_staff_assignment'] = $case;
-        return view('admin.case_staff_assignments.show')->with('viewData', $viewData);
+        return view('admin.case_staff_assignments.detail')->with('viewData', $viewData);
     }
 
     /**
@@ -87,7 +100,13 @@ class CaseStaffAssignmentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $viewData = [];
+        $viewData['title'] = 'Case Page - Edit Case - CMS';
+        $viewData['cases'] = CaseModel::all();
+        $viewData['court_staffs'] = CourtStaff::all(); 
+        $viewData['case_staff_assignment']= Case_staff_assignment::findOrFail($id);
+        $viewData['staff_roles']= Staffrole::all();
+        return view('admin.case_staff_assignments.edit')->with('viewData', $viewData);
     }
 
     /**
@@ -99,7 +118,17 @@ class CaseStaffAssignmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // CaseModel::validate($request);
+        $case_staff_assignment = Case_staff_assignment::findOrFail($id);
+        // $case->case_number = $request->case_number;
+        $case_staff_assignment->case_id = $request->case_id;
+        $case_staff_assignment->court_staff_id = $request->court_staff_id;
+        $case_staff_assignment->assigned_as = $case_staff_assignment->courtStaff->staffrole->role_name;
+        $case_staff_assignment->assigned_by = Auth::user()->id;
+        $case_staff_assignment->assigned_at = date("Y-m-d");
+        $case_staff_assignment->save();
+        notify()->success('Case_staff_assignment Updateted Successfully', 'Update Success');
+        return redirect()->route('admin.case_staff_assignments.index');
     }
 
     /**
@@ -110,7 +139,9 @@ class CaseStaffAssignmentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        CaseModel::destroy($id);
+        notify()->success('Case Assignment Deleted Successfully', 'Delete Success');
+        return back();
     }
 }
 

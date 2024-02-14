@@ -19,19 +19,25 @@
                 <div class="row">
                     <div class="col">
                         <div class="mb-3 row">
-                            <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Name:</label>
+                            <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Case Number:</label>
                             <div class="col-lg-10 col-md-6 col-sm-12">
-                                <input name="name" value="{{ $viewData['product']->name }}" type="text"
-                                    class="form-control">
+                                <select name="case_id" id="case_id" class="form-control">
+                                    @foreach ($viewData['cases'] as $case)
+                                        <option value="{{ $case->id }}">{{ $case->case_number }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                     </div>
                     <div class="col">
                         <div class="mb-3 row">
-                            <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Price:</label>
+                            <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">csa numeber:</label>
                             <div class="col-lg-10 col-md-6 col-sm-12">
-                                <input name="price" value="{{ $viewData['product']->price }}" type="number"
-                                    class="form-control">
+                                <select name="case_id" id="case_id" class="form-control">
+                                    @foreach ($viewData['cases'] as $case)
+                                        <option value="{{ $csa->id }}">{{ $case->csa_number }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -39,9 +45,13 @@
                 <div class="row">
                     <div class="col">
                         <div class="mb-3 row">
-                            <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Image:</label>
+                            <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">document type:</label>
                             <div class="col-lg-10 col-md-6 col-sm-12">
-                                <input class="form-control" type="file" name="image">
+                                <select name="event_type_id" id="event_type_id" class="form-control">
+                                    @foreach ($viewData['eventTypes'] as $dType)
+                                        <option value="{{ $dType->id }}">{{ $dType->document_type_name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                     </div>
