@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Person extends Model
 {
@@ -25,6 +26,22 @@ class Person extends Model
             'gender' => 'required|max:6',
             'id_number' => "required|max:8"
         ]);
+    }
+
+    public static function getAllStaffEmployees()
+    {
+        return self::query()
+            ->leftJoin('court_staff', 'court_staff.person_id', '=', 'persons.id')
+            ->where('court_staff.court_id', '<>', NULL)
+            ->get();
+    }
+
+    public static function getAllClients()
+    {
+        return self::query()
+            ->leftJoin('court_staff', 'court_staff.person_id', '=', 'persons.id')
+            ->where('court_staff.court_id', '=', NULL)
+            ->get();
     }
 
     public function getDate()

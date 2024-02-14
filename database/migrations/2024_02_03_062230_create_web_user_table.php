@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password',50);
             $table->string('email');
             $table->string('phone',20);
+            $table->string('remember_token');
             $table->unsignedBigInteger('person_id');
             $table->foreign('person_id')->references('id')->on('persons');
             $table->timestamps();

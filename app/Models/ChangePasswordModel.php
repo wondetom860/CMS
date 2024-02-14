@@ -4,6 +4,7 @@ namespace App\Models;
 
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class ChangePasswordModel extends Model
@@ -24,14 +25,14 @@ class ChangePasswordModel extends Model
         ]);
     }
 
-    public function changeUserName($id, $old, $new1, $new2)
+    public function changePassword($id, $old, $new1, $new2)
     {
         $user = User::findOrFail($id);
-        if ($user->user_name == $old) {
+        if ($user && password_verify($old, $user->password)) {
             if ($new1 == $new2) {
-                $user->user_name = $new1;
+                $user->password = Hash::make($new1);
                 $user->update();
-                return [1, "Username changed"];
+                return [1, "Password changed"];
             } else {
                 return [0, "New User Names does'nt match."];
             }

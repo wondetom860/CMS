@@ -48,7 +48,7 @@
                         {{-- logged In user --}}
                         <form action="{{ route('logout') }}" id="logout" method="POST">
                             <a title="Logout" role="button" class="nav-link active text-center"
-                                onclick="document.getElementById('logout').submit();">Logout({{ Auth::user()->name }})</a>
+                                onclick="document.getElementById('logout').submit();">Logout({{ Auth::user()->user_name }})</a>
                             @csrf
                         </form>
                     @endguest

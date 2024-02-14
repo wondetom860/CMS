@@ -20,7 +20,6 @@ class Party extends Model
         ]);
     }
 
-
     public function getPartyDetail()
     {
         return $this->person->getFullName();

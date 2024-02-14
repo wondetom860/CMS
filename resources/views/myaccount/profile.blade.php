@@ -17,15 +17,10 @@
             <div class="col-md-5 col-lg-5 col-sm-6">
                 <div class="card">
                     <div class="card-header">
-                        More
+                        Change Password
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('myaccount.update.password', ['id' => $viewData['profile']->id]) }}"
-                            method="post">
-                            @csrf
-                            <button onclick="return confirm('Are you sure to reset your password?')" class="btn bg-warning"
-                                type="submit">Reset Password</button>
-                        </form>
+                        @include('myaccount.partials._change_password_form')
                     </div>
                 </div>
             </div>
