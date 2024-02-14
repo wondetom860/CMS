@@ -67,7 +67,7 @@ class PartyController extends Controller
     public function show($id)
     {
         $viewData['party'] = Party::findOrFail($id);
-        $viewData['title'] = "Party   ";
+        $viewData['title'] = "Party";
         $viewData['subtitle'] = "Detail of Party ";
         return view('admin.party.detail')->with('viewData', $viewData);
     }
