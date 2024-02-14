@@ -16,7 +16,7 @@
                     <td>" .
                 ++$count .
                 "</td>
-                    <td>{$event->event_type_id}</td>
+                    <td>{$event->eventType->event_type_name}</td>
                     <td>{$event->date_time}</td>
                     <td>{$event->location}</td>
                     <td>{$event->out_come}</td>
