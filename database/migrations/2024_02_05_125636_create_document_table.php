@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('document_type_id');
             $table->date('date_filed');
             $table->string('description');
-            $table->string('doc_storage_path');
+            $table->string('doc_storage_path')->nullable();
             $table->foreign('case_id')->references('id')->on('case')->onDelete('cascade');
             $table->foreign('csa_id')->references('id')->on('case_staff_assignment')->onDelete('cascade');
             $table->foreign('document_type_id')->references('id')->on('document_type')->onDelete('cascade');

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('staff_role_id');
             $table->foreign('person_id')->references('id')->on('persons');
             $table->foreign('staff_role_id')->references('id')->on('staff_role');
-            $table->unique('court_id,person_id');
+            $table->unique('court_id','person_id');
             $table->foreign('court_id')->references('id')->on('courts');
             $table->timestamps();
         });
