@@ -9,6 +9,15 @@ class StaffRoleController extends Controller
 {
     //
 
+
+    function __construct()
+    {
+        $this->middleware('permission:staff-role-list|role-create|role-edit|role-delete', ['only' => ['index', 'store']]);
+        $this->middleware('permission:staff-role-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:staff-role-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:staff-role-delete', ['only' => ['delete']]);
+        $this->middleware('permission:staff-role-detail', ['only' => ['show']]);
+    }
     public function index()
     {
         $viewData['title'] = "staff role";
