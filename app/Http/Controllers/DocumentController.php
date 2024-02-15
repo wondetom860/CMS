@@ -14,13 +14,12 @@ use Illuminate\Http\Request;
 
 class DocumentController extends Controller
 {
-        /**
-     * Display a listing of the resource.
-     * @param  \Illuminate\Http\Request  $request
-
-
-     * @return \Illuminate\Http\Response
-     */
+    function __construct()
+{   $this->middleware('permission:document-list|document-create|document-edit|document-delete', ['only' => ['index', 'store','create', 'show','update', 'edit','destroy']]);
+        $this->middleware('permission:document-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:document-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:document-delete', ['only' => ['destroy']]);
+    }
     public function index()
     {
         $viewData['title'] = "MOD_CCMS";
@@ -69,7 +68,7 @@ class DocumentController extends Controller
         // $Document->doc_storage_path = $request->doc_storage_path;
         $Document->save();
         notify()->success('Document registered Successfully', 'Creation Success');
-        return redirect()->route('admin.document.index');
+        return redirect()->route('admin.document.store');
     }
 
     /**
