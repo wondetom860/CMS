@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('case', function (Blueprint $table) {
             $table->id();
 
-            $table->string('case_number')->unique;
+            $table->string('case_number')->unique();
             $table->string('cause_of_action');
             $table->unsignedBigInteger('court_id');
             $table->smallInteger('case_status');
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->foreign('court_id')->references('id')->on('courts')->onDelete('cascade');
             $table->foreign('case_type_id')->references('id')->on('case_type')->onDelete('cascade');
             $table->date('start_date');
-            $table->date('end_date')->nullable;
+            $table->date('end_date')->nullable();
             $table->timestamps();
         });
     }

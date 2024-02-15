@@ -32,6 +32,7 @@ class PermissionTableSeeder extends Seeder
             'case-list',
             'case-create',
             'case-edit',
+            'case-detail',
             'case-delete',
 
             'event-list',

@@ -117,12 +117,34 @@
                                         return '/case/show/' . $data->id ;
                                     },
                                     'edit' => function ($data) {
-                                        return '/case/' . $data->id . '/edit';
+                                        if (Auth::user()->can('case-edit')) {
+                                            return '/case/' . $data->id . '/edit';
+                                        } else {
+                                            return false;
+                                        }
                                     },
+                                //      @can('case-edit')
+                                    //     'edit' => function ($data) {
+                                    //         return '/case/' . $data->id . '/edit';
+                                    //      },
+                                //      ,@endcan
+                                //      @can('case-edit')
+                                        // [
+                                        // 'class' => Itstructure\GridView\Actions\Edit::class, // REQUIRED
+                                        // 'url' => function ($data) {
+                                        //     return '/case'.'/'. $data->id . '/edit';
+                                        // },
+                                        // 'visible' => Auth::user()->can('case-edit'),
+                                        // ],
+                                //     @endcan
                                     [
                                         'class' => Itstructure\GridView\Actions\Delete::class, // REQUIRED
                                         'url' => function ($data) {
-                                            return '/case/'. $data->id . '/delete';
+                                            if (Auth::user()->can('case-delete')) {
+                                                return '/case/'. $data->id . '/delete';
+                                        } else {
+                                            return false;
+                                        }
                                         },
                                         'htmlAttributes' => [
                                             'target' => '_blank',
