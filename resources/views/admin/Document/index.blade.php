@@ -104,8 +104,9 @@
                             [
                                 'label' => 'doc storage path ', // Column label.
                                 'attribute' => 'doc_storage_path',
+                                'format' => 'html',
                                 'value' => function ($row) {
-                                    return $row->doc_storage_path;
+                                    return $row->doc_storage_path ? "<button class='btn btn-primary btn-xs' onclick='showDocument({$row->id});return false;'>Show</button>" : '-';
                                 },
                             ],
 
@@ -151,5 +152,26 @@
                 @gridView($gridData)
             </div>
         </div>
+        <script>
+            const showDocument = (doc_id) => {
+                $('#myForm').trigger("reset");
+                $('#formModal').modal('show');
+                $("#modal_body").html("Laoding image will be implemented soon...");
+            }
+        </script>
     </div>
 @endsection
+
+<div class="modal fade" id="formModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="formModalLabel">Case Document
+                </h4>
+            </div>
+            <div class="modal-body" id="modal_body">
+                
+            </div>
+        </div>
+    </div>
+</div>

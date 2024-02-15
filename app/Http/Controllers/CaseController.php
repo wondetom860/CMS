@@ -24,7 +24,11 @@ class CaseController extends Controller
         $viewData["title"] = "Register_Case - CCMS";
         $viewData["subtitle"] = "List of Cases";
         $viewData["case"] = CaseModel::all();
-        $dataProvider = new EloquentDataProvider(CaseModel::query());
+        $dataProvider = new EloquentDataProvider(
+            CaseModel::query()
+            ->withAggregate('court','name')
+            ->withAggregate('caseType','case_type_name')
+        );
         return view('case.index', [
             'dataProvider' => $dataProvider,
             'viewData' => $viewData

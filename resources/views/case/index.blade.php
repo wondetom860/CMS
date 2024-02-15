@@ -78,15 +78,15 @@
                                 },
                             ],
                             [
-                                'label' => 'Cause',
+                                'label' => 'Cause of Action',
                                 'value' => function ($row) {
                                     return $row->cause_of_action;
                                 },
                                 //'sort' => 'first_name', // To sort rows. Have to set if an 'attribute' is not defined for column.
                             ],
                             [
-                                'label' => 'Case_Type', // Column label.
-                                'attribute' => 'case_type_name', // Attribute, by which the row column data will be taken from a model.
+                                'label' => 'Case Type', // Column label.
+                                'attribute' => 'case_type_case_type_name', // Attribute, by which the row column data will be taken from a model.
                                 'value' => function ($row) {
                                     return $row->caseType->case_type_name;
                                 },
