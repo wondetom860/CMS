@@ -25,6 +25,18 @@
                     <div class="row">
                         <div class="col">
                             <div class="mb-4 row">
+                                <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">Client Category:</label>
+                                <div class="col-md-6 col-sm-12">
+                                    <select name="party_type_id" id="party_type_id" class="form-select">
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-4 row">
                                 <label class="text-right col-lg-2 col-md-6 col-sm-12 col-form-label">Client Name:</label>
                                 <div class="col-md-3 col-sm-12">
                                     <select name="person_id" id="person_id" class="form-control">
