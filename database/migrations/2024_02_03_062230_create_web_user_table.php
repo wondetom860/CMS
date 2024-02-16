@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('password',100);
             $table->string('email');
             $table->string('phone',20)->default('00000000');
-            $table->unsignedBigInteger('person_id');
+            $table->unsignedBigInteger('person_id')->nullable();
             $table->foreign('person_id')->references('id')->on('persons');
             $table->timestamps();
         });

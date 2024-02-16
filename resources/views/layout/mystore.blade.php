@@ -42,8 +42,8 @@
                             <a href="{{ route('admin.home.index') }}" class="nav-link active">{{ __('Dashboard') }}</a>
                         @endif
                         @if (Auth::user()->isSuperAdmin())
-                            <a href="{{ route('roles.index') }}" class="nav-link active text-warning">Roles</a>
-                            <a href="{{ route('users.index') }}" class="nav-link active text-warning">Users</a>
+                            <a href="{{ route('admin.roles.index') }}" class="nav-link active text-warning">Roles</a>
+                            <a href="{{ route('admin.users.index') }}" class="nav-link active text-warning">Users</a>
                         @endif
                         {{-- logged In user --}}
                         <form action="{{ route('logout') }}" id="logout" method="POST">

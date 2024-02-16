@@ -19,7 +19,7 @@
     @endif
     <form action="{{ route('admin.roles.update', $role->id) }}" method="POST">
         @csrf
-        @method('PATCH')
+        @method('PUT')
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
