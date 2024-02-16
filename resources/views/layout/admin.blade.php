@@ -44,7 +44,7 @@
             {{-- middle area container container and left sidebar --}}
             <div class="col-lg-2 col-md-3 col-sm-0 text-white bg-dark" style="min-height: 101%">
                 {{-- left side bar --}}
-                
+
                 <a href="{{ route('admin.home.index') }}" class="text-white text-decoration-none">
                     <span class="fs-4">Admin Panel</span>
                 </a>
@@ -53,42 +53,53 @@
                     <li><a href="{{ route('admin.home.index') }}" class="nav-link text-white">Home</a></li>
                     <li>
                         @can('manage-basic-file')
-                        <ul class="nav flex-column sidebar">
-                            <h5 class="nav-link-header text-white">Setup Entries</h5>
-                            <li><a href="{{ route('admin.staffrole.index') }}" class="nav-link text-white">Staff Role</a>
-                            </li>
-                            <li><a href="{{ route('admin.case_type.index') }}" class="nav-link text-white">Case Type</a>
-                            </li>
-                            <li><a href="{{ route('admin.event-type.index') }}" class="nav-link text-white">Event Type</a>
-                            </li>
-                            <li><a href="{{ route('admin.document_type.index') }}" class="nav-link text-white">DocumentType</a>
-                            </li>
-                            <li><a href="{{ route('admin.party_type.index') }}" class="nav-link text-white">Party Type</a>
-                            </li>
-                        </ul>
+                            <ul class="nav flex-column sidebar">
+                                <h5 class="nav-link-header text-white">Setup Entries</h5>
+                                <li><a href="{{ route('admin.staffrole.index') }}" class="nav-link text-white">Staff
+                                        Role</a>
+                                </li>
+                                <li><a href="{{ route('admin.case_type.index') }}" class="nav-link text-white">Case
+                                        Type</a>
+                                </li>
+                                <li><a href="{{ route('admin.event-type.index') }}" class="nav-link text-white">Event
+                                        Type</a>
+                                </li>
+                                <li><a href="{{ route('admin.document_type.index') }}"
+                                        class="nav-link text-white">DocumentType</a>
+                                </li>
+                                <li><a href="{{ route('admin.party_type.index') }}" class="nav-link text-white">Party
+                                        Type</a>
+                                </li>
+                            </ul>
                         @endcan
                     </li>
                     <li>
-                        <ul class="nav flex-column sidebar">
-                            <h5 class="nav-link-header text-white">Court and Staff</h5>
-                            <li><a href="{{ route('admin.court.index') }}" class="nav-link text-white">Courts</a>
-                            </li>
-                            <li><a href="{{ route('admin.person.index') }}" class="nav-link text-white">Profile</a>
-                            </li>
-                            <li><a href="{{ route('admin.courtstaff.index') }}" class="nav-link text-white">Courts Staff</a>
-                            </li>
-                        </ul>
+                        @can('manage-court-staff')
+                            <ul class="nav flex-column sidebar">
+                                <h5 class="nav-link-header text-white">Court and Staff</h5>
+                                <li><a href="{{ route('admin.court.index') }}" class="nav-link text-white">Courts</a>
+                                </li>
+                                <li><a href="{{ route('admin.person.index') }}" class="nav-link text-white">Profile</a>
+                                </li>
+                                <li><a href="{{ route('admin.courtstaff.index') }}" class="nav-link text-white">Courts
+                                        Staff</a>
+                                </li>
+                            </ul>
+                        @endcan
                     </li>
                     <li>
-                        <ul class="nav flex-column sidebar">
-                            <h5 class="nav-link-header text-white">Case Management</h5>
-                            <li><a href="{{ route('admin.case_staff_assignments.index') }}" class="nav-link text-white">Case
-                            Staff Assignment</a></li>
-                            <li><a href="{{ route('admin.party.index') }}" class="nav-link text-white">Parties</a></li>
-                            <li><a href="{{ route('admin.event.index') }}" class="nav-link text-white">Event</a></li>
-                            <li><a href="{{ route('admin.document.index') }}" class="nav-link text-white">Document</a>
-                            </li>
-                        </ul>
+                        @can('manage-case-file')
+                            <ul class="nav flex-column sidebar">
+                                <h5 class="nav-link-header text-white">Case Management</h5>
+                                <li><a href="{{ route('admin.case_staff_assignments.index') }}"
+                                        class="nav-link text-white">Case
+                                        Staff Assignment</a></li>
+                                <li><a href="{{ route('admin.party.index') }}" class="nav-link text-white">Parties</a></li>
+                                <li><a href="{{ route('admin.event.index') }}" class="nav-link text-white">Event</a></li>
+                                <li><a href="{{ route('admin.document.index') }}" class="nav-link text-white">Document</a>
+                                </li>
+                            </ul>
+                        @endcan
                     </li>
                     {{-- @can('user-list')
                        <li><a class="nav-link text-white" href="{{ route('admin.users.index') }}">Manage Users</a></li>
@@ -97,17 +108,21 @@
                        <li><a class="nav-link text-white" href="{{ route('admin.roles.index') }}">Manage Role</a></li>
                     @endcan --}}
                     <li>
-                        <ul class="nav flex-column sidebar">
-                            <h5 class="nav-link-header text-white">RBAC</h5>
-                            <li><a href="{{ route('admin.roles.index') }}" class="nav-link text-white">Roles</a></li>
-                            <li><a href="{{ route('admin.users.index') }}" class="nav-link text-white">Users</a></li>
-                        </ul>
+                        @can('manage-rbac')
+                            <ul class="nav flex-column sidebar">
+                                <h5 class="nav-link-header text-white">RBAC</h5>
+                                <li><a href="{{ route('admin.roles.index') }}" class="nav-link text-white">Roles</a></li>
+                                <li><a href="{{ route('admin.users.index') }}" class="nav-link text-white">Users</a></li>
+                            </ul>
+                        @endcan
                     </li>
                     <li>
                         <ul class="nav flex-column sidebar">
                             <h5 class="nav-link-header text-white">Manage Account</h5>
-                            <li><a href="{{ route('myaccount.change.username') }}" class="nav-link text-white">Change User Name</a></li>
-                            <li><a href="{{ route('myaccount.change.password') }}" class="nav-link text-white">Change password</a></li>
+                            <li><a href="{{ route('myaccount.change.username') }}" class="nav-link text-white">Change
+                                    User Name</a></li>
+                            <li><a href="{{ route('myaccount.change.password') }}" class="nav-link text-white">Change
+                                    password</a></li>
                         </ul>
                     </li>
                     <li>
@@ -150,7 +165,8 @@
             <div class="copyright py-3 text-center text-white">
                 <div class="container">
                     <small class="copyright">
-                        Copyright - <a class="text-reset fw-bold text-decoration-none" target="_blank" href="#">
+                        Copyright - <a class="text-reset fw-bold text-decoration-none" target="_blank"
+                            href="#">
                             MOD
                         </a> - <b>ICT <i>YoungTigers</i></b>
                     </small>
