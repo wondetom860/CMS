@@ -64,6 +64,8 @@ class PermissionTableSeeder extends Seeder
             'case-staff-assignment-create',
             'case-staff-assignment-edit',
             'case-staff-assignment-delete',
+
+            'manage-basic-file',
         ];
         foreach ($permissions as $permission) {
             Permission::create(['name' => $permission]);

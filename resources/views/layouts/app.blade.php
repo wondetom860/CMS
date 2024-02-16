@@ -35,7 +35,7 @@
                     @else
                         <form action="{{ route('logout') }}" id="logout" method="POST">
                             <a role="button" class="nav-link active"
-                                onclick="document.getElementById('logout').submit();">Logout</a>
+                                onclick="document.getElementById('logout').submit();"  style="color: white">Logout</a>
                             @csrf
                         </form>
                     @endguest
