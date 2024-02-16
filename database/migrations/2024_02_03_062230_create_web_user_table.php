@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('web_user', function (Blueprint $table) {
             $table->id();
             $table->string('user_name',50);
-            $table->string('password',50);
+            $table->string('password',100);
             $table->string('email');
-            $table->string('phone',20);
+            $table->string('phone',20)->default('00000000');
             $table->unsignedBigInteger('person_id');
             $table->foreign('person_id')->references('id')->on('persons');
             $table->timestamps();

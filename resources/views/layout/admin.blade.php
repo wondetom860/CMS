@@ -44,6 +44,7 @@
             {{-- middle area container container and left sidebar --}}
             <div class="col-lg-2 col-md-3 col-sm-0 text-white bg-dark" style="min-height: 101%">
                 {{-- left side bar --}}
+                
                 <a href="{{ route('admin.home.index') }}" class="text-white text-decoration-none">
                     <span class="fs-4">Admin Panel</span>
                 </a>
@@ -51,6 +52,7 @@
                 <ul class="nav flex-column sidebar">
                     <li><a href="{{ route('admin.home.index') }}" class="nav-link text-white">Home</a></li>
                     <li>
+                        @can('manage-basic-file')
                         <ul class="nav flex-column sidebar">
                             <h5 class="nav-link-header text-white">Setup Entries</h5>
                             <li><a href="{{ route('admin.staffrole.index') }}" class="nav-link text-white">Staff Role</a>
@@ -64,6 +66,7 @@
                             <li><a href="{{ route('admin.party_type.index') }}" class="nav-link text-white">Party Type</a>
                             </li>
                         </ul>
+                        @endcan
                     </li>
                     <li>
                         <ul class="nav flex-column sidebar">
