@@ -14,8 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', App\Http\Controllers\HomeController::class . '@index')->name('home.index');
-Route::get('/admin', App\Http\Controllers\Admin\AdminHomeController::class . '@index')->name('admin.home.index');
+ Route::get('/', App\Http\Controllers\HomeController::class . '@index')->name('home.index');
+// Route::get('/admin', App\Http\Controllers\Admin\AdminHomeController::class . '@index')->name('admin.home.index');
 
 // Route::get('/about', function () {
 //     return redirect('/posts');
@@ -31,19 +31,19 @@ Route::get('/error/{message}', function ($message) {
     return view('error')->with('message', $message);
 })->name('error');
 //
-Route::get('/home/insert', App\Http\Controllers\HomeController::class . '@insert')->name('sample.insert');
-Route::get('/home/select', App\Http\Controllers\HomeController::class . '@select')->name('sample.select');
-Route::get('/home/update', App\Http\Controllers\HomeController::class . '@update')->name('sample.edit');
+// Route::get('/home/insert', App\Http\Controllers\HomeController::class . '@insert')->name('sample.insert');
+// Route::get('/home/select', App\Http\Controllers\HomeController::class . '@select')->name('sample.select');
+// Route::get('/home/update', App\Http\Controllers\HomeController::class . '@update')->name('sample.edit');
 
 // product controller-view routing
-Route::get('/products', App\Http\Controllers\ProductController::class . '@index')->name('products.index');
-Route::get('/products/{id}', App\Http\Controllers\ProductController::class . '@show')->name('products.show');
+// Route::get('/products', App\Http\Controllers\ProductController::class . '@index')->name('products.index');
+// Route::get('/products/{id}', App\Http\Controllers\ProductController::class . '@show')->name('products.show');
 
 // only for authenticated users
 Route::middleware('auth')->group(function () {
-    Route::get('/cart/purchase', App\Http\Controllers\CartController::class . '@purchase')->name('cart.purchase');
-    Route::get('/my-account/orders', App\Http\Controllers\MyAccountController::class . '@orders')->name('myaccount.orders');
-    Route::get('/my-account/profile', App\Http\Controllers\MyAccountController::class . '@profile')->name('myaccount.profile');
+    // Route::get('/cart/purchase', App\Http\Controllers\CartController::class . '@purchase')->name('cart.purchase');
+    // Route::get('/my-account/orders', App\Http\Controllers\MyAccountController::class . '@orders')->name('myaccount.orders');
+     Route::get('/my-account/profile', App\Http\Controllers\MyAccountController::class . '@profile')->name('myaccount.profile');
     // Route::post('/my-account/update/{id}', App\Http\Controllers\MyAccountController::class . '@update')->name('myaccount.update.profile');
     // Route::post('/my-account/resetPassword/{id}', App\Http\Controllers\MyAccountController::class . '@resetPassword')->name('myaccount.reset.password');
 
@@ -79,8 +79,8 @@ Route::middleware('auth')->group(function () {
 //     Route::get('/users', App\Http\Controllers\RoleController::class . '@users')->name('users.index');
 // });
 
-Route::middleware('auth')->prefix('/admin')->group(function () {
-    // Route::get('', App\Http\Controllers\Admin\AdminHomeController::class . '@index')->name('admin.home.index');
+Route::middleware('auth')->prefix('/admin')->group(function () {  //|'/SuperAdmin'
+     Route::get('', App\Http\Controllers\Admin\AdminHomeController::class . '@index')->name('admin.home.index');
     // Route::get('/products', App\Http\Controllers\Admin\AdminProductController::class . '@index')->name('admin.products.index');
     // Route::get('/products/create', App\Http\Controllers\Admin\AdminProductController::class . '@create')->name('admin.products.create');
     // Route::post('/products/store', App\Http\Controllers\Admin\AdminProductController::class . '@store')->name('admin.products.store');
@@ -196,7 +196,7 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::post('/event-type/{id}/delete', App\Http\Controllers\EventTypeController::class . '@destroy')->name('admin.event-type.delete');
 
     // case staff assignment 
-    Route::get('/admin/case_staff_assignments', App\Http\Controllers\CaseStaffAssignmentController::class . '@index')->name('admin.case_staff_assignments.index');
+    Route::get('/case_staff_assignments', App\Http\Controllers\CaseStaffAssignmentController::class . '@index')->name('admin.case_staff_assignments.index');
     Route::get('/case_staff_assignments/show/{id}', App\Http\Controllers\CaseStaffAssignmentController::class . '@show')->name('admin.case_staff_assignments.show');
     Route::get('/case_staff_assignments/create', App\Http\Controllers\CaseStaffAssignmentController::class . '@create')->name('admin.case_staff_assignments.create');
     Route::post('/case_staff_assignments/store', App\Http\Controllers\CaseStaffAssignmentController::class . '@store')->name('admin.case_staff_assignments.store');
@@ -211,13 +211,13 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::post('/roles/store', App\Http\Controllers\Admin\RoleController::class . '@store')->name('admin.roles.store');
     Route::get('/roles/show/{id}', App\Http\Controllers\Admin\RoleController::class . '@show')->name('admin.roles.show');
     Route::get('/roles/{id}/edit', App\Http\Controllers\Admin\RoleController::class . '@edit')->name('admin.roles.edit');
-    Route::get('/roles/{id}/destroy', App\Http\Controllers\Admin\RoleController::class . '@destroy')->name('admin.roles.destroy');
+    Route::post('/roles/{id}/destroy', App\Http\Controllers\Admin\RoleController::class . '@destroy')->name('admin.roles.destroy');
     Route::put('/roles/{id}/update', App\Http\Controllers\Admin\RoleController::class . '@update')->name('admin.roles.update');
 
     Route::get('/users', App\Http\Controllers\Admin\UserController::class . '@index')->name('admin.users.index');
     Route::get('/users/show/{id}', App\Http\Controllers\Admin\UserController::class . '@show')->name('admin.users.show');
     Route::get('/users/{id}/edit', App\Http\Controllers\Admin\UserController::class . '@edit')->name('admin.users.edit');
-    Route::get('/users/{id}/destroy', App\Http\Controllers\Admin\UserController::class . '@destroy')->name('admin.users.destroy');
+    Route::post('/users/{id}/delete', App\Http\Controllers\Admin\UserController::class . '@delete')->name('admin.users.delete');
     Route::put('/users/{id}/update', App\Http\Controllers\Admin\UserController::class . '@update')->name('admin.users.update');
     
     // Manage Account

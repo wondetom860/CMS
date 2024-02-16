@@ -25,7 +25,7 @@ class UserController extends Controller
         $this->middleware('permission:user-list|user-create|user-edit|user-delete', ['only' => ['index', 'store']]);
         $this->middleware('permission:user-create', ['only' => ['create', 'store']]);
         $this->middleware('permission:user-edit', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:user-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:user-delete', ['only' => ['delete']]);
     }
     /**
      * Display a listing of the resource.
@@ -165,12 +165,19 @@ class UserController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     *
      */
-    public function destroy($id): RedirectResponse
+    // public function destroy($id): RedirectResponse
+    // {
+    //     User::find($id)->delete();
+    //     return redirect()->route('admin.users.index')
+    //         ->with('success', 'User deleted successfully');
+    // }
+
+    public function delete($id)
     {
-        User::find($id)->delete();
-        return redirect()->route('admin.users.index')
-            ->with('success', 'User deleted successfully');
+        User::destroy($id);
+        notify()->success('User Deleted Successfully', 'Delete Success');
+        return back();
     }
 }
