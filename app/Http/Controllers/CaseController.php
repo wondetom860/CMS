@@ -13,6 +13,15 @@ use Itstructure\GridView\DataProviders\EloquentDataProvider;
 
 class CaseController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:case-list|role-create|case-edit|case-delete', ['only' => ['index', 'store']]);
+        $this->middleware('permission:case-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:case-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:case-delete', ['only' => ['delete']]);
+        $this->middleware('permission:case-detail', ['only' => ['show']]);
+    }
+
     /**
      * Display a listing of the resource.
      *

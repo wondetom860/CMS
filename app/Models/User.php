@@ -42,12 +42,14 @@ class User extends Authenticatable
     public function person()
     {
         return $this->belongsTo(Person::class,'person_id');
+
     }
 
     public function getFullName()
     {
         $person = $this->person;
-        return $person ? $person->getFullName() : $this->user_name;
+
+        return $person ? $person->getFullName() : 'Super Admin';
     }
 
     /**

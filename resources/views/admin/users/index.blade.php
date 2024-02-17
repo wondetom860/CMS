@@ -38,14 +38,18 @@
                 </td>
                 <td>
                     <a class="btn btn-info" href="{{ route('admin.users.show', $user->id) }}">Show</a>
-                    <a class="btn btn-primary" href="{{ route('admin.users.edit', $user->id) }}">Edit</a>
-                    <form style="display:inline" action="{{ route('admin.users.destroy', $user->id) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-danger">
-                            <i class="bi-trash"></i>
-                        </button>
-                    </form>
+                    @can('role-edit')
+                        <a class="btn btn-primary" href="{{ route('admin.users.edit', $user->id) }}">Edit</a>
+                    @endcan
+                    @can('role-delete')
+                        <form style="display:inline" action="{{ route('admin.users.delete', $user->id) }}" method="POST">
+                            @csrf
+                            @method('POST')
+                            <button class="btn btn-danger">
+                                <i class="bi-trash"></i>
+                            </button>
+                        </form>
+                    @endcan
                 </td>
             </tr>
         @endforeach
