@@ -33,7 +33,7 @@
                     @can('role-delete')
                         <form style="display:inline" action="{{ route('admin.roles.destroy', $role->id) }}" method="POST">
                             @csrf
-                            @method('DELETE')
+                            @method('POST')
                             <button class="btn btn-danger">
                                 <i class="bi-trash"></i>
                             </button>

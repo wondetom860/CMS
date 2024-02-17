@@ -11,7 +11,6 @@ use Itstructure\GridView\DataProviders\EloquentDataProvider;
 
 class CourtStaffController extends Controller
 {
-
     function __construct()
     {
         $this->middleware('permission:court-staff-list|role-create|role-edit|role-delete', ['only' => ['index', 'store']]);
@@ -19,6 +18,7 @@ class CourtStaffController extends Controller
         $this->middleware('permission:court-staff-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:court-staff-delete', ['only' => ['destroy']]);
         $this->middleware('permission:court-staff-detail', ['only' => ['show']]);
+
     }
     //
     public function index()
