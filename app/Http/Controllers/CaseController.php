@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\CaseModel;
 use App\Models\CaseType;
 use App\Models\Court;
+use App\Models\Party;
 use App\Models\Person;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Itstructure\GridView\DataProviders\EloquentDataProvider;
 
 class CaseController extends Controller
@@ -77,6 +79,20 @@ class CaseController extends Controller
         $case->case_status = 0;
         $case->case_type_id = $request->case_type_id;
         $case->start_date = date('Y-m-d');
+        
+        // create party and courtStaff automatically
+        // dd($request->person_id);//client ID = $request->person_id
+        // users registering case should be memebres of the court.
+        $party = new Party();
+        $party->person_id = $request->person_id;
+        $party->case_id = 1;
+        $party->party_type_id = $request->party_type_id;
+        
+
+
+        $det = Auth::user()->id;
+        dd($det);
+
         //$case->end_date = $request->end_date;
         $case->save();
         notify()->success('Case Created Successfully', 'Creation Success');

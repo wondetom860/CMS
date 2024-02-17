@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('gfath_name');
             $table->integer('dob');
             $table->string('gender');
-            $table->string('id_number');
+            $table->string('id_number',50)->unique();
             $table->timestamps();
         });
     }

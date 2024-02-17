@@ -25,7 +25,7 @@
                 <nav class="p-2 shadow text-end">
                     @guest
                         <a href="{{ route('login') }}" class="nav-link active">Login</a>
-                        <a href="{{ route('register') }}" class="nav-link active">Register</a>
+                        {{-- <a href="{{ route('register') }}" class="nav-link active">Register</a> --}}
                     @else
                         <img class="img-profile rounded-circle float-right" src="{{ asset('/images/undraw_image.png') }}"
                             style="float: right;" alt="">

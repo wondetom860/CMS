@@ -42,7 +42,8 @@
                             <a href="{{ route('admin.home.index') }}" class="nav-link active" style="color: white">{{ __('Dashboard') }}</a>
                         @endif
                         @if (Auth::user()->isSuperAdmin())
-                        <a href="{{ route('admin.home.index') }}" class="nav-link active">{{ __('Dashboard') }}</a>
+
+                            <a href="{{ route('admin.home.index') }}" class="nav-link active">{{ __('Dashboard') }}</a>
                             <a href="{{ route('admin.roles.index') }}" class="nav-link active text-warning">Roles</a>
                             <a href="{{ route('admin.users.index') }}" class="nav-link active text-warning">Users</a>
                         @endif

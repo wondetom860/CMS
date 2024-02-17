@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('web_user', function (Blueprint $table) {
             $table->id();
-            $table->string('user_name',50);
+            $table->string('user_name',100)->unique();
             $table->string('password',100);
-            $table->string('email');
+            $table->string('email',150)->unique();
             $table->string('phone',20)->default('00000000');
-            $table->unsignedBigInteger('person_id');
+            $table->unsignedBigInteger('person_id')->nullable()->unique();
             $table->foreign('person_id')->references('id')->on('persons');
             $table->timestamps();
         });
