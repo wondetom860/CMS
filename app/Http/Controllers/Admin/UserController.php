@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+
     function __construct()
     {
         $this->middleware('permission:user-list|user-create|user-edit|user-delete', ['only' => ['index', 'store']]);

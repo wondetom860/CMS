@@ -17,29 +17,29 @@
 
 <body>
     <!-- header -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary py-4">
+    <nav class="navbar navbar-light" style="background-color: #4682B4;">
+        <a class="navbar-brand" href="#" style="max-width: 3%;">
+            <img src="{{ asset('/images/7.png') }}" class="img-fluid">
+         </a>
         <div class="container">
-            <a class="navbar-brand" href="/">{{ __('CRM-System') }}</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <a class="navbar-brand" href="/" style="color: white">{{ __('CRM-System') }}</a>
+            <div class="navbar navbar-expand-lg" id="navbarNavAltMarkup">
                 <div class="navbar-nav ms-auto">
-                    <a class="nav-link active" href="/">{{ __('Home') }}</a>
-                    <a class="nav-link active" href="/case">{{ __('Cases') }}</a>
+                    
+                    <a class="nav-link active" href="/" style="color: white">{{ __('Home') }}</a>
+                    <a class="nav-link active" href="/case" style="color: white">{{ __('Cases') }}</a>
                     {{-- <a class="nav-link active" href="/cart">{{ __('Cart') }}</a>
                     <a class="nav-link active" href="/about">{{ __('About') }}</a> --}}
                     <div class="vr bg-white mx-2 d-none d-lg-block"></div>
                     @guest
-                        <a href="{{ route('login') }}" class="nav-link active">Login</a>
+                        <a href="{{ route('login') }}" class="nav-link active" style="color: white">Login</a>
                         {{-- <a href="{{ route('register') }}" class="nav-link active">Register</a> --}}
                     @else
                         {{-- <a href="{{ route('myaccount.orders') }}" class="nav-link active">{{ __('My Orders') }}</a>
                     --}}
-                        <a href="{{ route('myaccount.profile') }}" class="nav-link active">{{ __('My Profile') }}</a>
+                        <a href="{{ route('myaccount.profile') }}" class="nav-link active" style="color: white">{{ __('My Profile') }}</a>
                         @if (Auth::user()->isAdmin())
-                           {{-- <a href="{{ route('admin.home.index') }}" class="nav-link active">{{ __('Dashboard') }}</a> --}}
+                            <a href="{{ route('admin.home.index') }}" class="nav-link active" style="color: white">{{ __('Dashboard') }}</a>
                         @endif
                         @if (Auth::user()->isSuperAdmin())
                         <a href="{{ route('admin.home.index') }}" class="nav-link active">{{ __('Dashboard') }}</a>
@@ -49,7 +49,7 @@
                         {{-- logged In user --}}
                         <form action="{{ route('logout') }}" id="logout" method="POST">
                             <a title="Logout" role="button" class="nav-link active text-center"
-                                onclick="document.getElementById('logout').submit();">Logout({{ Auth::user()->user_name }})</a>
+                                onclick="document.getElementById('logout').submit();"  style="color: white">Logout({{ Auth::user()->user_name }})</a>
                             @csrf
                         </form>
                     @endguest
@@ -57,9 +57,9 @@
             </div>
         </div>
     </nav>
-    <header class="masthead bg-warning text-white text-center py-4">
+    <header class="container-fluid d-flix align-items-center flex-column" style="background-color: #E6EDf5;">
         <div class="container d-flex align-items-center flex-column">
-            <h2>@yield('subtitle', 'MOD - Court Case Managment System')</h2>
+            <h2 style="color: teal">@yield('subtitle', 'MOD - Court Case Managment System')</h2>
         </div>
     </header>
     <!-- header -->

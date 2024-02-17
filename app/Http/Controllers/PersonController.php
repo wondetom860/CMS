@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Person;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Itstructure\GridView\DataProviders\EloquentDataProvider;
 
 class PersonController extends Controller
 {
@@ -30,7 +31,11 @@ class PersonController extends Controller
         $viewData['person'] = Person::all();
         $viewData['title'] = "MOD - CCMS";
         $viewData['subtitle'] = "Person Information";
-        return view('admin.person.index')->with('viewData', $viewData);
+        $dataProvider = new EloquentDataProvider(Person::query());
+        return view('admin.person.index', [
+            'dataProvider' => $dataProvider,
+            'viewData' => $viewData
+        ]);
     }
 
     /**
