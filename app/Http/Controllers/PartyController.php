@@ -12,6 +12,14 @@ use Illuminate\Support\Facades\DB;
 
 class PartyController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:party-list|role-create|role-edit|role-delete', ['only' => ['index', 'store']]);
+        $this->middleware('permission:party-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:party-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:party-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:party-detail', ['only' => ['show']]);
+    }
     //
 
 
