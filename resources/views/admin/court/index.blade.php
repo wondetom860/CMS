@@ -26,28 +26,18 @@
                         'columnFields' => [
                             [
                                 'attribute' => 'name', // REQUIRED if value is not defined. Attribute name to get row column data.
-                                'label' => 'name', // Column label.
+                                'label' => 'Court Name', // Column label.
                                 // 'filter' => false, // If false, then column will be without a search filter form field.,
                                 'htmlAttributes' => [
                                     'width' => '15%', // Width of table column.
                                 ],
                             ],
                             // [
-                            //     'label' => 'Active', // Column label.
-                            //     'value' => function ($row) {
-                            //         // You can set 'value' as a callback function to get a row data value dynamically.
-                            //         return '<span class="icon fas ' . ($row->logo_image_path == 1 ? 'fa-check' : 'fa-times') . '"></span>';
-                            //     },
-                            //     'filter' => [
-                            //         // For dropdown it is necessary to set 'data' array. Array keys are for html <option> tag values, array values are for titles.
-                            //         'class' => Itstructure\GridView\Filters\DropdownFilter::class, // REQUIRED. For this case it is necessary to set 'class'.
-                            //         'name' => 'active', // REQUIRED if 'attribute' is not defined for column.
-                            //         'data' => [
-                            //             // REQUIRED.
-                            //             0 => 'No active',
-                            //             1 => 'Active',
-                            //         ],
-                            //     ],
+                            //     'label' => 'court_id', // Column label.
+                            //     'filter' => Arr::map(Court::all(), function($model){
+                            //         return $model->name;
+                            //     }),
+                            // ],
                             //     'format' => 'html', // To render column content without lossless of html tags, set 'html' formatter.
                             //     'sort' => 'active', // To sort rows. Have to set if an attribute is not defined for column.
                             // ],
@@ -91,7 +81,7 @@
                                     return $model->getActiveCases();
                                 }
                             ],
-                            'created_at', // Simple column setting by string.
+                            // 'created_at', // Simple column setting by string.
                             [
                                 // Set Action Buttons.
                                 'class' => Itstructure\GridView\Columns\ActionColumn::class, // REQUIRED.

@@ -25,10 +25,13 @@
                     <div class="row">
                         <div class="col">
                             <div class="mb-4 row">
-                                <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">Client Category:</label>
+                                <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">Client
+                                    Category:</label>
                                 <div class="col-md-6 col-sm-12">
                                     <select name="party_type_id" id="party_type_id" class="form-select">
-                                        
+                                        @foreach ($viewData['partyType'] as $partyType)
+                                            <option value="{{ $partyType->id }}">{{ $partyType->party_type_name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>

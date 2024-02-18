@@ -2,10 +2,10 @@
 @section('title', $viewData['title'])
 @section('innerTitle', $viewData['subtitle'])
 @section('content')
-    <div class="container d-flix align-items-center flex-column">
+    <div class="d-flix align-items-center flex-column">
         <div class="card">
             <h5 class="card-header">
-                Party - Admin Panel - MOD-CCMS
+                Person - Admin Panel - MOD-CCMS
                 <a class="btn btn-primary btn-xs register-caseType-btn" href="{{ route('admin.person.create') }}"
                     style="align-self: flex-end">Register New person</a>
             </h5>
@@ -18,23 +18,24 @@
                             'pageName' => 'p',
                         ],
                         'rowsPerPage' => 5, // The number of rows in one page. By default 10.
-                        'title' => 'person', // It can be empty ''
+                        'title' => 'Person', // It can be empty ''
                         'strictFilters' => true, // If true, then a searching by filters will be strict, using an equal '=' SQL operator instead of 'like'.
                         'rowsFormAction' => '/admin/pages/deletion', // Route url to send slected checkbox items for deleting rows, for example.
                         'useSendButtonAnyway' => true, // If true, even if there are no checkbox column, the main send button will be displayed.
                         'searchButtonLabel' => 'Find',
                         'columnFields' => [
-                            [
-                                'attribute' => 'ID', // REQUIRED if value is not defined. Attribute name to get row column data.
-                                'label' => 'id', // Column label.
-                                'value' => function ($row) {
-                                    return $row->p->id;
-                                },
-                                // 'filter' => false, // If false, then column will be without a search filter form field.,
-                                'htmlAttributes' => [
-                                    'width' => '15%', // Width of table column.
-                                ],
-                            ],
+                            // [
+                            //     'attribute' => 'ID', // REQUIRED if value is not defined. Attribute name to get row column data.
+                            //     'label' => 'id', // Column label.
+                            //     'value' => function ($row) {
+                            //         return $row->id;
+                            //     },
+                            //     // 'filter' => false, // If false, then column will be without a search filter form field.,
+                            //     'htmlAttributes' => [
+                            //         'width' => '15%', // Width of table column.
+                            //     ],
+                            // ],
+
                             // [
                             //     'label' => 'Active', // Column label.
                             //     'value' => function ($row) {
@@ -71,48 +72,46 @@
                             //     ],
                             // ],
                             [
-                                'attribute' => 'name',
-                                'label' => 'Full Name',
-                                'value' => function ($row) {
-                                    return $row->p->getFullName();
-                                },
-                            ],
-                            [    'attribute' => 'age',
-                                'label' => 'Age',
-                                'value' => function ($row) {
-                                    return $row->p->getAge();
-                                },
-                                //'sort' => 'first_name', // To sort rows. Have to set if an 'attribute' is not defined for column.
-                            ],
-                            
-
-
-                            [
                                 'attribute' => 'number',
                                 'label' => 'ID NUMBER',
                                 'value' => function ($row) {
-                                    return $row->p->id_number;
+                                    return $row->id_number;
                                 },
+                            ],
+                            [
+                                'attribute' => 'name',
+                                'label' => 'Full Name',
+                                'value' => function ($row) {
+                                    return $row->getFullName();
+                                },
+                            ],
+                            [
+                                'attribute' => 'age',
+                                'label' => 'Age',
+                                'value' => function ($row) {
+                                    return $row->getAge();
+                                },
+                                //'sort' => 'first_name', // To sort rows. Have to set if an 'attribute' is not defined for column.
                             ],
                             [
                                 'label' => 'Login Account',
                                 'value' => function ($row) {
-                                    return $row->p->getLoginCreds();
+                                    return $row->getLoginCreds();
                                 },
                                 //'sort' => 'first_name', // To sort rows. Have to set if an 'attribute' is not defined for column.
                             ],
-                            
+
                             'created_at', // Simple column setting by string.
                             [
                                 // Set Action Buttons.
                                 'class' => Itstructure\GridView\Columns\ActionColumn::class, // REQUIRED.
                                 'options' => [
-                                    'style' => 'background-color: red;'
+                                    'style' => 'background-color: red;',
                                 ],
                                 'actionTypes' => [
                                     // REQUIRED.
                                     'view' => function ($data) {
-                                        return '/admin/person/show/' . $data->id ;
+                                        return '/admin/person/show/' . $data->id;
                                     },
                                     'edit' => function ($data) {
                                         return '/admin/person/' . $data->id . '/edit';

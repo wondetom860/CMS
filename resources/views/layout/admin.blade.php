@@ -42,7 +42,7 @@
             <div class="col-12">
             </div>
             {{-- middle area container container and left sidebar --}}
-            <div class="col-lg-2 col-md-3 col-sm-0 text-white bg-dark" style="min-height: 101%">
+            <div class="col-lg-2 col-md-3 col-sm-0 text-white bg-dark" style="min-height: 100%">
                 {{-- left side bar --}}
 
                 <a href="{{ route('admin.home.index') }}" class="text-white text-decoration-none">

@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Case_Staff_Assignment;
 use App\Models\CaseModel;
 use App\Models\CaseType;
 use App\Models\Court;
+use App\Models\CourtStaff;
 use App\Models\Party;
+use App\Models\PartyType;
 use App\Models\Person;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -37,8 +40,8 @@ class CaseController extends Controller
         $viewData["case"] = CaseModel::all();
         $dataProvider = new EloquentDataProvider(
             CaseModel::query()
-            ->withAggregate('court','name')
-            ->withAggregate('caseType','case_type_name')
+                ->withAggregate('court', 'name')
+                ->withAggregate('caseType', 'case_type_name')
         );
         return view('case.index', [
             'dataProvider' => $dataProvider,
@@ -51,54 +54,73 @@ class CaseController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function create($clientId = null)
     {
-        $viewData['title'] = 'Register Case - CCMS';
-        $viewData['courts'] = Court::all();
-        $viewData['case'] = CaseModel::all();
-        $viewData['case_type'] = CaseType::all();
-        $viewData['clients'] = $clientId ? ([Person::findOrFail($clientId)]) : (Person::all());
-        return view('case.create')->with('viewData', $viewData);
+        $courtStaff = CourtStaff::where(['person_id' => Auth::user()->person_id])->first();
+        if ($courtStaff) {
+            $viewData['title'] = 'Register Case - CCMS';
+            $viewData['courts'] = Court::all();
+            $viewData['case'] = CaseModel::all();
+            $viewData['case_type'] = CaseType::all();
+            $viewData['partyType'] = PartyType::all();
+            $viewData['courtStaff'] = $courtStaff;
+            $viewData['clients'] = $clientId ? ([Person::findOrFail($clientId)]) : (Person::all());
+            return view('case.create')->with('viewData', $viewData);
+        } else {
+            return view('error')
+                ->with('title', 'Access not allowed')
+                ->with('message', 'Case registration is allowed only for court staff.');
+        }
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         // CaseModel::validate($request);
-        $case = new CaseModel();
-        $case->court_id = $request->court_id;
-        $case->case_number =$case->getCaseNumber();
-        $case->cause_of_action = $request->cause_of_action;
-        $case->case_status = 0;
-        $case->case_type_id = $request->case_type_id;
-        $case->start_date = date('Y-m-d');
-        
-        // create party and courtStaff automatically
-        // dd($request->person_id);//client ID = $request->person_id
-        // users registering case should be memebres of the court.
-        $party = new Party();
-        $party->person_id = $request->person_id;
-        $party->case_id = 1;
-        $party->party_type_id = $request->party_type_id;
-        
+        $courtStaff = CourtStaff::where(['person_id' => Auth::user()->person_id])->first();
+        if ($courtStaff) {
+            $case = new CaseModel();
+            $case->court_id = $request->court_id;
+            $case->case_number = $case->getCaseNumber();
+            $case->cause_of_action = $request->cause_of_action;
+            $case->case_status = 0;
+            $case->case_type_id = $request->case_type_id;
+            $case->start_date = date('Y-m-d');
 
+            if ($case->save()) {
+                // users registering case should be memebres of the court.
+                $party = new Party();
+                $party->person_id = $request->person_id;
+                $party->case_id = $case->id;
+                $party->party_type_id = $request->party_type_id;
 
-        $det = Auth::user()->id;
-        dd($det);
+                $party->save();
 
-        //$case->end_date = $request->end_date;
-        $case->save();
-        notify()->success('Case Created Successfully', 'Creation Success');
-        return redirect()->route('case.index');
+                $csa = new Case_Staff_Assignment();
+                $csa->court_staff_id = $courtStaff->id;
+                $csa->assigned_as = $courtStaff->staffRole->role_name;
+                $csa->case_id = $case->id;
+                $csa->assigned_at = $case->start_date;
+                $csa->assigned_by = Auth::user()->id;
 
-        // kjhfkh
+                $csa->save();
+
+                notify()->success('Case Registered Successfully', 'Creation Success');
+                return redirect()->route('case.index');
+            }else{
+                notify()->error('Case Registering failed', 'Creation Failed');
+                return redirect()->route('case.create');
+            }
+        } else {
+            return view('error')
+                ->with('title', 'Access not allowed')
+                ->with('message', 'Case registration is allowed only for court staff.');
+        }
     }
 
     /**
@@ -169,6 +191,6 @@ class CaseController extends Controller
      */
     public function destroy($id)
     {
-        
+
     }
 }
