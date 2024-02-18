@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\CaseModel;
 use App\Models\CaseType;
 use App\Models\Court;
+use App\Models\CourtStaff;
+use App\Models\Party;
 use App\Models\Person;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Itstructure\GridView\DataProviders\EloquentDataProvider;
 
 class CaseController extends Controller
@@ -78,7 +81,16 @@ class CaseController extends Controller
         $case->case_type_id = $request->case_type_id;
         $case->start_date = date('Y-m-d');
         //$case->end_date = $request->end_date;
-        $case->save();
+        // $case->save();
+        // register current user as his role/Detective for the case
+        dd($request->person_id);
+        $party = new Party();
+        $party->person_id = $request->person_id;
+        $party->case_id = $case->id;
+        $person = Person::get()->where('id',Auth::user()->person_id)->first();
+        $staffProfile = CourtStaff::get()->where(['person_id' => $person->id])->first();
+        dd($staffProfile);
+
         notify()->success('Case Created Successfully', 'Creation Success');
         return redirect()->route('case.index');
 
