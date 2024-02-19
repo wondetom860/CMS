@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="bg-default">
-                <h4>Edit User Role <b><i>{{ $user->person->getFullName() }}</i></b> <a
+                <h4>Edit User Role <b><i>{{ $user->getFullName() }}</i></b> <a
                         class="btn btn-primary register-caseType-btn" href="{{ route('admin.users.index') }}"> Back</a></h4>
             </div>
         </div>
