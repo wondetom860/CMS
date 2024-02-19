@@ -38,11 +38,14 @@ class CaseModel extends Model
 
     public function getCsaId()
     {
-        $csa = $this->caseStaffAssignments()
-            ->join('court_staff', 'court_staff.id', '=', 'case_staff_assignment.court_staff_id')
-            ->where(['court_staff.person_id' => Auth::user()->person_id])->get();
-            dd($csa[0]->id);
-        return $csa ? $csa->id : null;
+        $courtStaffMoel = CourtStaff::where(['person_id' => Auth::user()->person_id])->get()->first();
+
+        $csa = $this->caseStaffAssignments;
+        foreach ($csa as $cs) {
+            if($cs->court_staff_id == $courtStaffMoel->id){
+                return $cs->id;
+            }
+        }
     }
 
     public function getCaseNumber()
