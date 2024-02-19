@@ -131,24 +131,26 @@
             $("id_number").val(clientId);
             $("#client_registration_id").val(1);
         }
-        $("#case_register_form").on('submit', function() {
+        const submitClientForm = () => {
             $.ajax({
-                url: "{{ route('admin.person.create') }}",
+                url: "{{ route('admin.person.store') }}",
                 type: "post",
-                data: {
-                    client_registration: 1
-                },
+                data: $("#case_register_form").serialize(),
                 dataType: 'JSON',
                 success: function(data) {
                     try {
                         person_id = Number(data);
-                        $("#id_number_search").val(person_id);
+                        $("#id_number_search").val(clientId);
+                        $('#formModal').modal('hide');
                         searchClientByIdNumber();
                     } catch (error) {
                         console.log(error);
                     }
                 }
             });
+        }
+        $("#case_register_form").on('submit', function() {
+
             return false;
         });
 
@@ -164,13 +166,14 @@
                 },
                 dataType: 'JSON',
                 success: function(data) {
-                    if (data == null) {
+                    if (data == 0) {
                         $("#search_existing").addClass('d-none');
                         $("#register_new").removeClass('d-none');
                         $("#id_number").val(clientId);
+                        $("#person_id").html(0);
                     } else {
                         try {
-                            $("#person_id").val(data['id']);
+                            $("#person_id").parent().html("<span>"+data+"</span>");
                         } catch (error) {
                             alert("Erro while loading data");
                             console.log(error);

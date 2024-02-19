@@ -84,7 +84,7 @@ class PermissionTableSeeder extends Seeder
             'profile-delete',
             
             'manage-basic-file',
-            'manage-case-file',
+            'manage-case',
             'manage-court-staff',
             'manage-rbac',
 
