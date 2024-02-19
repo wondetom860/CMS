@@ -44,6 +44,15 @@ class Person extends Model
             ->get();
     }
 
+    public function getCourtSfatt()
+    {
+        $courtSfatt = "";
+        foreach ($this->courtStaffs as $courtStaff) {
+            $courtSfatt .= " <b>{$courtStaff->staffRole->role_name}</b> ";
+        }
+        return $courtSfatt;
+    }
+
     public function getDate()
     {
         return date("Y-m-d", $this->dob);
@@ -91,6 +100,11 @@ class Person extends Model
 
     public function court()
     {
-        return $this->belongsTo(Court::class);
+        return $this->belongsTo(Court::class, 'court_id');
+    }
+
+    public function courtStaffs()
+    {
+        return $this->hasMany(CourtStaff::class, 'person_id');
     }
 }

@@ -42,9 +42,9 @@
                         <a class="btn btn-primary" href="{{ route('admin.users.edit', $user->id) }}">Edit</a>
                     @endcan
                     @can('role-delete')
-                        <form style="display:inline" action="{{ route('admin.users.destroy', $user->id) }}" method="POST">
+                        <form style="display:inline" action="{{ route('admin.users.delete', $user->id) }}" method="POST">
                             @csrf
-                            @method('DELETE')
+                            @method('POST')
                             <button class="btn btn-danger">
                                 <i class="bi-trash"></i>
                             </button>

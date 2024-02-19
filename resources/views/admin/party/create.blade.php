@@ -10,7 +10,7 @@
                 @csrf
                 <div class="mb-3">
                   <label class="form-label">case Number</label>
-                  <select name="case_id" id="case_" class="form-control">
+                  <select name="case_id" id="case_id" class="form-control">
                       @foreach ($viewData['cases'] as $case)
                           <option value="{{ $case->id }}">{{ $case->case_number }}</option>
                       @endforeach
