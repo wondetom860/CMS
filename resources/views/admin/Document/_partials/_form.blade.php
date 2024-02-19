@@ -8,7 +8,7 @@
                 <div class="row">
                     <div class="col">
                         <div class="mb-4 row">
-                            <label class="text-right col-lg-4 col-md-4 col-sm-12 col-form-label">document Type
+                            <label class="text-right col-lg-4 col-md-4 col-sm-12 col-form-label">Document Type
                                 :</label>
                             <div class="col-md-8 col-sm-12">
                                 <select name="document_type_id" id="document_type_id" class="form-select">

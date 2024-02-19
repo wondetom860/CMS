@@ -40,7 +40,8 @@ class CaseModel extends Model
     {
         $csa = $this->caseStaffAssignments()
             ->join('court_staff', 'court_staff.id', '=', 'case_staff_assignment.court_staff_id')
-            ->where(['person_id' => Auth::user()->person_id])->get()->first();
+            ->where(['court_staff.person_id' => Auth::user()->person_id])->get();
+            dd($csa[0]->id);
         return $csa ? $csa->id : null;
     }
 
