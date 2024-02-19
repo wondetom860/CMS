@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Court;
 use App\Models\CourtStaff;
+use App\Models\Staffrole;
 use App\Models\User;
 // use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
@@ -46,10 +47,12 @@ class PersonController extends Controller
      *
      * @return \Illuminate\Http\Response |\Illuminate\Contracts\View\View
      */
-    public function create()
+    public function create($client_registration = null)
     {
         $viewData['title'] = 'Admin Page - Register a Person Information - CCMS';
         $viewData['courts'] = Court::all();
+        $viewData['staffrole'] = Staffrole::all();
+        $viewData['client_registration'] = $client_registration;
         return view('admin.person.create')->with('viewData', $viewData);
     }
 
@@ -57,23 +60,41 @@ class PersonController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
+
+        // dd($request->role_id);
         // Person::validate($request);
-        $caseTypes = new Person();
-        $caseTypes->court_id = $request->court_id;
-        $caseTypes->first_name = ucfirst(strtolower($request->first_name));
-        $caseTypes->fath_name = ucfirst(strtolower($request->fath_name));
-        // $caseTypes->fat_name = $request->fat_name;
-        $caseTypes->gfath_name = ucfirst(strtolower($request->gfath_name));
-        $caseTypes->dob = strtotime($request->dob);
-        $caseTypes->id_number = $request->id_number;
-        $caseTypes->gender = $request->gender;
-        $caseTypes->save();
-        notify()->success('Person Information Registered Successfully', 'Creation Success');
-        return redirect()->route('admin.person.index');
+        $person = new Person();
+        $person->court_id = $request->court_id;
+        $person->first_name = ucfirst(strtolower($request->first_name));
+        $person->fath_name = ucfirst(strtolower($request->fath_name));
+        // $person->fat_name = $request->fat_name;
+        $person->gfath_name = ucfirst(strtolower($request->gfath_name));
+        $person->dob = strtotime($request->dob);
+        $person->id_number = $request->id_number;
+        $person->gender = $request->gender;
+        if($person->checkIfExists()){
+            notify()->error('Such profile inforamtion alredy exists', 'Creation failed');
+            return redirect()->route('admin.person.index');
+        }
+        if($request->client_registration){
+            $person->save();
+            return $person->id;
+        }
+        if ($person->save()) {
+            // auto register court_staff
+            $courtStaff = new CourtStaff();
+            $courtStaff->person_id = $person->id;
+            $courtStaff->court_id = $person->court_id;
+            $courtStaff->staff_role_id = $request->role_id;
+
+            if ($courtStaff->save()) {
+                notify()->success('Person Information Registered Successfully', 'Creation Success');
+                return redirect()->route('admin.person.index');
+            }
+        } 
     }
 
     public function signUp(Request $request)

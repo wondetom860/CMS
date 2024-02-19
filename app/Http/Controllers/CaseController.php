@@ -10,6 +10,7 @@ use App\Models\CourtStaff;
 use App\Models\Party;
 use App\Models\PartyType;
 use App\Models\Person;
+use App\Models\Staffrole;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Itstructure\GridView\DataProviders\EloquentDataProvider;
@@ -62,8 +63,10 @@ class CaseController extends Controller
             $viewData['title'] = 'Register Case - CCMS';
             $viewData['courts'] = Court::all();
             $viewData['case'] = CaseModel::all();
+            $viewData['staffrole'] = Staffrole::all();
             $viewData['case_type'] = CaseType::all();
-            $viewData['partyType'] = PartyType::all();
+            $viewData['partyType'] = PartyType::all();//client_registration
+            $viewData['client_registration'] = 1;//
             $viewData['courtStaff'] = $courtStaff;
             $viewData['clients'] = $clientId ? ([Person::findOrFail($clientId)]) : (Person::all());
             return view('case.create')->with('viewData', $viewData);
@@ -112,7 +115,7 @@ class CaseController extends Controller
 
                 notify()->success('Case Registered Successfully', 'Creation Success');
                 return redirect()->route('case.index');
-            }else{
+            } else {
                 notify()->error('Case Registering failed', 'Creation Failed');
                 return redirect()->route('case.create');
             }

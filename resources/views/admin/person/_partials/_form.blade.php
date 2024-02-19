@@ -2,7 +2,7 @@
     <div class="card-header"> Register Person Information
     </div>
     <div class="card-body">
-        <form method="POST" action="{{ route('admin.person.store') }}">
+        <form method="POST" action="{{ route('admin.person.store') }}" id="case_register_form">
             @csrf
             <div class="row">
                 <div class="col">
@@ -24,7 +24,8 @@
                         <label
                             class="text-right col-lg-4 col-md-6 col-sm-12 col-form-label">{{ __('ID Number') }}:</label>
                         <div class="col-lg-8 col-md-6 col-sm-12">
-                            <input name="id_number" id="id_number" value="{{ old('id_number') }}" type="text" class="form-control">
+                            <input name="id_number" id="id_number" value="{{ old('id_number') }}" type="text"
+                                class="form-control">
                         </div>
                     </div>
                 </div>
@@ -97,6 +98,25 @@
             <div class="row">
                 <div class="col">
                     <div class="mb-4 row">
+                        <label
+                            class="text-right col-lg-4 col-md-6 col-sm-12 col-form-label">{{ __('Role') }}:</label>
+                        <div class="col-lg-8 col-md-6 col-sm-12">
+                            @if ($viewData['client_registration'] != 1)
+                                <select name="role_id" id="role_id" class="form-control">
+                                    @foreach ($viewData['staffrole'] as $staffrole)
+                                        <option value="{{ $staffrole->id }}">{{ $staffrole->role_name }}</option>
+                                    @endforeach
+                                </select>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="mb-4 row">
+                        <input type="text" id='client_registration_id' name="client_registration"
+                            value="{{ $viewData['client_registration'] }}" class="d-none">
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                 </div>

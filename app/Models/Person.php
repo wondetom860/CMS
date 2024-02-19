@@ -28,6 +28,17 @@ class Person extends Model
         ]);
     }
 
+    public function checkIfExists()
+    {
+        return Person::where([
+            "first_name"=>$this->first_name,
+            "fath_name" => $this->fath_name,
+            'gfath_name' => $this->gfath_name
+            ])->orWhere(['id_number' => $this->id_number])
+            ->get()
+            ->count() > 0;
+    }
+
     public static function getAllStaffEmployees()
     {
         return self::query()

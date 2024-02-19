@@ -101,7 +101,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row d-none">
                         <div class="col">
                             <div class="mb-4 row">
                                 <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">Report Date:</label>
@@ -129,7 +129,28 @@
             $('#myForm').trigger("reset");
             $('#formModal').modal('show');
             $("id_number").val(clientId);
+            $("#client_registration_id").val(1);
         }
+        $("#case_register_form").on('submit', function() {
+            $.ajax({
+                url: "{{ route('admin.person.create') }}",
+                type: "post",
+                data: {
+                    client_registration: 1
+                },
+                dataType: 'JSON',
+                success: function(data) {
+                    try {
+                        person_id = Number(data);
+                        $("#id_number_search").val(person_id);
+                        searchClientByIdNumber();
+                    } catch (error) {
+                        console.log(error);
+                    }
+                }
+            });
+            return false;
+        });
 
         function searchClientByIdNumber() {
             // clientId = document.getElementById('id_number').value;
