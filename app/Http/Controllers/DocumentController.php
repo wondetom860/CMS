@@ -14,12 +14,21 @@ use Illuminate\Support\Facades\Storage;
 
 class DocumentController extends Controller
 {
+
+    function __construct()
+        {
+            $this->middleware('permission:document-list|document-create|document-edit|document-delete', ['only' => ['index', 'store']]);
+            $this->middleware('permission:document-create', ['only' => ['create', 'store']]);
+            $this->middleware('permission:document-edit', ['only' => ['edit', 'update']]);
+            $this->middleware('permission:document-delete', ['only' => ['destroy']]);
+        }
         /**
      * Display a listing of the resource.
      * @param  \Illuminate\Http\Request  $request
      */
     public function index()
     {
+
         $viewData['title'] = "MOD_CCMS";
         $viewData['subtitle'] = "Lists Documents";
         $viewData['Document'] = Document::all();

@@ -18,7 +18,7 @@ class CaseController extends Controller
 {
     function __construct()
     {
-        $this->middleware('permission:case-list|role-create|case-edit|case-delete', ['only' => ['index', 'store']]);
+        $this->middleware('permission:case-list|case-create|case-edit|case-delete', ['only' => ['index', 'store']]);
         $this->middleware('permission:case-create', ['only' => ['create', 'store']]);
         $this->middleware('permission:case-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:case-delete', ['only' => ['delete']]);
