@@ -88,7 +88,7 @@
                         @endcan
                     </li>
                     <li>
-                        @can('manage-case-file')
+                        @can('manage-case')
                             <ul class="nav flex-column sidebar">
                                 <h5 class="nav-link-header text-white">Case Management</h5>
                                 <li><a href="{{ route('admin.case_staff_assignments.index') }}"

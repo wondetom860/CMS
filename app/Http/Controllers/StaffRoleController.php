@@ -22,7 +22,7 @@ class StaffRoleController extends Controller
     {
         $viewData['title'] = "staff role";
         $viewData['subtitle'] = "Lists staff role";
-        $viewData['staff_role'] = Staffrole::all();
+        $viewData['staff_role'] = Staffrole::all()->sortBy('rank');
         return view('admin.staffrole.index')->with('viewData', $viewData);
     }
 
