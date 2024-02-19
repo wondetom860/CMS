@@ -28,7 +28,7 @@
 
                     <a class="nav-link active" href="/" style="color: white">{{ __('Home') }}</a>
                     @can('case-list')
-                        <a class="nav-link active" href="/case" style="color: white">{{ __('Cases') }}</a>
+                    <a class="nav-link active" href="/case" style="color: white">{{ __('Cases') }}</a>
                     @endcan
                     {{-- <a class="nav-link active" href="/cart">{{ __('Cart') }}</a>
                     <a class="nav-link active" href="/about">{{ __('About') }}</a> --}}

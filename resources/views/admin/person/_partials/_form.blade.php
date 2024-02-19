@@ -117,7 +117,8 @@
                     <div class="mb-4 row">
                         <input type="text" id='client_registration_id' name="client_registration"
                             value="{{ $viewData['client_registration'] }}" class="d-none">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button onclick="submitClientForm();return false;" type="submit"
+                            class="btn btn-primary">Submit</button>
                     </div>
                 </div>
             </div>
