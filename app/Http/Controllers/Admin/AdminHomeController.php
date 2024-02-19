@@ -8,7 +8,10 @@ use App\Http\Controllers\Controller;
 
 class AdminHomeController extends Controller
 {
-    //
+    function __construct()
+    {
+        $this->middleware('permission:dashboard-view', ['only' => ['index']]);
+    }
 
     public function index(){
         $viewData["title"] = "Admin Page - Admin";

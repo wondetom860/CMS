@@ -27,7 +27,9 @@
                 <div class="navbar-nav ms-auto">
 
                     <a class="nav-link active" href="/" style="color: white">{{ __('Home') }}</a>
-                    <a class="nav-link active" href="/case" style="color: white">{{ __('Cases') }}</a>
+                    @can('case-list')
+                        <a class="nav-link active" href="/case" style="color: white">{{ __('Cases') }}</a>
+                    @endcan
                     {{-- <a class="nav-link active" href="/cart">{{ __('Cart') }}</a>
                     <a class="nav-link active" href="/about">{{ __('About') }}</a> --}}
                     <div class="vr bg-white mx-2 d-none d-lg-block"></div>
@@ -90,8 +92,7 @@
         <div class="container">
             <p class="copyright">
                 @include('partials.language_switcher')
-                Copyright - <a class="text-reset" target="_blank"
-                    href="https://www.mod.gov.et">
+                Copyright - <a class="text-reset" target="_blank" href="https://www.mod.gov.et">
                     MOD
                 </a> - <b>ICT</b>
                 <span class="flex justify-right justify-end pt-0">
