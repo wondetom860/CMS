@@ -3,19 +3,30 @@
 namespace App\Http\Controllers;
 
 use App\Models\Court;
+use App\Models\CourtStaff;
 use App\Models\User;
 // use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use App\Models\Person;
+// use App\Models\Role;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Itstructure\GridView\DataProviders\EloquentDataProvider;
 
 class PersonController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:profile-list|profile-create|profile-edit|profile-delete', ['only' => ['index', 'store']]);
+        $this->middleware('permission:profile-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:profile-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:profile-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -23,7 +34,11 @@ class PersonController extends Controller
         $viewData['person'] = Person::all();
         $viewData['title'] = "MOD - CCMS";
         $viewData['subtitle'] = "Person Information";
-        return view('admin.person.index')->with('viewData', $viewData);
+        $dataProvider = new EloquentDataProvider(Person::query());
+        return view('admin.person.index', [
+            'dataProvider' => $dataProvider,
+            'viewData' => $viewData
+        ]);
     }
 
     /**
@@ -70,9 +85,21 @@ class PersonController extends Controller
         $user->person_id = intval($request->person_id);
         $user->phone = $request->phone;
 
-        $user->assignRole('Client');
-
         if ($user->save()) {
+            $courtStaff = CourtStaff::where(['person_id' => $user->person_id])->first();
+            if ($courtStaff) {
+                $role = $courtStaff->staffRole->role_name;
+            } else {
+                $role = 'Client';
+            }
+
+            $RR = Role::where(['name' => $role])->first();
+            if ($RR) {
+
+            } else {
+                Role::create(['name' => $role]);
+            }
+            $user->assignRole($role);
             return 1;
         } else {
             return "signup failed";
@@ -145,7 +172,9 @@ class PersonController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Person::find($id)->delete();
+        return redirect()->route('admin.person.index')
+            ->with('success', 'person deleted successfully');
     }
 
     public function findPerson(Request $request)

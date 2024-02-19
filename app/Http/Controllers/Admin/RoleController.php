@@ -18,13 +18,13 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    function __construct()
-    {
-        $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index', 'store']]);
-        $this->middleware('permission:role-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:role-edit', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:role-delete', ['only' => ['destroy']]);
-    }
+    // function __construct()
+    // {
+    //     $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index', 'store','create', 'edit','update', 'delete']]);
+    //     $this->middleware('permission:role-create', ['only' => ['create', 'store']]);
+    //     $this->middleware('permission:role-edit', ['only' => ['edit', 'update']]);
+    //     $this->middleware('permission:role-delete', ['only' => ['destroy']]);
+    // }
 
 
     /**
@@ -129,7 +129,7 @@ class RoleController extends Controller
         $role->syncPermissions($request->input('permission'));
 
 
-        return redirect()->route('roles.index')
+        return redirect()->route('admin.roles.index')
             ->with('success', 'Role updated successfully');
     }
     /**
@@ -141,7 +141,7 @@ class RoleController extends Controller
     public function destroy($id): RedirectResponse
     {
         DB::table("roles")->where('id', $id)->delete();
-        return redirect()->route('roles.index')
+        return redirect()->route('admin.roles.index')
             ->with('success', 'Role deleted successfully');
     }
 }

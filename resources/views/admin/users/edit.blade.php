@@ -2,8 +2,9 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
-            <div class="">
-                <h2>Edit New User<a class="btn btn-primary register-caseType-btn" href="{{ route('admin.users.index') }}"> Back</a></h2>
+            <div class="bg-default">
+                <h4>Edit User Role <b><i>{{ $user->person->getFullName() }}</i></b> <a
+                        class="btn btn-primary register-caseType-btn" href="{{ route('admin.users.index') }}"> Back</a></h4>
             </div>
         </div>
     </div>
@@ -20,9 +21,9 @@
     <form action="{{ route('admin.users.update', $user->id) }}" method="POST">
         @csrf
         @method('PUT')
-        <input type="hidden" value="{{$user->person_id}}" name="person_id" class="hidden">
+        <input type="hidden" value="{{ $user->person_id }}" name="person_id" class="hidden">
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12">
+            {{-- <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <label for="name"><strong>User Name:</strong></label>
                     <input type="text" user_name="user_name" id="name" placeholder="Name" class="form-control"
@@ -35,7 +36,7 @@
                     <input type="text" name="email" id="email" placeholder="Email" class="form-control"
                         value="{{ $user->email }}">
                 </div>
-            </div>
+            </div> --}}
             {{-- <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <label for="password"><strong>Password:</strong></label>

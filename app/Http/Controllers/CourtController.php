@@ -8,6 +8,13 @@ use Itstructure\GridView\DataProviders\EloquentDataProvider;
 
 class CourtController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:court-list|court-create|court-edit|court-delete', ['only' => ['index', 'store']]);
+        $this->middleware('permission:court-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:court-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:court-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

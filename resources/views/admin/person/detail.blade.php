@@ -19,7 +19,7 @@
                             Name: {{ $viewData['person']->getFullName() }}
                         </h5>
                         <p class="card-text">Age: {{ $viewData['person']->getAge() }}</p>
-                        <p class="card-text">Rank: {{ $viewData['person']->rank }}</p>
+                        <p class="card-text">Court Staff: <?= $viewData['person']->getCourtSfatt() ?></p>
                         <p class="card-text">Login Credentials: <?= $viewData['person']->getLoginCreds(1) ?></p>
                     </div>
                 </div>
