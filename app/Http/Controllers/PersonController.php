@@ -75,11 +75,11 @@ class PersonController extends Controller
         $person->dob = strtotime($request->dob);
         $person->id_number = $request->id_number;
         $person->gender = $request->gender;
-        if($person->checkIfExists()){
+        if ($person->checkIfExists()) {
             notify()->error('Such profile inforamtion alredy exists', 'Creation failed');
             return redirect()->route('admin.person.index');
         }
-        if($request->client_registration){
+        if ($request->client_registration) {
             $person->save();
             return $person->id;
         }
@@ -94,7 +94,7 @@ class PersonController extends Controller
                 notify()->success('Person Information Registered Successfully', 'Creation Success');
                 return redirect()->route('admin.person.index');
             }
-        } 
+        }
     }
 
     public function signUp(Request $request)
@@ -200,7 +200,16 @@ class PersonController extends Controller
 
     public function findPerson(Request $request)
     {
-        // $person = ;
-        return json_encode(DB::table('persons')->where('id_number', $request->personId)->first());
+        if ($request->personId) {
+            $p = Person::where('id_number', $request->personId)->get()->first();
+            if ($p) {
+                // $option = "<option value='{$p->id}'>{$p->getFullName()}</option>";
+                return $p->getFullName();
+            }
+            return 0;
+
+        } else {
+            return 0;
+        }
     }
 }

@@ -27,7 +27,9 @@
                 <div class="navbar-nav ms-auto">
 
                     <a class="nav-link active" href="/" style="color: white">{{ __('Home') }}</a>
+                    @can('case-list')
                     <a class="nav-link active" href="/case" style="color: white">{{ __('Cases') }}</a>
+                    @endcan
                     {{-- <a class="nav-link active" href="/cart">{{ __('Cart') }}</a>
                     <a class="nav-link active" href="/about">{{ __('About') }}</a> --}}
                     <div class="vr bg-white mx-2 d-none d-lg-block"></div>
