@@ -12,6 +12,13 @@ use Itstructure\GridView\DataProviders\EloquentDataProvider;
 
 class eventController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:event-list|event-create|event-edit|event-delete', ['only' => ['index', 'store']]);
+        $this->middleware('permission:event-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:event-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:event-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *
