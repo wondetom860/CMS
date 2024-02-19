@@ -1,7 +1,9 @@
 @php
     $docs = $case->documents;
+    $attachBytton = $case->isAssignedTo(Auth::user()->person_id) && $case->isActive() ? 
+    "<button class='btn btn-default btn-link btn-sm register-case-btn' onclick='attachDoc({$case->id});return false;'>Upload/Attach</button>" : "";
     if ($docs) {
-        echo "<h6>Documents Registered In This Case</h6>
+        echo "<h6>Documents attached to this case{$attachBytton}</h6>
         <table class='table table-condensed table-sm table-bordered' style='font-size: 9pt;'>
             <thead style='background-color:cornflowerblue;'>
                 <th>#</th>

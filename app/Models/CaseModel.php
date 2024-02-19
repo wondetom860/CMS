@@ -4,10 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class CaseModel extends Model
 {
     use HasFactory;
+    const STATUS_CLOSED = 2;
+    const STATUS_READY = 0;
+    const STATUS_ACTIVE = 1;
 
     //protected $fillable = ['case_number','start_date',];
 
@@ -20,12 +24,36 @@ class CaseModel extends Model
         ]);
     }
 
+    public function isActive()
+    {
+        return $this->case_status != self::STATUS_CLOSED;
+    }
+
+    public function isAssignedTo($person_id)
+    {
+        $courtStaff = CourtStaff::where(['person_id' => $person_id])->get()->first();
+        $court_staff_id = $courtStaff ? $courtStaff->id : null;
+        return $this->caseStaffAssignments()->where(['court_staff_id' => $court_staff_id])->count() > 0;
+    }
+
+    public function getCsaId()
+    {
+        $csa = $this->caseStaffAssignments()
+            ->join('court_staff', 'court_staff.id', '=', 'case_staff_assignment.court_staff_id')
+            ->where(['person_id' => Auth::user()->person_id])->get()->first();
+        return $csa ? $csa->id : null;
+    }
+
     public function getCaseNumber()
     {
         return "MODCCMS/" . $this->court_id . "/" . str_pad(rand(99, 10000), 4, "0");
     }
 
-    
+    public function caseStaffAssignments()
+    {
+        return $this->hasMany(Case_Staff_Assignment::class, 'case_id');
+    }
+
     public function caseType()
     {
         return $this->belongsTo(CaseType::class);
@@ -59,27 +87,26 @@ class CaseModel extends Model
 
     public function documents()
     {
-        return $this->hasMany(Document::class,'case_id');
+        return $this->hasMany(Document::class, 'case_id');
     }
     public function events()
     {
-        return $this->hasMany(event::class,'case_id');
+        return $this->hasMany(event::class, 'case_id');
     }
 
     public function staffs()
     {
-        return $this->hasMany(Case_Staff_Assignment::class,'case_id');
+        return $this->hasMany(Case_Staff_Assignment::class, 'case_id');
     }
 
     public function parties()
     {
-        return $this->hasMany(Party::class,'case_id');
+        return $this->hasMany(Party::class, 'case_id');
     }
-   
-   
+
+
     public function eventType()
     {
         return $this->hasMany(EventType::class);
     }
-
 }

@@ -12,6 +12,7 @@ use App\Models\PartyType;
 use App\Models\Person;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Itstructure\GridView\DataProviders\EloquentDataProvider;
 
 class CaseController extends Controller
@@ -37,9 +38,17 @@ class CaseController extends Controller
         $viewData = [];
         $viewData["title"] = "Register_Case - CCMS";
         $viewData["subtitle"] = "List of Cases";
-        $viewData["case"] = CaseModel::all();
+        // DB::table('case')
+        //     ->select('*')
+        //     ->join('case_staff_assignment', 'case_staff_assignment.id', '=', 'case.csa_id')
+        //     ->join('court_staff', 'court_staff.id', '=', 'case_staff_assignment.court_staff_id')
+        //     ->where('court_staff.person_id', Auth::user()->person_id)
+        //     ->get();
         $dataProvider = new EloquentDataProvider(
             CaseModel::query()
+                ->join('case_staff_assignment', 'case.id', '=', 'case_staff_assignment.case_id')
+                ->join('court_staff', 'court_staff.id', '=', 'case_staff_assignment.court_staff_id')
+                ->where('court_staff.person_id', Auth::user()->person_id)
                 ->withAggregate('court', 'name')
                 ->withAggregate('caseType', 'case_type_name')
         );
@@ -112,7 +121,7 @@ class CaseController extends Controller
 
                 notify()->success('Case Registered Successfully', 'Creation Success');
                 return redirect()->route('case.index');
-            }else{
+            } else {
                 notify()->error('Case Registering failed', 'Creation Failed');
                 return redirect()->route('case.create');
             }
@@ -191,6 +200,5 @@ class CaseController extends Controller
      */
     public function destroy($id)
     {
-
     }
 }
