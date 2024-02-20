@@ -5,7 +5,7 @@
         <div class="row p1 rounded-left" style="margin-bottom: 15%">
             <header>
                 <div class="container d-flex align-items-center flex-column">
-                    <h2>@yield('subtitle', 'About MoD-CMS')</h2>
+                    <h2><u>@yield('subtitle', 'MoD-CMS')</u></h2>
                 </div>
             </header>
             <header>
@@ -26,22 +26,28 @@
                 <div class="container d-flex align-items-center flex-column">
                     <h2>@yield('subtitle', '')</h2>
                     <h2>@yield('subtitle', '')</h2>
-                    <h2>@yield('subtitle', 'Chief-Staffs')</h2>
+                    <h2><u>@yield('subtitle', 'Chief-Staffs')</u></h2>
 
                 </div>
             </header>
-            <div class="card col-lg-3 col-md-3 col-sm-12 text-center mx-auto">
-                <img class="card-img-top rounded-left img-fluid" src="{{ asset('/images/3.jpg') }}" alt="Card image">
-                <div class="card-body">
-
+            <div class="col-md-4 text-left mx-auto">
+                <div class="thumbnail">
+                    <img src="{{ asset('/images/9.jpeg') }}" alt="Nature" style="width:300px; height:300px;">
+                    <div class="caption">
+                      <p> prime minister</p>
+                    </div>
+                  </a>
                 </div>
-            </div>
-            <div class="card col-lg-3 col-md-3 col-sm-12 text-center mx-auto">
-                <img class="card-img-top rounded-left img-fluid" src="{{ asset('/images/2.webp') }}" alt="Card image">
-                <div class="card-body">
-
+              </div>
+                
+              <div class="col-md-4 text-left mx-300px">
+                <div class="thumbnail">
+                    <img src="{{ asset('/images/2.webp') }}" alt="Nature" style="width:310px; height:300px;">
+                    <div class="caption">
+                      <p>Defence Army-Chief</p>
+                    </div>
+                  </a>
                 </div>
-            </div>
-        </div>
-    </div>
+              </div>
+                
 @endsection
