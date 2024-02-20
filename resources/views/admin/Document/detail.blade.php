@@ -15,7 +15,7 @@
                 <div class="col-md-8">
                     <div class="card-body">
                         <p class="card-text"><b>Case number : </b>{{ $viewData['document']->case->case_number }}</p>
-                        <p class="card-text"><b>Csa number : </b>{{ $viewData['document']->csa->csa_number }}</p>
+                        <p class="card-text"><b>Submitted By : </b>{{ $viewData['document']->csa->courtStaff->person->getFullName() }}</p>
                         <p class="card-text"><b>Date : </b>{{ $viewData['event']->date_filed }}</p>
                         <p class="card-text"><b>description : </b>{{ $viewData['event']->description }}</p>
                         <p class="card-text"><b>doc storage path : </b>{{ $viewData['event']->doc->doc_storage_path }}</p>

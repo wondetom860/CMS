@@ -94,8 +94,7 @@
         <div class="container">
             <p class="copyright">
                 @include('partials.language_switcher')
-                Copyright - <a class="text-reset" target="_blank"
-                    href="https://www.mod.gov.et">
+                Copyright - <a class="text-reset" target="_blank" href="https://www.mod.gov.et">
                     MOD
                 </a> - <b>ICT</b>
                 <span class="flex justify-right justify-end pt-0">

@@ -138,13 +138,10 @@
                 data: $("#case_register_form").serialize(),
                 dataType: 'JSON',
                 success: function(data) {
-                    try {
-                        person_id = Number(data);
-                        $("#id_number_search").val(clientId);
-                        $('#formModal').modal('hide');
-                        searchClientByIdNumber();
-                    } catch (error) {
-                        console.log(error);
+                    if (data == 1) {
+                        window.location.href = window.location;
+                    } else {
+                        alert(data);
                     }
                 }
             });
@@ -173,7 +170,7 @@
                         $("#person_id").html(0);
                     } else {
                         try {
-                            $("#person_id").parent().html("<span>"+data+"</span>");
+                            $("#person_id").val(data);
                         } catch (error) {
                             alert("Erro while loading data");
                             console.log(error);

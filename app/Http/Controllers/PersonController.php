@@ -76,12 +76,15 @@ class PersonController extends Controller
         $person->id_number = $request->id_number;
         $person->gender = $request->gender;
         if ($person->checkIfExists()) {
+            if ($request->client_registration) {
+                return "Such record already exists";
+            }
             notify()->error('Such profile inforamtion alredy exists', 'Creation failed');
             return redirect()->route('admin.person.index');
         }
         if ($request->client_registration) {
             $person->save();
-            return $person->id;
+            return 1;
         }
         if ($person->save()) {
             // auto register court_staff
@@ -203,11 +206,10 @@ class PersonController extends Controller
         if ($request->personId) {
             $p = Person::where('id_number', $request->personId)->get()->first();
             if ($p) {
-                // $option = "<option value='{$p->id}'>{$p->getFullName()}</option>";
-                return $p->getFullName();
+                $option = "<option value='{$p->id}'>{$p->getFullName()}</option>";
+                return $p->id;
             }
             return 0;
-
         } else {
             return 0;
         }
