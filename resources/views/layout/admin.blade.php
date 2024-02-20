@@ -46,7 +46,7 @@
                 {{-- left side bar --}}
 
                 <a href="{{ route('admin.home.index') }}" class="text-white text-decoration-none">
-                    <span class="fs-4">Admin Panel</span>
+                    <span class="fs-4">Dashboard Panel</span>
                 </a>
                 <hr />
                 <ul class="nav flex-column sidebar">
@@ -77,13 +77,19 @@
                         @can('manage-court-staff')
                             <ul class="nav flex-column sidebar">
                                 <h5 class="nav-link-header text-white">Court and Staff</h5>
-                                <li><a href="{{ route('admin.court.index') }}" class="nav-link text-white">Courts</a>
-                                </li>
-                                <li><a href="{{ route('admin.person.index') }}" class="nav-link text-white">Profile</a>
-                                </li>
-                                <li><a href="{{ route('admin.courtstaff.index') }}" class="nav-link text-white">Courts
-                                        Staff</a>
-                                </li>
+                                @can('court-list')
+                                    <li><a href="{{ route('admin.court.index') }}" class="nav-link text-white">Courts</a>
+                                    </li>
+                                @endcan
+                                @can('profile-list')
+                                    <li><a href="{{ route('admin.person.index') }}" class="nav-link text-white">Profile</a>
+                                    </li>
+                                @endcan
+                                @can('court-staff-list')
+                                    <li><a href="{{ route('admin.courtstaff.index') }}" class="nav-link text-white">Courts
+                                            Staff</a>
+                                    </li>
+                                @endcan
                             </ul>
                         @endcan
                     </li>
@@ -91,12 +97,20 @@
                         @can('manage-case')
                             <ul class="nav flex-column sidebar">
                                 <h5 class="nav-link-header text-white">Case Management</h5>
-                                <li><a href="{{ route('admin.case_staff_assignments.index') }}"
-                                        class="nav-link text-white">Case
-                                        Staff Assignment</a></li>
-                                <li><a href="{{ route('admin.party.index') }}" class="nav-link text-white">Parties</a></li>
-                                <li><a href="{{ route('admin.event.index') }}" class="nav-link text-white">Event</a></li>
-                                <li><a href="{{ route('admin.document.index') }}" class="nav-link text-white">Document</a>
+                                @can('case-staff-assignment-list')
+                                    <li><a href="{{ route('admin.case_staff_assignments.index') }}"
+                                            class="nav-link text-white">Case
+                                            Staff Assignment</a></li>
+                                @endcan
+                                @can('party-list')
+                                    <li><a href="{{ route('admin.party.index') }}" class="nav-link text-white">Parties</a></li>
+                                @endcan
+                                @can('event-list')
+                                    <li><a href="{{ route('admin.event.index') }}" class="nav-link text-white">Event</a></li>
+                                @endcan
+                                @can('document-list')
+                                    <li><a href="{{ route('admin.document.index') }}" class="nav-link text-white">Document</a>
+                                    @endcan
                                 </li>
                             </ul>
                         @endcan
@@ -165,8 +179,7 @@
             <div class="copyright py-3 text-center text-white">
                 <div class="container">
                     <small class="copyright">
-                        Copyright - <a class="text-reset fw-bold text-decoration-none" target="_blank"
-                            href="#">
+                        Copyright - <a class="text-reset fw-bold text-decoration-none" target="_blank" href="#">
                             MOD
                         </a> - <b>ICT <i>YoungTigers</i></b>
                     </small>

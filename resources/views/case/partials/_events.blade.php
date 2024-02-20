@@ -1,7 +1,11 @@
 @php
     $events = $case->events;
+    $btn = '';
+    if (Auth::user()->isClerk()) {
+        $btn = "<button class='btn btn-sm btn-link register-case-btn' onclick='registerEvent({$case->id}); return false;'>Scehdule Event</button>";
+    }
     if ($events) {
-        echo "<h6>Events Attached To This Case</h6>
+        echo "<h6>Events Attached To This Case{$btn}</h6>
         <table class='table table-condensed table-sm table-bordered' style='font-size: 9pt;'>
             <thead style='background-color:cornflowerblue;'>
                 <th>#</th>

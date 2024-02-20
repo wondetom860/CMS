@@ -48,8 +48,8 @@
                         <a href="{{ route('myaccount.profile') }}" class="nav-link active"
                             style="color: white">{{ __('My Profile') }}</a>
                         @if (Auth::user()->isAdmin())
-                            <a href="{{ route('admin.home.index') }}" class="nav-link active"
-                                style="color: white">{{ __('Dashboard') }}</a>
+                            {{-- <a href="{{ route('admin.home.index') }}" class="nav-link active"
+                                style="color: white">{{ __('Dashboard') }}</a> --}}
                         @endif
                        @can('dashboard-view')
                        <a href="{{ route('admin.home.index') }}" class="nav-link active">{{ __('Dashboard') }}</a>

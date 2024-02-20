@@ -10,9 +10,11 @@
                 <th>Doc Type</th>
                 <th>Date submitted</th>
                 <th>By</th>
+                <th></th>
             </thead><tbody>";
         $count = 0;
         foreach ($docs as $doc) {
+            $btn = "<button class='btn btn-link btn-sm' onclick='shoeDoc({$doc->id});return false;'>Show</button>";
             echo "<tr>
                     <td>" .
                 ++$count .
@@ -20,6 +22,7 @@
                     <td>{$doc->documentType->doc_type_name}</td>
                     <td>{$doc->date_filed}</td>
                     <td>{$doc->caseStaffAssignemnt->courtStaff->person->getFullName()}</td>
+                    <td>{$btn}</td>
                 </tr>";
         }
         echo '</tbody></table>';

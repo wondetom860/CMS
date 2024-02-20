@@ -13,7 +13,7 @@ class CourtStaffController extends Controller
 {
     function __construct()
     {
-        $this->middleware('permission:court-staff-list|role-create|role-edit|role-delete', ['only' => ['index', 'store']]);
+        $this->middleware('permission:court-staff-list|court-staff-create|court-staff-edit|court-staff-delete', ['only' => ['index', 'store']]);
         $this->middleware('permission:court-staff-create', ['only' => ['create', 'store']]);
         $this->middleware('permission:court-staff-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:court-staff-delete', ['only' => ['destroy']]);
