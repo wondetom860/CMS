@@ -43,7 +43,8 @@ class CaseController extends Controller
         $dataProvider = null;
 
         $user = User::findOrFail(Auth::user()->id);
-        if ($user->isClerk()){
+
+        if ($user->isClerk()) {
             $dataProvider = new EloquentDataProvider(
                 CaseModel::query()
                     ->withAggregate('court', 'name')

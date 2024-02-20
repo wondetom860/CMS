@@ -19,8 +19,12 @@
     <!-- header -->
     <nav class="navbar navbar-light" style="background-color: #4682B4;">
         <a class="navbar-brand" href="#" style="max-width: 4%; padding-left: 9px;">
-            <img src="{{ asset('/images/7.png') }}" class="img-fluid">
+            <img src="{{ asset('/images/8.png') }}" class="img-fluid">
         </a>
+        {{-- <a class="navbar-brand" href="#" style="max-width: 4%; padding-left: 9px;">
+            <img src="{{ asset('/images/8.png') }}" class="img-fluid">
+        </a> --}}
+        
         <div class="container">
             <a class="navbar-brand" href="/" style="color: white">{{ __('CRM-System') }}</a>
             <div class="navbar navbar-expand-lg" id="navbarNavAltMarkup">
@@ -35,8 +39,10 @@
                     <div class="vr bg-white mx-2 d-none d-lg-block"></div>
                     @guest
                         <a href="{{ route('login') }}" class="nav-link active" style="color: white">Login</a>
+                        
                         {{-- <a href="{{ route('register') }}" class="nav-link active">Register</a> --}}
                     @else
+                    
                         {{-- <a href="{{ route('myaccount.orders') }}" class="nav-link active">{{ __('My Orders') }}</a>
                     --}}
                         <a href="{{ route('myaccount.profile') }}" class="nav-link active"
