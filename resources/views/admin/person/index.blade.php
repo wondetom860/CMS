@@ -86,6 +86,14 @@
                                 },
                             ],
                             [
+                                'attribute' => 'role',
+                                'label' => 'Role',
+                                'value' => function ($row) {
+                                    return $row->getUserRoles();
+                                },
+                                //'sort' => 'first_name', // To sort rows. Have to set if an 'attribute' is not defined for column.
+                            ],
+                            [
                                 'attribute' => 'age',
                                 'label' => 'Age',
                                 'value' => function ($row) {
