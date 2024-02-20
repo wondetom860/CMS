@@ -36,16 +36,16 @@
                                     'width' => '15%', // Width of table column.
                                 ],
                             ],
-                            [
-                                'attribute' => 'csa_number',
-                                'label' => 'Csa Number',
-                                'value' => function ($row) {
-                                    return $row->case->case_number;
-                                },
-                                'htmlAttributes' => [
-                                    'width' => '15%',
-                                ],
-                            ],
+                            // [
+                            //     'attribute' => 'Submitted By',
+                            //     'label' => 'Submitted By',
+                            //     'value' => function ($row) {
+                            //         return $row->courtStaff->person->getFullName();
+                            //     },
+                            //     'htmlAttributes' => [
+                            //         'width' => '15%',
+                            //     ],
+                            // ],
                             // [
                             //     'label' => 'Active', // Column label.
                             //     'value' => function ($row) {

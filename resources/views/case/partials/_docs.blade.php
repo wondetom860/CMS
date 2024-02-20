@@ -17,9 +17,9 @@
                     <td>" .
                 ++$count .
                 "</td>
-                    <td>{$doc->doc_type_id}</td>
+                    <td>{$doc->documentType->doc_type_name}</td>
                     <td>{$doc->date_filed}</td>
-                    <td>{$doc->csa_id}</td>
+                    <td>{$doc->caseStaffAssignemnt->courtStaff->person->getFullName()}</td>
                 </tr>";
         }
         echo '</tbody></table>';
