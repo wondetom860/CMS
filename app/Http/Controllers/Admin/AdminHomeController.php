@@ -14,7 +14,7 @@ class AdminHomeController extends Controller
     }
 
     public function index(){
-        $viewData["title"] = "Admin Page - Admin";
+        $viewData["title"] = "Dashboard Page ";
         return view("admin.home.index")->with("viewData",$viewData);
     }
 
