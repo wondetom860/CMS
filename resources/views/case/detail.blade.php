@@ -44,6 +44,29 @@
         $('#myForm').trigger("reset");
         $('#formModal').modal('show');
     }
+
+    const submitClientForm = () => {
+        $.ajax({
+            url: "{{ route('admin.party.store') }}",
+            type: "post",
+            data: $("#case_register_form").serialize(),
+            dataType: 'JSON',
+            success: function(data) {
+                if (data == 1) {
+                    window.location.href = window.location;
+                } else {
+                    alert(data);
+                }
+            }
+        });
+    }
+
+    const registerParty = (case_id) => {
+        $("#modal_body").html($("#party-form-container").html());
+        $("#formModalLabel").html("Register parties for case {{ $viewData['case']->case_number }}");
+        $('#myForm').trigger("reset");
+        $('#formModal').modal('show');
+    }
     const shoeDoc = (doc_id) => {
         $("#modal_body").html("Loading document....");
         $("#formModalLabel").html("Uploaded document detail");
@@ -59,6 +82,10 @@
         // $("id_number").val(clientId);
     }
 </script>
+
+<div id="party-form-container" class="d-none">
+    @include('admin.party._partials._form', ['viewData' => $viewData])
+</div>
 
 <div id="doc-form-container" class="d-none">
     @include('admin.Document._partials._form', ['case' => $viewData['case']])
@@ -76,7 +103,7 @@
                 </h4>
             </div>
             <div class="modal-body" id="modal_body">
-                
+
             </div>
         </div>
     </div>

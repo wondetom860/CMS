@@ -29,8 +29,19 @@ class CaseModel extends Model
         return $this->case_status != self::STATUS_CLOSED;
     }
 
+    public function canRegisterParty(){
+        // $usr = User::find(Auth::user()->id);
+        // $courtStaff = CourtStaff::where(['person_id' => $usr->person_id])->get()->first();
+        // $court_staff_id = $courtStaff ? $courtStaff->id : null;
+        // return $this->caseStaffAssignments()->where(['court_staff_id' => $court_staff_id])->count() > 0;
+    }
+
     public function isAssignedTo($person_id)
     {
+        $usr = User::where(['person_id' => $person_id])->get()->first();
+        if ($usr->isClient()) {
+            return false;
+        }
         $courtStaff = CourtStaff::where(['person_id' => $person_id])->get()->first();
         $court_staff_id = $courtStaff ? $courtStaff->id : null;
         return $this->caseStaffAssignments()->where(['court_staff_id' => $court_staff_id])->count() > 0;
@@ -39,11 +50,12 @@ class CaseModel extends Model
     public function getCsaId()
     {
         $courtStaffMoel = CourtStaff::where(['person_id' => Auth::user()->person_id])->get()->first();
-
-        $csa = $this->caseStaffAssignments;
-        foreach ($csa as $cs) {
-            if($cs->court_staff_id == $courtStaffMoel->id){
-                return $cs->id;
+        if ($courtStaffMoel) {
+            $csa = $this->caseStaffAssignments;
+            foreach ($csa as $cs) {
+                if ($cs->court_staff_id == $courtStaffMoel->id) {
+                    return $cs->id;
+                }
             }
         }
     }

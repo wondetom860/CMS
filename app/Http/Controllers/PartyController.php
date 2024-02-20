@@ -46,6 +46,7 @@ class PartyController extends Controller
         $viewData['parttype'] = PartyType::all();
         $viewData['person'] = Person::getAllClients();
         $viewData['cases'] = CaseModel::all();
+        $viewData['client_registration'] = 1;
         return view('admin.party.create')->with('viewData', $viewData);
     }
 
@@ -57,6 +58,7 @@ class PartyController extends Controller
      */
     public function store(Request $request)
     {
+        // $case
         Party::validate($request);
         $court = new Party();
         $court->case_id = $request->case_id;
