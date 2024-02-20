@@ -43,7 +43,13 @@ class CaseController extends Controller
         $dataProvider = null;
 
         $user = User::findOrFail(Auth::user()->id);
-        if ($user->isClient()) { //list all cases in which a client is associated to: withness,plaintiff,defendant..
+        if ($user->isClerk()){
+            $dataProvider = new EloquentDataProvider(
+                CaseModel::query()
+                    ->withAggregate('court', 'name')
+                    ->withAggregate('caseType', 'case_type_name')
+            );
+        }else if ($user->isClient()) { //list all cases in which a client is associated to: withness,plaintiff,defendant..
             // $user = User::findOrFaail(Auth::user()->id);
             // if ($user->isClient()) { //list all cases in which a client is associated to: withness,plaintiff,defendant..
             //     // $party = Party::where(['person_id' => $person_id])->get()->first();
