@@ -13,10 +13,16 @@ use Illuminate\Support\Facades\Auth;
 use Itstructure\GridView\DataProviders\EloquentDataProvider;
 
 class CaseStaffAssignmentController extends Controller
-
-
-
 {
+    function __construct()
+    {
+        $this->middleware('permission:case-staff-assignment-list|case-staff-assignment-create|case-staff-assignment-edit|case-staff-assignment-delete', ['only' => ['index', 'store']]);
+        $this->middleware('permission:case-staff-assignment-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:case-staff-assignment-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:case-staff-assignment-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:case-staff-assignment-detail', ['only' => ['show']]);
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -135,13 +141,20 @@ class CaseStaffAssignmentController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * 
      */
-    public function destroy($id)
+    public function delete($id)
     {
-        CaseModel::destroy($id);
-        notify()->success('Case Assignment Deleted Successfully', 'Delete Success');
-        return back();
+        //CaseModel::delete($id);
+        if(case_staff_assignment::destroy($id)){
+            notify()->success('Case Assignment Deleted Successfully', 'Delete Success');
+            return back();
+        }else{
+            notify()->error('Case Assignment Deleted Error', 'Delete Error');
+            return back();
+        }
+        
+       
     }
 }
 

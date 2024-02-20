@@ -7,7 +7,7 @@
         </h3>
         <div class="card-body">
             <p>
-                Welcome to Admin Page
+                Welcome !!!
             </p>
         </div>
     </div>
