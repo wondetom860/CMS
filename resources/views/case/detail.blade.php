@@ -38,13 +38,35 @@
 @endsection
 
 <script>
+    const registerEvent = (case_id) => {
+        $("#modal_body").html($("#event-form-container").html());
+        $("#formModalLabel").html("Schedule Event for case {{ $viewData['case']->case_number }}");
+        $('#myForm').trigger("reset");
+        $('#formModal').modal('show');
+    }
+    const shoeDoc = (doc_id) => {
+        $("#modal_body").html("Loading document....");
+        $("#formModalLabel").html("Uploaded document detail");
+        $('#myForm').trigger("reset");
+        $('#formModal').modal('show');
+    }
     const attachDoc = (case_id) => {
         // clientId = $("#id_number_search").val();
+        $("#modal_body").html($("#doc-form-container").html());
+        $("#formModalLabel").html("Attach dicument for case " + {{ $viewData['case']->case_number }});
         $('#myForm').trigger("reset");
         $('#formModal').modal('show');
         // $("id_number").val(clientId);
     }
 </script>
+
+<div id="doc-form-container" class="d-none">
+    @include('admin.Document._partials._form', ['case' => $viewData['case']])
+</div>
+
+<div id="event-form-container" class="d-none">
+    @include('admin.event._partials._form', ['case' => $viewData['case']])
+</div>
 
 <div class="modal fade" id="formModal" aria-hidden="true">
     <div class="modal-dialog">
@@ -54,7 +76,7 @@
                 </h4>
             </div>
             <div class="modal-body" id="modal_body">
-                @include('admin.Document._partials._form', ['case' => $viewData['case']])
+                
             </div>
         </div>
     </div>

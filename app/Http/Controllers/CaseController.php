@@ -11,6 +11,7 @@ use App\Models\Party;
 use App\Models\PartyType;
 use App\Models\Person;
 use App\Models\Staffrole;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -39,20 +40,33 @@ class CaseController extends Controller
         $viewData = [];
         $viewData["title"] = "Register_Case - CCMS";
         $viewData["subtitle"] = "List of Cases";
-        // DB::table('case')
-        //     ->select('*')
-        //     ->join('case_staff_assignment', 'case_staff_assignment.id', '=', 'case.csa_id')
-        //     ->join('court_staff', 'court_staff.id', '=', 'case_staff_assignment.court_staff_id')
-        //     ->where('court_staff.person_id', Auth::user()->person_id)
-        //     ->get();
-        $dataProvider = new EloquentDataProvider(
-            CaseModel::query()
-                ->join('case_staff_assignment', 'case.id', '=', 'case_staff_assignment.case_id')
-                ->join('court_staff', 'court_staff.id', '=', 'case_staff_assignment.court_staff_id')
-                ->where('court_staff.person_id', Auth::user()->person_id)
-                ->withAggregate('court', 'name')
-                ->withAggregate('caseType', 'case_type_name')
-        );
+        $dataProvider = null;
+
+        $user = User::findOrFail(Auth::user()->id);
+        if ($user->isClient()) { //list all cases in which a client is associated to: withness,plaintiff,defendant..
+            // $user = User::findOrFaail(Auth::user()->id);
+            // if ($user->isClient()) { //list all cases in which a client is associated to: withness,plaintiff,defendant..
+            //     // $party = Party::where(['person_id' => $person_id])->get()->first();
+            //     return $this->parties()->where(['person_id' => $user->person_id])->count() > 0;
+            // }
+            $dataProvider = new EloquentDataProvider(
+                CaseModel::query()
+                    ->join('party', 'case.id', '=', 'party.case_id')
+                    ->where('party.person_id', Auth::user()->person_id)
+                    ->withAggregate('court', 'name')
+                    ->withAggregate('caseType', 'case_type_name')
+            );
+        } else {
+            $dataProvider = new EloquentDataProvider(
+                CaseModel::query()
+                    ->join('case_staff_assignment', 'case.id', '=', 'case_staff_assignment.case_id')
+                    ->join('court_staff', 'court_staff.id', '=', 'case_staff_assignment.court_staff_id')
+                    ->where('court_staff.person_id', Auth::user()->person_id)
+                    ->withAggregate('court', 'name')
+                    ->withAggregate('caseType', 'case_type_name')
+            );
+        }
+
         return view('case.index', [
             'dataProvider' => $dataProvider,
             'viewData' => $viewData
@@ -74,8 +88,8 @@ class CaseController extends Controller
             $viewData['case'] = CaseModel::all();
             $viewData['staffrole'] = Staffrole::all();
             $viewData['case_type'] = CaseType::all();
-            $viewData['partyType'] = PartyType::all();//client_registration
-            $viewData['client_registration'] = 1;//
+            $viewData['partyType'] = PartyType::all(); //client_registration
+            $viewData['client_registration'] = 1; //
             $viewData['courtStaff'] = $courtStaff;
             $viewData['clients'] = $clientId ? ([Person::findOrFail($clientId)]) : (Person::all());
             return view('case.create')->with('viewData', $viewData);

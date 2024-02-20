@@ -31,10 +31,10 @@ class Person extends Model
     public function checkIfExists()
     {
         return Person::where([
-            "first_name"=>$this->first_name,
+            "first_name" => $this->first_name,
             "fath_name" => $this->fath_name,
             'gfath_name' => $this->gfath_name
-            ])->orWhere(['id_number' => $this->id_number])
+        ])->orWhere(['id_number' => $this->id_number])
             ->get()
             ->count() > 0;
     }
@@ -78,7 +78,7 @@ class Person extends Model
     {
         $logins = $this->getLogins();
         if ($logins) {
-            return "{$logins->user_name}@******";
+            return "{$logins->user_name}@******|{$logins->email}";
         } else {
             return $withLink ? "<button class='btn btn-info text-right btn-sm' onclick='signupUser({$this->id})'>Create Login Account</button>"
                 : "<p class='bg-warning'>Login account doesn't exist.</p>";
@@ -93,6 +93,12 @@ class Person extends Model
     public function getAge()
     {
         return 26;
+    }
+
+    public function getUserRoles()
+    {
+        $usser = $this->getLogins();
+        return $usser ?  $usser->getRoles() : '';
     }
 
     public function getRandomUserName()

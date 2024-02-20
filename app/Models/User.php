@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use Spatie\Permission\Models\Role;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -41,8 +42,7 @@ class User extends Authenticatable
 
     public function person()
     {
-        return $this->belongsTo(Person::class,'person_id');
-
+        return $this->belongsTo(Person::class, 'person_id');
     }
 
     public function getFullName()
@@ -50,6 +50,18 @@ class User extends Authenticatable
         $person = $this->person;
 
         return $person ? $person->getFullName() : 'Super Admin';
+    }
+
+    public function getRoles()
+    {
+        $rr = [];
+        $roles = Role::all();
+        foreach ($roles as $r) {
+            if ($this->hasRole($r)) {
+                $rr[] = $r->name;
+            }
+        }
+        return implode($rr);
     }
 
     /**
@@ -65,6 +77,16 @@ class User extends Authenticatable
     {
         // var_dump($this->hasRole('SuperAdmin'));
         return $this->hasRole('Admin');
+    }
+
+    public function isClerk()
+    {
+        return $this->hasRole('Clerk');
+    }
+
+    public function isClient()
+    {
+        return $this->hasRole('Client');
     }
 
     public function isSuperAdmin()
@@ -90,7 +112,8 @@ class User extends Authenticatable
     //     return $this->belongsToMany(Role::class);
     // }
 
-    public function getDefaultPassword(){
+    public function getDefaultPassword()
+    {
         return "younT@123";
     }
 
