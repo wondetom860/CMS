@@ -46,11 +46,11 @@
                 {{-- left side bar --}}
 
                 <a href="{{ route('admin.home.index') }}" class="text-white text-decoration-none">
-                    <span class="fs-4">Dashboard Panel</span>
+                    <span class="fs-4">{{ __('Dashboard Panel') }}</span>
                 </a>
                 <hr />
                 <ul class="nav flex-column sidebar">
-                    <li><a href="{{ route('admin.home.index') }}" class="nav-link text-white">Home</a></li>
+                    <li><a href="{{ route('admin.home.index') }}" class="nav-link text-white">{{__('Home')}}</a></li>
                     <li>
                         @can('manage-basic-file')
                             <ul class="nav flex-column sidebar">
@@ -65,7 +65,7 @@
                                         Type</a>
                                 </li>
                                 <li><a href="{{ route('admin.document_type.index') }}"
-                                        class="nav-link text-white">DocumentType</a>
+                                        class="nav-link text-white">Document Type</a>
                                 </li>
                                 <li><a href="{{ route('admin.party_type.index') }}" class="nav-link text-white">Party
                                         Type</a>

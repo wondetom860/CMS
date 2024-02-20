@@ -3,7 +3,7 @@
 @section('content')
     <div class="card">
         <h3 class="card-header">
-            {{ $viewData['title'] }}
+            {{__($viewData['title']) }}
         </h3>
         <div class="card-body">
             <p>
