@@ -102,7 +102,7 @@
                                             return '/admin/court/' . $data->id . '/delete';
                                         },
                                         'htmlAttributes' => [
-                                            'target' => '_blank',
+                                            'target' => '_self',
                                             'style' => 'color: yellow; font-size: 16px;',
                                             'onclick' => 'return window.confirm("Sure to delete?");',
                                         ],

@@ -39,7 +39,7 @@ class CaseModel extends Model
     public function isAssignedTo($person_id)
     {
         $usr = User::where(['person_id' => $person_id])->get()->first();
-        if ($usr->isClient()) {
+        if($usr->isClient()){
             return false;
         }
         $courtStaff = CourtStaff::where(['person_id' => $person_id])->get()->first();
@@ -58,6 +58,7 @@ class CaseModel extends Model
                 }
             }
         }
+
     }
 
     public function getCaseNumber()
