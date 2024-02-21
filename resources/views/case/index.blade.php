@@ -5,9 +5,9 @@
     <div class="container d-flix align-items-center flex-column">
         <div class="card">
             <h4 class="card-header">
-                Cases - CCMS
+                {{__('Cases - CCMS')}}
                 <a class="btn btn-primary btn-xs register-case-btn" href="{{ route('case.create') }}"
-                    style="align-self: flex-end">Register Case</a>
+                    style="align-self: flex-end">{{__('Register Case')}}</a>
             </h4>
             <div class="card-body">
                 @php
@@ -18,15 +18,16 @@
                             'pageName' => 'p',
                         ],
                         'rowsPerPage' => 5, // The number of rows in one page. By default 10.
-                        'title' => 'Cases', // It can be empty ''
+                        'title' => __('Cases'), // It can be empty ''
                         'strictFilters' => true, // If true, then a searching by filters will be strict, using an equal '=' SQL operator instead of 'like'.
                         'rowsFormAction' => '/admin/pages/deletion', // Route url to send slected checkbox items for deleting rows, for example.
                         'useSendButtonAnyway' => true, // If true, even if there are no checkbox column, the main send button will be displayed.
-                        'searchButtonLabel' => 'Find',
+                        'searchButtonLabel' => __('Find'),
+                        'resetButtonLabel' => __('Reset'),
                         'columnFields' => [
                             [
                                 'attribute' => 'Case_number', // REQUIRED if value is not defined. Attribute name to get row column data.
-                                'label' => 'case_number', // Column label.
+                                'label' => __('Case Number'), // Column label.
                                 // 'filter' => false, // If false, then column will be without a search filter form field.,
                                 'value' => function ($row) {
                                     return $row->case_number;
@@ -71,35 +72,35 @@
                             //     ],
                             // ],
                             [
-                                'label' => 'Court',
+                                'label' => __('Court'),
                                 'attribute' => 'court_name',
                                 'value' => function ($row) {
                                     return $row->court->name;
                                 },
                             ],
                             [
-                                'label' => 'Cause of Action',
+                                'label' => __('Cause of Action'),
                                 'value' => function ($row) {
                                     return $row->cause_of_action;
                                 },
                                 //'sort' => 'first_name', // To sort rows. Have to set if an 'attribute' is not defined for column.
                             ],
                             [
-                                'label' => 'Case Type', // Column label.
+                                'label' => __('Case Type'), // Column label.
                                 'attribute' => 'case_type_case_type_name', // Attribute, by which the row column data will be taken from a model.
                                 'value' => function ($row) {
                                     return $row->caseType->case_type_name;
                                 },
                             ],
                             [
-                                'label' => 'Date Reported', // Column label.
+                                'label' => __('Date Reported'), // Column label.
                                 'attribute' => 'start_date', // Attribute, by which the row column data will be taken from a model.
                                 'value' => function ($row) {
                                     return $row->start_date;
                                 },
                             ],
                             [
-                                'attribute' => 'Status',
+                                'attribute' => __('Status'),
                                 'value' => function($model){
                                     return $model->getStatus();
                                 }
@@ -108,6 +109,7 @@
                             [
                                 // Set Action Buttons.
                                 'class' => Itstructure\GridView\Columns\ActionColumn::class, // REQUIRED.
+                                'label' => '',
                                 'options' => [
                                     'style' => 'background-color: red;'
                                 ],

@@ -53,7 +53,7 @@ class HomeController extends Controller
     public function index()
     {
         $viewData = [];
-        $viewData["title"] = "Home Page - CCMS";
+        $viewData["title"] = __("Home Page - CCMS");
         $viewData['courts_count'] = Court::all()->count();
         return view('home.index')->with("viewData", $viewData);
     }

@@ -1,10 +1,10 @@
 @extends('layout.mystore')
-@section('title', 'Case Detail')
+@section('title', __('Case Detail'))
 @section('subtitle', $viewData['subtitle'])
 @section('content')
     <div class="container">
         <h3 class="float-right">
-            Detail: {{ $viewData['case']->getDetail() }}
+            {{__('Detail')}}: {{ $viewData['case']->getDetail() }}
         </h3>
         <div class="card mb-3">
             <div class="row g-0">
@@ -14,10 +14,10 @@
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <p class="card-text"><b>Case number : </b>{{ $viewData['case']->case_number }}</p>
-                        <p class="card-text"><b>Court Name : </b>{{ $viewData['case']->court->name }}</p>
-                        <p class="card-text"><b>Case Type : </b>{{ $viewData['case']->caseType->case_type_name }}</p>
-                        <p class="card-text"><b>Registered On : </b>{{ $viewData['case']->created_at }}</p>
+                        <p class="card-text"><b>{{__('Case Number')}} : </b>{{ $viewData['case']->case_number }}</p>
+                        <p class="card-text"><b>{{__('Court Name')}} : </b>{{ $viewData['case']->court->name }}</p>
+                        <p class="card-text"><b>{{__('Case Type')}} : </b>{{ $viewData['case']->caseType->case_type_name }}</p>
+                        <p class="card-text"><b>{{__('Registered On')}} : </b>{{ $viewData['case']->created_at }}</p>
                         <div class="container-fluid">
                             @include('case.partials._docs', ['case' => $viewData['case']])
                         </div>

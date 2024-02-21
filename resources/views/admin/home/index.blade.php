@@ -7,7 +7,7 @@
         </h3>
         <div class="card-body">
             <p>
-                Welcome !!!
+               {{__('Welcome')}} !!!
             </p>
         </div>
     </div>

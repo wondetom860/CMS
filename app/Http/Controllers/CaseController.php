@@ -38,8 +38,8 @@ class CaseController extends Controller
     {
         //
         $viewData = [];
-        $viewData["title"] = "Register_Case - CCMS";
-        $viewData["subtitle"] = "List of Cases";
+        $viewData["title"] = __("Register Case - CCMS");
+        $viewData["subtitle"] = __("List of Cases");
         $dataProvider = null;
 
         $user = User::findOrFail(Auth::user()->id);
@@ -90,7 +90,7 @@ class CaseController extends Controller
     {
         $courtStaff = CourtStaff::where(['person_id' => Auth::user()->person_id])->first();
         if ($courtStaff) {
-            $viewData['title'] = 'Register Case - CCMS';
+            $viewData['title'] = __("Register Case - CCMS");
             $viewData['courts'] = Court::all();
             $viewData['case'] = CaseModel::all();
             $viewData['staffrole'] = Staffrole::all();
@@ -165,8 +165,8 @@ class CaseController extends Controller
     public function show($id)
     {
         $case = CaseModel::findOrFail($id);
-        $viewData['title'] = 'Case Page - Case Detail - CCMS';
-        $viewData['subtitle'] = "Case Detail: " . $case->getDetail();
+        $viewData['title'] = __('Case Page - Case Detail - CCMS');
+        $viewData['subtitle'] = __('Case Detail'). ":" . $case->getDetail();
         $viewData['case'] = $case;
         return view('case.detail')->with('viewData', $viewData);
     }
