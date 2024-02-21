@@ -1,7 +1,7 @@
 <div class="card-header"> Register New party
 </div>
 <div class="card-body">
-    <form method="POST" action="{{ route('admin.party.store') }}">
+    <form method="POST" action="{{ route('admin.party.store') }}" id="party_register_form">
         @csrf
         <div class="row">
             <div class="mb-3">

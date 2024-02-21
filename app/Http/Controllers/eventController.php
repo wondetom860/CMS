@@ -59,13 +59,17 @@ class eventController extends Controller
     {
         event::validate($request);
         $event = new event();
+        $event->date_time = $request->date_time;
+        if(!$event->validDate()){
+            notify()->error('Event registering failed', 'Schedule Date error');
+            return redirect()->route('admin.event.create');
+        }
         $event->case_id = $request->case_id;
         $event->event_type_id = $request->event_type_id;
-        $event->date_time = $request->date_time;
         $event->location = $request->location;
         $event->out_come = $request->out_come;
         $event->save();
-        notify()->success('event registered Successfully', 'Creation Success');
+        notify()->success('Event registered Successfully', 'Creation Success');
         return redirect()->route('admin.event.index');
     }
 
