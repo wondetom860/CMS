@@ -1,13 +1,16 @@
 @php
     $staffs = $case->parties;
     if ($staffs) {
+        $ee = __('Person');
+        $pp = __('Party Type');
+        $rr = __('Registered Date');
         echo "<h6>Parties in This Case</h6>
         <table class='table table-condensed table-sm table-bordered' style='font-size: 9pt;'>
             <thead style='background-color:cornflowerblue;'>
                 <th>#</th>
-                <th>Person</th>
-                <th>Party Type</th>
-                <th>Date</th>
+                <th>$ee</th>
+                <th>$pp</th>
+                <th>$rr</th>
             </thead><tbody>";
         $count = 0;
         foreach ($staffs as $staff) {

@@ -5,14 +5,18 @@
         $btn = "<button class='btn btn-sm btn-link register-case-btn' onclick='registerEvent({$case->id}); return false;'>Scehdule Event</button>";
     }
     if ($events) {
+        $ee = __('Event Type');
+        $dd = __('Event Date');
+        $ll = __('Locatin');
+        $oo = __('OutCome');
         echo "<h6>Events Attached To This Case{$btn}</h6>
         <table class='table table-condensed table-sm table-bordered' style='font-size: 9pt;'>
             <thead style='background-color:cornflowerblue;'>
                 <th>#</th>
-                <th>Event Type</th>
-                <th>Date </th>
-                <th>Locatin</th>
-                <th>OutCome</th>
+                <th>$ee</th>
+                <th>$dd</th>
+                <th>$ll</th>
+                <th>$oo</th>
             </thead><tbody>";
         $count = 0;
         foreach ($events as $event) {

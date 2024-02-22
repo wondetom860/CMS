@@ -59,5 +59,14 @@
     "Detail":"ዝርዝር",
     "Case Page - Case Detail - CCMS":"የጉዳይ ገጽ - የጉዳይ ዝርዝር - ፍ/ጉ/አ/ስ",
     "Date Submitted":"የቀረበበት ቀን",
-    "By":"በ"
+    "By":"በ",
+    "Event Date":"የቀጠሮ ቀን",
+    "Locatin":"አድራሻ",
+    "OutCome":"ዉጤት",
+    "Registered Date":"የተመዘገበበት ቀን",
+    "Staff Name":"የሰራተኞች ስም",
+    "Assign As":"የመዘገበዉ",
+    "Assign Date":"የተመዘገበበት ቀን",
+    "Show":"እይ",
+    "Upload Attach":"አባሪ ይጫኑ"
 }

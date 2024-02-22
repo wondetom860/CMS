@@ -1,7 +1,8 @@
 @php
     $docs = $case->documents;
+    $uu = __('Upload Attach');
     $attachBytton = $case->isAssignedTo(Auth::user()->person_id) && $case->isActive() ? 
-    "<button class='btn btn-default btn-link btn-sm register-case-btn' onclick='attachDoc({$case->id});return false;'>Upload/Attach</button>" : "";
+    "<button class='btn btn-default btn-link btn-sm register-case-btn' onclick='attachDoc({$case->id});return false;'>$uu</button>" : "";
     if ($docs) {
         $hh = __('Document Type');
         $bb = __('Date Submitted');
@@ -17,7 +18,8 @@
             </thead><tbody>";
         $count = 0;
         foreach ($docs as $doc) {
-            $btn = "<button class='btn btn-link btn-sm' onclick='shoeDoc({$doc->id});return false;'>Show</button>";
+            $aa = __('Show');
+            $btn = "<button class='btn btn-link btn-sm' onclick='shoeDoc({$doc->id});return false;'>$aa</button>";
             echo "<tr>
                     <td>" .
                 ++$count .
