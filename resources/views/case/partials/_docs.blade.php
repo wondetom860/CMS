@@ -2,11 +2,7 @@
     $docs = $case->documents;
     $uu = __('Upload Attach');
     $attachBytton = $case->isAssignedTo(Auth::user()->person_id) && $case->isActive() ? 
-<<<<<<< HEAD
     "<button class='btn btn-default btn-link btn-sm register-case-btn' onclick='attachDoc({$case->id});return false;'>$uu</button>" : "";
-=======
-    "<button class='btn btn-link btn-sm float-right' onclick='attachDoc({$case->id});return false;'>Upload/Attach</button>" : "";
->>>>>>> main
     if ($docs) {
         $hh = __('Document Type');
         $bb = __('Date Submitted');

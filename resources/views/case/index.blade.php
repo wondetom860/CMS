@@ -28,11 +28,7 @@
                         'columnFields' => [
                             [
                                 'attribute' => 'Case_number', // REQUIRED if value is not defined. Attribute name to get row column data.
-<<<<<<< HEAD
                                 'label' => __('Case Number'), // Column label.
-=======
-                                'label' => 'Case Number', // Column label.
->>>>>>> main
                                 // 'filter' => false, // If false, then column will be without a search filter form field.,
                                 'value' => function ($row) {
                                     return $row->case_number;
