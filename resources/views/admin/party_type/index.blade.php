@@ -2,7 +2,7 @@
 @section('title', $viewData['title'])
 @section('innerTitle', $viewData['title'])
 @section('content')
-    <div class="container d-flix align-items-center flex-column">
+    <div class="">
         <div class="card">
             <h4 class="card-header">
                 {{__('Party Types - Admin Panel')}}
@@ -29,7 +29,7 @@
                                 <td>
                                      <a href="{{ route('admin.party_type.edit', ['id' => $pt->id]) }}">
                                         <button class="btn btn-primary">
-                                            <i class="bi-pencil"></i>
+                                            <i class="far fa-edit"></i>
                                         </button>
                                     </a> 
                                 </td>

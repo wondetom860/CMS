@@ -2,12 +2,12 @@
 @section('title', $viewData['title'])
 @section('innerTitle', $viewData['subtitle'])
 @section('content')
-    <div class="container d-flix align-items-center flex-column">
+    <div class="">
         <div class="card">
             {{-- <img src="{{ asset($row->Image) }}" style="width:80px; height:80px; border-radius:50%;" alt=""> --}}
             <h4 class="card-header">
                 Documents - Admin Panel - MOD-CCMS
-                <a class="btn btn-primary btn-xs register-caseType-btn" href="{{ route('admin.document.create') }}"
+                <a class="btn btn-primary btn-xs register-caseType-btn float-right" href="{{ route('admin.document.create') }}"
                     style="align-self: flex-end">Register New Document</a>
             </h4>
             <div class="card-body">

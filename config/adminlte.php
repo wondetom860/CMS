@@ -15,8 +15,8 @@ return [
     */
 
     'title' => 'Court Case Management System',
-    'title_prefix' => 'MoND',
-    'title_postfix' => 'CCMS',
+    'title_prefix' => '',
+    'title_postfix' => '',
 
     /*
     |--------------------------------------------------------------------------
@@ -63,12 +63,12 @@ return [
     |
     */
 
-    'logo' => 'CCMS',
-    'logo_img' => asset('/images/court.png'),
+    'logo' => 'MoND CCMS',
+    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'CCMS Logo',
+    'logo_img_alt' => 'Admin Logo',
 
     /*
     |--------------------------------------------------------------------------
@@ -84,9 +84,9 @@ return [
     */
 
     'auth_logo' => [
-        'enabled' => true,
+        'enabled' => false,
         'img' => [
-            'path' => asset('/images/user_login.webp'),
+            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
             'alt' => 'Auth Logo',
             'class' => '',
             'width' => 50,
@@ -107,10 +107,10 @@ return [
     */
 
     'preloader' => [
-        'enabled' => false,
+        'enabled' => true,
         'img' => [
-            'path' => asset('/images/court.png'),
-            'alt' => 'CCMS Image',
+            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'alt' => 'AdminLTE Preloader Image',
             'effect' => 'animation__shake',
             'width' => 60,
             'height' => 60,
@@ -194,7 +194,7 @@ return [
     'classes_content' => '',
     'classes_sidebar' => 'sidebar-dark-primary elevation-4',
     'classes_sidebar_nav' => '',
-    'classes_topnav' => 'navbar-light navbar-teal',
+    'classes_topnav' => 'navbar-white navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
     'classes_topnav_container' => 'container',
 
@@ -252,14 +252,14 @@ return [
     |
     */
 
-    'use_route_url' => true,
-    'dashboard_url' => 'home.index',
+    'use_route_url' => false,
+    'dashboard_url' => 'home',
     'logout_url' => 'logout',
     'login_url' => 'login',
-    // 'register_url' => 'register',
-    // 'password_reset_url' => 'password/reset',
-    // 'password_email_url' => 'password/email',
-    'profile_url' => 'myaccount.profile',
+    'register_url' => 'register',
+    'password_reset_url' => 'password/reset',
+    'password_email_url' => 'password/email',
+    'profile_url' => false,
 
     /*
     |--------------------------------------------------------------------------

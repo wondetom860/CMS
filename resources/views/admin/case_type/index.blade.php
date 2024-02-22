@@ -2,11 +2,11 @@
 @section('title', $viewData['title'])
 @section('innerTitle', $viewData['title'])
 @section('content')
-    <div class="container d-flix align-items-center flex-column">
+    <div class="">
         <div class="card">
             <h4 class="card-header">
                 Case Types - Admin Panel - MOD-CCMS
-                <a class="btn btn-primary btn-xs register-caseType-btn" href="{{ route('admin.case_type.create') }}"
+                <a class="btn btn-primary btn-xs register-caseType-btn float-right" href="{{ route('admin.case_type.create') }}"
                     style="align-self: flex-end">Register New Case Type</a>
             </h4>
             <div class="card-body">
@@ -25,11 +25,15 @@
                                 <td>{{ $ct->id }}</td>
                                 <td>{{ $ct->case_type_name }}</td>
                                 <td>{{ $ct->description }}</td>
-                                <td><a href="{{ route('admin.case_type.show', ['id' => $ct->id]) }}">Show</a></td>
+                                <td><a href="{{ route('admin.case_type.show', ['id' => $ct->id]) }}">
+                                    <button class="btn btn-primary">
+                                        <i class="fa fa-eye"></i>
+                                    </button>
+                                </a></td>
                                 <td>
                                     <a href="{{ route('admin.case_type.edit', ['id' => $ct->id]) }}">
                                         <button class="btn btn-primary">
-                                            <i class="bi-pencil"></i>
+                                            <i class="far fa-edit"></i>
                                         </button>
                                     </a> 
                                 </td>
@@ -38,7 +42,7 @@
                                         @csrf
                                         <button class="btn btn-cs btn-danger"
                                             onclick="return confirm('Are you sure to delete case_type profile?');">
-                                            <i class="bi-trash"></i>
+                                            <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </form> 
                                 </td>

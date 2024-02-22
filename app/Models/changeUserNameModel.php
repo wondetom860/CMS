@@ -4,7 +4,7 @@ namespace App\Models;
 
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\App;
+// use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Validator;
 
 class ChangeUserNameModel extends Model
