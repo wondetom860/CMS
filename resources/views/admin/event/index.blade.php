@@ -2,11 +2,11 @@
 @section('title', $viewData['title'])
 @section('innerTitle', $viewData['subtitle'])
 @section('content')
-    <div class="container d-flix align-items-center flex-column">
+    <div class="">
         <div class="card">
             <h4 class="card-header">
                 Events - Admin Panel - MOD-CCMS
-                <a class="btn btn-primary btn-xs register-caseType-btn" href="{{ route('admin.event.create') }}"
+                <a class="btn btn-primary btn-xs register-caseType-btn float-right" href="{{ route('admin.event.create') }}"
                     style="align-self: flex-end">Register New Event</a>
             </h4>
             <div class="card-body">

@@ -2,7 +2,7 @@
 @section('title', $viewData['title'])
 @section('innerTitle', $viewData['subtitle'])
 @section('content')
-    <div class="container d-flix align-items-center flex-column">
+    <div class="">
         <div class="card">
             <h4 class="card-header">
                 Courts - Admin Panel - MOD-CCMS
@@ -27,11 +27,15 @@
                                 <td>{{ $staff_role->role_name }}</td>
                                 <td>{{ $staff_role->rank }}</td>
                                 <td>{{ $staff_role->description }}</td>
-                                <td><a href="{{ route('admin.staffrole.show', ['id' => $staff_role->id]) }}">Show</a></td>
+                                <td><a href="{{ route('admin.staffrole.show', ['id' => $staff_role->id]) }}">
+                                    <button class="btn btn-primary">
+                                        <i class="fa fa-eye"></i>
+                                    </button>
+                                </a></td>
                                 <td>
                                     <a href="{{ route('admin.staffrole.edit', ['id' =>$staff_role->id]) }}">
                                         <button class="btn btn-primary">
-                                            <i class="bi-pencil"></i>
+                                            <i class="fa fa-edit"></i>
                                         </button>
                                     </a>
                                 </td>
@@ -40,7 +44,7 @@
                                         @csrf
                                         <button class="btn btn-cs btn-danger"
                                             onclick="return confirm('Are you sure to delete court profile?');">
-                                            <i class="bi-trash"></i>
+                                            <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </form>
                                 </td>
