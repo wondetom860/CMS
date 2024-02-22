@@ -25,6 +25,12 @@ class event extends Model
         ]);
     }
 
+    public function validDate(){
+        $now = time();
+        $schedDatetime = strtotime($this->date_time);
+        return ($schedDatetime > $now) && ($schedDatetime < $now + (86400 * 14));
+    }
+
     public function case(){
         return $this->belongsTo(CaseModel::class);
     }

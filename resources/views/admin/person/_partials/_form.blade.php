@@ -10,7 +10,7 @@
                         <label class="text-right col-lg-4 col-md-6 col-sm-12 col-form-label">{{ __('Court') }}:</label>
                         <div class="col-lg-8 col-md-6 col-sm-12">
                             <select name="court_id" id="court_id" class="form-control">
-                                @foreach ($viewData['courts'] as $court)
+                                @foreach (App\models\Court::all() as $court)
                                     <option value="{{ $court->id }}">{{ $court->name }}</option>
                                 @endforeach
                             </select>
@@ -84,7 +84,6 @@
                         <div class="col-lg-8 col-md-6 col-sm-12">
                             {{-- <input name="gender" value="{{ old('gender') }}" type="text" class="form-control"> --}}
                             <select class="form-control" name="gender" required>
-                                <option value="">Please select gender</option>
                                 <option value="MALE">Male</option>
                                 <option value="FEMALE">Female</option>
                                 {{-- @foreach ($users as $user)
@@ -103,7 +102,7 @@
                         <div class="col-lg-8 col-md-6 col-sm-12">
                             @if ($viewData['client_registration'] != 1)
                                 <select name="role_id" id="role_id" class="form-control">
-                                    @foreach ($viewData['staffrole'] as $staffrole)
+                                    @foreach (App\models\Staffrole::all() as $staffrole)
                                         <option value="{{ $staffrole->id }}">{{ $staffrole->role_name }}</option>
                                     @endforeach
                                 </select>

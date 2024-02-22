@@ -1,5 +1,11 @@
 @php
     $staffs = $case->parties;
+    $btn = "";
+    if($case->isAssignedTo(Auth::user()->person_id) && $case->isActive() && Auth::user()->can('party-create'))
+    {
+        $btn = "<button class='btn btn-sm btn-link register-case-btn' onclick='registerParty({$case->id}); return false;'>Add New Party</button>";
+    }
+    
     if ($staffs) {
         $ee = __('Person');
         $pp = __('Party Type');

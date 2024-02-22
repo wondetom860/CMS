@@ -44,6 +44,38 @@
         $('#myForm').trigger("reset");
         $('#formModal').modal('show');
     }
+
+    const submitClientForm = () => {
+        console.log($("#first_name").val());
+        $.ajax({
+            url: "{{ route('admin.party.store') }}",
+            type: "POST",
+            data: $("#party_register_form").serialize(),
+            dataType: 'JSON',
+            success: function(data) {
+                if (data == 1) {
+                    window.location.href = window.location;
+                } else {
+                    alert(data);
+                }
+            }
+        });
+    }
+
+    const registerParty = (case_id) => {
+        $("#modal_body").html('Loading party registration form');
+        $("#formModalLabel").html("Register parties for case {{ $viewData['case']->case_number }}");
+        $.post('{{ route('admin.party.create_partial') }}', {
+            case_id: case_id
+        }).done((resp) => {
+            $("#modal_body").html(resp);
+        });
+        $('#myForm').trigger("reset");
+        $('#formModal').modal('show');
+    }
+    // $('#formModal').on('hide.bs.modal', function(e) {
+    //     window.location.href = window.location;
+    // });
     const shoeDoc = (doc_id) => {
         $("#modal_body").html("Loading document....");
         $("#formModalLabel").html("Uploaded document detail");
@@ -58,6 +90,7 @@
         $('#formModal').modal('show');
         // $("id_number").val(clientId);
     }
+    // organizational excellence
 </script>
 
 <div id="doc-form-container" class="d-none">
@@ -76,7 +109,7 @@
                 </h4>
             </div>
             <div class="modal-body" id="modal_body">
-                
+
             </div>
         </div>
     </div>
