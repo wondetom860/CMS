@@ -2,11 +2,11 @@
 @section('title', $viewData['title'])
 @section('innerTitle', $viewData['subtitle'])
 @section('content')
-    <div class="container d-flix align-items-center flex-column">
+    <div class="">
         <div class="card">
             <h5 class="card-header">
                 Courtstaff - Admin Panel - MOD-CCMS
-                <a class="btn btn-primary btn-xs register-caseType-btn" href="{{ route('admin.courtstaff.create') }}"
+                <a class="btn btn-primary btn-xs register-caseType-btn float-right" href="{{ route('admin.courtstaff.create') }}"
                     style="align-self: flex-end">Register New Court Staff</a>
             </h5>
             <div class="card-body">
