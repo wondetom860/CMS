@@ -3,7 +3,7 @@
 @section('subtitle',  $viewData['subtitle'])
 @section('content')
 <div class="container">
-        <h3 class="float-right">
+        <h3 class="float-right bg-light">
             Detail: {{ $viewData['case_staff_assignment']->getDetail() }} 
         </h3>
         <div class="card mb-3">

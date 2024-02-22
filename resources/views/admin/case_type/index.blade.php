@@ -4,7 +4,7 @@
 @section('content')
     <div class="">
         <div class="card">
-            <h4 class="card-header">
+            <h4 class="card-header bg-light">
                 Case Types - Admin Panel - MOD-CCMS
                 <a class="btn btn-primary btn-xs register-caseType-btn float-right" href="{{ route('admin.case_type.create') }}"
                     style="align-self: flex-end">Register New Case Type</a>

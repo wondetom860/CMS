@@ -2,11 +2,11 @@
 @section('title', $viewData['title'])
 @section('innerTitle', $viewData['subtitle'])
 @section('content')
-    <div class="container d-flix align-items-center flex-column">
+    <div class="">
         <div class="card">
-            <h4 class="card-header">
+            <h4 class="card-header bg-light">
                 Assign Staff To case- Admin Panel - MOD-CCMS
-                <a class="btn btn-primary btn-xs float-end" href="{{ route('admin.case_staff_assignments.create') }}">Assign
+                <a class="btn btn-primary btn-xs float-end float-right" href="{{ route('admin.case_staff_assignments.create') }}">Assign
                     The Case</a>
             </h4>
             <div class="card-body">

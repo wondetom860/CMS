@@ -107,7 +107,7 @@ return [
     */
 
     'preloader' => [
-        'enabled' => true,
+        'enabled' => false,
         'img' => [
             'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
             'alt' => 'AdminLTE Preloader Image',
@@ -130,7 +130,7 @@ return [
     */
 
     'usermenu_enabled' => true,
-    'usermenu_header' => false,
+    'usermenu_header' => true,
     'usermenu_header_class' => 'bg-primary',
     'usermenu_image' => false,
     'usermenu_desc' => false,
@@ -194,7 +194,7 @@ return [
     'classes_content' => '',
     'classes_sidebar' => 'sidebar-dark-primary elevation-4',
     'classes_sidebar_nav' => '',
-    'classes_topnav' => 'navbar-white navbar-light',
+    'classes_topnav' => 'navbar-teal navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
     'classes_topnav_container' => 'container',
 
@@ -333,7 +333,7 @@ return [
                 ],
                 [
                     'text'        => 'Party Type',
-                    'url'         => 'admin/party-type',
+                    'url'         => 'admin/party_type',
                     'icon'        => 'far fa-fw fa-file',
                 ],
             ]
@@ -367,7 +367,7 @@ return [
                 [
                     'text'          => 'Case-Staff Assignment',
                     'can'           => 'court-list',
-                    'url'           => 'admin/case_staff_assignment',
+                    'url'           => 'admin/case_staff_assignments',
                     'icon'          => 'far fa-fw fa-file',
                 ],
                 [

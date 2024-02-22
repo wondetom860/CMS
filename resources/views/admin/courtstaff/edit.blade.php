@@ -3,7 +3,7 @@
 @section('innerTitle', 'Edit court staff')
 @section('content')
     <div class="card mb-4">
-        <div class="card-header"> Edit Staff Role
+        <div class="card-header bg-light"> Edit Staff Role
         </div>
         <div class="card-body">
             @if ($errors->any())

@@ -4,7 +4,7 @@
 @section('content')
     <div class="container d-flix align-items-center flex-column">
         <div class="card">
-            <h4 class="card-header">
+            <h4 class="card-header bg-light">
                 Courts - Admin Panel - MOD-CCMS
                 <a class="btn btn-primary btn-xs register-caseType-btn" href="{{ route('admin.court.create') }}"
                     style="align-self: flex-end">Register New Court</a>
