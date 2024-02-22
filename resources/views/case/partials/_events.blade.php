@@ -1,8 +1,9 @@
 @php
     $events = $case->events;
     $btn = '';
+    $uu = __('Scehdule Event');
     if (Auth::user()->isClerk()) {
-        $btn = "<button class='btn btn-sm btn-link register-case-btn' onclick='registerEvent({$case->id}); return false;'>Scehdule Event</button>";
+        $btn = "<button class='btn btn-sm btn-link register-case-btn' onclick='registerEvent({$case->id}); return false;'>$uu</button>";
     }
     if ($events) {
         $ee = __('Event Type');

@@ -15,7 +15,7 @@ class PartyTypeController extends Controller
     public function index()
     {
         $viewData['party_type'] = PartyType::all();
-        $viewData['title'] = "MOD - CCMS";
+        $viewData['title'] = __('MOD-CCMS');
         $viewData['subtitle'] = "Party Types";
         return view('admin.party_type.index')->with('viewData', $viewData);
     }

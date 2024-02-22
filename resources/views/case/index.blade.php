@@ -12,6 +12,7 @@
             <div class="card-body">
                 @php
                     $gridData = [
+                        //$tt = __('You Sure to delete?'),
                         'dataProvider' => $dataProvider,
                         'paginatorOptions' => [
                             // Here you can set some options of paginator Illuminate\Pagination\LengthAwarePaginator, used in a package.
@@ -148,10 +149,10 @@
                                             return false;
                                         }
                                         },
-                                        'htmlAttributes' => [
+                                        'htmlAttributes' => [ 
                                             'target' => '_self',
                                             'style' => 'color: yellow; font-size: 16px;',
-                                            'onclick' => 'return window.confirm("Sure to delete?");',
+                                           // 'onclick' => 'return window.confirm('$tt');',
                                         ],
                                     ],
                                 ],
