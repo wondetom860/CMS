@@ -42,29 +42,65 @@ class PartyController extends Controller
      */
     public function create()
     {
-        $viewData['title'] = 'Admin Page - parties - CCMS';
+        $viewData['title'] = 'Dashborad - parties - CCMS';
         $viewData['parttype'] = PartyType::all();
         $viewData['person'] = Person::getAllClients();
         $viewData['cases'] = CaseModel::all();
+        $viewData['client_registration'] = 1;
         return view('admin.party.create')->with('viewData', $viewData);
+    }
+
+
+    public function createPartial(Request $request)
+    {
+        // dd($request->case_id);
+        $viewData['title'] = 'Dashborad - Register Parties - CCMS';
+        $viewData['parttype'] = PartyType::all();
+        $viewData['case'] = CaseModel::findOrFail($request->case_id);
+        $viewData['client_registration'] = 1;
+        return view('admin.party._create')->with('viewData', $viewData);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        Party::validate($request);
-        $court = new Party();
-        $court->case_id = $request->case_id;
-        $court->person_id = $request->person_id;
-        $court->party_type_id = $request->party_type_id;
-        $court->save();
-        notify()->success('party registered Successfully', 'Creation Success');
-        return redirect()->route('admin.party.index');
+        // Party::validate($request);
+        $case = CaseModel::findOrFail($request->case_id);        
+        $person = new Person();
+        $person->court_id = $case->court_id;
+        $person->first_name = ucfirst(strtolower($request->first_name));
+        $person->fath_name = ucfirst(strtolower($request->fath_name));
+        // $person->fat_name = $request->fat_name;
+        $person->gfath_name = ucfirst(strtolower($request->gfath_name));
+        $person->dob = strtotime($request->dob);
+        $person->id_number = $request->id_number;
+        $person->gender = $request->gender;
+        if ($person->checkIfExists()) {
+            if ($request->client_registration) {
+                return "Such record already exists";
+            }
+            notify()->error('Such profile inforamtion alredy exists', 'Creation failed');
+            return redirect()->route('case.detail', ['id' => $case->id]);
+        }
+        if ($person->save()) {
+            $party = new Party();
+            $party->case_id = $case->id;
+            $party->person_id = $person->id;
+            $party->party_type_id = $request->party_type_id;
+            if ($party->save()) {
+                notify()->success('Party registration successfull.', 'Creation success');
+                if ($request->client_registration) {
+                    return 1;
+                } else {
+                    notify()->error('Party registration failed', 'Creation failed');
+                    return redirect()->route('case.detail', ['id' => $request->case_id]);
+                }
+            }
+        }
     }
 
     /**
@@ -91,7 +127,7 @@ class PartyController extends Controller
     {
 
         $viewData = [];
-        $viewData['title'] = 'Admin Page - Edit staffrole - CCMS';
+        $viewData['title'] = 'Dashborad - Edit staffrole - CCMS';
         $viewData['party'] = Party::findOrFail($id);
         $viewData['parttype'] = PartyType::all();
         $viewData['person'] = Person::all();
@@ -112,14 +148,14 @@ class PartyController extends Controller
 
         //
 
-         Party::validate($request);
-         $party = Party::findOrFail($id);
-         $party->case->case_number = $request->case_number;
-         $party->person->person_id = $request->person_id;
-         $party->party_type_name = $request->party_type_name;
-         $party->save();
-         notify()->success('Party Updateted Successfully', 'Update Success');
-         return redirect()->route('admin.party.index');
+        Party::validate($request);
+        $party = Party::findOrFail($id);
+        $party->case->case_number = $request->case_number;
+        $party->person->person_id = $request->person_id;
+        $party->party_type_name = $request->party_type_name;
+        $party->save();
+        notify()->success('Party Updateted Successfully', 'Update Success');
+        return redirect()->route('admin.party.index');
     }
 
     /**
