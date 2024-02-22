@@ -1,19 +1,21 @@
-@extends('layout.mystore')
+@extends('layout.adminLTE')
 @section('title', 'Case Detail')
 @section('subtitle', $viewData['subtitle'])
 @section('content')
-    <div class="container">
-        <h3 class="float-right">
-            Detail: {{ $viewData['case']->getDetail() }}
-        </h3>
-        <div class="card mb-3">
-            <div class="row g-0">
-                <div class="col-md-4 p-2">
-                    <img src="{{ asset('/images' . $viewData['case']->getLogoPath()) }}" class="img-fluid rounded-start"
-                        style="width: 320px; height:auto">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header">
+                <h3>
+                    Detail: {{ $viewData['case']->getDetail() }}
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 p-2">
+                        <img src="{{ asset('/images' . $viewData['case']->getLogoPath()) }}" class="img-fluid rounded-start"
+                            style="width: 320px; height:auto">
+                    </div>
+                    <div class="col-md-9">
                         <p class="card-text"><b>Case number : </b>{{ $viewData['case']->case_number }}</p>
                         <p class="card-text"><b>Court Name : </b>{{ $viewData['case']->court->name }}</p>
                         <p class="card-text"><b>Case Type : </b>{{ $viewData['case']->caseType->case_type_name }}</p>

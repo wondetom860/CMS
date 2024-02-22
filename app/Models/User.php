@@ -84,6 +84,11 @@ class User extends Authenticatable
         return $this->hasRole('Clerk');
     }
 
+    public function adminlte_profile_url()
+    {
+        return "myaccount/profile";
+    }
+
     public function isClient()
     {
         return $this->hasRole('Client');

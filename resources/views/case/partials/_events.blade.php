@@ -2,7 +2,7 @@
     $events = $case->events;
     $btn = '';
     if (Auth::user()->isClerk()) {
-        $btn = "<button class='btn btn-sm btn-link register-case-btn' onclick='registerEvent({$case->id}); return false;'>Scehdule Event</button>";
+        $btn = "<button class='btn btn-sm btn-link float-right' onclick='registerEvent({$case->id}); return false;'>Scehdule Event</button>";
     }
     if ($events) {
         echo "<h6>Events Attached To This Case{$btn}</h6>
