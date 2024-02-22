@@ -1,4 +1,4 @@
-@extends('layout.admin')
+@extends('layout.adminLTE')
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">

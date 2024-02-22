@@ -1,8 +1,8 @@
-@extends('layout.admin')
+@extends('layout.adminLTE')
 @section('title', $viewData['title'])
 @section('innerTitle', $viewData['title'])
 @section('content')
-    <div class="container d-flix align-items-center flex-column">
+    <div class="">
         <div class="card">
             <h4 class="card-header">
                 Event Types - Admin Panel - MOD-CCMS
@@ -29,7 +29,7 @@
                                 <td>
                                     <a href="{{ route('admin.event-type.edit', ['id' => $p->id]) }}">
                                         <button class="btn btn-primary">
-                                            <i class="bi-pencil"></i>
+                                            <i class="fa fa-edit fa-sm"></i>
                                         </button>
                                     </a>
                                 </td>
