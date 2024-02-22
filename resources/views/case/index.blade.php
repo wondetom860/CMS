@@ -1,8 +1,8 @@
-@extends('layout.mystore')
+@extends('layout.adminLTE')
 @section('title', $viewData['title'])
 @section('innerTitle', $viewData['title'])
 @section('content')
-    <div class="container d-flix align-items-center flex-column">
+    <div class="">
         <div class="card">
             <h4 class="card-header">
                 {{__('Cases - CCMS')}}
@@ -28,7 +28,11 @@
                         'columnFields' => [
                             [
                                 'attribute' => 'Case_number', // REQUIRED if value is not defined. Attribute name to get row column data.
+<<<<<<< HEAD
                                 'label' => __('Case Number'), // Column label.
+=======
+                                'label' => 'Case Number', // Column label.
+>>>>>>> main
                                 // 'filter' => false, // If false, then column will be without a search filter form field.,
                                 'value' => function ($row) {
                                     return $row->case_number;

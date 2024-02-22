@@ -1,4 +1,4 @@
-@extends('layout.admin')
+@extends('layout.adminLTE')
 @section('title', 'Event Detail')
 @section('subtitle',  $viewData['subtitle'])
 @section('content')

@@ -1,4 +1,4 @@
-@extends('layout.admin')
+@extends('layout.adminLTE')
 @section('title', 'Product Detail')
 @section('subtitle', $product->name)
 @section('content')

@@ -1,4 +1,4 @@
-@extends('layout.admin')
+@extends('layout.adminLTE')
 @section('title', 'staffrole Detail')
 @section('subtitle', $viewData['staff_role']->role_name)
 @section('content')
