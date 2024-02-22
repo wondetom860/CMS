@@ -79,6 +79,10 @@ class User extends Authenticatable
         return $this->hasRole('Admin');
     }
 
+    public function adminlte_desc(){
+        return $this->getFullName();
+    }
+
     public function isClerk()
     {
         return $this->hasRole('Clerk');
@@ -86,7 +90,12 @@ class User extends Authenticatable
 
     public function adminlte_profile_url()
     {
-        return "myaccount/profile";
+        return "my-account/profile";
+    }
+
+    public function adminlte_image()
+    {
+        return asset('/images/undraw_image.png');
     }
 
     public function isClient()

@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+
 return [
 
     /*
@@ -107,7 +109,7 @@ return [
     */
 
     'preloader' => [
-        'enabled' => true,
+        'enabled' => false,
         'img' => [
             'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
             'alt' => 'AdminLTE Preloader Image',
@@ -130,11 +132,11 @@ return [
     */
 
     'usermenu_enabled' => true,
-    'usermenu_header' => false,
+    'usermenu_header' => true,
     'usermenu_header_class' => 'bg-primary',
-    'usermenu_image' => false,
-    'usermenu_desc' => false,
-    'usermenu_profile_url' => false,
+    'usermenu_image' => true,
+    'usermenu_desc' => true,
+    'usermenu_profile_url' => '/my-account/profile',
 
     /*
     |--------------------------------------------------------------------------
@@ -256,10 +258,10 @@ return [
     'dashboard_url' => 'home',
     'logout_url' => 'logout',
     'login_url' => 'login',
-    'register_url' => 'register',
+    'register_url' => 'admin/register',
     'password_reset_url' => 'password/reset',
     'password_email_url' => 'password/email',
-    'profile_url' => false,
+    'profile_url' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -333,7 +335,7 @@ return [
                 ],
                 [
                     'text'        => 'Party Type',
-                    'url'         => 'admin/party-type',
+                    'url'         => 'admin/party_type',
                     'icon'        => 'far fa-fw fa-file',
                 ],
             ]
@@ -367,7 +369,7 @@ return [
                 [
                     'text'          => 'Case-Staff Assignment',
                     'can'           => 'court-list',
-                    'url'           => 'admin/case_staff_assignment',
+                    'url'           => 'admin/case_staff_assignments',
                     'icon'          => 'far fa-fw fa-file',
                 ],
                 [
@@ -471,6 +473,12 @@ return [
         //     'icon_color' => 'cyan',
         //     'url'        => '#',
         // ],
+        [
+            'text' => 'Login',
+            'visible'   => 0,
+            'url' => 'login',
+            'icon' => 'fas fa-fw fa-user',
+        ],
     ],
 
     /*
