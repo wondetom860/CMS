@@ -12,7 +12,7 @@
                     @endforeach
                 </ul>
             @endif
-            <form method="POST" action="{{ route('document.update', ['id' => $viewData['document']->id]) }}"
+            <form method="POST" action="{{ route('admin.document.update', ['id' => $viewData['document']->id]) }}"
                 enctype="multipart/form-data">
                 @csrf
                 @method('PUT')

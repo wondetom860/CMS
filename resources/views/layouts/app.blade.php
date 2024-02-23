@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
         crossorigin="anonymous" />
-    <title>MOD-CRMS : @yield('title', '')</title>
+    <title>{{__('MOD-CCMS')}} : @yield('title', '')</title>
     <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
 </head>
 
@@ -17,7 +17,7 @@
             <a class="navbar-brand" href="#">
                 <img src="logo1.webp" style="display: inline-block;">
               </a>
-            <a class="navbar-brand" href="/">Mod_CRM-System</a>
+            <a class="navbar-brand" href="/">{{__('Mod-CRM-System')}}</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -35,7 +35,7 @@
                     @else
                         <form action="{{ route('logout') }}" id="logout" method="POST">
                             <a role="button" class="nav-link active"
-                                onclick="document.getElementById('logout').submit();"  style="color: white">Logout</a>
+                                onclick="document.getElementById('logout').submit();"  style="color: white">{{ __('Logout') }}</a>
                             @csrf
                         </form>
                     @endguest
@@ -56,7 +56,7 @@
     <div style="clear: both"></div>
     {{-- footer starts here --}}
     <div class=" py-4 text-center text-white footer" style="background-color: #1A252F;">
-        <div class="container">
+        <div class="container-fluid ">
             <small class="copyright">
                 Copyright - <a class="text-reset fw-bold text-decoration-none" target="_blank"
                     href="https://twitter.com/user">

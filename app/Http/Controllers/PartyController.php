@@ -40,12 +40,17 @@ class PartyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($case_id = null)
     {
         $viewData['title'] = 'Dashborad - parties - CCMS';
         $viewData['parttype'] = PartyType::all();
         $viewData['person'] = Person::getAllClients();
-        $viewData['cases'] = CaseModel::all();
+        if($case_id){
+            $viewData['case'] = CaseModel::findOrFail($case_id);
+        }else{
+            $viewData['cases'] = CaseModel::all();
+        }
+        
         $viewData['client_registration'] = 1;
         return view('admin.party.create')->with('viewData', $viewData);
     }

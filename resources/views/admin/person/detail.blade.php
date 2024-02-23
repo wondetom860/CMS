@@ -3,8 +3,8 @@
 @section('subtitle', $viewData['subtitle'])
 @section('content')
     {{-- <script type="module" src="{{ asset('/js/signupUser.js') }}"></script> --}}
-    <div class="container">
-        <h3 class="float-right">
+    <div class="container-fluid ">
+        <h3 class="">
             Detail: {{ $viewData['person']->getFullName() }} - Person page
         </h3>
         <div class="card mb-3">

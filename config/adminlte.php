@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+
 return [
 
     /*
@@ -132,9 +134,9 @@ return [
     'usermenu_enabled' => true,
     'usermenu_header' => true,
     'usermenu_header_class' => 'bg-primary',
-    'usermenu_image' => false,
-    'usermenu_desc' => false,
-    'usermenu_profile_url' => false,
+    'usermenu_image' => true,
+    'usermenu_desc' => true,
+    'usermenu_profile_url' => '/my-account/profile',
 
     /*
     |--------------------------------------------------------------------------
@@ -256,10 +258,10 @@ return [
     'dashboard_url' => 'home',
     'logout_url' => 'logout',
     'login_url' => 'login',
-    'register_url' => 'register',
+    'register_url' => 'admin/register',
     'password_reset_url' => 'password/reset',
     'password_email_url' => 'password/email',
-    'profile_url' => false,
+    'profile_url' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -365,6 +367,12 @@ return [
             'can'  => 'manage-case',
             'submenu' => [
                 [
+                    'text'          => 'Cases',
+                    'can'           => 'case-list',
+                    'url'           => '/case',
+                    'icon'          => 'far fa-fw fa-file',
+                ],
+                [
                     'text'          => 'Case-Staff Assignment',
                     'can'           => 'court-list',
                     'url'           => 'admin/case_staff_assignments',
@@ -409,12 +417,12 @@ return [
         ['header' => 'account_settings'],
         [
             'text' => 'Change User Name',
-            'url'  => 'myaccount/changeUserName',
+            'url'  => 'my-account/changeUserName',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
             'text' => 'Change Password',
-            'url'  => 'myaccount/changePassword',
+            'url'  => 'my-account/changePassword',
             'icon' => 'fas fa-fw fa-lock',
         ],
         // [
@@ -471,6 +479,12 @@ return [
         //     'icon_color' => 'cyan',
         //     'url'        => '#',
         // ],
+        [
+            'text' => 'Login',
+            'visible'   => 0,
+            'url' => 'login',
+            'icon' => 'fas fa-fw fa-user',
+        ],
     ],
 
     /*

@@ -2,8 +2,8 @@
 @section('title', 'Court Detail')
 @section('subtitle', $viewData['subtitle'])
 @section('content')
-    <div class="container">
-        <h3 class="float-right bg-light">
+    <div class="container-fluid ">
+        <h3 class="">
             Detail: {{ $viewData['court']->getDetail() }} - Court Detail
         </h3>
         <div class="card mb-3">

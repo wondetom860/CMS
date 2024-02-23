@@ -2,8 +2,8 @@
 @section('title', 'staffrole Detail')
 @section('subtitle', $viewData['staff_role']->role_name)
 @section('content')
-<div class="container">
-    <h3 class="float-right">
+<div class="container-fluid ">
+    <h3 class="">
         Detail: {{$viewData['staff_role']->role_name }} - Staff Role page
     </h3>
     <div class="card mb-3">

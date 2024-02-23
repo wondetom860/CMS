@@ -1,5 +1,5 @@
 <div class="card">
-    <div class="card-header"> Register Person Information
+    <div class="card-header"> {{__('Register Person Information')}}
     </div>
     <div class="card-body">
         <form method="POST" action="{{ route('admin.person.store') }}" id="case_register_form">
@@ -117,7 +117,7 @@
                         <input type="text" id='client_registration_id' name="client_registration"
                             value="{{ $viewData['client_registration'] }}" class="d-none">
                         <button onclick="submitClientForm();return false;" type="submit"
-                            class="btn btn-primary">Submit</button>
+                            class="btn btn-primary">{{__('Submit')}}</button>
                     </div>
                 </div>
             </div>
