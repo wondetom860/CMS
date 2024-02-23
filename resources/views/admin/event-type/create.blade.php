@@ -3,7 +3,7 @@
 @section('innerTitle', 'Register Event Type')
 @section('content')
     <div class="card mb-4">
-        <div class="card-header"> Register Event Type
+        <div class="card-header bg-light"> Register Event Type
         </div>
         <div class="card-body">
             <form method="POST" action="{{ route('admin.event-type.store') }}">

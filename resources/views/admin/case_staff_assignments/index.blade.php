@@ -4,7 +4,7 @@
 @section('content')
     <div class=" ">
         <div class="card">
-            <h4 class="card-header">
+            <h4 class="card-header bg-light">
                 Assign Staff To case- Admin Panel - MOD-CCMS
                 @can('case-staff-assignment-create')
                     <a class="btn btn-primary btn-xs float-end" href="{{ route('admin.case_staff_assignments.create') }}">Assign

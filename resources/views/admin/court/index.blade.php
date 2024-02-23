@@ -4,7 +4,7 @@
 @section('content')
     <div class="">
         <div class="card">
-            <h5 class="card-header">
+            <h5 class="card-header bg-light">
                 Courts - Admin Panel - MOD-CCMS
                 @can('court-create')
                     <a class="btn btn-primary btn-xs register-caseType-btn" href="{{ route('admin.court.create') }}"
