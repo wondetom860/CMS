@@ -314,8 +314,8 @@ return [
             'submenu' => [
                 [
                     'text'          => 'Staff Role',
-                    'can'           => 'staffrole-list',
-                    'url'           => 'admin/staffrole/',
+                    'can'           => 'staff-role-list',
+                    'url'           => 'admin/staffrole',
                     'icon'          => 'far fa-fw fa-file',
                 ],
                 [
@@ -352,11 +352,13 @@ return [
                 ],
                 [
                     'text'        => 'Profile',
+                    'can'         => 'profile-list',
                     'url'         => 'admin/person',
                     'icon'        => 'far fa-fw fa-file',
                 ],
                 [
                     'text'        => 'Court Staff',
+                    'can'         => 'court-staff-list',
                     'url'         => 'admin/courtstaff',
                     'icon'        => 'far fa-fw fa-file',
                 ],
@@ -380,16 +382,19 @@ return [
                 ],
                 [
                     'text'        => 'Parties',
+                    'can'         => 'party-list',
                     'url'         => 'admin/party',
                     'icon'        => 'far fa-fw fa-file',
                 ],
                 [
                     'text'        => 'Event',
+                    'can'         => 'event-list',
                     'url'         => 'admin/event',
                     'icon'        => 'far fa-fw fa-file',
                 ],
                 [
                     'text'        => 'Document',
+                    'can'         => 'court-list',
                     'url'         => 'admin/document',
                     'icon'        => 'far fa-fw fa-file',
                 ],
