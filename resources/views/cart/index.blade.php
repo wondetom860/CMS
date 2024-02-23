@@ -1,4 +1,4 @@
-@extends('layout.mystore')
+@extends('layout.adminLTE')
 @section('title', $viewData['title'])
 @section('subtitle', $viewData['subtitle'])
 @section('content')

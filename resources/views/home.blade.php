@@ -1,4 +1,4 @@
-@extends('layout.mystore')
+@extends('layout.adminLTE')
 
 @section('content')
 <div class="container-fluid ">

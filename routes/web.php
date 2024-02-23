@@ -144,7 +144,7 @@ Route::middleware('auth')->prefix('/admin')->group(function () {  //|'/SuperAdmi
     Route::get('/party/{id}/edit', App\Http\Controllers\PartyController::class . '@edit')->name('admin.party.edit');
     Route::put('/party/{id}/update', App\Http\Controllers\PartyController::class . '@update')->name('admin.party.update');
     Route::get('/party/{id}/delete',  App\Http\Controllers\PartyController::class . '@delete')->name('admin.party.delete');
-    Route::post('/party/create_partial',  App\Http\Controllers\PartyController::class . '@createPartial')->name('admin.party.create_partial');
+    Route::get('/party/create_partial',  App\Http\Controllers\PartyController::class . '@createPartial')->name('admin.party.create_partial');
 
 
     Route::get('/staffrole', App\Http\Controllers\StaffRoleController::class . '@index')->name('admin.staffrole.index');

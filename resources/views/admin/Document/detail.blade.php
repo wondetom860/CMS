@@ -1,4 +1,4 @@
-@extends('layout.mystore')
+@extends('layout.adminLTE')
 @section('title', 'Document Detail')
 @section('subtitle', $document->name)
 @section('content')

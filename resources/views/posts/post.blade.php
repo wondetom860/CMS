@@ -1,4 +1,4 @@
-@extends('layout.mystore')
+@extends('layout.adminLTE')
 @section('title')
     Post : {{ $post->title }}
 @endsection

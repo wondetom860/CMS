@@ -2,7 +2,7 @@
 @section('title', $viewData['title'])
 @section('innerTitle', $viewData['subtitle'])
 @section('content')
-    <div class="">
+    <div class=" ">
         <div class="card">
             <h4 class="card-header bg-light">
                 Assign Staff To case- Admin Panel - MOD-CCMS

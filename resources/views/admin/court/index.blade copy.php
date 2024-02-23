@@ -2,7 +2,7 @@
 @section('title', $viewData['title'])
 @section('innerTitle', $viewData['subtitle'])
 @section('content')
-    <div class="container d-flix align-items-center flex-column">
+    <div class=" ">
         <div class="card">
             <h4 class="card-header bg-light">
                 Courts - Admin Panel - MOD-CCMS
