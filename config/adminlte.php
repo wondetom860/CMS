@@ -333,7 +333,7 @@ return [
                 ],
                 [
                     'text'        => 'Party Type',
-                    'url'         => 'admin/party-type',
+                    'url'         => 'admin/party_type',
                     'icon'        => 'far fa-fw fa-file',
                 ],
             ]
@@ -365,9 +365,15 @@ return [
             'can'  => 'manage-case',
             'submenu' => [
                 [
+                    'text'          => 'Cases',
+                    'can'           => 'case-list',
+                    'url'           => '/case',
+                    'icon'          => 'far fa-fw fa-file',
+                ],
+                [
                     'text'          => 'Case-Staff Assignment',
                     'can'           => 'court-list',
-                    'url'           => 'admin/case_staff_assignment',
+                    'url'           => 'admin/case_staff_assignments',
                     'icon'          => 'far fa-fw fa-file',
                 ],
                 [
@@ -409,12 +415,12 @@ return [
         ['header' => 'account_settings'],
         [
             'text' => 'Change User Name',
-            'url'  => 'myaccount/changeUserName',
+            'url'  => 'my-account/changeUserName',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
             'text' => 'Change Password',
-            'url'  => 'myaccount/changePassword',
+            'url'  => 'my-account/changePassword',
             'icon' => 'fas fa-fw fa-lock',
         ],
         // [

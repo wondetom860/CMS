@@ -2,7 +2,7 @@
 @section('title', $viewData['title'])
 @section('subtitle', $viewData['subtitle'])
 @section('content')
-    <div class="container">
+    <div class="container-fluid ">
         <div class="row">
             <div class="col-md-7 col-lg-7 col-sm-6">
                 <div class="card">

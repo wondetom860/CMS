@@ -3,7 +3,7 @@
     $btn = '';
     $uu = __('Scehdule Event');
     if (Auth::user()->isClerk()) {
-        $btn = "<button class='btn btn-sm btn-link register-case-btn' onclick='registerEvent({$case->id}); return false;'>$uu</button>";
+        $btn = "<button class='btn btn-sm btn-link float-right' onclick='registerEvent({$case->id}); return false;'>$uu</button>";
     }
     if ($events) {
         $ee = __('Event Type');

@@ -1,7 +1,7 @@
 @extends('layout.adminLTE')
 @section('title', $viewData['title'])
 @section('content')
-<div class="container">
+<div class="container-fluid ">
     <div class="card mb-4">
         <div class="card-header"> {{__('Update Case')}}
         </div>

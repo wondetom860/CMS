@@ -6,7 +6,7 @@
         <div class="card">
             <h4 class="card-header">
                 {{__('Cases - CCMS')}}
-                <a class="btn btn-primary btn-xs register-case-btn" href="{{ route('case.create') }}"
+                <a class="btn btn-primary btn-xs float-right" href="{{ route('case.create') }}"
                     style="align-self: flex-end">{{__('Register Case')}}</a>
             </h4>
             <div class="card-body">

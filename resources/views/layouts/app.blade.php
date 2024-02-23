@@ -56,7 +56,7 @@
     <div style="clear: both"></div>
     {{-- footer starts here --}}
     <div class=" py-4 text-center text-white footer" style="background-color: #1A252F;">
-        <div class="container">
+        <div class="container-fluid ">
             <small class="copyright">
                 Copyright - <a class="text-reset fw-bold text-decoration-none" target="_blank"
                     href="https://twitter.com/user">

@@ -25,7 +25,7 @@
             <img src="{{ asset('/images/8.png') }}" class="img-fluid">
         </a> --}}
         
-        <div class="container">
+        <div class="container-fluid ">
             <a class="navbar-brand" href="/" style="color: white">{{ __('CCM-System') }}</a>
             <div class="navbar navbar-expand-lg" id="navbarNavAltMarkup">
                 <div class="navbar-nav ms-auto">
@@ -97,7 +97,7 @@
         </div>
     </main>
     <footer class="footer py-1 text-center text-white" style="background-color: #1A252F;">
-        <div class="container">
+        <div class="container-fluid ">
             <p class="copyright">
                 @include('partials.language_switcher')
                 Copyright - <a class="text-reset" target="_blank" href="https://www.mod.gov.et">
