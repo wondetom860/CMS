@@ -16,7 +16,7 @@
             <form method="POST" action="{{ route('admin.courtstaff.update', ['id' => $viewData['court_staff']->id]) }}"
                 enctype="multipart/form-data">
                 @csrf
-                @method('PUT')
+                {{-- @method('PUT') --}}
                 <div class="row">
                     <div class="col">
                         <div class="mb-4 row">
