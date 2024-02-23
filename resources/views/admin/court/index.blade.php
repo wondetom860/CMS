@@ -6,10 +6,13 @@
         <div class="card">
             <h5 class="card-header bg-light">
                 Courts - Admin Panel - MOD-CCMS
-                <a class="btn btn-primary btn-xs register-caseType-btn" href="{{ route('admin.court.create') }}"
-                    style="align-self: flex-end">Register New Court</a>
+                @can('court-create')
+                    <a class="btn btn-primary btn-xs register-caseType-btn" href="{{ route('admin.court.create') }}"
+                        style="align-self: flex-end">Register New Court</a>
+                @endcan
+
             </h5>
-            <div class="card-body"> 
+            <div class="card-body">
                 @php
                     $gridData = [
                         'dataProvider' => $dataProvider,
@@ -19,7 +22,7 @@
                         ],
                         'rowsPerPage' => 5, // The number of rows in one page. By default 10.
                         'title' => 'Courts', // It can be empty ''
-                        'strictFilters' => true, // If true, then a searching by filters will be strict, using an equal '=' SQL operator instead of 'like'.
+                        'strictFilters' => false, // If true, then a searching by filters will be strict, using an equal '=' SQL operator instead of 'like'.
                         'rowsFormAction' => '/admin/pages/deletion', // Route url to send slected checkbox items for deleting rows, for example.
                         'useSendButtonAnyway' => true, // If true, even if there are no checkbox column, the main send button will be displayed.
                         'searchButtonLabel' => 'Find',
@@ -77,21 +80,21 @@
                             ],
                             [
                                 'attribute' => 'Active Cases',
-                                'value' => function($model){
+                                'value' => function ($model) {
                                     return $model->getActiveCases();
-                                }
+                                },
                             ],
                             // 'created_at', // Simple column setting by string.
                             [
                                 // Set Action Buttons.
                                 'class' => Itstructure\GridView\Columns\ActionColumn::class, // REQUIRED.
                                 'options' => [
-                                    'style' => 'background-color: red;'
+                                    'style' => 'background-color: red;',
                                 ],
                                 'actionTypes' => [
                                     // REQUIRED.
                                     'view' => function ($data) {
-                                        return '/admin/court/show/' . $data->id ;
+                                        return '/admin/court/show/' . $data->id;
                                     },
                                     'edit' => function ($data) {
                                         return '/admin/court/' . $data->id . '/edit';
@@ -121,7 +124,21 @@
                         ],
                     ];
                 @endphp
+                @include('layout.__print')
                 @gridView($gridData)
+                <script>
+                    $('table').attr('id');
+                    $('table').attr('id', 'court_list_table');
+                    $('table').attr('id');
+
+                    new DataTable('#court_list_table', {
+                        layout: {
+                            topStart: {
+                                buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+                            }
+                        }
+                    });
+                </script>
             </div>
         </div>
     </div>

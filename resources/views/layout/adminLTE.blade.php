@@ -28,7 +28,7 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
 @stop
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
 </script>
@@ -36,7 +36,5 @@
 @notifyJs
 @include('notify::components.notify')
 @section('js')
-    <script>
-        console.log('Hi!');
-    </script>
+    
 @stop
