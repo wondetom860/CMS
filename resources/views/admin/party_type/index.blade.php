@@ -10,7 +10,7 @@
                     style="align-self: flex-end">{{__('Register New Party Type')}}</a>
             </h4>
             <div class="card-body">
-                <table class="table table-condensed table-hover table-sm table-bordered">
+                <table id="myDataTable" class="table table-striped table-bordered" style="width:100%">
                     <thead>
                         <th>{{__('ID')}}</th>
                         <th>{{__('Party Type')}}</th>
