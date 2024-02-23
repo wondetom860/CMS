@@ -6,8 +6,10 @@
         <div class="card">
             <h5 class="card-header">
                 Party - Admin Panel - MOD-CCMS
-                <a class="btn btn-primary btn-xs register-caseType-btn float-right" href="{{ route('admin.party.create') }}"
-                    style="align-self: flex-end">Register New Parties</a>
+                @can('party-create')
+                    <a class="btn btn-primary btn-xs register-caseType-btn float-right" href="{{ route('admin.party.create') }}"
+                        style="align-self: flex-end">Register New Parties</a>
+                @endcan
             </h5>
             <div class="card-body">
                 @php
@@ -89,12 +91,12 @@
                                 // Set Action Buttons.
                                 'class' => Itstructure\GridView\Columns\ActionColumn::class, // REQUIRED.
                                 'options' => [
-                                    'style' => 'background-color: red;'
+                                    'style' => 'background-color: red;',
                                 ],
                                 'actionTypes' => [
                                     // REQUIRED.
                                     'view' => function ($data) {
-                                        return '/admin/party/show/' . $data->id ;
+                                        return '/admin/party/show/' . $data->id;
                                     },
                                     'edit' => function ($data) {
                                         return '/admin/party/' . $data->id . '/edit';

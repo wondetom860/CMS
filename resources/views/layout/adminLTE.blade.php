@@ -24,7 +24,14 @@
 @stop
 
 @section('footer')
-    @yield('footer')
+    {{-- @yield('footer') --}}
+    <div class="float-right d-none d-sm-block ">
+        <b>By: <i>YoungTigers</i></b>
+    </div>
+    @include('partials.language_switcher')
+    <strong> &copy; 2024 - <a class="text-reset" target="_blank" href="https://www.mod.gov.et">
+            MOD
+        </a> - <b>ICT</b></strong> All rights reserved.
 @stop
 
 @section('css')

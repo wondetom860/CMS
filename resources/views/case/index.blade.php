@@ -6,8 +6,10 @@
         <div class="card">
             <h4 class="card-header">
                 {{__('Cases - CCMS')}}
+                @can('case-create')
                 <a class="btn btn-primary btn-xs float-right" href="{{ route('case.create') }}"
                     style="align-self: flex-end">{{__('Register Case')}}</a>
+                @endcan
             </h4>
             <div class="card-body">
                 @php

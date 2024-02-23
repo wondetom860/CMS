@@ -10,7 +10,6 @@
                     <a class="btn btn-primary btn-xs register-caseType-btn" href="{{ route('admin.court.create') }}"
                         style="align-self: flex-end">Register New Court</a>
                 @endcan
-
             </h5>
             <div class="card-body">
                 @php
