@@ -1,4 +1,4 @@
-@extends('layout.mystore')
+@extends('layout.adminLTE')
 @section('title', 'Products List')
 @section('content')
     <div class="container-fluid d-flix align-items-center flex-column">
