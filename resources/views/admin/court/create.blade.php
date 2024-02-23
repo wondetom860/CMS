@@ -3,7 +3,7 @@
 @section('innerTitle', 'Register New Court')
 @section('content')
     <div class="card mb-4">
-        <div class="card-header"> Register New Court
+        <div class="card-header bg-light"> Register New Court
         </div>
         <div class="card-body">
             <form method="POST" action="{{ route('admin.court.store') }}">

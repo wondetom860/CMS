@@ -2,7 +2,7 @@
 @section('title', $viewData['title'])
 @section('content')
     <div class="card mb-4">
-        <div class="card-header"> Edit Court Information
+        <div class="card-header bg-light"> Edit Court Information
         </div>
         <div class="card-body">
             @if ($errors->any())

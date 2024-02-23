@@ -3,7 +3,7 @@
 @section('innerTitle', 'Edit court staff')
 @section('content')
     <div class="card mb-4">
-        <div class="card-header"> Edit Staff Role
+        <div class="card-header bg-light"> Edit Staff Role
         </div>
         <div class="card-body">
             @if ($errors->any())
@@ -16,7 +16,7 @@
             <form method="POST" action="{{ route('admin.courtstaff.update', ['id' => $viewData['court_staff']->id]) }}"
                 enctype="multipart/form-data">
                 @csrf
-                @method('PUT')
+                {{-- @method('PUT') --}}
                 <div class="row">
                     <div class="col">
                         <div class="mb-4 row">

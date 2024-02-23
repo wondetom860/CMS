@@ -2,7 +2,7 @@
 @section('title', $viewData['title'])
 @section('content')
     <div class="card mb-4">
-        <div class="card-header"> Edit Event Type
+        <div class="card-header bg-light"> Edit Event Type
         </div>
         <div class="card-body">
             @if ($errors->any())
@@ -26,6 +26,7 @@
                             </div>
                         </div>
                     </div>
+                </div>
                 <div class="mb-3">
                     <label class="form-label">Description</label>
                     <textarea class="form-control" name="description" rows="3">{{ $viewData['eventType']->description }}</textarea>
