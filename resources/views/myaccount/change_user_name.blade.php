@@ -1,4 +1,4 @@
-@extends('layout.mystore')
+@extends('layout.adminLTE')
 @section('title', "Account Management")
 @section('subtitle', "Change User Name")
 @section('content')

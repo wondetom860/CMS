@@ -347,7 +347,7 @@ return [
                 [
                     'text'          => 'Courts',
                     'can'           => 'court-list',
-                    'url'           => '/court',
+                    'url'           => '/courts',
                     'icon'          => 'far fa-fw fa-file',
                 ],
                 [
