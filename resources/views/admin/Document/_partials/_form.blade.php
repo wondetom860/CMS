@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid ">
     <div class="card mb-4">
         <div class="card-header"> Upload documents to a case {{ $case->case_number }}
         </div>

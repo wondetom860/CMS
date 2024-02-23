@@ -49,7 +49,7 @@
     </div>
     <!-- footer -->
     <div class="copyright py-4 text-center text-white">
-        <div class="container">
+        <div class="container-fluid ">
             <small>
                 Copyright - <a class="text-reset fw-bold text-decoration-none" target="_blank"
                     href="https://twitter.com/user">

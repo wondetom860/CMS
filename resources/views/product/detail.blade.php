@@ -2,8 +2,8 @@
 @section('title', 'Product Detail')
 @section('subtitle', $product->name)
 @section('content')
-    <div class="container">
-        <h3 class="float-right">
+    <div class="container-fluid ">
+        <h3 class="">
             Detail: {{ $product->name }} - Product page
         </h3>
         <div class="card mb-3">

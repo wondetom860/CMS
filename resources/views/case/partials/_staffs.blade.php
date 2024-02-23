@@ -1,13 +1,16 @@
 @php
     $staffs = $case->staffs;
     if ($staffs) {
+        $ee = __('Staff Name');
+        $pp = __('Assign As');
+        $rr = __('Assign Date');
         echo "<h6>Staffs Assign To This Case</h6>
         <table class='table table-condensed table-sm table-bordered' style='font-size: 9pt;'>
             <thead style='background-color:cornflowerblue;'>
                 <th>#</th>
-                <th>Staff Name</th>
-                <th>Assign As</th>
-                <th>Assign At</th>
+                <th>$ee</th>
+                <th>$pp</th>
+                <th>$rr</th>
             </thead><tbody>";
         $count = 0;
         foreach ($staffs as $staff) {

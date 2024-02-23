@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     {{--
     <link href="/css/bootstrap.min.css" rel="stylesheet" /> --}}
-    <title>: @yield('title', '')</title>
+    <title>@yield('title', '')</title>
     <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
 </head>
 
@@ -25,8 +25,8 @@
             <img src="{{ asset('/images/8.png') }}" class="img-fluid">
         </a> --}}
         
-        <div class="container">
-            <a class="navbar-brand" href="/" style="color: white">{{ __('CRM-System') }}</a>
+        <div class="container-fluid ">
+            <a class="navbar-brand" href="/" style="color: white">{{ __('CCM-System') }}</a>
             <div class="navbar navbar-expand-lg" id="navbarNavAltMarkup">
                 <div class="navbar-nav ms-auto">
 
@@ -38,7 +38,7 @@
                     <a class="nav-link active" href="/about">{{ __('About') }}</a> --}}
                     <div class="vr bg-white mx-2 d-none d-lg-block"></div>
                     @guest
-                        <a href="{{ route('login') }}" class="nav-link active" style="color: white">Login</a>
+                        <a href="{{ route('login') }}" class="nav-link active" style="color: white">{{ __('Login') }}</a>
                         
                         {{-- <a href="{{ route('register') }}" class="nav-link active">Register</a> --}}
                     @else
@@ -55,14 +55,14 @@
                        <a href="{{ route('admin.home.index') }}" class="nav-link active">{{ __('Dashboard') }}</a>
                        @endcan
                         @if (Auth::user()->isSuperAdmin())
-                            <a href="{{ route('admin.roles.index') }}" class="nav-link active text-warning">Roles</a>
-                            <a href="{{ route('admin.users.index') }}" class="nav-link active text-warning">Users</a>
+                            <a href="{{ route('admin.roles.index') }}" class="nav-link active text-warning">{{ __('Roles') }}</a>
+                            <a href="{{ route('admin.users.index') }}" class="nav-link active text-warning">{{ __('Users') }}</a>
                         @endif
                         {{-- logged In user --}}
                         <form action="{{ route('logout') }}" id="logout" method="POST">
                             <a title="Logout" role="button" class="nav-link active text-center"
                                 onclick="document.getElementById('logout').submit();"
-                                style="color: white">Logout({{ Auth::user()->user_name }})</a>
+                                style="color: white">{{ __('Logout') }}({{ Auth::user()->user_name }})</a>
                             @csrf
                         </form>
                     @endguest
@@ -72,7 +72,7 @@
     </nav>
     <header class="container-fluid d-flix align-items-center flex-column" style="background-color: #E6EDf5;">
         <div class="container d-flex align-items-center flex-column">
-            <h2 style="color: teal">@yield('subtitle', 'MOD - Court Case Managment System')</h2>
+            <h2 style="color: teal">@yield('subtitle', __('MOD - Court Case Managment System'))</h2>
         </div>
     </header>
     <!-- header -->
@@ -97,7 +97,7 @@
         </div>
     </main>
     <footer class="footer py-1 text-center text-white" style="background-color: #1A252F;">
-        <div class="container">
+        <div class="container-fluid ">
             <p class="copyright">
                 @include('partials.language_switcher')
                 Copyright - <a class="text-reset" target="_blank" href="https://www.mod.gov.et">

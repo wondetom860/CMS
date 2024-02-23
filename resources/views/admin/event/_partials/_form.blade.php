@@ -51,7 +51,7 @@
             <div class="row">
                 <div class="col-8">
                     <input type="hidden" name="case_id" value="{{$case->id}}" class="d-none">
-                    <button type="submit" class="btn btn-primary register-case-btn btn-sm">Submit</button>
+                    <button type="submit" class="btn btn-primary float-right btn-sm">Submit</button>
                 </div>
             </div>
         </form>
