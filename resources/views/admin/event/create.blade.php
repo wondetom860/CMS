@@ -71,7 +71,7 @@
                     </div>
                     <div class="row">
                         <div class="col-8">
-                            <button type="submit" class="btn btn-primary register-case-btn">Submit</button>
+                            <button type="submit" class="btn btn-primary float-right">Submit</button>
                         </div>
                     </div>
             </form>

@@ -2,12 +2,14 @@
 @section('title', $viewData['title'])
 @section('innerTitle', $viewData['subtitle'])
 @section('content')
-    <div class="container d-flix align-items-center flex-column">
+    <div class=" ">
         <div class="card">
-            <h4 class="card-header">
+            <h4 class="card-header bg-light">
                 Assign Staff To case- Admin Panel - MOD-CCMS
-                <a class="btn btn-primary btn-xs float-end" href="{{ route('admin.case_staff_assignments.create') }}">Assign
-                    The Case</a>
+                @can('case-staff-assignment-create')
+                    <a class="btn btn-primary btn-xs float-end" href="{{ route('admin.case_staff_assignments.create') }}">Assign
+                        The Case</a>
+                @endcan
             </h4>
             <div class="card-body">
                 @php
@@ -18,7 +20,7 @@
                             'pageName' => 'p',
                         ],
                         'rowsPerPage' => 5, // The number of rows in one page. By default 10.
-                       // 'title' => 'Assign Staff To case', // It can be empty ''
+                        // 'title' => 'Assign Staff To case', // It can be empty ''
                         'strictFilters' => true, // If true, then a searching by filters will be strict, using an equal '=' SQL operator instead of 'like'.
                         'rowsFormAction' => '/admin/pages/deletion', // Route url to send slected checkbox items for deleting rows, for example.
                         'useSendButtonAnyway' => true, // If true, even if there are no checkbox column, the main send button will be displayed.
@@ -91,23 +93,24 @@
                                     return $row->assigned_at;
                                 },
                             ],
-                            [   'label' => 'Assigned By', // Column label.
+                            [
+                                'label' => 'Assigned By', // Column label.
                                 'attribute' => 'assignedBy',
-                                'value' => function($row){
+                                'value' => function ($row) {
                                     return $row->assignedBy->user_name;
-                                }
+                                },
                             ],
-                           
+
                             [
                                 // Set Action Buttons.
                                 'class' => Itstructure\GridView\Columns\ActionColumn::class, // REQUIRED.
                                 'options' => [
-                                    'style' => 'background-color: red;'
+                                    'style' => 'background-color: red;',
                                 ],
                                 'actionTypes' => [
                                     // REQUIRED.
                                     'view' => function ($data) {
-                                        return '/admin/case_staff_assignments/show/' . $data->id ;
+                                        return '/admin/case_staff_assignments/show/' . $data->id;
                                     },
                                     'edit' => function ($data) {
                                         return '/admin/case_staff_assignments/' . $data->id . '/edit';
@@ -115,7 +118,7 @@
                                     [
                                         'class' => Itstructure\GridView\Actions\Delete::class, // REQUIRED
                                         'url' => function ($data) {
-                                            return '/admin/case_staff_assignments/'. $data->id . '/delete';
+                                            return '/admin/case_staff_assignments/' . $data->id . '/delete';
                                         },
                                         'htmlAttributes' => [
                                             'target' => '_self',

@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+
 return [
 
     /*
@@ -107,7 +109,7 @@ return [
     */
 
     'preloader' => [
-        'enabled' => true,
+        'enabled' => false,
         'img' => [
             'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
             'alt' => 'AdminLTE Preloader Image',
@@ -130,11 +132,11 @@ return [
     */
 
     'usermenu_enabled' => true,
-    'usermenu_header' => false,
+    'usermenu_header' => true,
     'usermenu_header_class' => 'bg-primary',
-    'usermenu_image' => false,
-    'usermenu_desc' => false,
-    'usermenu_profile_url' => false,
+    'usermenu_image' => true,
+    'usermenu_desc' => true,
+    'usermenu_profile_url' => '/my-account/profile',
 
     /*
     |--------------------------------------------------------------------------
@@ -194,7 +196,7 @@ return [
     'classes_content' => '',
     'classes_sidebar' => 'sidebar-dark-primary elevation-4',
     'classes_sidebar_nav' => '',
-    'classes_topnav' => 'navbar-white navbar-light',
+    'classes_topnav' => 'navbar-light navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
     'classes_topnav_container' => 'container',
 
@@ -256,10 +258,10 @@ return [
     'dashboard_url' => 'home',
     'logout_url' => 'logout',
     'login_url' => 'login',
-    'register_url' => 'register',
+    'register_url' => 'admin/register',
     'password_reset_url' => 'password/reset',
     'password_email_url' => 'password/email',
-    'profile_url' => false,
+    'profile_url' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -312,8 +314,8 @@ return [
             'submenu' => [
                 [
                     'text'          => 'Staff Role',
-                    'can'           => 'staffrole-list',
-                    'url'           => 'admin/staffrole/',
+                    'can'           => 'staff-role-list',
+                    'url'           => 'admin/staffrole',
                     'icon'          => 'far fa-fw fa-file',
                 ],
                 [
@@ -333,7 +335,7 @@ return [
                 ],
                 [
                     'text'        => 'Party Type',
-                    'url'         => 'admin/party-type',
+                    'url'         => 'admin/party_type',
                     'icon'        => 'far fa-fw fa-file',
                 ],
             ]
@@ -345,16 +347,18 @@ return [
                 [
                     'text'          => 'Courts',
                     'can'           => 'court-list',
-                    'url'           => '/court',
+                    'url'           => '/courts',
                     'icon'          => 'far fa-fw fa-file',
                 ],
                 [
                     'text'        => 'Profile',
+                    'can'         => 'profile-list',
                     'url'         => 'admin/person',
                     'icon'        => 'far fa-fw fa-file',
                 ],
                 [
                     'text'        => 'Court Staff',
+                    'can'         => 'court-staff-list',
                     'url'         => 'admin/courtstaff',
                     'icon'        => 'far fa-fw fa-file',
                 ],
@@ -365,23 +369,32 @@ return [
             'can'  => 'manage-case',
             'submenu' => [
                 [
+                    'text'          => 'Cases',
+                    'can'           => 'case-list',
+                    'url'           => '/case',
+                    'icon'          => 'far fa-fw fa-file',
+                ],
+                [
                     'text'          => 'Case-Staff Assignment',
                     'can'           => 'court-list',
-                    'url'           => 'admin/case_staff_assignment',
+                    'url'           => 'admin/case_staff_assignments',
                     'icon'          => 'far fa-fw fa-file',
                 ],
                 [
                     'text'        => 'Parties',
+                    'can'         => 'party-list',
                     'url'         => 'admin/party',
                     'icon'        => 'far fa-fw fa-file',
                 ],
                 [
                     'text'        => 'Event',
+                    'can'         => 'event-list',
                     'url'         => 'admin/event',
                     'icon'        => 'far fa-fw fa-file',
                 ],
                 [
                     'text'        => 'Document',
+                    'can'         => 'court-list',
                     'url'         => 'admin/document',
                     'icon'        => 'far fa-fw fa-file',
                 ],
@@ -409,12 +422,12 @@ return [
         ['header' => 'account_settings'],
         [
             'text' => 'Change User Name',
-            'url'  => 'myaccount/changeUserName',
+            'url'  => 'my-account/changeUserName',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
             'text' => 'Change Password',
-            'url'  => 'myaccount/changePassword',
+            'url'  => 'my-account/changePassword',
             'icon' => 'fas fa-fw fa-lock',
         ],
         // [
@@ -471,6 +484,12 @@ return [
         //     'icon_color' => 'cyan',
         //     'url'        => '#',
         // ],
+        [
+            'text' => 'Login',
+            'visible'   => 0,
+            'url' => 'login',
+            'icon' => 'fas fa-fw fa-user',
+        ],
     ],
 
     /*

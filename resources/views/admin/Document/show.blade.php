@@ -2,8 +2,8 @@
 @section('title', 'Document Detail')
 @section('subtitle', $viewData['subtitle'])
 @section('content')
-    <div class="container">
-        <h3 class="float-right">
+    <div class="container-fluid ">
+        <h3 class="">
             Detail: {{ $viewData['event']->getDetail() }} - Document Detail
         </h3>
         <div class="card mb-3">

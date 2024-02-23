@@ -20,7 +20,7 @@
 </style>
 
 <!-- resources/views/case_staff_assignments/_form.blade.php -->
-<div class="container">
+<div class="container-fluid ">
     <div class="form-control">
         <div class="ml-5">
             <label for="case_id">Case</label>

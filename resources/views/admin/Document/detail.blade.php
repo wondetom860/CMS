@@ -1,9 +1,9 @@
-@extends('layout.mystore')
+@extends('layout.adminLTE')
 @section('title', 'Document Detail')
 @section('subtitle', $document->name)
 @section('content')
-    <div class="container">
-        <h3 class="float-right">
+    <div class="container-fluid ">
+        <h3 class="">
             Detail: {{ $product->name }} - Document page
         </h3>
         <div class="card mb-3">

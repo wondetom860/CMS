@@ -1,8 +1,8 @@
-@extends('layout.mystore')
+@extends('layout.adminLTE')
 @section('title', $viewData['title'])
 @section('innerTitle', 'Register New Document')
 @section('content')
-    <div class="container">
+    <div class="container-fluid ">
         <div class="card mb-4">
             <div class="card-header"> Register New Document
             </div>

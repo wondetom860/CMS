@@ -1,9 +1,9 @@
 @extends('layout.adminLTE')
 @section('title', $viewData['title'])
 @section('innerTitle', 'Create Case Type')
-@section('content')
+@section('content')  
     <div class="card mb-4">
-        <div class="card-header"> Create Case Type
+        <div class="card-header bg-light"> Create Case Type
         </div>
         <div class="card-body">
             <form method="POST" action="{{ route('admin.case_type.store') }}">

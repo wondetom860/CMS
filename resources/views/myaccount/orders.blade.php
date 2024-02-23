@@ -1,8 +1,8 @@
-@extends('layout.mystore')
+@extends('layout.adminLTE')
 @section('title', $viewData['title'])
 @section('subtitle', $viewData['subtitle'])
 @section('content')
-    <div class="container">
+    <div class="container-fluid ">
         @forelse ($viewData["orders"] as $order)
             <div class="card mb-4">
                 <div class="card-header"> Order #<b>{{ strtoupper(md5($order->id)) }}</b>

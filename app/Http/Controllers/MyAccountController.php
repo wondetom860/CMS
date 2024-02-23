@@ -25,7 +25,7 @@ class MyAccountController extends Controller
     public function profile()
     {
         $viewData = [];
-        $viewData["title"] = "Profile - Online Store";
+        $viewData["title"] = "Profile - CCMS";
         $viewData["subtitle"] = __("Manage Profile");
         // Model = new MyAccount()
         // User::whereId(Auth::user()->id)->get('name', 'id')->first()

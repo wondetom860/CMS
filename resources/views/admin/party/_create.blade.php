@@ -1,5 +1,5 @@
 <div class="card mb-4">
-    <div class="card-header"> Register New party
+    <div class="card-header bg-light"> Register New party
     </div>
     <div class="card-body">
         <form method="POST" action="{{ route('admin.party.store') }}" id="party_register_form">

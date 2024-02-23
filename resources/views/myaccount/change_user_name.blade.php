@@ -1,8 +1,8 @@
-@extends('layout.mystore')
+@extends('layout.adminLTE')
 @section('title', "Account Management")
 @section('subtitle', "Change User Name")
 @section('content')
-    <div class="container">
+    <div class="container-fluid ">
         <div class="card col-4">
             <div class="card-header">
                 <div class="col-lg-12 margin-tb">
