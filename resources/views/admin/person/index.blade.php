@@ -6,8 +6,10 @@
         <div class="card">
             <h5 class="card-header">
                 Person - Admin Panel - MOD-CCMS
-                <a class="btn btn-primary btn-xs register-caseType-btn float-right" href="{{ route('admin.person.create') }}"
-                    style="align-self: flex-end">Register New person</a>
+                @can('profile-create')
+                    <a class="btn btn-primary btn-xs register-caseType-btn float-right" href="{{ route('admin.person.create') }}"
+                        style="align-self: flex-end">Register New person</a>
+                @endcan
             </h5>
             <div class="card-body">
                 @php

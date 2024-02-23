@@ -6,8 +6,10 @@
         <div class="card">
             <h5 class="card-header">
                 Courtstaff - Admin Panel - MOD-CCMS
-                <a class="btn btn-primary btn-xs register-caseType-btn float-right" href="{{ route('admin.courtstaff.create') }}"
-                    style="align-self: flex-end">Register New Court Staff</a>
+                @can('court-staff-create')
+                    <a class="btn btn-primary btn-xs register-caseType-btn float-right"
+                        href="{{ route('admin.courtstaff.create') }}" style="align-self: flex-end">Register New Court Staff</a>
+                @endcan
             </h5>
             <div class="card-body">
                 @php
@@ -89,12 +91,12 @@
                                 // Set Action Buttons.
                                 'class' => Itstructure\GridView\Columns\ActionColumn::class, // REQUIRED.
                                 'options' => [
-                                    'style' => 'background-color: red;'
+                                    'style' => 'background-color: red;',
                                 ],
                                 'actionTypes' => [
                                     // REQUIRED.
                                     'view' => function ($data) {
-                                        return '/admin/courtstaff/show/' . $data->id ;
+                                        return '/admin/courtstaff/show/' . $data->id;
                                     },
                                     'edit' => function ($data) {
                                         return '/admin/courtstaff/' . $data->id . '/edit';

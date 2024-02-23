@@ -7,8 +7,10 @@
         <div class="card">
             <h4 class="card-header">
                 Courts - Admin Panel - MOD-CCMS
-                <a class="btn btn-primary btn-xs register-caseType-btn" href="{{ route('admin.staffrole.create') }}"
-                    style="align-self: flex-end">Register Staff Role</a>
+                @can('staff-role-create')
+                    <a class="btn btn-primary btn-xs register-caseType-btn" href="{{ route('admin.staffrole.create') }}"
+                        style="align-self: flex-end">Register Staff Role</a>
+                @endcan
             </h4>
             <div class="card-body">
                 <table id="example" class="table table-striped" style="width:100%">
@@ -29,19 +31,20 @@
                                 <td>{{ $staff_role->rank }}</td>
                                 <td>{{ $staff_role->description }}</td>
                                 <td><a href="{{ route('admin.staffrole.show', ['id' => $staff_role->id]) }}">
-                                    <button class="btn btn-primary">
-                                        <i class="fa fa-eye"></i>
-                                    </button>
-                                </a></td>
+                                        <button class="btn btn-primary">
+                                            <i class="fa fa-eye"></i>
+                                        </button>
+                                    </a></td>
                                 <td>
-                                    <a href="{{ route('admin.staffrole.edit', ['id' =>$staff_role->id]) }}">
+                                    <a href="{{ route('admin.staffrole.edit', ['id' => $staff_role->id]) }}">
                                         <button class="btn btn-primary">
                                             <i class="fa fa-edit"></i>
                                         </button>
                                     </a>
                                 </td>
                                 <td>
-                                    <form action="{{ route('admin.staffrole.delete', ['id' => $staff_role->id]) }}" method="post">
+                                    <form action="{{ route('admin.staffrole.delete', ['id' => $staff_role->id]) }}"
+                                        method="post">
                                         @csrf
                                         <button class="btn btn-cs btn-danger"
                                             onclick="return confirm('Are you sure to delete court profile?');">
