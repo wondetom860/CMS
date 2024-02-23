@@ -66,7 +66,7 @@
     const registerParty = (case_id) => {
         $("#modal_body").html('Loading party registration form');
         $("#formModalLabel").html("Register parties for case {{ $viewData['case']->case_number }}");
-        $.post('{{ route('admin.party.create_partial') }}', {
+        $.get('{{ route('admin.party.create_partial') }}', {
             case_id: case_id
         }).done((resp) => {
             $("#modal_body").html(resp);
