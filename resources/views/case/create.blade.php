@@ -3,9 +3,9 @@
 @section('innerTitle', 'Register New Case')
 @section('content')
     <div class="container-fluid ">
-        <div class="card mb-4">
+        <div class="card mb-4">   
             <div class="card-header">{{__('Register New Case')}}
-            </div>
+            </div>  
             <div class="card-body">
                 <form method="POST" action="{{ route('case.store') }}">
                     @csrf
