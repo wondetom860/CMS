@@ -4,8 +4,10 @@
         <div class="col-lg-12 margin-tb">
             <div class="">
                 <h2>Role Management
-                    <a class="btn btn-success register-caseType-btn" href="{{ route('admin.roles.create') }}"> Create New
-                        Role</a>
+                    @can('role-create')
+                        <a class="btn btn-success register-caseType-btn" href="{{ route('admin.roles.create') }}"> Create New
+                            Role</a>
+                    @endcan
                 </h2>
             </div>
         </div>

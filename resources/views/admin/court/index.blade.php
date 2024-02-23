@@ -6,10 +6,12 @@
         <div class="card">
             <h5 class="card-header">
                 Courts - Admin Panel - MOD-CCMS
-                <a class="btn btn-primary btn-xs register-caseType-btn" href="{{ route('admin.court.create') }}"
-                    style="align-self: flex-end">Register New Court</a>
+                @can('court-create')
+                    <a class="btn btn-primary btn-xs register-caseType-btn" href="{{ route('admin.court.create') }}"
+                        style="align-self: flex-end">Register New Court</a>
+                @endcan
             </h5>
-            <div class="card-body"> 
+            <div class="card-body">
                 @php
                     $gridData = [
                         'dataProvider' => $dataProvider,
@@ -77,21 +79,21 @@
                             ],
                             [
                                 'attribute' => 'Active Cases',
-                                'value' => function($model){
+                                'value' => function ($model) {
                                     return $model->getActiveCases();
-                                }
+                                },
                             ],
                             // 'created_at', // Simple column setting by string.
                             [
                                 // Set Action Buttons.
                                 'class' => Itstructure\GridView\Columns\ActionColumn::class, // REQUIRED.
                                 'options' => [
-                                    'style' => 'background-color: red;'
+                                    'style' => 'background-color: red;',
                                 ],
                                 'actionTypes' => [
                                     // REQUIRED.
                                     'view' => function ($data) {
-                                        return '/admin/court/show/' . $data->id ;
+                                        return '/admin/court/show/' . $data->id;
                                     },
                                     'edit' => function ($data) {
                                         return '/admin/court/' . $data->id . '/edit';
