@@ -10,7 +10,7 @@
                     style="align-self: flex-end">Register New Event Type</a>
             </h4>
             <div class="card-body">
-                <table class="table table-condensed table-hover table-sm table-bordered">
+                <table id="example" class="table table-striped" style="width:100%">
                     <thead>
                         <th>ID</th>
                         <th>Event Type</th>
