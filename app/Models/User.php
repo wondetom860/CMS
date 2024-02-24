@@ -45,6 +45,37 @@ class User extends Authenticatable
         return $this->belongsTo(Person::class, 'person_id');
     }
 
+    public function getIdNumber()
+    {
+        $person = $this->person;
+        if ($person) {
+            return $person->id_number;
+        }
+
+        return "-";
+    }
+
+    public function getStaffRole()
+    {
+        $person = $this->person;
+        if ($this->isClient()) {
+            return $this->getRoles();
+        }
+        if ($person) {
+            $courtStaff = $person->courtStaffs;
+            if ($courtStaff && count($courtStaff) > 0) {
+                $roless = [];
+                foreach ($courtStaff as $cStaff) {
+                    $roless[] = $cStaff->staffRole->role_name;
+                }
+                return implode($roless);
+            } else {
+                return "Login account does not exist, please create account for <a class='btn btn-link' href='/admin/person/show/{$person->id}'>{$person->getFullName()}</a>";
+            }
+        }
+        return "Super-Admin User";
+    }
+
     public function getFullName()
     {
         $person = $this->person;
@@ -79,13 +110,14 @@ class User extends Authenticatable
         return $this->hasRole('Admin');
     }
 
-    public function adminlte_desc(){
+    public function adminlte_desc()
+    {
         return $this->getFullName();
     }
 
     public function isClerk()
     {
-        return $this->hasRole('Clerk');
+        return $this->hasRole(['Clerk','Clerks']);
     }
 
     public function adminlte_profile_url()

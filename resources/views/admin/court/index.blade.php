@@ -2,6 +2,7 @@
 @section('title', $viewData['title'])
 @section('innerTitle', $viewData['subtitle'])
 @section('content')
+@section('plugins.Datatables', true)
     <div class="">
         <div class="card">
             <h5 class="card-header bg-light">

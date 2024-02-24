@@ -9,55 +9,43 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
         crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    {{--
-    <link href="/css/bootstrap.min.css" rel="stylesheet" /> --}}
-    <title>@yield('title', '')</title>
-    <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
+    <link href="{{ asset('/css/admin.css') }}" rel="stylesheet" />
+    <link href="{{ asset('/css/admin.css') }}" rel="stylesheet" />
+    <title>@yield('title', __('Admin - MOD - Court Case Management System'))</title>
 </head>
 
 <body>
     <!-- header -->
     <nav class="navbar navbar-light" style="background-color: #4682B4;">
-        <a class="navbar-brand" href="#" style="max-width: 4%; padding-left: 9px;">
-            <img src="{{ asset('/images/8.png') }}" class="img-fluid">
-        </a>
         {{-- <a class="navbar-brand" href="#" style="max-width: 4%; padding-left: 9px;">
             <img src="{{ asset('/images/8.png') }}" class="img-fluid">
         </a> --}}
-        
+
         <div class="container-fluid ">
-            <a class="navbar-brand" href="/" style="color: white">{{ __('CCM-System') }}</a>
+            <a class="navbar-brand" href="/home" style="color: white">{{ __('CCM-System') }}</a>
+            <a class="navbar-brand justify:start" href="#" style="max-width: 4%; padding-left: 9px;">
+                <img src="{{ asset('/images/8.png') }}" class="img-fluid">
+            </a>
             <div class="navbar navbar-expand-lg" id="navbarNavAltMarkup">
                 <div class="navbar-nav ms-auto">
 
-                    <a class="nav-link active" href="/" style="color: white">{{ __('Home') }}</a>
-                    @can('case-list')
-                    <a class="nav-link active" href="/case" style="color: white">{{ __('Cases') }}</a>
-                    @endcan
+                    {{-- <a class="nav-link active" href="/home" style="color: white">{{ __('Home') }}</a> --}}
                     {{-- <a class="nav-link active" href="/cart">{{ __('Cart') }}</a>
                     <a class="nav-link active" href="/about">{{ __('About') }}</a> --}}
                     <div class="vr bg-white mx-2 d-none d-lg-block"></div>
                     @guest
                         <a href="{{ route('login') }}" class="nav-link active" style="color: white">{{ __('Login') }}</a>
-                        
+
                         {{-- <a href="{{ route('register') }}" class="nav-link active">Register</a> --}}
                     @else
-                    
-                        {{-- <a href="{{ route('myaccount.orders') }}" class="nav-link active">{{ __('My Orders') }}</a>
-                    --}}
+                        @can('case-list')
+                            <a class="nav-link active" href="/case" style="color: white">{{ __('Cases') }}</a>
+                        @endcan
                         <a href="{{ route('myaccount.profile') }}" class="nav-link active"
                             style="color: white">{{ __('My Profile') }}</a>
-                        @if (Auth::user()->isAdmin())
-                            {{-- <a href="{{ route('admin.home.index') }}" class="nav-link active"
-                                style="color: white">{{ __('Dashboard') }}</a> --}}
-                        @endif
-                       @can('dashboard-view')
-                       <a href="{{ route('admin.home.index') }}" class="nav-link active">{{ __('Dashboard') }}</a>
-                       @endcan
-                        @if (Auth::user()->isSuperAdmin())
-                            <a href="{{ route('admin.roles.index') }}" class="nav-link active text-warning">{{ __('Roles') }}</a>
-                            <a href="{{ route('admin.users.index') }}" class="nav-link active text-warning">{{ __('Users') }}</a>
-                        @endif
+                        @can('dashboard-view')
+                            <a href="{{ route('admin.home.index') }}" class="nav-link active">{{ __('Dashboard') }}</a>
+                        @endcan
                         {{-- logged In user --}}
                         <form action="{{ route('logout') }}" id="logout" method="POST">
                             <a title="Logout" role="button" class="nav-link active text-center"
@@ -96,14 +84,14 @@
 
         </div>
     </main>
-    <footer class="footer py-1 text-center text-white" style="background-color: #1A252F;">
+    <footer class="py-1 text-center text-white" style="background-color: #1A252F;">
         <div class="container-fluid ">
             <p class="copyright">
                 @include('partials.language_switcher')
                 Copyright - <a class="text-reset" target="_blank" href="https://www.mod.gov.et">
                     MOD
                 </a> - <b>ICT</b>
-                <span class="flex justify-right justify-end pt-0">
+                <span class="flex justify-center justify-end pt-0">
                     By: <i>YoungTigers</i>
                 </span>
             </p>

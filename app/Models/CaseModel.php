@@ -13,6 +13,9 @@ class CaseModel extends Model
     const STATUS_READY = 0;
     const STATUS_ACTIVE = 1;
 
+    const CASE_PUBLIC = 1;
+    const CASE_CLOSED = 0;
+
     //protected $fillable = ['case_number','start_date',];
 
     public $table = 'case';
@@ -24,22 +27,83 @@ class CaseModel extends Model
         ]);
     }
 
+    protected function getParty($partyType)
+    {
+        $ptiff = PartyType::where(['party_type_name' => strtoupper($partyType)])->get()->first();
+        return $ptiff ? $ptiff->id : $ptiff;
+    }
+
+
+    public function getPlaintiff()
+    {
+        $plaintiffs = $this->parties()->where(['party_type_id' => $this->getParty('plaintiff')])->get();
+        return $this->formatAndReturn($plaintiffs);
+
+    }
+
+    private function formatAndReturn($party)
+    {
+        if ($party && count($party) > 0) {
+            $count = count($party);
+            $fPerson = $party[0]->person->getFullName();
+            if ($count > 1) {
+                return $fPerson . " and " . ($count - 1) . " others";
+            } else {
+                return $fPerson;
+            }
+        }
+        return "-";
+    }
+    public function getDefendant()
+    {
+        $defendants = $this->parties()->where(['party_type_id' => $this->getParty('defendant')])->get();
+        return $this->formatAndReturn($defendants);
+    }
+    public function getEventSceduleForToday()
+    {
+        $todayEvent = $this->events()->where(['date_time' => date('Y-m-d')])->get()->first();
+
+        if ($todayEvent) {
+            return $todayEvent->date_time;
+        } else {
+            $event = $this->events()->orderBy('date_time')->get()->first();//3=>SORT_DESC
+            if ($event) {
+                return $event->date_time;
+            }
+        }
+    }
+    public function getEventType()
+    {
+        $event = $this->events()->orderBy('date_time')->get()->first();//3=>SORT_DESC
+        if ($event) {
+            return $event->eventType->event_type_name;
+        } else {
+            return "No event.";
+        }
+    }
+
     public function isActive()
     {
         return $this->case_status != self::STATUS_CLOSED;
     }
 
-    public function canRegisterParty(){
+    public function canRegisterParty()
+    {
         // $usr = User::find(Auth::user()->id);
         // $courtStaff = CourtStaff::where(['person_id' => $usr->person_id])->get()->first();
         // $court_staff_id = $courtStaff ? $courtStaff->id : null;
         // return $this->caseStaffAssignments()->where(['court_staff_id' => $court_staff_id])->count() > 0;
     }
-
+    public static function getOpenCaseTrials()
+    {
+        return CaseModel::with(['caseStaffAssignments', 'parties'])
+            ->where(['case_public' => self::CASE_PUBLIC])
+            ->get();
+    }
     public function isAssignedTo($person_id)
     {
         $usr = User::where(['person_id' => $person_id])->get()->first();
-        if($usr->isClient()){
+        if ($usr->isClient()) {
             return false;
         }
         $courtStaff = CourtStaff::where(['person_id' => $person_id])->get()->first();
@@ -119,11 +183,5 @@ class CaseModel extends Model
     public function parties()
     {
         return $this->hasMany(Party::class, 'case_id');
-    }
-
-
-    public function eventType()
-    {
-        return $this->hasMany(EventType::class);
     }
 }

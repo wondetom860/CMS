@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
- Route::get('/', App\Http\Controllers\HomeController::class . '@index')->name('home.index');
+//  Route::get('/', App\Http\Controllers\HomeController::class . '@index')->name('welcome');
 // Route::get('/admin', App\Http\Controllers\Admin\AdminHomeController::class . '@index')->name('admin.home.index');
 
 // Route::get('/about', function () {
@@ -25,6 +25,9 @@ Route::get('/about', \App\Http\Controllers\HomeController::class . '@about')->na
 
 Route::get('/test', function () {
     return redirect('/test');
+});
+Route::get('/', function () {
+    return view('/welcome');
 });
 
 Route::get('/error/{message}', function ($message) {
@@ -43,7 +46,7 @@ Route::get('/error/{message}', function ($message) {
 Route::middleware('auth')->group(function () {
     // Route::get('/cart/purchase', App\Http\Controllers\CartController::class . '@purchase')->name('cart.purchase');
     // Route::get('/my-account/orders', App\Http\Controllers\MyAccountController::class . '@orders')->name('myaccount.orders');
-     Route::get('/my-account/profile', App\Http\Controllers\MyAccountController::class . '@profile')->name('myaccount.profile');
+    Route::get('/my-account/profile', App\Http\Controllers\MyAccountController::class . '@profile')->name('myaccount.profile');
     // Route::post('/my-account/update/{id}', App\Http\Controllers\MyAccountController::class . '@update')->name('myaccount.update.profile');
     // Route::post('/my-account/resetPassword/{id}', App\Http\Controllers\MyAccountController::class . '@resetPassword')->name('myaccount.reset.password');
 
@@ -67,7 +70,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/courts', App\Http\Controllers\CourtController::class . '@index')->name('courts.index');
 
     // seach for person by ID
-    Route::post('/person/findPerson', App\Http\Controllers\PersonController::class . '@findPerson')->name('person.findPerson');
+    Route::get('/person/findPerson', App\Http\Controllers\PersonController::class . '@findPerson')->name('person.findPerson');
 });
 
 Route::middleware('auth')->group(function () {
@@ -80,7 +83,7 @@ Route::middleware('auth')->group(function () {
 // });
 
 Route::middleware('auth')->prefix('/admin')->group(function () {  //|'/SuperAdmin'
-     Route::get('', App\Http\Controllers\Admin\AdminHomeController::class . '@index')->name('admin.home.index');
+    Route::get('', App\Http\Controllers\Admin\AdminHomeController::class . '@index')->name('admin.home.index');
     // Route::get('/products', App\Http\Controllers\Admin\AdminProductController::class . '@index')->name('admin.products.index');
     // Route::get('/products/create', App\Http\Controllers\Admin\AdminProductController::class . '@create')->name('admin.products.create');
     // Route::post('/products/store', App\Http\Controllers\Admin\AdminProductController::class . '@store')->name('admin.products.store');
@@ -143,8 +146,8 @@ Route::middleware('auth')->prefix('/admin')->group(function () {  //|'/SuperAdmi
     Route::post('/party/store', App\Http\Controllers\PartyController::class . '@store')->name('admin.party.store');
     Route::get('/party/{id}/edit', App\Http\Controllers\PartyController::class . '@edit')->name('admin.party.edit');
     Route::put('/party/{id}/update', App\Http\Controllers\PartyController::class . '@update')->name('admin.party.update');
-    Route::get('/party/{id}/delete',  App\Http\Controllers\PartyController::class . '@delete')->name('admin.party.delete');
-    Route::post('/party/create_partial',  App\Http\Controllers\PartyController::class . '@createPartial')->name('admin.party.create_partial');
+    Route::get('/party/{id}/delete', App\Http\Controllers\PartyController::class . '@delete')->name('admin.party.delete');
+    Route::get('/party/create_partial', App\Http\Controllers\PartyController::class . '@createPartial')->name('admin.party.create_partial');
 
 
     Route::get('/staffrole', App\Http\Controllers\StaffRoleController::class . '@index')->name('admin.staffrole.index');
@@ -205,7 +208,7 @@ Route::middleware('auth')->prefix('/admin')->group(function () {  //|'/SuperAdmi
     Route::put('/case_staff_assignments/{id}/update', App\Http\Controllers\CaseStaffAssignmentController::class . '@update')->name('admin.case_staff_assignments.update');
     Route::get('/case_staff_assignments/{id}/delete', App\Http\Controllers\CaseStaffAssignmentController::class . '@delete')->name('admin.case_staff_assignments.delete');
     // routes/web.php
-    
+
     // User roles and assignment
     Route::get('/roles', App\Http\Controllers\Admin\RoleController::class . '@index')->name('admin.roles.index');
     Route::get('/roles/create', App\Http\Controllers\Admin\RoleController::class . '@create')->name('admin.roles.create');
@@ -220,7 +223,7 @@ Route::middleware('auth')->prefix('/admin')->group(function () {  //|'/SuperAdmi
     Route::get('/users/{id}/edit', App\Http\Controllers\Admin\UserController::class . '@edit')->name('admin.users.edit');
     Route::post('/users/{id}/delete', App\Http\Controllers\Admin\UserController::class . '@delete')->name('admin.users.delete');
     Route::put('/users/{id}/update', App\Http\Controllers\Admin\UserController::class . '@update')->name('admin.users.update');
-    
+
     // Manage Account
     // Route::get('/users/changeUserName', App\Http\Controllers\Admin\UserController::class . '@changeUserName')->name('admin.users.changeUserName');
     Route::get('/users/resetPassword/{id}', App\Http\Controllers\Admin\UserController::class . '@resetPassword')->name('admin.users.resetPassword');
@@ -228,30 +231,34 @@ Route::middleware('auth')->prefix('/admin')->group(function () {  //|'/SuperAdmi
 
 //case
 
+Route::get(
+    'notifications/get',
+    [App\Http\Controllers\NotificationsController::class, 'getNotificationsData']
+)->name('notifications.get');
 
 
-Route::get('/post', App\Http\Controllers\PostsController::class . '@index')->name('post.list');
-Route::get('/post/insert', App\Http\Controllers\PostsController::class . '@insert')->name('post.insert');
-Route::get('/post/insert_with_image', App\Http\Controllers\PostsController::class . '@insertPostWithPostImage')->name('post.insert_with_image');
-Route::get('/post/select', App\Http\Controllers\PostsController::class . '@select')->name('post.show');
-Route::get('/post/find/{id}', App\Http\Controllers\PostsController::class . '@show')->name('post.view');
-Route::get('/post/soft_delete/{id}', App\Http\Controllers\PostsController::class . '@softDelete')->name('post.soft_delete');
-Route::get('/post/read_soft_deletes', App\Http\Controllers\PostsController::class . '@readSoftDeletes')->name('post.read_soft_delets');
-Route::get('/post/restore/{id}', App\Http\Controllers\PostsController::class . '@restore')->name('post.restore');
-Route::get('/postCategories', App\Http\Controllers\PostCategoryController::class . '@index')->name('post.categories');
+// Route::get('/post', App\Http\Controllers\PostsController::class . '@index')->name('post.list');
+// Route::get('/post/insert', App\Http\Controllers\PostsController::class . '@insert')->name('post.insert');
+// Route::get('/post/insert_with_image', App\Http\Controllers\PostsController::class . '@insertPostWithPostImage')->name('post.insert_with_image');
+// Route::get('/post/select', App\Http\Controllers\PostsController::class . '@select')->name('post.show');
+// Route::get('/post/find/{id}', App\Http\Controllers\PostsController::class . '@show')->name('post.view');
+// Route::get('/post/soft_delete/{id}', App\Http\Controllers\PostsController::class . '@softDelete')->name('post.soft_delete');
+// Route::get('/post/read_soft_deletes', App\Http\Controllers\PostsController::class . '@readSoftDeletes')->name('post.read_soft_delets');
+// Route::get('/post/restore/{id}', App\Http\Controllers\PostsController::class . '@restore')->name('post.restore');
+// Route::get('/postCategories', App\Http\Controllers\PostCategoryController::class . '@index')->name('post.categories');
 
-// cart controller-view routing
-Route::get('/cart', \App\Http\Controllers\CartController::class . '@index')->name('cart.index');
-Route::get('/cart/deleteme', '\App\Http\Controllers\CartController@deleteme')->name('cart.delete');
-Route::get('/cart/{id}', \App\Http\Controllers\CartController::class . '@show')->name('cart.show');
-Route::post('/cart/add/{id}', \App\Http\Controllers\CartController::class . '@add')->name('cart.add');
+// // cart controller-view routing
+// Route::get('/cart', \App\Http\Controllers\CartController::class . '@index')->name('cart.index');
+// Route::get('/cart/deleteme', '\App\Http\Controllers\CartController@deleteme')->name('cart.delete');
+// Route::get('/cart/{id}', \App\Http\Controllers\CartController::class . '@show')->name('cart.show');
+// Route::post('/cart/add/{id}', \App\Http\Controllers\CartController::class . '@add')->name('cart.add');
 
 
-Route::get('/posts.about/{name}', 'App\Http\Controllers\PostsController@about');
-Route::get('/pages/check/{view}', '\App\Http\Controllers\PagesController@checkIfExists');
-Route::get('/home', '\App\Http\Controllers\HomeController@index');
-Route::get('/home/employee-list', '\App\Http\Controllers\HomeController@employyes_list');
-Route::get('/home/new-menu', '\App\Http\Controllers\HomeController@addNewMenu');
+// Route::get('/posts.about/{name}', 'App\Http\Controllers\PostsController@about');
+// Route::get('/pages/check/{view}', '\App\Http\Controllers\PagesController@checkIfExists');
+// Route::get('/home', '\App\Http\Controllers\HomeController@index');
+// Route::get('/home/employee-list', '\App\Http\Controllers\HomeController@employyes_list');
+// Route::get('/home/new-menu', '\App\Http\Controllers\HomeController@addNewMenu');
 
 Auth::routes();
 

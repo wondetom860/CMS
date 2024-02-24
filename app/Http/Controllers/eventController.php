@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\CaseModel;
 use App\Models\event;
 
- 
+
 
 use App\Models\EventType;
 use Illuminate\Http\Request;
@@ -59,8 +60,8 @@ class eventController extends Controller
     {
         event::validate($request);
         $event = new event();
-        $event->date_time = $request->date_time;
-        if(!$event->validDate()){
+        $event->date_time = date('Y-m-d H:i:s', strtotime($request->date_time));
+        if (!$event->validDate()) {
             notify()->error('Event registering failed', 'Schedule Date error');
             return redirect()->route('admin.event.create');
         }
@@ -135,7 +136,7 @@ class eventController extends Controller
     {
         event::destroy($id);
         notify()->success('event Deleted Successfully', 'Delete Success');
-         return back();
-       // return redirect()->route('admin.event.index');
+        return back();
+        // return redirect()->route('admin.event.index');
     }
 }
