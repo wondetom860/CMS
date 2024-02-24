@@ -22,7 +22,7 @@
                         ],
                         'rowsPerPage' => 5, // The number of rows in one page. By default 10.
                         'title' => 'Courts', // It can be empty ''
-                        'strictFilters' => true, // If true, then a searching by filters will be strict, using an equal '=' SQL operator instead of 'like'.
+                        'strictFilters' => false, // If true, then a searching by filters will be strict, using an equal '=' SQL operator instead of 'like'.
                         'rowsFormAction' => '/admin/pages/deletion', // Route url to send slected checkbox items for deleting rows, for example.
                         'useSendButtonAnyway' => true, // If true, even if there are no checkbox column, the main send button will be displayed.
                         'searchButtonLabel' => 'Find',
@@ -124,7 +124,21 @@
                         ],
                     ];
                 @endphp
+                @include('layout.__print')
                 @gridView($gridData)
+                <script>
+                    $('table').attr('id');
+                    $('table').attr('id', 'court_list_table');
+                    $('table').attr('id');
+
+                    new DataTable('#court_list_table', {
+                        layout: {
+                            topStart: {
+                                buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+                            }
+                        }
+                    });
+                </script>
             </div>
         </div>
     </div>

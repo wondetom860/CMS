@@ -1,4 +1,6 @@
 @extends('layout.adminLTE')
+{{-- {{ $trail->push('Update', route('admin.role.edit')) }} --}}
+{{ Breadcrumbs::render() }}
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
