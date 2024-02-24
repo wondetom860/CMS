@@ -19,15 +19,19 @@
     <table class="table table-bordered">
         <tr>
             <th>No</th>
+            <th>ID Number</th>
             <th>Name</th>
+            <th>Staff Role</th>
             <th>Email</th>
-            <th>Roles</th>
+            <th>Aceess Roles</th>
             <th width="280px">Action</th>
         </tr>
         @foreach ($data as $key => $user)
             <tr>
                 <td>{{ ++$i }}</td>
+                <td>{{ $user->getIdNumber() }}</td>
                 <td>{{ $user->getFullName() }}</td>
+                <td><?= $user->getStaffRole() ?></td>
                 <td>{{ $user->email }}</td>
                 <td>
                     @if (!empty($user->getRoleNames()))

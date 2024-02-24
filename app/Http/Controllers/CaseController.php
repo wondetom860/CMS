@@ -123,7 +123,7 @@ class CaseController extends Controller
             $case->cause_of_action = $request->cause_of_action;
             $case->case_status = 0;
             $case->case_type_id = $request->case_type_id;
-            $case->start_date = date('Y-m-d');
+            $case->start_date = date('Y-m-d H:i:s');
 
             if ($case->save()) {
                 // users registering case should be memebres of the court.

@@ -23,7 +23,7 @@
                     <div class="mb-4 row">
                         <label class="text-right col-lg-4 col-md-4 col-sm-12 col-form-label">Date:</label>
                         <div class="col-lg-8 col-md-8 col-sm-12 text-left">
-                            <input name="date_time" type="date" class="form-control">
+                            <input name="date_time" type="datetime-local" class="form-control">
                         </div>
                     </div>
                 </div>

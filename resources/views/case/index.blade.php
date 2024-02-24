@@ -5,10 +5,10 @@
     <div class="">
         <div class="card">
             <h4 class="card-header">
-                {{__('Cases - CCMS')}}
+                {{ __('Cases - CCMS') }}
                 @can('case-create')
-                <a class="btn btn-primary btn-xs float-right" href="{{ route('case.create') }}"
-                    style="align-self: flex-end">{{__('Register Case')}}</a>
+                    <a class="btn btn-primary btn-xs float-right" href="{{ route('case.create') }}"
+                        style="align-self: flex-end">{{ __('Register Case') }}</a>
                 @endcan
             </h4>
             <div class="card-body">
@@ -80,6 +80,7 @@
                                 'value' => function ($row) {
                                     return $row->court->name;
                                 },
+                                'sort' => 'start_date',
                             ],
                             [
                                 'label' => __('Cause of Action'),
@@ -94,6 +95,17 @@
                                 'value' => function ($row) {
                                     return $row->caseType->case_type_name;
                                 },
+                                'filter' => [
+                                    // For dropdown it is necessary to set 'data' array. Array keys are for html <option> tag values, array values are for titles.
+                                    'class' => Itstructure\GridView\Filters\DropdownFilter::class, // REQUIRED. For this case it is necessary to set 'class'.
+                                    'name' => 'case.case_type_id', // REQUIRED if 'attribute' is not defined for column.
+                                    'data' => App\models\CaseType::select('id', 'case_type_name')
+                                        ->get()
+                                        ->mapWithKeys(function ($item) {
+                                            return [$item['id'] => $item['case_type_name']];
+                                        })
+                                        ->toArray(),
+                                ],
                             ],
                             [
                                 'label' => __('Date Reported'), // Column label.
@@ -104,57 +116,39 @@
                             ],
                             [
                                 'attribute' => __('Status'),
-                                'value' => function($model){
+                                'value' => function ($model) {
                                     return $model->getStatus();
-                                }
+                                },
                             ],
-                           
+
                             [
                                 // Set Action Buttons.
                                 'class' => Itstructure\GridView\Columns\ActionColumn::class, // REQUIRED.
                                 'label' => '',
                                 'options' => [
-                                    'style' => 'background-color: red;'
+                                    'style' => 'background-color: red;',
                                 ],
                                 'actionTypes' => [
                                     // REQUIRED.
                                     'view' => function ($data) {
-                                        return '/case/show/' . $data->id ;
+                                        return '/case/show/' . $data->id;
                                     },
                                     'edit' => function ($data) {
-                                        if (Auth::user()->can('case-edit')) {
-                                            return '/case/' . $data->id . '/edit';
-                                        } else {
-                                            return false;
-                                        }
+                                        '/case' . '/' . $data->id . '/edit';
                                     },
-                                //      @can('case-edit')
-                                    //     'edit' => function ($data) {
-                                    //         return '/case/' . $data->id . '/edit';
-                                    //      },
-                                //      ,@endcan
-                                //      @can('case-edit')
-                                        // [
-                                        // 'class' => Itstructure\GridView\Actions\Edit::class, // REQUIRED
-                                        // 'url' => function ($data) {
-                                        //     return '/case'.'/'. $data->id . '/edit';
-                                        // },
-                                        // 'visible' => Auth::user()->can('case-edit'),
-                                        // ],
-                                //     @endcan
                                     [
                                         'class' => Itstructure\GridView\Actions\Delete::class, // REQUIRED
                                         'url' => function ($data) {
                                             if (Auth::user()->can('case-delete')) {
-                                                return '/case/'. $data->id . '/delete';
-                                        } else {
-                                            return false;
-                                        }
+                                                return '/case' . '/' . $data->id . '/delete';
+                                            } else {
+                                                return false;
+                                            }
                                         },
-                                        'htmlAttributes' => [ 
+                                        'htmlAttributes' => [
                                             'target' => '_self',
                                             'style' => 'color: yellow; font-size: 16px;',
-                                           // 'onclick' => 'return window.confirm('$tt');',
+                                            // 'onclick' => 'return window.confirm('$tt');',
                                         ],
                                     ],
                                 ],
