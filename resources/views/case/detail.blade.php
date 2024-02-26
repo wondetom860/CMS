@@ -1,11 +1,10 @@
-
 @extends('layout.adminLTE')
 @section('title', __('Case Detail'))
 @section('subtitle', $viewData['subtitle'])
 @section('content')
     <div class="container-fluid">
         <h3 class="">
-            {{__('Detail')}}: {{ $viewData['case']->getDetail() }}
+            {{ __('Detail') }}: {{ $viewData['case']->getDetail() }}
         </h3>
         <div class="card mb-3">
             <div class="row g-0">
@@ -15,10 +14,11 @@
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <p class="card-text"><b>{{__('Case Number')}} : </b>{{ $viewData['case']->case_number }}</p>
-                        <p class="card-text"><b>{{__('Court Name')}} : </b>{{ $viewData['case']->court->name }}</p>
-                        <p class="card-text"><b>{{__('Case Type')}} : </b>{{ $viewData['case']->caseType->case_type_name }}</p>
-                        <p class="card-text"><b>{{__('Registered On')}} : </b>{{ $viewData['case']->created_at }}</p>
+                        <p class="card-text"><b>{{ __('Case Number') }} : </b>{{ $viewData['case']->case_number }}</p>
+                        <p class="card-text"><b>{{ __('Court Name') }} : </b>{{ $viewData['case']->court->name }}</p>
+                        <p class="card-text"><b>{{ __('Case Type') }} :
+                            </b>{{ $viewData['case']->caseType->case_type_name }}</p>
+                        <p class="card-text"><b>{{ __('Registered On') }} : </b>{{ $viewData['case']->created_at }}</p>
                         <div class="container-fluid">
                             @include('case.partials._docs', ['case' => $viewData['case']])
                         </div>
@@ -39,11 +39,39 @@
 @endsection
 
 <script>
+    const registerCsa = (case_id) => {
+        $("#modal_body").html('Loading Case Staff Assignment form');
+        $("#formModalLabel").html("Assign Court Staff for case {{ $viewData['case']->case_number }}");
+        $.get('{{ route('admin.case_staff_assignments.create_partial') }}', {
+            case_id: case_id
+        }).done((resp) => {
+            $("#modal_body").html(resp);
+        });
+        $('#myForm').trigger("reset");
+        $('#formModal').modal('show');
+    }
     const registerEvent = (case_id) => {
         $("#modal_body").html($("#event-form-container").html());
         $("#formModalLabel").html("Schedule Event for case {{ $viewData['case']->case_number }}");
         $('#myForm').trigger("reset");
         $('#formModal').modal('show');
+    }
+
+    const submitCsaForm = () => {
+        // console.log($("#first_name").val());
+        $.ajax({
+            url: "{{ route('admin.case_staff_assignments.store') }}",
+            type: "POST",
+            data: $("#csa_form").serialize(),
+            dataType: 'JSON',
+            success: function(data) {
+                if (data == 1) {
+                    window.location.href = window.location;
+                } else {
+                    alert(data);
+                }
+            }
+        });
     }
 
     const submitClientForm = () => {
@@ -93,6 +121,10 @@
     }
     // organizational excellence
 </script>
+
+{{-- <div id="csa-form-container" class="d-none">
+    @include('admin.case_staff_assignments._partials._form', ['case' => $viewData['case']])
+</div> --}}
 
 <div id="doc-form-container" class="d-none">
     @include('admin.Document._partials._form', ['case' => $viewData['case']])
