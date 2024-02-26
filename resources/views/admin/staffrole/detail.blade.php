@@ -1,14 +1,17 @@
 @extends('layout.adminLTE')
-@section('title', 'staffrole Detail')
+@section('title', 'Staff-Role Detail')
 @section('subtitle', $viewData['staff_role']->role_name)
 @section('content')
-<div class="container-fluid ">
-    <h3 class="">
-        Detail: {{$viewData['staff_role']->role_name }} - Staff Role page
-    </h3>
-    <div class="card mb-3">
-        <div class="row g-0">
-            <div class="col-md-4 p-2">
+    <div class="container-fluid ">
+        <div class="card">
+            <div class="card-header">
+                @can('staffrole-create')
+                    <h3 class="">
+                        Detail: {{ $viewData['staff_role']->role_name }} - Staff Role page
+                    </h3>
+                @endcan
+            </div>
+            <div class="card-body">
                 <table class="table table-condensed table-hover table-sm table-bordered">
                     <thead>
                         <th>ID</th>
@@ -24,14 +27,15 @@
                         <td>{{ $viewData['staff_role']->rank }}</td>
                         <td>{{ $viewData['staff_role']->description }}</td>
                         <td>
-                            <a href="{{ route('admin.staffrole.edit', ['id' =>$viewData['staff_role']->id]) }}">
+                            <a href="{{ route('admin.staffrole.edit', ['id' => $viewData['staff_role']->id]) }}">
                                 <button class="btn btn-primary">
                                     <i class="bi-pencil"></i>
                                 </button>
                             </a>
                         </td>
                         <td>
-                            <form action="{{ route('admin.staffrole.delete', ['id' => $viewData['staff_role']->id]) }}" method="post">
+                            <form action="{{ route('admin.staffrole.delete', ['id' => $viewData['staff_role']->id]) }}"
+                                method="post">
                                 @csrf
                                 <button class="btn btn-cs btn-danger"
                                     onclick="return confirm('Are you sure to delete court profile?');">
@@ -39,12 +43,9 @@
                                 </button>
                             </form>
                         </td>
-                </div>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
-</div>
 @endsection
-
-
-
