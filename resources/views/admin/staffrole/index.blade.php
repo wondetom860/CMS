@@ -1,3 +1,4 @@
+
 @extends('layout.adminLTE')
 @section('title', $viewData['title'])
 @section('innerTitle', $viewData['subtitle'])
@@ -12,7 +13,7 @@
                 @endcan
             </h4>
             <div class="card-body">
-                <table class="table table-condensed table-hover table-sm table-bordered">
+                <table id="example" class="table table-striped" style="width:100%">
                     <thead>
                         <th>ID</th>
                         <th>Role Name</th>

@@ -13,15 +13,18 @@
             </div>
             <div class="col-md-8">
                 <div class="card-body">
-                    <h5 class="card-title">
+                    {{-- <h5 class="card-title">
                         {{ $viewData['court_staff']['name'] }} ({{ $viewData['court_staff']->name }})
-                    </h5>
-                    <p class="card-text">Court Name: {{ $viewData['court_staff']->court->name }}</p>
-                    <p class="card-text" style="">Person Name: {{ $viewData['court_staff']->person->getFullName() }}</p>
-                    <p class="card-text"> Staff Role Name :{{ $viewData['court_staff']->staffrole->role_name}}</p>
+                    </h5> --}}
+                    <p class="card-text"><b> Name:</b> {{ $viewData['court_staff']->court->name }}</p>
+                    <p class="card-text" style=""><b>Person Name:</b> {{ $viewData['court_staff']->person->getFullName() }}</p>
+                    <p class="card-text"><b> Staff Role Name </b>{{ $viewData['court_staff']->staffrole->role_name}}</p>
                     {{-- <div class="container-fluid"> --}}
                         {{-- @include('admin.courtstaff.detail',['courtstaff' => $viewData['court_staff']]) --}}
                     {{-- </div> --}}
+                    <div class="container-fluid">
+                        @include('admin.courtstaff._partials._staffs',['courtstaff' => $viewData['court_staff']])
+                    </div>
                 </div>
             </div>
         </div>

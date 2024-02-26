@@ -39,6 +39,6 @@ class CourtStaff extends Model
     }
     public function caseStaffAssignments()
     {
-        return $this->hasMany(Caset::class, 'court_staff_id');
+        return $this->hasMany(Case_Staff_Assignment::class, 'court_staff_id');
     }
 }
