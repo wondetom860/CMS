@@ -38,7 +38,6 @@ class CaseModel extends Model
     {
         $plaintiffs = $this->parties()->where(['party_type_id' => $this->getParty('plaintiff')])->get();
         return $this->formatAndReturn($plaintiffs);
-
     }
 
     private function formatAndReturn($party)
@@ -66,7 +65,7 @@ class CaseModel extends Model
         if ($todayEvent) {
             return $todayEvent->date_time;
         } else {
-            $event = $this->events()->orderBy('date_time')->get()->first();//3=>SORT_DESC
+            $event = $this->events()->orderBy('date_time')->get()->first(); //3=>SORT_DESC
             if ($event) {
                 return $event->date_time;
             }
@@ -74,7 +73,7 @@ class CaseModel extends Model
     }
     public function getEventType()
     {
-        $event = $this->events()->orderBy('date_time')->get()->first();//3=>SORT_DESC
+        $event = $this->events()->orderBy('date_time')->get()->first(); //3=>SORT_DESC
         if ($event) {
             return $event->eventType->event_type_name;
         } else {
@@ -96,7 +95,9 @@ class CaseModel extends Model
     }
     public static function getOpenCaseTrials()
     {
-        return CaseModel::with(['caseStaffAssignments', 'parties'])
+        // , 'event.date_time' => date('Y-m-d')
+        return CaseModel::with(['caseStaffAssignments', 'parties', 'events'])
+            // ->join('event')
             ->where(['case_public' => self::CASE_PUBLIC])
             ->get();
     }
@@ -122,7 +123,6 @@ class CaseModel extends Model
                 }
             }
         }
-
     }
 
     public function getCaseNumber()

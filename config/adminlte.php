@@ -326,7 +326,7 @@ return [
         [
             'text' => 'Basic Files',
             'can' => 'manage-basic-file',
-            'icon' => 'fa-solid fa-person-through-window',
+            'icon' => 'fa fa-gears',
             'submenu' => [
                 [
                     'text' => 'Staff Role',
@@ -394,7 +394,7 @@ return [
                 ],
                 [
                     'text' => 'Case-Staff Assignment',
-                    'can' => 'court-list',
+                    'can' => 'case-staff-assignment-list',
                     'url' => 'admin/case_staff_assignments',
                     'icon' => 'far fa-fw fa-file',
                 ],
@@ -412,7 +412,7 @@ return [
                 ],
                 [
                     'text' => 'Document',
-                    'can' => 'court-list',
+                    'can' => 'document-list',
                     'url' => 'admin/document',
                     'icon' => 'far fa-fw fa-file',
                 ],
@@ -440,7 +440,7 @@ return [
         [
             'text' => 'Account Setting',
             'icon' => 'fas fa-universal-access',
-            'visible' => function () {
+            'active' => function () {
                 return !(Auth::guest());
             },
             'submenu' => [
