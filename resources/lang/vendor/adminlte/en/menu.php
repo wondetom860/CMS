@@ -16,4 +16,7 @@ return [
     'important'                     => 'Important',
     'warning'                       => 'Warning',
     'information'                   => 'Information',
+    'account_settings_trans_key'    => 'ACCOUNT SETTING',
+    'profile_trans_key'             => ':name Profile',
+    'name'                          => 'ስም'
 ];
