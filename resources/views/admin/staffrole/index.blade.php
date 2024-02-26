@@ -6,22 +6,22 @@
     <div class="">
         <div class="card">
             <h4 class="card-header">
-                Courts - Admin Panel - MOD-CCMS
+                {{__('Staff Role - MOD-CCMS')}}
                 @can('staff-role-create')
                     <a class="btn btn-primary btn-xs register-caseType-btn" href="{{ route('admin.staffrole.create') }}"
-                        style="align-self: flex-end">Register Staff Role</a>
+                        style="align-self: flex-end">{{__('Register New Staff Role')}}</a>
                 @endcan
             </h4>
             <div class="card-body">
                 <table id="example" class="table table-striped" style="width:100%">
                     <thead>
-                        <th>ID</th>
-                        <th>Role Name</th>
-                        <th>Rank</th>
-                        <th>description</th>
-                        <th>Show</th>
-                        <th>Update</th>
-                        <th>Delete</th>
+                        <th>{{__('ID')}}</th>
+                        <th>{{__('Role Name')}}</th>
+                        <th>{{__('Rank')}}</th>
+                        <th>{{__('Description')}}</th>
+                        <th>{{__('Show')}}</th>
+                        <th>{{__('Update')}}</th>
+                        <th>{{__('Delete')}}</th>
                     </thead>
                     <tbody>
                         @foreach ($viewData['staff_role'] as $staff_role)

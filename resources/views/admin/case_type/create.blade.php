@@ -1,7 +1,7 @@
 @extends('layout.adminLTE')
 @section('title', $viewData['title'])
 @section('innerTitle', 'Create Case Type')
-@section('content')  
+@section('content')    
     <div class="card mb-4">
         <div class="card-header bg-light"> Create Case Type
         </div>
