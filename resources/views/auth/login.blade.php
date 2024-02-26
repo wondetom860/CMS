@@ -1,7 +1,7 @@
 @extends('layout.mystore')
 
 @section('content')
-<div class="container-fluid ">
+<div class="container-fluid "style="min-height: 600px;">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">

@@ -394,7 +394,7 @@ return [
                 ],
                 [
                     'text' => 'Case-Staff Assignment',
-                    'can' => 'court-list',
+                    'can' => 'case-staff assignment-list',
                     'url' => 'admin/case_staff_assignments',
                     'icon' => 'far fa-fw fa-file',
                 ],

@@ -1,7 +1,7 @@
 @extends('layout.mystore')
 @section('content')
     <div class="container-fluid">
-        <div class="row">
+        <div class="row" style="min-height: 600px;">
             <div class="col-12 table-responsive">
                 @include('case.partials._dashboard')
             </div>
