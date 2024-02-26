@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'logo' => 'MoND CCMS',
+    'logo' => 'MOD CCMS',
     'logo_img' => 'images/court.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -325,8 +325,8 @@ return [
         ],
         [
             'text' => 'Basic Files',
+            'icon' => 'fa fa-align-justify',
             'can' => 'manage-basic-file',
-            'icon' => 'fa fa-gears',
             'submenu' => [
                 [
                     'text' => 'Staff Role',
@@ -383,7 +383,7 @@ return [
         ],
         [
             'text' => 'Case Management',
-            'icone' => 'fas fa-fw fa-share',
+            'icon' => 'fa fa-file',
             'can' => 'manage-case',
             'submenu' => [
                 [
@@ -393,7 +393,7 @@ return [
                     'icon' => 'far fa-fw fa-file',
                 ],
                 [
-                    'text' => 'Case-Staff Assignment',
+                    'text' => 'Case Staff Assignment',
                     'can' => 'case-staff-assignment-list',
                     'url' => 'admin/case_staff_assignments',
                     'icon' => 'far fa-fw fa-file',
