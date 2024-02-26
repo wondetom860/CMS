@@ -53,11 +53,25 @@ class CaseModel extends Model
         }
         return "-";
     }
+
+    public function publicity()
+    {
+        return $this->case_public ? 'Public' : 'Closed';
+    }
     public function getDefendant()
     {
         $defendants = $this->parties()->where(['party_type_id' => $this->getParty('defendant')])->get();
         return $this->formatAndReturn($defendants);
     }
+
+    public static function getUnAssignedStaff($case_id)
+    {
+        $case = CaseModel::findOrFail($case_id);
+        $assignedStaffs = $case->caseStaffAssignments()->pluck('court_staff_id');
+        $unAssignedDate = CourtStaff::where('id',' not in ',[$assignedStaffs])->get();
+        return $unAssignedDate;
+    }
+
     public function getEventSceduleForToday()
     {
         $todayEvent = $this->events()->where(['date_time' => date('Y-m-d')])->get()->first();
@@ -81,7 +95,8 @@ class CaseModel extends Model
         }
     }
 
-    public static function getTodayRegisteredCases(){
+    public static function getTodayRegisteredCases()
+    {
         $today = date("Y-m-d");
         $records = CaseModel::where(['start_date' => $today])->get();
         return count($records);

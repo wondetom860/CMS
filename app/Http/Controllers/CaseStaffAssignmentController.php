@@ -21,7 +21,6 @@ class CaseStaffAssignmentController extends Controller
         $this->middleware('permission:case-staff-assignment-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:case-staff-assignment-delete', ['only' => ['destroy']]);
         $this->middleware('permission:case-staff-assignment-detail', ['only' => ['show']]);
-
     }
     /**
      * Display a listing of the resource.
@@ -49,11 +48,19 @@ class CaseStaffAssignmentController extends Controller
     {
         $viewData['title'] = 'Add-case to staff-assignment - CCMS';
         $viewData['subtitle'] = "Assign The Case to Staff";
-        $viewData['innerTitle']= "Assign The Case";
+        $viewData['innerTitle'] = "Assign The Case";
         // $viewData['case_staff_assignment'] = case_staff_assignment::all();
         $viewData['cases'] = CaseModel::all();
-        $viewData['court_staffs'] = CourtStaff::all(); 
+        $viewData['court_staffs'] = CourtStaff::all();
         return view('admin.case_staff_assignments.create')->with('viewData', $viewData);
+    }
+
+
+    public function createPartial(Request $request)
+    {
+        $viewData['case'] = CaseModel::findOrFail($request->case_id);
+        $viewData['court_staff'] = CaseModel::getUnAssignedStaff($request->case_id);
+        return view('admin.case_staff_assignments._partials._form')->with('viewData', $viewData);
     }
 
     /**
@@ -62,7 +69,7 @@ class CaseStaffAssignmentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-   
+
 
     public function store(Request $request)
     {
@@ -88,12 +95,12 @@ class CaseStaffAssignmentController extends Controller
      */
 
 
-     
+
     public function show($id)
     {
         $case = Case_staff_assignment::find($id);
         $viewData['title'] = ' Case Staff Assignment-MOD-CMS';
-        $viewData['subtitle'] = "Course Detail: ".$case->$id;
+        $viewData['subtitle'] = "Course Detail: " . $case->$id;
         $viewData['case_staff_assignment'] = $case;
         return view('admin.case_staff_assignments.detail')->with('viewData', $viewData);
     }
@@ -109,9 +116,9 @@ class CaseStaffAssignmentController extends Controller
         $viewData = [];
         $viewData['title'] = 'Case Page - Edit Case - CMS';
         $viewData['cases'] = CaseModel::all();
-        $viewData['court_staffs'] = CourtStaff::all(); 
-        $viewData['case_staff_assignment']= Case_staff_assignment::findOrFail($id);
-        $viewData['staff_roles']= Staffrole::all();
+        $viewData['court_staffs'] = CourtStaff::all();
+        $viewData['case_staff_assignment'] = Case_staff_assignment::findOrFail($id);
+        $viewData['staff_roles'] = Staffrole::all();
         return view('admin.case_staff_assignments.edit')->with('viewData', $viewData);
     }
 
@@ -146,15 +153,13 @@ class CaseStaffAssignmentController extends Controller
     public function delete($id)
     {
         //CaseModel::delete($id);
-        if(case_staff_assignment::destroy($id)){
+        if (case_staff_assignment::destroy($id)) {
             notify()->success('Case Assignment Deleted Successfully', 'Delete Success');
             return back();
-        }else{
+        } else {
             notify()->error('Case Assignment Deleted Error', 'Delete Error');
             return back();
         }
-        
-       
     }
 }
 
