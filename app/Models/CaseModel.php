@@ -81,6 +81,12 @@ class CaseModel extends Model
         }
     }
 
+    public static function getTodayRegisteredCases(){
+        $today = date("Y-m-d");
+        $records = CaseModel::where(['start_date' => $today])->get();
+        return count($records);
+    }
+
     public function isActive()
     {
         return $this->case_status != self::STATUS_CLOSED;
