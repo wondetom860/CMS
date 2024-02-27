@@ -13,12 +13,12 @@ return [
     |
     */
 
-    'btn_close' => 'Cerrar',
-    'btn_close_active' => 'Cerrar Activa',
-    'btn_close_all' => 'Cerrar Todas',
-    'btn_close_all_other' => 'Cerrar Las Demás',
-    'tab_empty' => 'Ninguna pestaña seleccionada!',
-    'tab_home' => 'Inicio',
-    'tab_loading' => 'Cargando pestaña',
+    // 'btn_close' => 'Cerrar',
+    // 'btn_close_active' => 'Cerrar Activa',
+    // 'btn_close_all' => 'Cerrar Todas',
+    // 'btn_close_all_other' => 'Cerrar Las Demás',
+    // 'tab_empty' => 'Ninguna pestaña seleccionada!',
+    // 'tab_home' => 'Inicio',
+    // 'tab_loading' => 'Cargando pestaña',
 
 ];

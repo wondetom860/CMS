@@ -13,6 +13,7 @@
     <link href="{{ asset('/css/admin.css') }}" rel="stylesheet" />
     <title>@yield('title', __('Admin - MOD - Court Case Management System'))</title>
 </head>
+<?php $ethiopian_date = new Andegna\DateTime(); ?>
 
 <body>
     <!-- header -->
@@ -61,6 +62,8 @@
     <header class="container-fluid d-flix align-items-center flex-column" style="background-color: #E6EDf5;">
         <div class="container d-flex align-items-center flex-column">
             <h2 style="color: teal">@yield('subtitle', __('MOD - Court Case Managment System'))</h2>
+            <span
+                class="text-white; float-right"><?= date('l, F d, Y') . ' [ ' . $ethiopian_date->format('l, F d, Y') . '] ' ?></span>
         </div>
     </header>
     <!-- header -->
