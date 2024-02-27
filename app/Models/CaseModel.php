@@ -2,9 +2,14 @@
 
 namespace App\Models;
 
+use Andegna\Constants;
+use Andegna\DateTime;
+use Andegna\DateTimeFactory;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CaseModel extends Model
 {
@@ -53,11 +58,39 @@ class CaseModel extends Model
         }
         return "-";
     }
+
+    public function publicity()
+    {
+        return $this->case_public ? 'Public' : 'Closed';
+    }
     public function getDefendant()
     {
         $defendants = $this->parties()->where(['party_type_id' => $this->getParty('defendant')])->get();
         return $this->formatAndReturn($defendants);
     }
+
+    public function getDate()
+    {
+        if (session()->get('locale') == 'am') {
+            $ethiopian_date = new DateTime($this->created_at);
+            // $gregorian = date_create($this->created_at);
+            // return DateTimeFactory::fromDateTime($gregorian);
+            // Constants::DATE_ETHIOPIAN_WONDE
+            return $ethiopian_date->format("l, F d, Y");
+        } else {
+            return $this->created_at;
+        }
+    }
+
+    public static function getUnAssignedStaff($case_id)
+    {
+        $case = CaseModel::findOrFail($case_id);
+        $unAssignedDate = CourtStaff::whereNotIn('id', DB::table('case_staff_assignment')->where('case_id', '=', $case->id)->pluck('court_staff_id'))
+            ->get();
+        // dd($unAssignedDate);
+        return $unAssignedDate;
+    }
+
     public function getEventSceduleForToday()
     {
         $todayEvent = $this->events()->where(['date_time' => date('Y-m-d')])->get()->first();
@@ -81,7 +114,8 @@ class CaseModel extends Model
         }
     }
 
-    public static function getTodayRegisteredCases(){
+    public static function getTodayRegisteredCases()
+    {
         $today = date("Y-m-d");
         $records = CaseModel::where(['start_date' => $today])->get();
         return count($records);

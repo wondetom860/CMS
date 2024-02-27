@@ -43,14 +43,20 @@ class CaseController extends Controller
         $dataProvider = null;
 
         $user = User::findOrFail(Auth::user()->id);
-
-        if ($user->isClerk()) {
+        // ->where(['case_status', '<>', CaseModel::STATUS_CLOSED])
+        if ($user->isInspectionHead()) {
             $dataProvider = new EloquentDataProvider(
                 CaseModel::query()
                     ->withAggregate('court', 'name')
                     ->withAggregate('caseType', 'case_type_name')
             );
-        }else if ($user->isClient()) { //list all cases in which a client is associated to: withness,plaintiff,defendant..
+        } elseif ($user->isClerk()) {
+            $dataProvider = new EloquentDataProvider(
+                CaseModel::query()
+                    ->withAggregate('court', 'name')
+                    ->withAggregate('caseType', 'case_type_name')
+            );
+        } else if ($user->isClient()) { //list all cases in which a client is associated to: withness,plaintiff,defendant..
             // $user = User::findOrFaail(Auth::user()->id);
             // if ($user->isClient()) { //list all cases in which a client is associated to: withness,plaintiff,defendant..
             //     // $party = Party::where(['person_id' => $person_id])->get()->first();
@@ -166,7 +172,7 @@ class CaseController extends Controller
     {
         $case = CaseModel::findOrFail($id);
         $viewData['title'] = __('Case Page - Case Detail - CCMS');
-        $viewData['subtitle'] = __('Case Detail'). ":" . $case->getDetail();
+        $viewData['subtitle'] = __('Case Detail') . ":" . $case->getDetail();
         $viewData['case'] = $case;
         return view('case.detail')->with('viewData', $viewData);
     }
