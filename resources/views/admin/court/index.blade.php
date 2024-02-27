@@ -6,10 +6,10 @@
     <div class="">
         <div class="card">
             <h5 class="card-header bg-light">
-                Courts - Admin Panel - MOD-CCMS
+                {{__('Courts - MOD-CCMS')}}
                 @can('court-create')
                     <a class="btn btn-primary btn-xs register-caseType-btn" href="{{ route('admin.court.create') }}"
-                        style="align-self: flex-end">Register New Court</a>
+                        style="align-self: flex-end">  {{__('Register New Court')}}</a>
                 @endcan
             </h5>
             <div class="card-body">
@@ -21,15 +21,16 @@
                             'pageName' => 'p',
                         ],
                         'rowsPerPage' => 5, // The number of rows in one page. By default 10.
-                        'title' => 'Courts', // It can be empty ''
+                        'title' => __('Courts'), // It can be empty ''
                         'strictFilters' => false, // If true, then a searching by filters will be strict, using an equal '=' SQL operator instead of 'like'.
                         'rowsFormAction' => '/admin/pages/deletion', // Route url to send slected checkbox items for deleting rows, for example.
-                        'useSendButtonAnyway' => true, // If true, even if there are no checkbox column, the main send button will be displayed.
-                        'searchButtonLabel' => 'Find',
+                        'useSendButtonAnyway' => false, // If true, even if there are no checkbox column, the main send button will be displayed.
+                        'searchButtonLabel' => __('Find'),
+                        'resetButtonLabel' => __('Reset'),
                         'columnFields' => [
                             [
                                 'attribute' => 'name', // REQUIRED if value is not defined. Attribute name to get row column data.
-                                'label' => 'Court Name', // Column label.
+                                'label' => __('Court Name'), // Column label.
                                 // 'filter' => false, // If false, then column will be without a search filter form field.,
                                 'htmlAttributes' => [
                                     'width' => '15%', // Width of table column.
@@ -61,25 +62,25 @@
                             //     ],
                             // ],
                             [
-                                'label' => 'City',
+                                'label' => __('City'),
                                 'attribute' => 'city',
                                 'value' => function ($row) {
                                     return $row->city;
                                 },
                             ],
                             [
-                                'label' => 'State',
+                                'label' => __('State'),
                                 'value' => function ($row) {
                                     return $row->state;
                                 },
                                 //'sort' => 'first_name', // To sort rows. Have to set if an 'attribute' is not defined for column.
                             ],
                             [
-                                'label' => 'Zip Code', // Column label.
+                                'label' => __('Zip Code'), // Column label.
                                 'attribute' => 'zip', // Attribute, by which the row column data will be taken from a model.
                             ],
                             [
-                                'attribute' => 'Active Cases',
+                                'attribute' => __('Active Cases'),
                                 'value' => function ($model) {
                                     return $model->getActiveCases();
                                 },
@@ -130,7 +131,7 @@
                     $('table').attr('id');
                     $('table').attr('id', 'court_list_table');
                     $('table').attr('id');
-
+                    
                     new DataTable('#court_list_table', {
                         layout: {
                             topStart: {
