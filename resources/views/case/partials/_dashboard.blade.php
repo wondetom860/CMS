@@ -1,5 +1,5 @@
 <div class="container table-responsive">
-    <h2 class="text-center bg-info mr-2 underlined">Case Trials</h2>
+    <h2 class="text-center bg-info mr-2 underlined">{{__('Case Trials')}}</h2>
     @php
         $cases = App\models\CaseModel::getOpenCaseTrials();
         $count = 0;
@@ -8,11 +8,11 @@
         <table class="table table-condensed table-sm table-bordered">
             <thead class="bg-active">
                 <th>#</th>
-                <th>Case Number</th>
-                <th>Plaintiff</th>
-                <th>Defendant</th>
-                <th>Date</th>
-                <th>Event Type</th>
+                <th>{{__('Case Number')}}</th>
+                <th>{{__('Plaintiff')}}</th>
+                <th>{{__('Defendant')}}</th>
+                <th>{{__('Event Date')}}</th>
+                <th>{{__('Event Type')}}</th>
             </thead>
             <tbody>
                 @foreach ($cases as $case)

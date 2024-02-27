@@ -4,7 +4,7 @@
 @section('content')
 @section('plugins.Select2', true)
     <div class="container-fluid ">
-        <div class="card mb-4">
+        <div class="card mb-4"> 
             <div class="card-header">{{ __('Register New Case') }}
             </div>
             <div class="card-body">

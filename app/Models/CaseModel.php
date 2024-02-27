@@ -2,9 +2,14 @@
 
 namespace App\Models;
 
+use Andegna\Constants;
+use Andegna\DateTime;
+use Andegna\DateTimeFactory;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CaseModel extends Model
 {
@@ -38,7 +43,6 @@ class CaseModel extends Model
     {
         $plaintiffs = $this->parties()->where(['party_type_id' => $this->getParty('plaintiff')])->get();
         return $this->formatAndReturn($plaintiffs);
-
     }
 
     private function formatAndReturn($party)
@@ -54,11 +58,39 @@ class CaseModel extends Model
         }
         return "-";
     }
+
+    public function publicity()
+    {
+        return $this->case_public ? 'Public' : 'Closed';
+    }
     public function getDefendant()
     {
         $defendants = $this->parties()->where(['party_type_id' => $this->getParty('defendant')])->get();
         return $this->formatAndReturn($defendants);
     }
+
+    public function getDate()
+    {
+        if (session()->get('locale') == 'am') {
+            $ethiopian_date = new DateTime($this->created_at);
+            // $gregorian = date_create($this->created_at);
+            // return DateTimeFactory::fromDateTime($gregorian);
+            // Constants::DATE_ETHIOPIAN_WONDE
+            return $ethiopian_date->format("l, F d, Y");
+        } else {
+            return $this->created_at;
+        }
+    }
+
+    public static function getUnAssignedStaff($case_id)
+    {
+        $case = CaseModel::findOrFail($case_id);
+        $unAssignedDate = CourtStaff::whereNotIn('id', DB::table('case_staff_assignment')->where('case_id', '=', $case->id)->pluck('court_staff_id'))
+            ->get();
+        // dd($unAssignedDate);
+        return $unAssignedDate;
+    }
+
     public function getEventSceduleForToday()
     {
         $todayEvent = $this->events()->where(['date_time' => date('Y-m-d')])->get()->first();
@@ -66,7 +98,7 @@ class CaseModel extends Model
         if ($todayEvent) {
             return $todayEvent->date_time;
         } else {
-            $event = $this->events()->orderBy('date_time')->get()->first();//3=>SORT_DESC
+            $event = $this->events()->orderBy('date_time')->get()->first(); //3=>SORT_DESC
             if ($event) {
                 return $event->date_time;
             }
@@ -74,12 +106,19 @@ class CaseModel extends Model
     }
     public function getEventType()
     {
-        $event = $this->events()->orderBy('date_time')->get()->first();//3=>SORT_DESC
+        $event = $this->events()->orderBy('date_time')->get()->first(); //3=>SORT_DESC
         if ($event) {
             return $event->eventType->event_type_name;
         } else {
             return "No event.";
         }
+    }
+
+    public static function getTodayRegisteredCases()
+    {
+        $today = date("Y-m-d");
+        $records = CaseModel::where(['start_date' => $today])->get();
+        return count($records);
     }
 
     public function isActive()
@@ -96,7 +135,9 @@ class CaseModel extends Model
     }
     public static function getOpenCaseTrials()
     {
-        return CaseModel::with(['caseStaffAssignments', 'parties'])
+        // , 'event.date_time' => date('Y-m-d')
+        return CaseModel::with(['caseStaffAssignments', 'parties', 'events'])
+            // ->join('event')
             ->where(['case_public' => self::CASE_PUBLIC])
             ->get();
     }
@@ -122,7 +163,6 @@ class CaseModel extends Model
                 }
             }
         }
-
     }
 
     public function getCaseNumber()

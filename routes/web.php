@@ -207,6 +207,7 @@ Route::middleware('auth')->prefix('/admin')->group(function () {  //|'/SuperAdmi
     Route::get('/case_staff_assignments/{id}/edit', App\Http\Controllers\CaseStaffAssignmentController::class . '@edit')->name('admin.case_staff_assignments.edit');
     Route::put('/case_staff_assignments/{id}/update', App\Http\Controllers\CaseStaffAssignmentController::class . '@update')->name('admin.case_staff_assignments.update');
     Route::get('/case_staff_assignments/{id}/delete', App\Http\Controllers\CaseStaffAssignmentController::class . '@delete')->name('admin.case_staff_assignments.delete');
+    Route::get('/case_staff_assignments/create_partial', App\Http\Controllers\CaseStaffAssignmentController::class . '@createPartial')->name('admin.case_staff_assignments.create_partial');
     // routes/web.php
 
     // User roles and assignment

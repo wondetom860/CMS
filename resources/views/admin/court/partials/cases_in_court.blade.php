@@ -6,6 +6,10 @@
             <thead style='background-color:cornflowerblue;'>
                 <th>#</th>
                 <th>Case Type</th>
+                <th>Case Number</th>
+                <th>Plaintiff(s)</th>
+                <th>Defendant(s)</th>
+                <th>Pulicity</th>
                 <th>Date regsitered</th>
                 <th>Status</th>
             </thead><tbody>";
@@ -16,6 +20,10 @@
                 ++$count .
                 "</td>
                     <td>{$case->caseType->case_type_name}</td>
+                    <td>{$case->case_number}</td>
+                    <td>{$case->getPlaintiff()}</td>
+                    <td>{$case->getDefendant()}</td>
+                    <td>{$case->publicity()}</td>
                     <td>{$case->start_date}</td>
                     <td>{$case->getStatus()}</td>
                 </tr>";

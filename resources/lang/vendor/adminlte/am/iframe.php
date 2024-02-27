@@ -13,11 +13,12 @@ return [
     |
     */
 
-    'btn_close' => 'بستن',
-    'btn_close_active' => 'بستن فعال',
-    'btn_close_all' => 'بستن همه',
-    'btn_close_all_other' => 'بستن همه چیز دیگر',
-    'tab_empty' => 'هیچ تب ای انتخاب نشده است',
-    'tab_home' => 'خانه',
-    'tab_loading' => 'تب در حال بارگیری است',
+    // 'btn_close' => 'Cerrar',
+    // 'btn_close_active' => 'Cerrar Activa',
+    // 'btn_close_all' => 'Cerrar Todas',
+    // 'btn_close_all_other' => 'Cerrar Las Demás',
+    // 'tab_empty' => 'Ninguna pestaña seleccionada!',
+    // 'tab_home' => 'Inicio',
+    // 'tab_loading' => 'Cargando pestaña',
+
 ];

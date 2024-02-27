@@ -120,6 +120,13 @@ class User extends Authenticatable
         return $this->hasRole(['Clerk','Clerks']);
     }
 
+    public function isInspectionHead()
+    {
+        return $this->hasRole(['InspectionHead']);
+    }
+
+    // 
+
     public function adminlte_profile_url()
     {
         return "my-account/profile";
