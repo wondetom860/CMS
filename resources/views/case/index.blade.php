@@ -113,6 +113,17 @@
                                 'value' => function ($row) {
                                     return $row->start_date;
                                 },
+                                'filter' => [
+                                    // For dropdown it is necessary to set 'data' array. Array keys are for html <option> tag values, array values are for titles.
+                                    'class' => Itstructure\GridView\Filters\DropdownFilter::class, // REQUIRED. For this case it is necessary to set 'class'.
+                                    'name' => 'report_date', // REQUIRED if 'attribute' is not defined for column.
+                                    'data' => [
+                                        // REQUIRED.
+                                        1 => 'Three month',
+                                        2 => 'Half-year',
+                                        3 => 'Yearly',
+                                    ],
+                                ],
                             ],
                             [
                                 'attribute' => __('Status'),

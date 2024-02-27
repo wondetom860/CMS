@@ -48,4 +48,9 @@ class event extends Model
     {
         return $this->case->case_number;
     }
+    public static function getTodayEvent(){
+        $today = date("Y-m-d");
+        $records = event::where(['date_time' => $today])->get();
+        return count($records);
+    }
 }
