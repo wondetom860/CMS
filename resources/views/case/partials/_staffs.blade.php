@@ -6,9 +6,7 @@
         $rr = __('Assign Date');
         $staffAddBtn = '';
         $nmnm = __('Assign Staff to this case');
-        // dd(Auth::user()->can('case-staff-assignment-create'));
         if (Auth::user()->can('case-staff-assignment-create')) {
-            // $staffAddBtn = ""
             $staffAddBtn = "<button class='btn btn-sm btn-link float-right' onclick='registerCsa({$case->id}); return false;'>$nmnm</button>";
         }
         echo "<h6>Staffs Assign To This Case{{$staffAddBtn}}</h6>
