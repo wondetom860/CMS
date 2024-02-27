@@ -18,7 +18,7 @@
                         <p class="card-text"><b>{{ __('Court Name') }} : </b>{{ $viewData['case']->court->name }}</p>
                         <p class="card-text"><b>{{ __('Case Type') }} :
                             </b>{{ $viewData['case']->caseType->case_type_name }}</p>
-                        <p class="card-text"><b>{{ __('Registered On') }} : </b>{{ $viewData['case']->created_at }}</p>
+                        <p class="card-text"><b>{{ __('Registered On') }} : </b>{{ $viewData['case']->getDate() }}</p>
                         <div class="container-fluid">
                             @include('case.partials._docs', ['case' => $viewData['case']])
                         </div>

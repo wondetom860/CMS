@@ -29,6 +29,16 @@ class Case_Staff_Assignment extends Model
         ]);
     }
 
+    public static function staffAssigned($court_staff_id, $case_id): bool
+    {
+        return self::where(['case_id' => $case_id, 'court_staff_id' => $court_staff_id])->count() > 0;
+    }
+
+    public function checkIfAssigned(): bool
+    {
+        return self::staffAssigned($this->court_staff_id, $this->case_id);
+    }
+
     // Define relationships
     public function case()
     {

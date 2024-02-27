@@ -82,6 +82,10 @@ class CaseStaffAssignmentController extends Controller
         $case_staff_assignment->assigned_by = Auth::user()->id;
         $case_staff_assignment->assigned_at = date("Y-m-d");
         // $case_staff_assignment->updated_at = $request->updated_at;
+        if ($case_staff_assignment->checkIfAssigned()) {
+            notify()->error('Court Staff id already assigned to this case', 'record creation failed');
+            return redirect()->route('admin.case_staff_assignments.index');
+        }
         $case_staff_assignment->save();
         notify()->success('Case is Assigned Successfully', 'Creation Success');
         return redirect()->route('admin.case_staff_assignments.index');
