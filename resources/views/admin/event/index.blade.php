@@ -5,10 +5,10 @@
     <div class="">
         <div class="card">
             <h4 class="card-header">
-                Events - Admin Panel - MOD-CCMS
+                {{__('Events - MOD-CCMS')}}
                 @can('event-create')
                     <a class="btn btn-primary btn-xs register-caseType-btn float-right" href="{{ route('admin.event.create') }}"
-                        style="align-self: flex-end">Register New Event</a>
+                        style="align-self: flex-end">{{__('Register New Event')}}</a>
                 @endcan
             </h4>
             <div class="card-body">
@@ -20,15 +20,16 @@
                             'pageName' => 'p',
                         ],
                         'rowsPerPage' => 5, // The number of rows in one page. By default 10.
-                        'title' => 'Events', // It can be empty ''
+                        'title' => __('Events'), // It can be empty ''
                         'strictFilters' => true, // If true, then a searching by filters will be strict, using an equal '=' SQL operator instead of 'like'.
                         'rowsFormAction' => '/admin/pages/deletion', // Route url to send slected checkbox items for deleting rows, for example.
-                        'useSendButtonAnyway' => true, // If true, even if there are no checkbox column, the main send button will be displayed.
-                        'searchButtonLabel' => 'Find',
+                        'useSendButtonAnyway' => false, // If true, even if there are no checkbox column, the main send button will be displayed.
+                        'searchButtonLabel' => __('Find'),
+                        'resetButtonLabel' => __('Reset'),
                         'columnFields' => [
                             [
                                 'attribute' => 'case_number', // REQUIRED if value is not defined. Attribute name to get row column data.
-                                'label' => 'Case Number', // Column label.
+                                'label' => __('Case Number'), // Column label.
                                 // 'filter' => false, // If false, then column will be without a search filter form field.,
                                 'value' => function ($row) {
                                     return $row->case->case_number;
@@ -73,28 +74,28 @@
                             //     ],
                             // ],
                             [
-                                'label' => 'Event type',
+                                'label' => __('Event Type'),
                                 'attribute' => 'event_type_name',
                                 'value' => function ($row) {
                                     return $row->eventType->event_type_name;
                                 },
                             ],
                             [
-                                'label' => 'Date', // Column label.
+                                'label' => __('Event Date'), // Column label.
                                 'attribute' => 'date_time', // Attribute, by which the row column data will be taken from a model.
                                 'value' => function ($row) {
                                     return $row->date_time;
                                 },
                             ],
                             [
-                                'label' => 'Location', // Column label.
+                                'label' => __('Location'), // Column label.
                                 'attribute' => 'location', // Attribute, by which the row column data will be taken from a model.
                                 'value' => function ($row) {
                                     return $row->location;
                                 },
                             ],
                             [
-                                'label' => 'Outcome', // Column label.
+                                'label' => __('OutCome'), // Column label.
                                 'attribute' => 'out_come',
                                 'value' => function ($row) {
                                     return $row->out_come;

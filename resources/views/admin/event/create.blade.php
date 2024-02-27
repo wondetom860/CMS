@@ -4,7 +4,7 @@
 @section('content')
 
     <div class="card mb-4">
-        <div class="card-header"> Register New event
+        <div class="card-header"> {{__('Register New Event')}}
         </div>
         <div class="card-body">
             <form method="POST" action="{{ route('admin.event.store') }}">
@@ -12,8 +12,7 @@
                 <div class="row">
                     <div class="col">
                         <div class="mb-4 row">
-                            <label for="case_id" class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">Case
-                                Number:</label>
+                            <label for="case_id" class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">{{__('Case Number')}}:</label>
                             <div class="col-lg-6 col-md-6 col-sm-12 text-left">
                                 <select name="case_id" id="case_id" class="form-select">
                                     @foreach ($viewData['cases'] as $case)
@@ -27,7 +26,7 @@
                 <div class="row">
                     <div class="col">
                         <div class="mb-4 row">
-                            <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">Event Type:</label>
+                            <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">{{__('Event Type')}}:</label>
                             <div class="col-lg-6 col-md-6 col-sm-12 text-left">
                                 <select name="event_type_id" id="event_type_id" class="form-select">
                                     @foreach ($viewData['eventTypes'] as $eType)
@@ -40,7 +39,7 @@
                     <div class="row">
                         <div class="col">
                             <div class="mb-4 row">
-                                <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">Date:</label>
+                                <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">{{__('Event Date')}}:</label>
                                 <div class="col-lg-6 col-md-6 col-sm-12 text-left">
                                     <input name="date_time" type="datetime-local" class="form-control">
                                 </div>
@@ -50,7 +49,7 @@
                     <div class="row">
                         <div class="col">
                             <div class="mb-4 row">
-                                <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">Location:</label>
+                                <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">{{__('Location')}}:</label>
                                 <div class="col-lg-6 col-md-6 col-sm-12 text-left">
                                     <input name="location" value="{{ old('location') }}" type="text"
                                         class="form-control">
@@ -61,7 +60,7 @@
                     <div class="row">
                         <div class="col">
                             <div class="mb-4 row">
-                                <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">Outcome:</label>
+                                <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">{{__('OutCome')}}:</label>
                                 <div class="col-lg-6 col-md-6 col-sm-12 text-left">
                                     <input name="out_come" value="{{ old('out_come') }}" type="text"
                                         class="form-control">
@@ -71,7 +70,7 @@
                     </div>
                     <div class="row">
                         <div class="col-8">
-                            <button type="submit" class="btn btn-primary float-right">Submit</button>
+                            <button type="submit" class="btn btn-primary float-right">{{__('Submit')}}</button>
                         </div>
                     </div>
                 </div>

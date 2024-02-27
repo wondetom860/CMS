@@ -5,10 +5,9 @@
     <div class=" ">
         <div class="card">
             <h4 class="card-header bg-light">
-                Assign Staff To case- Admin Panel - MOD-CCMS
+                {{__('Assign Staff To Case - MOD-CCMS')}}
                 @can('case-staff-assignment-create')
-                    <a class="btn btn-primary btn-xs float-end" href="{{ route('admin.case_staff_assignments.create') }}">Assign
-                        The Case</a>
+                    <a class="btn btn-primary btn-xs float-end" href="{{ route('admin.case_staff_assignments.create') }}"> {{__('Assign The Case')}}</a>
                 @endcan
             </h4>
             <div class="card-body">
@@ -23,12 +22,12 @@
                         // 'title' => 'Assign Staff To case', // It can be empty ''
                         'strictFilters' => true, // If true, then a searching by filters will be strict, using an equal '=' SQL operator instead of 'like'.
                         'rowsFormAction' => '/admin/pages/deletion', // Route url to send slected checkbox items for deleting rows, for example.
-                        'useSendButtonAnyway' => true, // If true, even if there are no checkbox column, the main send button will be displayed.
-                        'searchButtonLabel' => 'Find',
+                        'useSendButtonAnyway' => false, // If true, even if there are no checkbox column, the main send button will be displayed.
+                        'searchButtonLabel' => __('Find'),
                         'columnFields' => [
                             [
                                 'attribute' => 'case_number', // REQUIRED if value is not defined. Attribute name to get row column data.
-                                'label' => 'Case Number', // Column label.
+                                'label' => __('Case Number'), // Column label.
                                 // 'filter' => false, // If false, then column will be without a search filter form field.,
                                 'value' => function ($row) {
                                     return $row->case->case_number;
@@ -73,28 +72,28 @@
                             //     ],
                             // ],
                             [
-                                'label' => 'Court Staff',
+                                'label' => __('Court Staff'),
                                 'attribute' => 'courtStaff',
                                 'value' => function ($row) {
                                     return $row->courtStaff->person->getFullName();
                                 },
                             ],
                             [
-                                'label' => 'Assigned As', // Column label.
+                                'label' => __('Assigned As'), // Column label.
                                 'attribute' => 'assigned_as', // Attribute, by which the row column data will be taken from a model.
                                 'value' => function ($row) {
                                     return $row->assigned_as;
                                 },
                             ],
                             [
-                                'label' => 'Assigned At', // Column label.
+                                'label' => __('Assigned Date'), // Column label.
                                 'attribute' => 'assigned_at', // Attribute, by which the row column data will be taken from a model.
                                 'value' => function ($row) {
                                     return $row->assigned_at;
                                 },
                             ],
                             [
-                                'label' => 'Assigned By', // Column label.
+                                'label' => __('Assigned By'), // Column label.
                                 'attribute' => 'assignedBy',
                                 'value' => function ($row) {
                                     return $row->assignedBy->user_name;
