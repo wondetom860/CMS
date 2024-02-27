@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="">
-                <h2>Users Management
+                <h2>{{__('Users Management')}}
                     {{-- <a class="btn btn-success d-none register-caseType-btn" href="{{ route('users.create') }}"> Create New User</a> --}}
                 </h2>
             </div>
@@ -18,13 +18,13 @@
 
     <table class="table table-bordered">
         <tr>
-            <th>No</th>
-            <th>ID Number</th>
-            <th>Name</th>
-            <th>Staff Role</th>
-            <th>Email</th>
-            <th>Aceess Roles</th>
-            <th width="280px">Action</th>
+            <th>{{__('No')}}</th>
+            <th>{{__('ID Number')}}</th>
+            <th>{{__('Name')}}</th>
+            <th>{{__('Staff Role')}}</th>
+            <th>{{__('Email')}}</th>
+            <th>{{__('Access Roles')}}</th>
+            <th width="280px">{{__('Action')}}</th>
         </tr>
         @foreach ($data as $key => $user)
             <tr>
@@ -41,9 +41,9 @@
                     @endif
                 </td>
                 <td>
-                    <a class="btn btn-info" href="{{ route('admin.users.show', $user->id) }}">Show</a>
+                    <a class="btn btn-info" href="{{ route('admin.users.show', $user->id) }}">{{__('Show')}}</a>
                     @can('role-edit')
-                        <a class="btn btn-primary" href="{{ route('admin.users.edit', $user->id) }}">Edit</a>
+                        <a class="btn btn-primary" href="{{ route('admin.users.edit', $user->id) }}">{{__('Edit')}}</a>
                     @endcan
                     @can('role-delete')
                         <form style="display:inline" action="{{ route('admin.users.delete', $user->id) }}" method="POST">
