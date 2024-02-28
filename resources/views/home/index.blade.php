@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-lg-3 col-6">
 
-                <div class="small-box bg-info">
+                <div class="small-box bg-purple">
                     <div class="inner">
                         <h3>{{ count(App\Models\Court::all()) }}</h3>
                         <p>{{ __('Court') }}</p>
@@ -27,7 +27,7 @@
 
             <div class="col-lg-3 col-6">
 
-                <div class="small-box bg-success">
+                <div class="small-box bg-secondary">
                     <div class="inner">
                         <h3>{{ count(App\Models\CaseModel::all()) }}</h3>
                         <p>{{ __('Cases') }}</p>
@@ -76,7 +76,7 @@
         <div class="row">
             <div class="col-lg-3 col-6">
 
-                <div class="small-box bg-danger">
+                {{-- <div class="small-box bg-danger">
                     <div class="inner">
                         <h3>{{ App\Models\CaseModel::getTodayRegisteredCases() }}</h3>
                         <p>Total Cases registered today</p>
@@ -98,11 +98,15 @@
                         <i class="ion ion-pie-graph"></i>
                     </div>
                     <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
-
+                 <div>
+                    <div class="col-12 table-responsive">
+                        @include('case.partials._dashboard2')
+                    </div>
+                </div>
 @stop
 @section('js')
     <script>

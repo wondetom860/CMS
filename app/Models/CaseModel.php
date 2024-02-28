@@ -44,6 +44,7 @@ class CaseModel extends Model
         $plaintiffs = $this->parties()->where(['party_type_id' => $this->getParty('plaintiff')])->get();
         return $this->formatAndReturn($plaintiffs);
     }
+    
 
     private function formatAndReturn($party)
     {
@@ -116,9 +117,10 @@ class CaseModel extends Model
 
     public static function getTodayRegisteredCases()
     {
-        $today = date("Y-m-d");
-        $records = CaseModel::where(['start_date' => $today])->get();
-        return count($records);
+        return CaseModel::with(['caseStaffAssignments', 'parties', 'events'])
+        // ->join('event')
+        ->where(['case_public' => self::CASE_PUBLIC])
+        ->get();
     }
 
     public function isActive()
@@ -170,6 +172,10 @@ class CaseModel extends Model
         return "MODCCMS/" . $this->court_id . "/" . str_pad(rand(99, 10000), 4, "0");
     }
 
+    public function getCouseOfAction()
+    {
+        return $this->cause_of_action;
+    }
     public function caseStaffAssignments()
     {
         return $this->hasMany(Case_Staff_Assignment::class, 'case_id');
