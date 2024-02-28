@@ -32,15 +32,21 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <label><strong>Permission:</strong></label>
-                    <br />
-                    @foreach ($permission as $value)
-                        <label>
-                            <input type="checkbox" name="permission[]" value="{{ $value->name }}" class="name">
-                            {{ $value->name }}
-                        </label>
-                        <br />
-                    @endforeach
+                    <div class="card">
+                        <div class="card-header">
+                            <label><strong>Permission:</strong></label>
+                        </div>
+                        <div class="card-body" style="max-height: 350px; overflow-y:auto">
+                            @foreach ($permission as $value)
+                                <label>
+                                    <input type="checkbox" name="permission[]" value="{{ $value->name }}" class="name"
+                                        {{ in_array($value->id, $rolePermissions) ? 'checked' : '' }}>
+                                    {{ $value->name }}
+                                </label>
+                                <br />
+                            @endforeach
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">

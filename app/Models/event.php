@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Andegna\DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,6 +24,19 @@ class event extends Model
             'location' => "required|max:255",
             'out_come' => "max:255",
         ]);
+    }
+
+    public function getDate()
+    {
+        if (session()->get('locale') == 'am') {
+            $ethiopian_date = new DateTime($this->created_at);
+            // $gregorian = date_create($this->created_at);
+            // return DateTimeFactory::fromDateTime($gregorian);
+            // Constants::DATE_ETHIOPIAN_WONDE
+            return $ethiopian_date->format("d/m/Y");
+        } else {
+            return $this->created_at;
+        }
     }
 
     public function validDate(){
