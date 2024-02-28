@@ -6,10 +6,10 @@
     <div class="">
         <div class="card">
             <h5 class="card-header">
-                Person - Admin Panel - MOD-CCMS
+                {{__('Person - MOD-CCMS')}}
                 @can('profile-create')
                     <a class="btn btn-primary btn-xs register-caseType-btn float-right" href="{{ route('admin.person.create') }}"
-                        style="align-self: flex-end">Register New person</a>
+                        style="align-self: flex-end"> {{__('Register New person')}}</a>
                 @endcan
             </h5>
             <div class="card-body">
@@ -21,30 +21,31 @@
                             'pageName' => 'p',
                         ],
                         'rowsPerPage' => 5, // The number of rows in one page. By default 10.
-                        'title' => 'Person', // It can be empty ''
+                        'title' => __('Person'), // It can be empty ''
                         'strictFilters' => false, // If true, then a searching by filters will be strict, using an equal '=' SQL operator instead of 'like'.
                         'rowsFormAction' => '/admin/pages/deletion', // Route url to send slected checkbox items for deleting rows, for example.
-                        'useSendButtonAnyway' => true, // If true, even if there are no checkbox column, the main send button will be displayed.
-                        'searchButtonLabel' => 'Find',
+                        'useSendButtonAnyway' => false, // If true, even if there are no checkbox column, the main send button will be displayed.
+                        'searchButtonLabel' => __('Find'),
+                        'resetButtonLabel' => __('Reset'),
                         'columnFields' => [
                             
                             [
                                 'attribute' => 'id_number',
-                                'label' => 'ID NUMBER',
+                                'label' => __('ID'),
                                 'value' => function ($row) {
                                     return $row->id_number;
                                 },
                             ],
                             [
                                 'attribute' => 'name',
-                                'label' => 'Full Name',
+                                'label' => __('Full Name'),
                                 'value' => function ($row) {
                                     return $row->getFullName();
                                 },
                             ],
                             [
                                 'attribute' => 'role',
-                                'label' => 'Role',
+                                'label' => __('Role'),
                                 'value' => function ($row) {
                                     return $row->getUserRoles();
                                 },
@@ -52,21 +53,21 @@
                             ],
                             [
                                 'attribute' => 'age',
-                                'label' => 'Age',
+                                'label' => __('Age'),
                                 'value' => function ($row) {
                                     return $row->getAge();
                                 },
                                 //'sort' => 'first_name', // To sort rows. Have to set if an 'attribute' is not defined for column.
                             ],
                             [
-                                'label' => 'Login Account',
+                                'label' => __('Login Account'),
                                 'value' => function ($row) {
                                     return $row->getLoginCreds();
                                 },
                                 //'sort' => 'first_name', // To sort rows. Have to set if an 'attribute' is not defined for column.
                             ],
 
-                            'created_at', // Simple column setting by string.
+                            __('created_at'), // Simple column setting by string.
                             [
                                 // Set Action Buttons.
                                 'class' => Itstructure\GridView\Columns\ActionColumn::class, // REQUIRED.

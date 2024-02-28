@@ -4,7 +4,7 @@
 @section('content')
     <div class="container-fluid ">
         <div class="card mb-4">
-            <div class="card-header"> Register New Document
+            <div class="card-header">{{__('Register New Document')}} 
             </div>
             <div class="card-body">
                 <form method="POST" action="{{ route('admin.document.store') }}" enctype="multipart/form-data">
@@ -12,7 +12,7 @@
                     <div class="row">
                         <div class="col">
                             <div class="mb-4 row">
-                                <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">Case number:</label>
+                                <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">{{__('Case Number')}}:</label>
                                 <div class="col-md-6 col-sm-12">
                                     <select name="case_id" id="case_id" class="form-select">
                                         @foreach ($viewData['cases'] as $case)
@@ -26,8 +26,7 @@
                     <div class="row">
                         <div class="col">
                             <div class="mb-4 row">
-                                <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">Case Assigned
-                                    To:</label>
+                                <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">{{__('Case Assigned To')}}:</label>
                                 <div class="col-md-6 col-sm-12">
                                     <select name="csa_id" id="csa_id" class="form-select">
                                         @foreach ($viewData['csas'] as $csa)
@@ -42,7 +41,7 @@
                     <div class="row">
                         <div class="col">
                             <div class="mb-4 row">
-                                <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">document Type
+                                <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">{{__('Document Type')}}
                                     :</label>
                                 <div class="col-md-6 col-sm-12">
                                     <select name="document_type_id" id="document_type_id" class="form-select">
@@ -57,7 +56,7 @@
                     <div class="row">
                         <div class="col">
                             <div class="mb-4 row">
-                                <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">Attach File:</label>
+                                <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">{{__('Attach File')}}:</label>
                                 <div class="col-lg-6 col-md-6 col-sm-12 text-left">
                                     <input type="file" name="file" class="form-control" accept=".jpg,.doc,.pdf">
                                 </div>
@@ -67,7 +66,7 @@
                     <div class="row">
                         <div class="col">
                             <div class="mb-4 row">
-                                <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">Description:</label>
+                                <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">{{__('Description')}}:</label>
                                 <div class="col-lg-6 col-md-6 col-sm-12 text-left">
                                     <textarea rows="2" name="description" type="text" class="form-control">{{ old('description') }}</textarea>
                                 </div>
@@ -78,7 +77,7 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="mb-4 row" style="float:right">
-                                <button type="submit" class="btn btn-primary ">Submit</button>
+                                <button type="submit" class="btn btn-primary ">{{__('Submit')}}</button>
                             </div>
                         </div>
                     </div>

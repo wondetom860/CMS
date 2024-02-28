@@ -8,12 +8,18 @@ use Andegna\DateTimeFactory;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class CaseModel extends Model
 {
     use HasFactory;
+
+    // use SoftDeletes;
+
+    // protected $dates = ['deleted_at'];
+    // public $searchBy = ['case_number', 'report_date'];
     const STATUS_CLOSED = 2;
     const STATUS_READY = 0;
     const STATUS_ACTIVE = 1;
@@ -30,6 +36,16 @@ class CaseModel extends Model
             'case_number' => "required|numeric|gt:0",
             'cause_of_action' => "required",
         ]);
+    }
+
+    public function scopeFilter($model, $filters)
+    {
+        // dd($filters['start_date']);
+        if (isset($filters['start_date'])) {
+            $model->where('start_date', '>=', $filters['start_date']);
+        }
+        // dd($filters['start_date']);
+        return $model;
     }
 
     protected function getParty($partyType)
