@@ -10,7 +10,8 @@
         $dd = __('Event Date');
         $ll = __('Locatin');
         $oo = __('OutCome');
-        echo "<h6>Events Attached To This Case{$btn}</h6>
+        $oo = __('Events Attached To This Case');
+        echo "<h6>$oo{$btn}</h6> 
         <table class='table table-condensed table-sm table-bordered' style='font-size: 9pt;'>
             <thead style='background-color:cornflowerblue;'>
                 <th>#</th>
