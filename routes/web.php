@@ -276,6 +276,16 @@ Route::get('/{locale?}', function ($locale = null) {
 
 Route::get("language/{locale}", App\Http\Controllers\LocalizationController::class . '@changeLocale')->name('locale');
 
+use App\Http\Controllers\ChangeCourtStaffController;
+
+Route::get('/admin/change_court_staff', [ChangeCourtStaffController::class, 'index'])->name('admin.change_court_staff.index');
+Route::get('/admin/change-court-staff/create', [ChangeCourtStaffController::class, 'create'])->name('admin.change_court_staff.create');
+Route::post('/admin/change-court-staff', [ChangeCourtStaffController::class, 'store'])->name('admin.change_court_staff.store');
+Route::get('/admin/change-court-staff/{id}/edit', [ChangeCourtStaffController::class, 'edit'])->name('admin.change_court_staff.edit');
+Route::put('/admin/change-court-staff/{id}', [ChangeCourtStaffController::class, 'update'])->name('admin.change_court_staff.update');
+Route::get('/admin/change-court-staff/{id}', [ChangeCourtStaffController::class, 'show'])->name('admin.change_court_staff.show');
+
+// Define other routes as needed for create, store, edit, update, and delete operations
 
 
 // use App\Http\Controllers\CaseStaffAssignmentController;
