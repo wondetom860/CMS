@@ -5,10 +5,10 @@
     <div class="">
         <div class="card">
             <h5 class="card-header">
-                Party - Admin Panel - MOD-CCMS
+                {{__('Party - MOD-CCMS')}}
                 @can('party-create')
                     <a class="btn btn-primary btn-xs register-caseType-btn float-right" href="{{ route('admin.party.create') }}"
-                        style="align-self: flex-end">Register New Parties</a>
+                        style="align-self: flex-end">{{__('Register New Parties')}}</a>
                 @endcan
             </h5>
             <div class="card-body">
@@ -20,15 +20,16 @@
                             'pageName' => 'p',
                         ],
                         'rowsPerPage' => 5, // The number of rows in one page. By default 10.
-                        'title' => 'Parties', // It can be empty ''
+                        'title' => __('Parties'), // It can be empty ''
                         'strictFilters' => true, // If true, then a searching by filters will be strict, using an equal '=' SQL operator instead of 'like'.
                         'rowsFormAction' => '/admin/pages/deletion', // Route url to send slected checkbox items for deleting rows, for example.
-                        'useSendButtonAnyway' => true, // If true, even if there are no checkbox column, the main send button will be displayed.
-                        'searchButtonLabel' => 'Find',
+                        'useSendButtonAnyway' => false, // If true, even if there are no checkbox column, the main send button will be displayed.
+                        'searchButtonLabel' => __('Find'),
+                        'resetButtonLabel' => __('Reset'),
                         'columnFields' => [
                             [
                                 'attribute' => 'Case Number', // REQUIRED if value is not defined. Attribute name to get row column data.
-                                'label' => 'case_number', // Column label.
+                                'label' => __('Case Number'), // Column label.
                                 'value' => function ($row) {
                                     return $row->case->case_number;
                                 },
@@ -73,20 +74,20 @@
                             //     ],
                             // ],
                             [
-                                'label' => 'Person',
+                                'label' => __('Person'),
                                 'attribute' => 'person_id',
                                 'value' => function ($row) {
                                     return $row->person->getFullName();
                                 },
                             ],
                             [
-                                'label' => 'Party Type',
+                                'label' => __('Party Type'),
                                 'value' => function ($row) {
                                     return $row->partyType->party_type_name;
                                 },
                                 //'sort' => 'first_name', // To sort rows. Have to set if an 'attribute' is not defined for column.
                             ],
-                            'created_at', // Simple column setting by string.
+                            __('created_at'), // Simple column setting by string.
                             [
                                 // Set Action Buttons.
                                 'class' => Itstructure\GridView\Columns\ActionColumn::class, // REQUIRED.
