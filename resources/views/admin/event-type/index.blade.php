@@ -5,19 +5,19 @@
     <div class="">
         <div class="card">
             <h4 class="card-header">
-                Event Types - Admin Panel - MOD-CCMS
+                {{__('Event Types - MOD-CCMS')}}
                 <a class="btn btn-primary btn-xs register-caseType-btn float-right" href="{{ route('admin.event-type.create') }}"
-                    style="align-self: flex-end">Register New Event Type</a>
+                    style="align-self: flex-end">{{__('Register New Event Type')}}</a>
             </h4>
             <div class="card-body">
                 <table id="example" class="table table-striped" style="width:100%">
                     <thead>
-                        <th>ID</th>
-                        <th>Event Type</th>
-                        <th>Description</th>
-                        <th>Show</th>
-                        <th>Update</th>
-                        <th>Delete</th>
+                        <th>{{__('ID')}}</th>
+                        <th>{{__('Event Type')}}</th>
+                        <th>{{__('Description')}}</th>
+                        <th>{{__('Show')}}</th>
+                        <th>{{__('Update')}}</th>
+                        <th>{{__('Delete')}}</th>
                     </thead>
                     <tbody>
                         @foreach ($viewData['event_type'] as $p)

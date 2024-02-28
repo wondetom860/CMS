@@ -22,9 +22,9 @@
                         ],
                         'rowsPerPage' => 5, // The number of rows in one page. By default 10.
                         'title' => __('Cases'), // It can be empty ''
-                        'strictFilters' => true, // If true, then a searching by filters will be strict, using an equal '=' SQL operator instead of 'like'.
+                        'strictFilters' => false, // If true, then a searching by filters will be strict, using an equal '=' SQL operator instead of 'like'.
                         'rowsFormAction' => '/admin/pages/deletion', // Route url to send slected checkbox items for deleting rows, for example.
-                        'useSendButtonAnyway' => true, // If true, even if there are no checkbox column, the main send button will be displayed.
+                        'useSendButtonAnyway' => false, // If true, even if there are no checkbox column, the main send button will be displayed.
                         'searchButtonLabel' => __('Find'),
                         'resetButtonLabel' => __('Reset'),
                         'columnFields' => [
@@ -95,6 +95,7 @@
                                 'value' => function ($row) {
                                     return $row->caseType->case_type_name;
                                 },
+                                // 'filter' => false;
                                 'filter' => [
                                     // For dropdown it is necessary to set 'data' array. Array keys are for html <option> tag values, array values are for titles.
                                     'class' => Itstructure\GridView\Filters\DropdownFilter::class, // REQUIRED. For this case it is necessary to set 'class'.
@@ -109,10 +110,27 @@
                             ],
                             [
                                 'label' => __('Date Reported'), // Column label.
+                                'filter' => false,
                                 'attribute' => 'start_date', // Attribute, by which the row column data will be taken from a model.
                                 'value' => function ($row) {
-                                    return $row->start_date;
+                                    return $row->getDate();
                                 },
+                                'filter' => [
+                                    // For dropdown it is necessary to set 'data' array. Array keys are for html <option> tag values, array values are for titles.
+                                    'class' => Itstructure\GridView\Filters\DropdownFilter::class, // REQUIRED. For this case it is necessary to set 'class'.
+                                    'name' => 'start_date', // REQUIRED if 'attribute' is not defined for column.
+                                    'data' => [
+                                        // REQUIRED.
+                                        date('Y-m-d') => 'Today',
+                                        date('Y-m-d', time() - 7 * 84600) => 'This Week',
+                                        date('Y-m-d', time() - 30 * 84600) => 'This Month',
+                                        date('Y-m-d', time() - 3 * 30 * 84600) => 'Last 3 Months',
+                                        date('Y-m-d', time() - 6 * 30 * 84600) => 'Last 6 Months',
+                                        date('Y-m-d', time() - 12 * 30 * 84600) => 'Last 1 Year',
+                                        date('Y-m-d', time() - 5 * 12 * 30 * 84600) => 'Last 5 Years',
+                                    ],
+                                ],
+                                'sort' => 'start_date',
                             ],
                             [
                                 'attribute' => __('Status'),

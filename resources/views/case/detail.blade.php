@@ -8,11 +8,11 @@
         </h3>
         <div class="card mb-3">
             <div class="row g-0">
-                <div class="col-md-4 p-2">
+                <div class="col-md-3 p-2">
                     <img src="{{ asset('/images' . $viewData['case']->getLogoPath()) }}" class="img-fluid rounded-start"
                         style="width: 320px; height:auto">
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-9">
                     <div class="card-body">
                         <p class="card-text"><b>{{ __('Case Number') }} : </b>{{ $viewData['case']->case_number }}</p>
                         <p class="card-text"><b>{{ __('Court Name') }} : </b>{{ $viewData['case']->court->name }}</p>

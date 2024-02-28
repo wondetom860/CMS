@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col">
                     <div class="mb-4 row">
-                        <label class="text-right col-lg-4 col-md-6 col-sm-12 col-form-label">{{ __('Court') }}:</label>
+                        <label class="form-label">{{ __('Court') }}:</label>
                         <div class="col-lg-8 col-md-6 col-sm-12">
                             <select name="court_id" id="court_id" class="form-control">
                                 @foreach (App\models\Court::all() as $court)
@@ -22,7 +22,7 @@
                 <div class="col">
                     <div class="mb-4 row">
                         <label
-                            class="text-right col-lg-4 col-md-6 col-sm-12 col-form-label">{{ __('ID Number') }}:</label>
+                            class="form-label">{{ __('ID Number') }}:</label>
                         <div class="col-lg-8 col-md-6 col-sm-12">
                             <input name="id_number" id="id_number" value="{{ old('id_number') }}" type="text"
                                 class="form-control">
@@ -34,7 +34,7 @@
                 <div class="col">
                     <div class="mb-4 row">
                         <label
-                            class="text-right col-lg-4 col-md-6 col-sm-12 col-form-label">{{ __('First Name') }}:</label>
+                            class="form-label">{{ __('First Name') }}:</label>
                         <div class="col-lg-8 col-md-6 col-sm-12">
                             <input name="first_name" value="{{ old('first_name') }}" type="text"
                                 class="form-control">
@@ -46,7 +46,7 @@
                 <div class="col">
                     <div class="mb-4 row">
                         <label
-                            class="text-right col-lg-4 col-md-6 col-sm-12 col-form-label">{{ __('Father\'s Name') }}:</label>
+                            class="form-label">{{ __('Father\'s Name') }}:</label>
                         <div class="col-lg-8 col-md-6 col-sm-12">
                             <input name="fath_name" value="{{ old('fath_name') }}" type="text" class="form-control">
                         </div>
@@ -57,7 +57,7 @@
                 <div class="col">
                     <div class="mb-4 row">
                         <label
-                            class="text-right col-lg-4 col-md-6 col-sm-12 col-form-label">{{ __('Grand Father\'s Name') }}:</label>
+                            class="form-label">{{ __('Grand Father\'s Name') }}:</label>
                         <div class="col-lg-8 col-md-6 col-sm-12">
                             <input name="gfath_name" value="{{ old('gfath_name') }}" type="text"
                                 class="form-control">
@@ -69,7 +69,7 @@
                 <div class="col">
                     <div class="mb-4 row">
                         <label
-                            class="text-right col-lg-4 col-md-6 col-sm-12 col-form-label">{{ __('Date Of Birth') }}:</label>
+                            class="form-label">{{ __('Date Of Birth') }}:</label>
                         <div class="col-lg-8 col-md-6 col-sm-12">
                             <input name="dob" value="{{ old('dob') }}" type="date" class="form-control">
                         </div>
@@ -80,7 +80,7 @@
                 <div class="col">
                     <div class="mb-4 row">
                         <label
-                            class="text-right col-lg-4 col-md-6 col-sm-12 col-form-label">{{ __('Gender') }}:</label>
+                            class="form-label">{{ __('Gender') }}:</label>
                         <div class="col-lg-8 col-md-6 col-sm-12">
                             {{-- <input name="gender" value="{{ old('gender') }}" type="text" class="form-control"> --}}
                             <select class="form-control" name="gender" required>
@@ -98,7 +98,7 @@
                 <div class="col">
                     <div class="mb-4 row">
                         <label
-                            class="text-right col-lg-4 col-md-6 col-sm-12 col-form-label">{{ __('Role') }}:</label>
+                            class="form-label">{{ __('Role') }}:</label>
                         <div class="col-lg-8 col-md-6 col-sm-12">
                             @if ($viewData['client_registration'] != 1)
                                 <select name="role_id" id="role_id" class="form-control">
@@ -111,16 +111,10 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
-                    <div class="mb-4 row">
-                        <input type="text" id='client_registration_id' name="client_registration"
+            <input type="text" id='client_registration_id' name="client_registration"
                             value="{{ $viewData['client_registration'] }}" class="d-none">
                         <button onclick="submitClientForm();return false;" type="submit"
-                            class="btn btn-primary">{{__('Submit')}}</button>
-                    </div>
-                </div>
-            </div>
+                        class="btn btn-primary">{{__('Submit')}}</button>
         </form>
     </div>
 </div>

@@ -3,8 +3,8 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="bg-default">
-                <h4>Edit User Role <b><i>{{ $user->getFullName() }}</i></b> <a
-                        class="btn btn-primary register-caseType-btn" href="{{ route('admin.users.index') }}"> Back</a></h4>
+                <h4>{{__('Edit User Role')}} :  <b><i>{{ $user->getFullName() }}</i></b> <a
+                        class="btn btn-primary register-caseType-btn" href="{{ route('admin.users.index') }}"> {{__('Back')}}</a></h4>
             </div>
         </div>
     </div>
@@ -52,7 +52,7 @@
             </div> --}}
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <label for="roles"><strong>Role:</strong></label>
+                    <label for="roles"><strong>{{__('Role')}}:</strong></label>
                     <select name="roles[]" class="form-control" multiple>
                         @foreach ($roles as $role)
                             <option value="{{ $role }}" {{ in_array($role, $userRole) ? 'selected' : '' }}>
@@ -62,7 +62,7 @@
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">{{__('Submit')}}</button>
             </div>
         </div>
     </form>

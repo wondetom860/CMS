@@ -5,19 +5,19 @@
     <div class="">
         <div class="card">
             <h4 class="card-header">
-                Case Types - Admin Panel - MOD-CCMS
+                {{__('Case Types - MOD-CCMS')}}
                 <a class="btn btn-primary btn-xs register-caseType-btn float-right" href="{{ route('admin.case_type.create') }}"
-                    style="align-self: flex-end">Register New Case Type</a>
+                    style="align-self: flex-end">{{__('Register New Case Type')}}</a>
             </h4>
             <div class="card-body">
                 <table id="example" class="table table-striped" style="width:100%">
                     <thead>
-                        <th>ID</th>
-                        <th>Case Type</th>
-                        <th>Description</th>
-                        <th>Show</th>
-                        <th>Update</th>
-                        <th>Delete</th>
+                        <th>{{__('ID')}}</th>
+                        <th>{{__('Case Type')}}</th>
+                        <th>{{__('Description')}}</th>
+                        <th>{{__('Show')}}</th>
+                        <th>{{__('Update')}}</th>
+                        <th>{{__('Delete')}}</th>
                     </thead>
                     <tbody>
                         @foreach ($viewData['case_type'] as $ct)
