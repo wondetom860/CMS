@@ -5,7 +5,7 @@
     <div class="">
         <div class="card">
             <h4 class="card-header">
-                {{__('Party Types - Admin Panel')}}
+                {{__('Party Types')}}
                 <a class="btn btn-primary btn-xs register-caseType-btn" href="{{ route('admin.party_type.create') }}"
                     style="align-self: flex-end">{{__('Register New Party Type')}}</a>
             </h4>

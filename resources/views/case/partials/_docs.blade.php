@@ -1,13 +1,14 @@
 @php
     $docs = $case->documents;
     $uu = __('Upload Attach');
-    $attachBytton = $case->isAssignedTo(Auth::user()->person_id) && $case->isActive() ? 
-    "<button class='btn btn-default btn-link btn-sm float-right' onclick='attachDoc({$case->id});return false;'>$uu</button>" : "";
+    $attachButton = $case->isAssignedTo(Auth::user()->person_id) && $case->isActive() ? 
+    "<button class='btn btn-primary btn-xs float-right' onclick='attachDoc({$case->id});return false;'>$uu</button>" : "";
     if ($docs) {
         $hh = __('Document Type');
         $bb = __('Date Submitted');
         $cc = __('By');
-        echo "<h6>Documents attached to this case{$attachBytton}</h6>
+        $ff = __('Documents attached to this case');
+        echo "<h6>$ff{$attachButton}</h6>
         <table class='table table-condensed table-sm table-bordered' style='font-size: 9pt;'>
             <thead style='background-color:cornflowerblue;'>
                 <th>#</th>
@@ -19,7 +20,7 @@
         $count = 0;
         foreach ($docs as $doc) {
             $aa = __('Show');
-            $btn = "<button class='btn btn-link btn-sm' onclick='shoeDoc({$doc->id});return false;'>$aa</button>";
+            $btn = "<button class='btn btn-link btn-xs' onclick='shoeDoc({$doc->id});return false;'>$aa</button>";
             echo "<tr>
                     <td>" .
                 ++$count .

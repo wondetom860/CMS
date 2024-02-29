@@ -13,11 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->text('description');
-            $table->timestamps();
+        Schema::table('document', function (Blueprint $table) {
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->foreign('created_by')->references('id')->on('web_user');
         });
     }
 
@@ -28,6 +26,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::table('document', function (Blueprint $table) {
+            //
+            $table->dropColumn('created_by');
+        });
     }
 };

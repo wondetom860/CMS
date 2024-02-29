@@ -6,10 +6,10 @@
         <div class="card">
             {{-- <img src="{{ asset($row->Image) }}" style="width:80px; height:80px; border-radius:50%;" alt=""> --}}
             <h4 class="card-header">
-                Documents - Admin Panel - MOD-CCMS
+                {{__('Documents - MOD-CCMS')}}
                 @can('document-create')
                     <a class="btn btn-primary btn-xs register-caseType-btn float-right"
-                        href="{{ route('admin.document.create') }}" style="align-self: flex-end">Register New Document</a>
+                        href="{{ route('admin.document.create') }}" style="align-self: flex-end">{{__('Register New Document')}}</a>
                 @endcan
             </h4>
             <div class="card-body">
@@ -21,15 +21,16 @@
                             'pageName' => 'p',
                         ],
                         'rowsPerPage' => 5, // The number of rows in one page. By default 10.
-                        'title' => 'Documents', // It can be empty ''
+                        'title' => __('Documents'), // It can be empty ''
                         'strictFilters' => true, // If true, then a searching by filters will be strict, using an equal '=' SQL operator instead of 'like'.
                         'rowsFormAction' => '/admin/pages/deletion', // Route url to send slected checkbox items for deleting rows, for example.
-                        'useSendButtonAnyway' => true, // If true, even if there are no checkbox column, the main send button will be displayed.
-                        'searchButtonLabel' => 'Find',
+                        'useSendButtonAnyway' => false, // If true, even if there are no checkbox column, the main send button will be displayed.
+                        'searchButtonLabel' => __('Find'),
+                        'resetButtonLabel' => __('Reset'),
                         'columnFields' => [
                             [
                                 'attribute' => 'case_number', // REQUIRED if value is not defined. Attribute name to get row column data.
-                                'label' => 'Case Number', // Column label.
+                                'label' => __('Case Number'), // Column label.
                                 // 'filter' => false, // If false, then column will be without a search filter form field.,
                                 'value' => function ($row) {
                                     return $row->case->case_number;
@@ -84,28 +85,28 @@
                             //     ],
                             // ],
                             [
-                                'label' => 'Document type',
+                                'label' => __('Document Type'),
                                 'attribute' => 'document_type_name',
                                 'value' => function ($row) {
                                     return $row->documentType->doc_type_name;
                                 },
                             ],
                             [
-                                'label' => 'Date', // Column label.
+                                'label' => __('Attach Date'), // Column label.
                                 'attribute' => 'date_filed', // Attribute, by which the row column data will be taken from a model.
                                 'value' => function ($row) {
                                     return $row->date_filed;
                                 },
                             ],
                             [
-                                'label' => 'description', // Column label.
+                                'label' => __('Description'), // Column label.
                                 'attribute' => 'description', // Attribute, by which the row column data will be taken from a model.
                                 'value' => function ($row) {
                                     return $row->description;
                                 },
                             ],
                             [
-                                'label' => 'doc storage path ', // Column label.
+                                'label' => __('Document Storage Path'), // Column label.
                                 'attribute' => 'doc_storage_path',
                                 'format' => 'html',
                                 'value' => function ($row) {

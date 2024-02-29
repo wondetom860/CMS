@@ -34,56 +34,86 @@ class CaseController extends Controller
      *
      *
      */
-    public function index()
+    public function index(Request $request)
     {
         //
         $viewData = [];
         $viewData["title"] = __("Register Case - CCMS");
         $viewData["subtitle"] = __("List of Cases");
-        $dataProvider = null;
+        $query = CaseModel::query(); //filter($request->filters)
 
         $user = User::findOrFail(Auth::user()->id);
         // ->where(['case_status', '<>', CaseModel::STATUS_CLOSED])
         if ($user->isInspectionHead()) {
-            $dataProvider = new EloquentDataProvider(
-                CaseModel::query()
-                    ->withAggregate('court', 'name')
-                    ->withAggregate('caseType', 'case_type_name')
-            );
+            $query->withAggregate('court', 'name')
+                ->withAggregate('caseType', 'case_type_name');
         } elseif ($user->isClerk()) {
-            $dataProvider = new EloquentDataProvider(
-                CaseModel::query()
-                    ->withAggregate('court', 'name')
-                    ->withAggregate('caseType', 'case_type_name')
-            );
-        } else if ($user->isClient()) { //list all cases in which a client is associated to: withness,plaintiff,defendant..
+            $query->withAggregate('court', 'name')
+                ->withAggregate('caseType', 'case_type_name');
+        } elseif ($user->isClient()) { //list all cases in which a client is associated to: withness,plaintiff,defendant..
             // $user = User::findOrFaail(Auth::user()->id);
             // if ($user->isClient()) { //list all cases in which a client is associated to: withness,plaintiff,defendant..
             //     // $party = Party::where(['person_id' => $person_id])->get()->first();
             //     return $this->parties()->where(['person_id' => $user->person_id])->count() > 0;
             // }
-            $dataProvider = new EloquentDataProvider(
-                CaseModel::query()
-                    ->join('party', 'case.id', '=', 'party.case_id')
-                    ->where('party.person_id', Auth::user()->person_id)
-                    ->withAggregate('court', 'name')
-                    ->withAggregate('caseType', 'case_type_name')
-            );
+            $query->join('party', 'case.id', '=', 'party.case_id')
+                ->where('party.person_id', Auth::user()->person_id)
+                ->withAggregate('court', 'name')
+                ->withAggregate('caseType', 'case_type_name');
         } else {
-            $dataProvider = new EloquentDataProvider(
-                CaseModel::query()
-                    ->join('case_staff_assignment', 'case.id', '=', 'case_staff_assignment.case_id')
-                    ->join('court_staff', 'court_staff.id', '=', 'case_staff_assignment.court_staff_id')
-                    ->where('court_staff.person_id', Auth::user()->person_id)
-                    ->withAggregate('court', 'name')
-                    ->withAggregate('caseType', 'case_type_name')
-            );
+            $query->join('case_staff_assignment', 'case.id', '=', 'case_staff_assignment.case_id')
+                ->join('court_staff', 'court_staff.id', '=', 'case_staff_assignment.court_staff_id')
+                ->where('court_staff.person_id', Auth::user()->person_id)
+                ->withAggregate('court', 'name')
+                ->withAggregate('caseType', 'case_type_name');
         }
+        // filterings..
+        // if (isset($request->filters)) {
+        //     $q2 = $query->where('2start_date', '>=', $request->filters['start_date']);
+        // }else{
+        //     $q2 = $query;
+        // }
+
+        // unset($request->filters);
 
         return view('case.index', [
-            'dataProvider' => $dataProvider,
+            'dataProvider' => new EloquentDataProvider($query),
             'viewData' => $viewData
         ]);
+    }
+
+    public function showByCaseNumber(Request $request)
+    {
+        dd($request->case_number);
+        $case = CaseModel::where(['case_number' => str_replace('_', '/', $request->case_number)])->first();
+        if ($case) {
+            $viewData['title'] = __('Case Page - Case Detail - CCMS');
+            $viewData['subtitle'] = __('Case Detail') . ":" . $case->getDetail();
+            $viewData['case'] = $case;
+            return view('case.detail')->with('viewData', $viewData);
+        }
+
+        return view('error')
+            ->with('title', 'Access not allowed')
+            ->with('message', 'Record not found.');
+    }
+
+    public function getReport(Request $request)
+    {
+        $report_type = $request->report_type;
+        $report_title = "Cases report";
+        if ($report_type == null) {
+            return "<p class='bg-warning'>Invalid request, please select report type</p>";
+        }
+        $cases = CaseModel::getReport($report_type);
+        return view('case.partials.report_content')->with('cases', $cases)->with('report_title', $report_title);
+    }
+
+    public function generateReport()
+    {
+        $viewData['title'] = __('Generate Report - Cases Page - CCMS');
+        $viewData['subtitle'] = __('Generate Report');
+        return view('case.partials.report-form')->with('viewData', $viewData);
     }
 
 

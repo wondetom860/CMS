@@ -13,15 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('case_staff_assignment', function (Blueprint $table) {
+        Schema::create('case_archives', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('event_id')->nullable();
             $table->unsignedBigInteger('case_id');
-            $table->unsignedBigInteger('court_staff_id');
-            $table->string('assigned_as');
-            $table->string('assigned_at');
-            $table->unsignedBigInteger('assigned_by');
+            $table->enum('file_type', ['audio','vedio','doc'])->nullable();
+            $table->string('file_path')->nullable();
+            $table->dateTime('date_archived');
+            $table->mediumText('description');
+            $table->unsignedBigInteger('archived_by');
+            $table->string('remark')->nullable();
+            $table->foreign('event_id')->references('id')->on('events');
             $table->foreign('case_id')->references('id')->on('case');
-            $table->foreign('court_staff_id')->references('id')->on('court_staff');
             $table->timestamps();
         });
     }
@@ -33,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('case_staff_assignment');
+        Schema::dropIfExists('case_archives');
     }
 };

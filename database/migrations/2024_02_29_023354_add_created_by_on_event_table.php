@@ -13,10 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('posts', function (Blueprint $table) {
-            $table->integer('created_by')->unsigned();
-            $table->integer('updated_by')->unsigned()->default(NULL);
-            $table->text('sig_data');
+        Schema::table('events', function (Blueprint $table) {
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->foreign('created_by')->references('id')->on('web_user');
         });
     }
 
@@ -27,10 +26,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('posts', function (Blueprint $table) {
+        Schema::table('events', function (Blueprint $table) {
+            //
             $table->dropColumn('created_by');
-            $table->dropColumn('updated_by');
-            $table->dropColumn('sig_data');
         });
     }
 };

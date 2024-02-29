@@ -4,14 +4,15 @@
     $uu = __('Add New Party');
     if($case->isAssignedTo(Auth::user()->person_id) && $case->isActive() && Auth::user()->can('party-create'))
     {
-        $btn = "<button class='btn btn-sm btn-link float-right' onclick='registerParty({$case->id}); return false;'>$uu</button>";
+        $btn = "<button class='btn btn-xs btn-primary float-right' onclick='registerParty({$case->id}); return false;'>$uu</button>";
     }
     
     if ($staffs) {
         $ee = __('Person');
         $pp = __('Party Type');
         $rr = __('Registered Date');
-        echo "<h6>Parties in This Case $btn</h6>
+        $ff = __('Parties in This Case');
+        echo "<h6>$ff $btn</h6>
         <table class='table table-condensed table-sm table-bordered' style='font-size: 9pt;'>
             <thead style='background-color:cornflowerblue;'>
                 <th>#</th>

@@ -5,7 +5,7 @@
 @section('innerTitle', $viewData['subtitle'])
 @section('content')
 <div class="card mb-4">
-    <div class="card-header"> Create Case Staff Assignment
+    <div class="card-header"> {{__('Create Case Staff Assignment')}}
     </div>
     <div class="card-body">
         <form method="POST" action="{{ route('admin.case_staff_assignments.store') }}">
@@ -13,7 +13,7 @@
             <div class="row">
                 <div class="col">
                     <div class="mb-4 row">
-                        <label for="case_id" class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">Select Case:</label>
+                        <label for="case_id" class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">{{__('Select Case')}}:</label>
                         <div class="col-lg-6 col-md-6 col-sm-12 text-left">
                             <select name="case_id" id="case_id" class="form-control">
                                 @foreach($viewData['cases'] as $case)
@@ -27,7 +27,7 @@
             <div class="row">
                 <div class="col">
                     <div class="mb-4 row">
-                        <label for="court_staff_id" class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">Select Staff:</label>
+                        <label for="court_staff_id" class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">{{__('Select Staff')}}:</label>
                         <div class="col-lg-6 col-md-6 col-sm-12 text-left">
                             <select name="court_staff_id" id="court_staff_id" class="form-control">
                                 @foreach($viewData['court_staffs'] as $staff)
@@ -41,7 +41,7 @@
             </div>
             <div class="row">
                 <div class="col-8">
-                    <button class="btn btn-primary" type="submit">Assign Case</button>
+                    <button class="btn btn-primary" type="submit">{{__('Assign Case')}}</button>
                 </div>
             </div>
         </form>
