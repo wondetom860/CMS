@@ -2,8 +2,12 @@
 
 namespace App\Models;
 
+// use Illuminate\Contracts\Mail\Mailer;
+use App\Mail\staffAssignment;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Mail;
+// use Mail;
 
 class Case_Staff_Assignment extends Model
 {
@@ -27,6 +31,16 @@ class Case_Staff_Assignment extends Model
             'assigned_at' => "required|date",
             'assigned_by' => "numeric|gt:0",
         ]);
+    }
+
+    public function notifyStaff()
+    {
+        $email = $this->courtStaff->person->getEmail();
+        if ($email) {
+            Mail::to($email)->send(new staffAssignment());
+        } else {
+            notify()->warning('User Email is not known');
+        }
     }
 
     public static function staffAssigned($court_staff_id, $case_id): bool

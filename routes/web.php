@@ -63,8 +63,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/case/store', App\Http\Controllers\CaseController::class . '@store')->name('case.store');
     Route::get('/case/{id}/edit', App\Http\Controllers\CaseController::class . '@edit')->name('case.edit');
     Route::put('/case/{id}/update', App\Http\Controllers\CaseController::class . '@update')->name('case.update');
-    Route::get('/case/{id}/delete', App\Http\Controllers\CaseController::class . '@delete')->name('case.delete');
-
+    Route::get('/case/{id}/delete', App\Http\Controllers\CaseController::class . '@delete')->name('case.delete'); //case.get-report
+    Route::get('/case/generate-report', App\Http\Controllers\CaseController::class . '@generateReport')->name('case.create.report');
+    Route::get('/case/get-report', App\Http\Controllers\CaseController::class . '@getReport')->name('case.get-report');
 
     // for auth users - court
     Route::get('/courts', App\Http\Controllers\CourtController::class . '@index')->name('courts.index');
@@ -128,7 +129,9 @@ Route::middleware('auth')->prefix('/admin')->group(function () {  //|'/SuperAdmi
     Route::post('/document/store', App\Http\Controllers\DocumentController::class . '@store')->name('admin.document.store');
     Route::get('/document/{id}/edit', App\Http\Controllers\DocumentController::class . '@edit')->name('admin.document.edit');
     Route::put('/document/{id}/update', App\Http\Controllers\DocumentController::class . '@update')->name('admin.document.update');
-    Route::post('/document/{id}/delete', App\Http\Controllers\DocumentController::class . '@destroy')->name('admin.document.delete');
+    Route::post('/document/{id}/delete', App\Http\Controllers\DocumentController::class . '@destroy')->name('admin.document.delete'); //readUploadedFile
+    Route::get('/document/readUploadedFile', App\Http\Controllers\DocumentController::class . '@readUploadedFile')->name('admin.document.readUploadedFile'); //create_partial
+    Route::get('/document/createPartial', App\Http\Controllers\DocumentController::class . '@createPartial')->name('admin.document.create_partial'); //
 
 
     // event
@@ -207,7 +210,8 @@ Route::middleware('auth')->prefix('/admin')->group(function () {  //|'/SuperAdmi
     Route::get('/case_staff_assignments/{id}/edit', App\Http\Controllers\CaseStaffAssignmentController::class . '@edit')->name('admin.case_staff_assignments.edit');
     Route::put('/case_staff_assignments/{id}/update', App\Http\Controllers\CaseStaffAssignmentController::class . '@update')->name('admin.case_staff_assignments.update');
     Route::get('/case_staff_assignments/{id}/delete', App\Http\Controllers\CaseStaffAssignmentController::class . '@delete')->name('admin.case_staff_assignments.delete');
-    Route::get('/case_staff_assignments/create_partial', App\Http\Controllers\CaseStaffAssignmentController::class . '@createPartial')->name('admin.case_staff_assignments.create_partial');
+    Route::get('/case_staff_assignments/create_partial', App\Http\Controllers\CaseStaffAssignmentController::class . '@createPartial')->name('admin.case_staff_assignments.create_partial');//send_notifiation
+    Route::get('/case_staff_assignments/sendNotificationMail', App\Http\Controllers\CaseStaffAssignmentController::class . '@sendNotificationMail')->name('admin.case_staff_assignments.send_notifiation');//send_notifiation
     // routes/web.php
 
     // User roles and assignment

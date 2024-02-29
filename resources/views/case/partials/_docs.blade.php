@@ -20,7 +20,7 @@
         $count = 0;
         foreach ($docs as $doc) {
             $aa = __('Show');
-            $btn = "<button class='btn btn-link btn-sm' onclick='shoeDoc({$doc->id});return false;'>$aa</button>";
+            $btn = "<button class='btn btn-link btn-xs' onclick='shoeDoc({$doc->id});return false;'>$aa</button>";
             echo "<tr>
                     <td>" .
                 ++$count .

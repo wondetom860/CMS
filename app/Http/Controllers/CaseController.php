@@ -40,7 +40,7 @@ class CaseController extends Controller
         $viewData = [];
         $viewData["title"] = __("Register Case - CCMS");
         $viewData["subtitle"] = __("List of Cases");
-        $query = CaseModel::query();//filter($request->filters)
+        $query = CaseModel::query(); //filter($request->filters)
 
         $user = User::findOrFail(Auth::user()->id);
         // ->where(['case_status', '<>', CaseModel::STATUS_CLOSED])
@@ -49,8 +49,7 @@ class CaseController extends Controller
                 ->withAggregate('caseType', 'case_type_name');
         } elseif ($user->isClerk() | $user->isRegistrar()) {
             $query->withAggregate('court', 'name')
-                ->withAggregate('caseType', 'case_type_name')
-            ;
+                ->withAggregate('caseType', 'case_type_name');
         } elseif ($user->isClient()) { //list all cases in which a client is associated to: withness,plaintiff,defendant..
             // $user = User::findOrFaail(Auth::user()->id);
             // if ($user->isClient()) { //list all cases in which a client is associated to: withness,plaintiff,defendant..
@@ -62,7 +61,6 @@ class CaseController extends Controller
                 ->withAggregate('court', 'name')
                 ->withAggregate('caseType', 'case_type_name');
         } else {
-
             $query->join('case_staff_assignment', 'case.id', '=', 'case_staff_assignment.case_id')
                 ->join('court_staff', 'court_staff.id', '=', 'case_staff_assignment.court_staff_id')
                 ->where('court_staff.person_id', Auth::user()->person_id)
@@ -82,6 +80,24 @@ class CaseController extends Controller
             'dataProvider' => new EloquentDataProvider($query),
             'viewData' => $viewData
         ]);
+    }
+
+    public function getReport(Request $request)
+    {
+        $report_type = $request->report_type;
+        $report_title = "Cases report";
+        if ($report_type == null) {
+            return "<p class='bg-warning'>Invalid request, please select report type</p>";
+        }
+        $cases = CaseModel::getReport($report_type);
+        return view('case.partials.report_content')->with('cases', $cases)->with('report_title', $report_title);
+    }
+
+    public function generateReport()
+    {
+        $viewData['title'] = __('Generate Report - Cases Page - CCMS');
+        $viewData['subtitle'] = __('Generate Report');
+        return view('case.partials.report-form')->with('viewData', $viewData);
     }
 
 

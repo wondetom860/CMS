@@ -15,7 +15,9 @@
                     <td>" .
                 ++$count .
                 "</td>
-                    <td>{$csa->case->case_number}</td>
+                    <td title='Show case detail'><a href='" .
+                route('case.show', ['id' => $csa->case_id]) .
+                "'>{$csa->case->case_number}</a></td>
                     <td>{$csa->assigned_at}</td>
                     <td>{$csa->assigned_as}</td>
                 </tr>";
