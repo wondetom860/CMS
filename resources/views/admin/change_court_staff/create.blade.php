@@ -15,8 +15,10 @@
                         <!-- Form fields for each column -->
                         <!-- Example: -->
                         <div class="form-group">
+                            <select name="assigned_as" id="case_staff_assignment_id" class="form-select">
                             <label for="csa_id">CSA ID:</label>
-                            <input type="text" class="form-control" id="csa_id" name="csa_id">
+                            {{-- <input type="text" class="form-control" id="csa_id" name="csa_id"> --}}
+                        </select>
                         </div>
 
                         <!-- Add more form fields for other columns -->
