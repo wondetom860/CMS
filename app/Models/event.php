@@ -62,4 +62,8 @@ class event extends Model
     {
         return $this->case->case_number;
     }
+
+    public function createdBy(){
+        return $this->belongsTo(User::class,'id');
+    }
 }
