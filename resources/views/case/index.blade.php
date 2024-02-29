@@ -26,6 +26,7 @@
                         'rowsFormAction' => '/admin/pages/deletion', // Route url to send slected checkbox items for deleting rows, for example.
                         'useSendButtonAnyway' => false, // If true, even if there are no checkbox column, the main send button will be displayed.
                         'searchButtonLabel' => __('Find'),
+                        'deleteButtonLabel' => false,
                         'resetButtonLabel' => __('Reset'),
                         'columnFields' => [
                             [

@@ -141,6 +141,11 @@ class User extends Authenticatable
     {
         return $this->hasRole('Client');
     }
+    
+    public function isRegistrar()
+    {
+        return $this->hasRole('Registrar');
+    }
 
     public function isSuperAdmin()
     {

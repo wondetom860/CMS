@@ -114,7 +114,7 @@
     const attachDoc = (case_id) => {
         // clientId = $("#id_number_search").val();
         $("#modal_body").html($("#doc-form-container").html());
-        $("#formModalLabel").html("Attach document for case {{ $viewData['case']->case_number }}");
+        $("#formModalLabel").html("Attach document for case { $viewData['case']->case_number }");
         $('#myForm').trigger("reset");
         $('#formModal').modal('show');
         // $("id_number").val(clientId);
@@ -138,8 +138,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="formModalLabel">Attach document to a case
-                </h4>
+                <h4 class="modal-title" id="formModalLabel">{{__('Attach document to a case')}}</h4>
             </div>
             <div class="modal-body" id="modal_body">
 
