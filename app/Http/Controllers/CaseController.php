@@ -82,6 +82,22 @@ class CaseController extends Controller
         ]);
     }
 
+    public function showByCaseNumber(Request $request)
+    {
+        dd($request->case_number);
+        $case = CaseModel::where(['case_number' => str_replace('_', '/', $request->case_number)])->first();
+        if ($case) {
+            $viewData['title'] = __('Case Page - Case Detail - CCMS');
+            $viewData['subtitle'] = __('Case Detail') . ":" . $case->getDetail();
+            $viewData['case'] = $case;
+            return view('case.detail')->with('viewData', $viewData);
+        }
+
+        return view('error')
+            ->with('title', 'Access not allowed')
+            ->with('message', 'Record not found.');
+    }
+
     public function getReport(Request $request)
     {
         $report_type = $request->report_type;
