@@ -63,14 +63,22 @@ class CaseStaffAssignmentController extends Controller
         return view('admin.case_staff_assignments._partials._form')->with('viewData', $viewData);
     }
 
+    public function sendNotificationMail(Request $request){
+        $csa_id = $request->csa_id;
+        $csaModel = case_staff_assignment::findOrFail($csa_id);
+
+        if($csaModel){
+            $csaModel->notifyStaff();
+        }
+     }
+
+
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-
-
     public function store(Request $request)
     {
         // $request->assign_as = ;
@@ -84,9 +92,11 @@ class CaseStaffAssignmentController extends Controller
         // $case_staff_assignment->updated_at = $request->updated_at;
         if ($case_staff_assignment->checkIfAssigned()) {
             notify()->error('Court Staff id already assigned to this case', 'record creation failed');
+
             return redirect()->route('admin.case_staff_assignments.index');
         }
         $case_staff_assignment->save();
+        $case_staff_assignment->notifyStaff();
         notify()->success('Case is Assigned Successfully', 'Creation Success');
         return redirect()->route('admin.case_staff_assignments.index');
     }
