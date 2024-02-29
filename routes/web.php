@@ -65,7 +65,8 @@ Route::middleware('auth')->group(function () {
     Route::put('/case/{id}/update', App\Http\Controllers\CaseController::class . '@update')->name('case.update');
     Route::get('/case/{id}/delete', App\Http\Controllers\CaseController::class . '@delete')->name('case.delete'); //case.get-report
     Route::get('/case/generate-report', App\Http\Controllers\CaseController::class . '@generateReport')->name('case.create.report');
-    Route::get('/case/get-report', App\Http\Controllers\CaseController::class . '@getReport')->name('case.get-report');
+    Route::get('/case/get-report', App\Http\Controllers\CaseController::class . '@getReport')->name('case.get-report');//
+    Route::get('/case/detail_remote/{case_number}', App\Http\Controllers\CaseController::class . '@showById')->name('case.detail_remote');//case.detail_remote
 
     // for auth users - court
     Route::get('/courts', App\Http\Controllers\CourtController::class . '@index')->name('courts.index');
