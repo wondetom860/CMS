@@ -37,8 +37,9 @@ class Case_Staff_Assignment extends Model
     {
         $email = $this->courtStaff->person->getEmail();
         if ($email) {
-            Mail::to($email)->send(new staffAssignment());
+            Mail::to($email)->send(new staffAssignment($this));
         } else {
+            // $st = 
             notify()->warning('User Email is not known');
         }
     }

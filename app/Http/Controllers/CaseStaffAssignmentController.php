@@ -66,7 +66,6 @@ class CaseStaffAssignmentController extends Controller
     public function sendNotificationMail(Request $request){
         $csa_id = $request->csa_id;
         $csaModel = case_staff_assignment::findOrFail($csa_id);
-
         if($csaModel){
             $csaModel->notifyStaff();
         }

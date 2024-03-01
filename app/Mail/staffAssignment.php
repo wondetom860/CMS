@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Case_Staff_Assignment;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -12,15 +13,16 @@ use Illuminate\Queue\SerializesModels;
 class staffAssignment extends Mailable
 {
     use Queueable, SerializesModels;
-
+    public $csa;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($csaa)
     {
-        //
+        // var_dump($csaa->case->case_number);exit;
+        $this->csa = $csaa;
     }
 
     /**
@@ -35,7 +37,8 @@ class staffAssignment extends Mailable
         );
     }
 
-    public function build(){
+    public function build()
+    {
         return $this->view('mail.staff-assignment');
     }
 
@@ -48,7 +51,7 @@ class staffAssignment extends Mailable
     {
         return new Content(
             view: 'mail.staff-assignment',
-            // with:['name' => ]
+            with: ['csa' => $this->csa]
         );
     }
 
