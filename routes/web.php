@@ -181,6 +181,16 @@ Route::middleware('auth')->prefix('/admin')->group(function () {  //|'/SuperAdmi
     Route::get('/case_type/{id}/edit', App\Http\Controllers\CaseTypeController::class . '@edit')->name('admin.case_type.edit');
     Route::put('/case_type/{id}/update', App\Http\Controllers\CaseTypeController::class . '@update')->name('admin.case_type.update');
 
+    //case archive
+    Route::get('/case_archive', App\Http\Controllers\CaseArchiveController::class . '@index')->name('admin.case_archive.index');
+    Route::get('/case_archive/show/{id}', App\Http\Controllers\CaseArchiveController::class . '@show')->name('admin.case_archive.show');
+    Route::get('/case_archive/create', App\Http\Controllers\CaseArchiveController::class . '@create')->name('admin.case_archive.create');
+    Route::post('/case_archive/store', App\Http\Controllers\CaseArchiveController::class . '@store')->name('admin.case_archive.store');
+    Route::get('/case_archive/{id}/delete', App\Http\Controllers\CaseArchiveController::class . '@delete')->name('admin.case_archive.delete');
+    Route::get('/case_archive/{id}/edit', App\Http\Controllers\CaseArchiveController::class . '@edit')->name('admin.case_archive.edit');
+    Route::put('/case_archive/{id}/update', App\Http\Controllers\CaseArchiveController::class . '@update')->name('admin.case_archive.update');
+    Route::get('/case_archive/create_partial', App\Http\Controllers\CaseArchiveController::class . '@createPartial')->name('admin.case_archive.create_partial');
+
     //party type
 
     Route::get('/party_type', App\Http\Controllers\PartyTypeController::class . '@index')->name('admin.party_type.index');

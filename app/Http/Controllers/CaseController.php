@@ -47,7 +47,7 @@ class CaseController extends Controller
         if ($user->isInspectionHead()) {
             $query->withAggregate('court', 'name')
                 ->withAggregate('caseType', 'case_type_name');
-        } elseif ($user->isClerk()) {
+        } elseif ($user->isClerk() | $user->isRegistrar()) {
             $query->withAggregate('court', 'name')
                 ->withAggregate('caseType', 'case_type_name');
         } elseif ($user->isClient()) { //list all cases in which a client is associated to: withness,plaintiff,defendant..
