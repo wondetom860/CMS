@@ -399,6 +399,12 @@ return [
                     'icon' => 'far fa-fw fa-file',
                 ],
                 [
+                    'text' => 'Change Case Staff Assignment',
+                    // 'can' => 'change-case-staff-assignment-list',
+                    'url' => 'admin/change_court_staff',
+                    'icon' => 'far fa-fw fa-file',
+                ],
+                [
                     'text' => 'Parties',
                     'can' => 'party-list',
                     'url' => 'admin/party',

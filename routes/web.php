@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ChangeCourtStaffController;
 
 /*
 |--------------------------------------------------------------------------
@@ -153,6 +154,15 @@ Route::middleware('auth')->prefix('/admin')->group(function () {  //|'/SuperAdmi
     Route::get('/party/{id}/delete', App\Http\Controllers\PartyController::class . '@delete')->name('admin.party.delete');
     Route::get('/party/create_partial', App\Http\Controllers\PartyController::class . '@createPartial')->name('admin.party.create_partial');
 
+    // change court staff
+
+    Route::get('/change_court_staff', [ChangeCourtStaffController::class, 'index'])->name('admin.change_court_staff.index');
+    Route::get('/change_court_staff/create', [ChangeCourtStaffController::class, 'create'])->name('admin.change_court_staff.create');
+    Route::post('/change_court_staff/store', [ChangeCourtStaffController::class, 'store'])->name('admin.change_court_staff.store');
+    Route::get('/change_court_staff/{id}/edit', [ChangeCourtStaffController::class, 'edit'])->name('admin.change_court_staff.edit');
+    Route::put('/change_court_staff/{id}', [ChangeCourtStaffController::class, 'update'])->name('admin.change_court_staff.update');
+    Route::get('/change_court_staff/{id}', [ChangeCourtStaffController::class, 'show'])->name('admin.change_court_staff.show');
+
 
     Route::get('/staffrole', App\Http\Controllers\StaffRoleController::class . '@index')->name('admin.staffrole.index');
     Route::get('/staffrole/show/{id}', App\Http\Controllers\StaffRoleController::class . '@show')->name('admin.staffrole.show');
@@ -291,6 +301,9 @@ Route::get('/{locale?}', function ($locale = null) {
 
 Route::get("language/{locale}", App\Http\Controllers\LocalizationController::class . '@changeLocale')->name('locale');
 
+
+
+// Define other routes as needed for create, store, edit, update, and delete operations
 
 
 // use App\Http\Controllers\CaseStaffAssignmentController;
