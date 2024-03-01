@@ -4,7 +4,7 @@
 @section('content')
 <div class="container-fluid ">
         <h3 class="">
-            Detail: {{ $viewData['case_staff_assignment']->getDetail() }} 
+            Detail: {{ $viewData['change_court_staff']->findOrFail() }} 
         </h3>
         <div class="card mb-3">
             <div class="row g-0">
