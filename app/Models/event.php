@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Andegna\DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,6 +24,19 @@ class event extends Model
             'location' => "required|max:255",
             'out_come' => "max:255",
         ]);
+    }
+
+    public function getDate()
+    {
+        if (session()->get('locale') == 'am') {
+            $ethiopian_date = new DateTime(date_create( $this->date_time));
+            // $gregorian = date_create($this->created_at);
+            // return DateTimeFactory::fromDateTime($gregorian);
+            // Constants::DATE_ETHIOPIAN_WONDE
+            return $ethiopian_date->format("d/m/Y");
+        } else {
+            return date_format(date_create( $this->date_time),"d/m/Y");
+        }
     }
 
     public function validDate(){
@@ -48,9 +62,13 @@ class event extends Model
     {
         return $this->case->case_number;
     }
-    public static function getTodayEvent(){
-        $today = date("Y-m-d");
-        $records = event::where(['date_time' => $today])->get();
-        return count($records);
+
+    public function createdBy(){
+        return $this->belongsTo(User::class,'created_by');
+    }
+
+    public function archives()
+    {
+        return $this->hasMany(CaseArchive::class,'event_id');
     }
 }
