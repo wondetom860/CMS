@@ -416,6 +416,12 @@ return [
                     'url' => 'admin/document',
                     'icon' => 'far fa-fw fa-file',
                 ],
+                [
+                    'text' => 'Last Statatment',
+                    'can' => 'laststatment-list',
+                    'url' => 'admin/laststatment',
+                    'icon' => 'far fa-fw fa-file',
+                ],
             ]
         ],
         [
