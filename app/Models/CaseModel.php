@@ -282,4 +282,8 @@ class CaseModel extends Model
     {
         return $this->hasMany(Party::class, 'case_id');
     }
+    public function archives()
+    {
+        return $this->hasMany(CaseArchive::class,'case_id');
+    }
 }

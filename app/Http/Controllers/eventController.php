@@ -9,6 +9,7 @@ use App\Models\event;
 
 use App\Models\EventType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Itstructure\GridView\DataProviders\EloquentDataProvider;
 
 class eventController extends Controller
@@ -69,6 +70,7 @@ class eventController extends Controller
         $event->event_type_id = $request->event_type_id;
         $event->location = $request->location;
         $event->out_come = $request->out_come;
+        $event->created_by = Auth::user()->id;
         $event->save();
         notify()->success('Event registered Successfully', 'Creation Success');
         return redirect()->route('admin.event.index');

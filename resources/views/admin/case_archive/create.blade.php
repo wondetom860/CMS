@@ -4,15 +4,16 @@
 @section('content')
 
     <div class="card mb-4">
-        <div class="card-header"> {{__('Add New Archive')}}
+        <div class="card-header"> {{ __('Add New Archive') }}
         </div>
         <div class="card-body">
-            <form method="POST" action="{{ route('admin.case_archive.store') }}">
+            <form method="POST" action="{{ route('admin.case_archive.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col">
                         <div class="mb-4 row">
-                            <label for="case_id" class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">{{__('Event Id')}}:</label>
+                            <label
+                                class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">{{ __('Case Number') }}:</label>
                             <div class="col-lg-6 col-md-6 col-sm-12 text-left">
                                 <select name="case_id" id="case_id" class="form-select">
                                     @foreach ($viewData['cases'] as $case)
@@ -22,26 +23,17 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <div class="mb-4 row">
-                            <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">{{__('Case Id')}}:</label>
-                            <div class="col-lg-6 col-md-6 col-sm-12 text-left">
-                                <select name="event_type_id" id="event_type_id" class="form-select">
-                                    @foreach ($viewData['eventTypes'] as $eType)
-                                        <option value="{{ $eType->id }}">{{ $eType->event_type_name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="col">
                             <div class="mb-4 row">
-                                <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">{{__('File Type')}}:</label>
+                                <label for="case_id"
+                                    class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">{{ __('Event Type') }}:</label>
                                 <div class="col-lg-6 col-md-6 col-sm-12 text-left">
-                                    <input name="date_time" type="datetime-local" class="form-control">
+                                    <select name="event_id" id="event_id" class="form-select">
+                                        @foreach ($viewData['events'] as $event)
+                                            <option value="{{ $event->id }}">{{ $event->eventType->event_type_name }}|{{$event->getDate()}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -49,10 +41,10 @@
                     <div class="row">
                         <div class="col">
                             <div class="mb-4 row">
-                                <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">{{__('File Path')}}:</label>
+                                <label
+                                    class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">{{ __('File') }}:</label>
                                 <div class="col-lg-6 col-md-6 col-sm-12 text-left">
-                                    <input name="location" value="{{ old('location') }}" type="text"
-                                        class="form-control">
+                                    <input type="file" name="file" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -60,10 +52,10 @@
                     <div class="row">
                         <div class="col">
                             <div class="mb-4 row">
-                                <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">{{__('Description')}}:</label>
+                                <label
+                                    class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">{{ __('Description') }}:</label>
                                 <div class="col-lg-6 col-md-6 col-sm-12 text-left">
-                                    <input name="out_come" value="{{ old('out_come') }}" type="text"
-                                        class="form-control">
+                                    <textarea name="description" rows="2" class="form-control">{{old('description')}}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -71,28 +63,17 @@
                     <div class="row">
                         <div class="col">
                             <div class="mb-4 row">
-                                <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">{{__('Remark')}}:</label>
+                                <label
+                                    class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">{{ __('Remark') }}:</label>
                                 <div class="col-lg-6 col-md-6 col-sm-12 text-left">
-                                    <input name="out_come" value="{{ old('out_come') }}" type="text"
-                                        class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="mb-4 row">
-                                <label class="text-right col-lg-2 col-md-4 col-sm-12 col-form-label">{{__('Archived By')}}:</label>
-                                <div class="col-lg-6 col-md-6 col-sm-12 text-left">
-                                    <input name="out_come" value="{{ old('out_come') }}" type="text"
-                                        class="form-control">
+                                    <textarea name="remark" rows="2" class="form-control">{{ old('remark') }}</textarea>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-8">
-                            <button type="submit" class="btn btn-primary float-right">{{__('Submit')}}</button>
+                            <button type="submit" class="btn btn-primary float-right">{{ __('Submit') }}</button>
                         </div>
                     </div>
                 </div>

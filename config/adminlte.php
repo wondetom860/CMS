@@ -416,6 +416,12 @@ return [
                     'url' => 'admin/document',
                     'icon' => 'far fa-fw fa-file',
                 ],
+                [
+                    'text' => 'Archives',
+                    'can' => 'archive-list',
+                    'url' => 'admin/case_archive',
+                    'icon' => 'far fa-fw fa-file',
+                ],
             ]
         ],
         [
