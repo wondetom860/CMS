@@ -1,8 +1,8 @@
 @php
     $docs = $case->documents;
     $uu = __('Upload Attach');
-    $attachButton = $case->isAssignedTo(Auth::user()->person_id) && $case->isActive() ? 
-    "<button class='btn btn-primary btn-xs float-right' onclick='attachDoc({$case->id});return false;'>$uu</button>" : "";
+    $attachButton = $case->isAssignedTo(Auth::user()->person_id) && $case->isActive() && Auth::user()->can('document-create') ? 
+    "<button class='btn btn-default btn-link btn-sm float-right' onclick='attachDoc({$case->id});return false;'>$uu</button>" : "";
     if ($docs) {
         $hh = __('Document Type');
         $bb = __('Date Submitted');

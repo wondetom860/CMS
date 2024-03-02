@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ChangeCourtStaffController;
 
 /*
 |--------------------------------------------------------------------------
@@ -135,6 +136,18 @@ Route::middleware('auth')->prefix('/admin')->group(function () {  //|'/SuperAdmi
     Route::get('/document/createPartial', App\Http\Controllers\DocumentController::class . '@createPartial')->name('admin.document.create_partial'); //
 
 
+    //last statment
+
+    Route::get('/laststatment', App\Http\Controllers\LastStatmentController::class . '@index')->name('admin.laststatment.index');
+    Route::get('/laststatment/show/{id}', App\Http\Controllers\LastStatmentController::class . '@show')->name('admin.laststatment.show');
+    Route::get('/laststatment/create', App\Http\Controllers\LastStatmentController::class . '@create')->name('admin.laststatment.create');
+    Route::post('/laststatment/store', App\Http\Controllers\LastStatmentController::class . '@store')->name('admin.laststatment.store');
+    Route::get('/laststatment/{id}/edit', App\Http\Controllers\LastStatmentController::class . '@edit')->name('admin.laststatment.edit');
+    Route::put('/laststatment/{id}/update', App\Http\Controllers\LastStatmentController::class . '@update')->name('admin.laststatment.update');
+    Route::get('/laststatment/{id}/delete', App\Http\Controllers\LastStatmentController::class . '@destroy')->name('admin.laststatment.delete');
+
+
+
     // event
     Route::get('/event', App\Http\Controllers\eventController::class . '@index')->name('admin.event.index');
     Route::get('/event/show/{id}', App\Http\Controllers\eventController::class . '@show')->name('admin.event.show');
@@ -152,6 +165,15 @@ Route::middleware('auth')->prefix('/admin')->group(function () {  //|'/SuperAdmi
     Route::put('/party/{id}/update', App\Http\Controllers\PartyController::class . '@update')->name('admin.party.update');
     Route::get('/party/{id}/delete', App\Http\Controllers\PartyController::class . '@delete')->name('admin.party.delete');
     Route::get('/party/create_partial', App\Http\Controllers\PartyController::class . '@createPartial')->name('admin.party.create_partial');
+
+    // change court staff
+
+    Route::get('/change_court_staff', [ChangeCourtStaffController::class, 'index'])->name('admin.change_court_staff.index');
+    Route::get('/change_court_staff/create', [ChangeCourtStaffController::class, 'create'])->name('admin.change_court_staff.create');
+    Route::post('/change_court_staff/store', [ChangeCourtStaffController::class, 'store'])->name('admin.change_court_staff.store');
+    Route::get('/change_court_staff/{id}/edit', [ChangeCourtStaffController::class, 'edit'])->name('admin.change_court_staff.edit');
+    Route::put('/change_court_staff/{id}', [ChangeCourtStaffController::class, 'update'])->name('admin.change_court_staff.update');
+    Route::get('/change_court_staff/{id}', [ChangeCourtStaffController::class, 'show'])->name('admin.change_court_staff.show');
 
 
     Route::get('/staffrole', App\Http\Controllers\StaffRoleController::class . '@index')->name('admin.staffrole.index');
@@ -180,6 +202,16 @@ Route::middleware('auth')->prefix('/admin')->group(function () {  //|'/SuperAdmi
     Route::get('/case_type/{id}/delete', App\Http\Controllers\CaseTypeController::class . '@delete')->name('admin.case_type.delete');
     Route::get('/case_type/{id}/edit', App\Http\Controllers\CaseTypeController::class . '@edit')->name('admin.case_type.edit');
     Route::put('/case_type/{id}/update', App\Http\Controllers\CaseTypeController::class . '@update')->name('admin.case_type.update');
+
+    //case archive
+    Route::get('/case_archive', App\Http\Controllers\CaseArchiveController::class . '@index')->name('admin.case_archive.index');
+    Route::get('/case_archive/show/{id}', App\Http\Controllers\CaseArchiveController::class . '@show')->name('admin.case_archive.show');
+    Route::get('/case_archive/create', App\Http\Controllers\CaseArchiveController::class . '@create')->name('admin.case_archive.create');
+    Route::post('/case_archive/store', App\Http\Controllers\CaseArchiveController::class . '@store')->name('admin.case_archive.store');
+    Route::get('/case_archive/{id}/delete', App\Http\Controllers\CaseArchiveController::class . '@delete')->name('admin.case_archive.delete');
+    Route::get('/case_archive/{id}/edit', App\Http\Controllers\CaseArchiveController::class . '@edit')->name('admin.case_archive.edit');
+    Route::put('/case_archive/{id}/update', App\Http\Controllers\CaseArchiveController::class . '@update')->name('admin.case_archive.update');
+    Route::get('/case_archive/create_partial', App\Http\Controllers\CaseArchiveController::class . '@createPartial')->name('admin.case_archive.create_partial');
 
     //party type
 
@@ -281,6 +313,9 @@ Route::get('/{locale?}', function ($locale = null) {
 
 Route::get("language/{locale}", App\Http\Controllers\LocalizationController::class . '@changeLocale')->name('locale');
 
+
+
+// Define other routes as needed for create, store, edit, update, and delete operations
 
 
 // use App\Http\Controllers\CaseStaffAssignmentController;

@@ -29,13 +29,13 @@ class event extends Model
     public function getDate()
     {
         if (session()->get('locale') == 'am') {
-            $ethiopian_date = new DateTime($this->created_at);
+            $ethiopian_date = new DateTime(date_create( $this->date_time));
             // $gregorian = date_create($this->created_at);
             // return DateTimeFactory::fromDateTime($gregorian);
             // Constants::DATE_ETHIOPIAN_WONDE
             return $ethiopian_date->format("d/m/Y");
         } else {
-            return $this->created_at;
+            return date_format(date_create( $this->date_time),"d/m/Y");
         }
     }
 
@@ -64,6 +64,11 @@ class event extends Model
     }
 
     public function createdBy(){
-        return $this->belongsTo(User::class,'id');
+        return $this->belongsTo(User::class,'created_by');
+    }
+
+    public function archives()
+    {
+        return $this->hasMany(CaseArchive::class,'event_id');
     }
 }

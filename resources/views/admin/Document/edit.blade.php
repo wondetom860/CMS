@@ -2,7 +2,7 @@
 @section('title', $viewData['title'])
 @section('content')
     <div class="card mb-4">
-        <div class="card-header"> Edit Case
+        <div class="card-header"> Edit Document
         </div>
         <div class="card-body">
             @if ($errors->any())
@@ -22,8 +22,9 @@
                             <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Case Number:</label>
                             <div class="col-lg-10 col-md-6 col-sm-12">
                                 <select name="case_id" id="case_id" class="form-control">
-                                    @foreach ($viewData['cases'] as $case)
-                                        <option value="{{ $case->id }}">{{ $case->case_number }}</option>
+                                    @foreach (App\Models\CaseModel::all() as $case)
+                                        <option @selected($viewData['document']->case_id == $case->id) value="{{ $case->id }}">
+                                            {{ $case->case_number }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -34,9 +35,9 @@
                             <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">csa numeber:</label>
                             <div class="col-lg-10 col-md-6 col-sm-12">
                                 <select name="case_id" id="case_id" class="form-control">
-                                    @foreach ($viewData['cases'] as $case)
+                                    {{-- @foreach ($viewData['cases'] as $case)
                                         <option value="{{ $csa->id }}">{{ $case->csa_number }}</option>
-                                    @endforeach
+                                    @endforeach --}}
                                 </select>
                             </div>
                         </div>
@@ -48,9 +49,9 @@
                             <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">document type:</label>
                             <div class="col-lg-10 col-md-6 col-sm-12">
                                 <select name="event_type_id" id="event_type_id" class="form-control">
-                                    @foreach ($viewData['eventTypes'] as $dType)
+                                    {{-- @foreach ($viewData['eventTypes'] as $dType)
                                         <option value="{{ $dType->id }}">{{ $dType->document_type_name }}</option>
-                                    @endforeach
+                                    @endforeach --}}
                                 </select>
                             </div>
                         </div>
@@ -60,7 +61,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Description</label>
-                    <textarea class="form-control" name="description" rows="3">{{ $viewData['product']->description }}</textarea>
+                    <textarea class="form-control" name="description" rows="3">{{ $viewData['document']->description }}</textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Edit</button>
             </form>

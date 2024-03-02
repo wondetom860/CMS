@@ -85,6 +85,11 @@
                                     <li><a href="{{ route('admin.courtstaff.index') }}" class="nav-link text-white">{{__('Courts Staff')}}</a>
                                     </li>
                                 @endcan
+
+                                @can('court-staff-list')
+                                    <li><a href="{{ route('admin.change_court_staff.index') }}" class="nav-link text-white">{{__('Courts Staff')}}</a>
+                                    </li>
+                                @endcan
                             </ul>
                         @endcan
                     </li>

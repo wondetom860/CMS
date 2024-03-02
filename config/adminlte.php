@@ -399,6 +399,12 @@ return [
                     'icon' => 'far fa-fw fa-file',
                 ],
                 [
+                    'text' => 'Change Case Staff Assignment',
+                    // 'can' => 'change-case-staff-assignment-list',
+                    'url' => 'admin/change_court_staff',
+                    'icon' => 'far fa-fw fa-file',
+                ],
+                [
                     'text' => 'Parties',
                     'can' => 'party-list',
                     'url' => 'admin/party',
@@ -414,6 +420,18 @@ return [
                     'text' => 'Document',
                     'can' => 'document-list',
                     'url' => 'admin/document',
+                    'icon' => 'far fa-fw fa-file',
+                ],
+                [
+                    'text' => 'Last Statatment',
+                    'can' => 'laststatment-list',
+                    'url' => 'admin/laststatment',
+                    'icon' => 'far fa-fw fa-file',
+                ],
+                [
+                    'text' => 'Archives',
+                    'can' => 'archive-list',
+                    'url' => 'admin/case_archive',
                     'icon' => 'far fa-fw fa-file',
                 ],
             ]
