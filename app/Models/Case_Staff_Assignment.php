@@ -3,10 +3,13 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Mail\Mailer;
+
+use Andegna\DateTime;
 use App\Mail\staffAssignment;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Mail;
+
 // use Mail;
 
 class Case_Staff_Assignment extends Model
@@ -41,6 +44,19 @@ class Case_Staff_Assignment extends Model
         } else {
             // $st = 
             notify()->warning('User Email is not known');
+        }
+    }
+
+    public function getAssignedDate()
+    {
+        if (session()->get('locale') == 'am') {
+            $ethiopian_date = new DateTime(date_create($this->assigned_at));
+            // $gregorian = date_create($this->assigned_at);
+            // return DateTimeFactory::fromDateTime($gregorian);
+            // Constants::DATE_ETHIOPIAN_WONDE
+            return $ethiopian_date->format("d/m/Y");
+        } else {
+            return date_format(date_create($this->assigned_at), 'd/m/Y');
         }
     }
 

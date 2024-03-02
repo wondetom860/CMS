@@ -98,6 +98,14 @@ class CaseController extends Controller
             ->with('message', 'Record not found.');
     }
 
+    public function getCaseReport(Request $request)
+    {
+        $case_id = $request->case_id;
+        $report_title = "Case summery report";
+        $case = CaseModel::findOrFail($case_id);
+        return view('case.partials.case_report')->with(['case' => $case, 'report_title' => $report_title]);
+    }
+
     public function getReport(Request $request)
     {
         $report_type = $request->report_type;

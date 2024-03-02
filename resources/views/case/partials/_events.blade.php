@@ -2,18 +2,17 @@
     $events = $case->events;
     $btn = '';
     $uu = __('Scehdule Event');
-    if (Auth::user()->isClerk()) {
+    if (Auth::user()->isClerk() && $case->isActive()) {
         $btn = "<button class='btn btn-primary btn-xs float-right' onclick='registerEvent({$case->id}); return false;'>$uu</button>";
-        
     }
     if ($events) {
         $ee = __('Event Type');
         $dd = __('Event Date');
         $ll = __('Locatin');
         $oo = __('OutCome');
-        $yy = __('Events Attached To This Case');
-        $add = __('Add Archive');
-        echo "<h6>$yy{$btn}</h6> 
+        $yy = __('Events Schedules');
+        $add = isset($print) ? '' : __('Archives');
+        echo "<h6 class='text-info'>$yy{$btn}</h6> 
         <table class='table table-condensed table-sm table-bordered' style='font-size: 9pt;'>
             <thead style='background-color:cornflowerblue;'>
                 <th>#</th>
@@ -21,26 +20,36 @@
                 <th>$dd</th>
                 <th>$ll</th>
                 <th>$oo</th>
-                <th>$add</th>
+                <th colspan=2>$add</th>
             </thead><tbody>";
         $count = 0;
         foreach ($events as $event) {
-            $btn2 = "";
-            $ad = "";
-            if (Auth::user()->can('event-create') && $event->createdBy && ($event->createdBy->id == Auth::user()->id)) {
-                
-               // $btn2 = "<button title='{{$event->createdBy->id}}' class='btn btn-xs btn-link float-right' onclick='updateEvent({$event->id}); return false;'>Update</button>";
-                $ad = "<button class='btn btn-primary btn-xs' onclick='addArchive({$event->id}); return false;'>{$add}</button>";
+            $btn2 = '';
+            $ad = '';
+            $ccount = count($event->archives);
+            if (!isset($print)) {
+                $btn = "<button class='btn btn-xs btn-success float-right' onclick='showArchives({$event->id});reeturn false;'>{$ccount} archives</button>";
+            }
+            // Auth::user()->can('event-create') &&
+            //     $event->createdBy &&
+            //     $event->createdBy->id == Auth::user()->id &&
+            //     $event->case->isActive()
+            if (Auth::user()->can('archive-create') && $event->case->isActive()) {
+                // $btn2 = "<button title='{{ $event->createdBy->id }}' class='btn btn-xs btn-link float-right' onclick='updateEvent({$event->id}); return false;'>Update</button>";
+                if (!isset($print)) {
+                    $ad = "<button class='btn btn-primary btn-xs' onclick='addArchive({$event->id}); return false;'>{$add}</button>";
+                }
             }
             echo "<tr>
                     <td>" .
                 ++$count .
                 "</td>
                     <td>{$event->eventType->event_type_name}</td>
-                    <td>{$event->date_time}</td>
+                    <td>{$event->getDate()}</td>
                     <td>{$event->location}</td>
                     <td>{$event->out_come}{$btn2}</td>
                     <td>{$ad}</td>
+                    <td>{$btn}</td>
                 </tr>";
         }
         echo '</tbody></table>';

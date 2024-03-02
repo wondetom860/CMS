@@ -21,6 +21,10 @@ class Party extends Model
         ]);
     }
 
+    public static function getClients(){
+        return self::all();
+    }
+
     public function getPartyDetail()
     {
         return $this->person->getFullName();

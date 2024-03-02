@@ -38,7 +38,7 @@ class event extends Model
                 $user->person_id
             )
             ->where('date_time', 'like', str(date('Y-m-d')) . "%")
-            ->groupBy('case_id')
+            // ->groupBy('case_id')
             ->count();
     }
     public function getDate()

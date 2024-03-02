@@ -42,18 +42,21 @@ class LastStatmentController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
      */
+
+    public function createPartial(Request $request)
+    {
+        $case_id = $request->case_id;
+        $viewData['case'] = CaseModel::findOrFail($case_id);
+        return view('admin.laststatment._partials._form')->with('viewData', $viewData);
+    }
     public function create()
     {
         $courtStaff = CourtStaff::where(['person_id' => Auth::user()->person_id])->first();
+        // print_r($courtStaff->pluck('id'));
         if ($courtStaff) {
-            $viewData['title'] = 'Admin Page - Lastststment - CCMS';
-            $viewData['cases'] = CaseModel::all();
-            $viewData['documentTypes'] = DocumentType::all();
-            $viewData['csas'] = Case_Staff_Assignment::all();
-            // $viewData['courtStaff'] = $courtStaff;
-            // $viewData['clients'] = $clientId ? ([Person::findOrFail($clientId)]) : (Person::all());
+            $viewData['title'] = 'Dashboard - Decisions - CCMS';
+            $viewData['csas'] = Case_Staff_Assignment::where('court_staff_id', '=', $courtStaff->id)->get();
             return view('admin.laststatment.create')->with('viewData', $viewData);
         } else {
             return view('error')
@@ -67,14 +70,9 @@ class LastStatmentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        // $viewData['case'] = CaseModel::all();
-        // $dataProvider = new EloquentDataProvider(Document::query());
-
-        // LastStatment::validate($request);
         $laststatment = new LastStatment();
         $laststatment->case_id = $request->case_id;
 
@@ -91,9 +89,13 @@ class LastStatmentController extends Controller
         $laststatment->remark = $request->remark;
         $laststatment->written_by = Auth::user()->id;
         $laststatment->date_time = date('Y-m-d');
-        // $Document->doc_storage_path = $request->doc_storage_path;
         $laststatment->save();
 
+        $laststatment->case->terminateCase();
+
+        if ($request->pop_up) {
+            return redirect()->route('case.show', ['id' => $laststatment->case_id]);
+        }
         notify()->success('laststatment registered Successfully', 'Creation Success');
 
         return redirect()->route('admin.laststatment.index');

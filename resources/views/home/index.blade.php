@@ -60,13 +60,15 @@
 
                 <div class="small-box bg-danger">
                     <div class="inner">
-                        <h3>65</h3>
-                        <p>{{ __('Unique Visitors') }}</p>
+                        <h3>@php
+                            echo count(App\Models\Party::getClients());
+                        @endphp</h3>
+                        <p>{{ __('Clients Participated so far') }}</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-pie-graph"></i>
                     </div>
-                    <a href="#" class="small-box-footer">{{ __('More info') }} <i
+                    <a href="admin/party" class="small-box-footer">{{ __('More info') }} <i
                             class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
@@ -102,14 +104,12 @@
             </div>
         </div>
     </div>
-                 <div>
-                    <div class="col-12 table-responsive">
-                        @include('case.partials._dashboard2')
-                    </div>
-                </div>
+    <div>
+        <div class="col-12 table-responsive">
+            @include('case.partials._dashboard2')
+        </div>
+    </div>
 @stop
 @section('js')
-    <script>
-        
-    </script>
+    <script></script>
 @stop

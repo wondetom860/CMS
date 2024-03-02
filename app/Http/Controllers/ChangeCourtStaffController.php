@@ -7,6 +7,7 @@ use App\Models\CourtStaff;
 use App\Models\ChangeCourtStaff;
 use App\Models\Case_Staff_Assignment;
 use Illuminate\Support\Facades\Auth;
+
 class ChangeCourtStaffController extends Controller
 {
     public function index()
@@ -21,10 +22,12 @@ class ChangeCourtStaffController extends Controller
 
     public function create()
     {
-        
+
         $viewData['cass'] = case_staff_assignment::query()
             ->join('court_staff', 'court_staff.id', '=', 'case_staff_assignment.court_staff_id')
-            ->where('court_staff.person_id', Auth::user()->person_id)->get();
+            ->join('case','case.id','=','case_staff_assignment.case_id')
+            ->where('court_staff.person_id', Auth::user()->person_id)
+            ->where('case_status', '<>', 2)->get();
 
         // $viewData['court_staf'] = CourtStaff::all();
         $viewData['title'] = "Change Case staff assignemnt";
@@ -39,7 +42,7 @@ class ChangeCourtStaffController extends Controller
         $changes->csa_id = $request->csa_id;
         $changes->termination_reason = $request->termination_reason;
         $changes->requested_by = Auth::user()->id;
-        $changes->requested_at = $changes->requestd_at  = date("Y-m-d");
+        $changes->requested_at = $changes->requestd_at = date("Y-m-d");
         // if ($changes->checkIfAssigned()) {
         //     notify()->error('Court Staff id already assigned to this case', 'record creation failed');
         //     return redirect()->route('admin.case_staff_assignments.index');
@@ -47,9 +50,9 @@ class ChangeCourtStaffController extends Controller
         $changes->save();
         notify()->success('Request generated Successfully', 'Creation Success');
         return redirect()->route('admin.change_court_staff.index');
-    
+
         // return redirect()->route('admin.change_court_staff.index')->with('success', 'Change Court Staff created successfully.');
-    
+
     }
     public function show($id)
     {
@@ -78,36 +81,36 @@ class ChangeCourtStaffController extends Controller
     }
 
 
-//     public function index()
+    //     public function index()
 //     {
 //         $changeCourtStaffs = ChangeCourtStaff::all();
 //         $changeCourtStaffs = case_staff_assignment::all();
 //         return view('admin.change_court_staff.index', compact('changeCourtStaffs'));
 //     }
 
-//     public function create()
+    //     public function create()
 //     {
 //         // Return view for creating new Change Court Staff record
 //         return view('admin.change_court_staff.create');
 //     }
 
-//     public function store(Request $request)
+    //     public function store(Request $request)
 //     {
 //         // Logic to store new Change Court Staff record
 //     }
 
-//     public function edit($id)
+    //     public function edit($id)
 //     {
 //         $changeCourtStaff = ChangeCourtStaff::findOrFail($id);
 //         return view('admin.change_court_staff.edit', compact('changeCourtStaff'));
 //     }
 
-//     public function update(Request $request, $id)
+    //     public function update(Request $request, $id)
 //     {
 //         // Logic to update existing Change Court Staff record
 //     }
 
-//     public function show($id)
+    //     public function show($id)
 //     {
 //         $changeCourtStaff = ChangeCourtStaff::findOrFail($id);
 //         return view('admin.change_court_staff.show', compact('changeCourtStaff'));
