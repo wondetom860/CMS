@@ -33,7 +33,9 @@
                                 'label' => __('Case Number'), // Column label.
                                 // 'filter' => false, // If false, then column will be without a search filter form field.,
                                 'value' => function ($row) {
-                                    return $row->case->case_number;
+                                    $case = $row->case;
+                                    if($case->case_status != 2){ $case->terminateCase(); }
+                                    return $case->case_number;
                                 },
                                 'htmlAttributes' => [
                                     'width' => '15%', // Width of table column.
@@ -85,13 +87,13 @@
                             //     ],
                             // ],
                             
-                            [
-                                'label' => __('Judges'), // Column label.
-                                'attribute' => 'judges', // Attribute, by which the row column data will be taken from a model.
-                                'value' => function ($row) {
-                                    return $row->judges;
-                                },
-                            ],
+                            // [
+                            //     'label' => __('Judges'), // Column label.
+                            //     'attribute' => 'judges', // Attribute, by which the row column data will be taken from a model.
+                            //     'value' => function ($row) {
+                            //         return $row->judges;
+                            //     },
+                            // ],
                             [
                                 'label' => __('Date'), // Column label.
                                 'attribute' => 'date_time', // Attribute, by which the row column data will be taken from a model.

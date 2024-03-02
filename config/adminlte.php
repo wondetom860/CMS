@@ -323,7 +323,6 @@ return [
         ],
 
         // Sidebar items:
-        ['header' => ''],
         [
             'type' => 'sidebar-menu-search',
             'text' => 'search',

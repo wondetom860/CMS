@@ -5,7 +5,7 @@
 @section('innerTitle', $viewData['subtitle'])
 @section('content')
 <div class="card mb-4">
-    <div class="card-header"> {{__('Create Case Staff Assignment')}}
+    <div class="card-header"> {{__('Assign The case to court staff')}}
     </div>
     <div class="card-body">
         <form method="POST" action="{{ route('admin.case_staff_assignments.store') }}">

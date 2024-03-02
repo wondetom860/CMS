@@ -71,6 +71,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/case/{id}/delete', App\Http\Controllers\CaseController::class . '@delete')->name('case.delete'); //case.get-report
     Route::get('/case/generate-report', App\Http\Controllers\CaseController::class . '@generateReport')->name('case.create.report');
     Route::get('/case/get-report', App\Http\Controllers\CaseController::class . '@getReport')->name('case.get-report');//
+    Route::get('/case/get-case-report', App\Http\Controllers\CaseController::class . '@getCaseReport')->name('case.get-case-report');//
     Route::get('/case/detail_remote/{case_number}', App\Http\Controllers\CaseController::class . '@showById')->name('case.detail_remote');//case.detail_remote
 
     // for auth users - court
@@ -149,7 +150,8 @@ Route::middleware('auth')->prefix('/admin')->group(function () {  //|'/SuperAdmi
     Route::post('/laststatment/store', App\Http\Controllers\LastStatmentController::class . '@store')->name('admin.laststatment.store');
     Route::get('/laststatment/{id}/edit', App\Http\Controllers\LastStatmentController::class . '@edit')->name('admin.laststatment.edit');
     Route::put('/laststatment/{id}/update', App\Http\Controllers\LastStatmentController::class . '@update')->name('admin.laststatment.update');
-    Route::get('/laststatment/{id}/delete', App\Http\Controllers\LastStatmentController::class . '@destroy')->name('admin.laststatment.delete');
+    Route::get('/laststatment/{id}/delete', App\Http\Controllers\LastStatmentController::class . '@destroy')->name('admin.laststatment.delete');//
+    Route::get('/laststatment/create_partial', App\Http\Controllers\LastStatmentController::class . '@createPartial')->name('admin.laststatment.create_partial');//
 
 
 

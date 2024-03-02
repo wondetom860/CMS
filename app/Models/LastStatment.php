@@ -29,7 +29,7 @@ class LastStatment extends Model
     public function getDate()
     {
         if (session()->get('locale') == 'am') {
-            $ethiopian_date = new DateTime($this->date_time);
+            $ethiopian_date = new DateTime(date_create($this->date_time));
             // $gregorian = date_create($this->date_time);
             // return DateTimeFactory::fromDateTime($gregorian);
             // Constants::DATE_ETHIOPIAN_WONDE

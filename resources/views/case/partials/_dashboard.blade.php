@@ -1,4 +1,4 @@
-<div class="container table-responsive">
+<div class="container-fluid table-responsive">
     <h2 class="text-center bg-info mr-2 underlined">{{__('Case Trials')}}</h2>
     @php
         $cases = App\models\CaseModel::getOpenCaseTrials();
