@@ -126,7 +126,7 @@ class DocumentController extends Controller
     {
         $viewData = [];
         $viewData['title'] = 'Admin Page - Edit Document Info - CCMS';
-        $viewData['document'] = document::findOrFail($id);
+        $viewData['document'] = Document::findOrFail($id);
 
         return view('admin.document.edit')->with('viewData', $viewData);
     }

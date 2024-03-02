@@ -4,12 +4,12 @@
 @section('content')
     <div class="container-fluid ">
         <h3 class="">
-            Detail: {{ $product->name }} - Document page
+            Detail: {{ $document->name }} - Document page
         </h3>
         <div class="card mb-3">
             <div class="row g-0">
                 <div class="col-md-4 p-2">
-                    <img src="{{ asset('/storage' . '/' . $product->image) }}" class="img-fluid rounded-start"
+                    <img src="{{ asset('/storage' . '/' . $document->image) }}" class="img-fluid rounded-start"
                         style="width: 350px; height:auto">
                 </div>
                 <div class="col-md-8">

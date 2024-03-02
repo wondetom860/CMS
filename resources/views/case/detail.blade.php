@@ -68,12 +68,39 @@
         $('#formModal').modal('show');
     }
 
+    const addArchive = (event_id) => {
+        $("#modal_body").html('Add Archive File');
+        $("#formModalLabel").html("Add Archive for case {{ $viewData['case']->case_number }}");
+        $.get('{{ route('admin.case_archive.create_partial') }}', {
+            event_id: event_id
+        }).done((resp) => {
+            $("#modal_body").html(resp);
+        });
+        $('#myForm').trigger("reset");
+        $('#formModal').modal('show');
+    }
     const submitCsaForm = () => {
         // console.log($("#first_name").val());
         $.ajax({
             url: "{{ route('admin.case_staff_assignments.store') }}",
             type: "POST",
             data: $("#csa_form").serialize(),
+            dataType: 'JSON',
+            success: function(data) {
+                if (data == 1) {
+                    window.location.href = window.location;
+                } else {
+                    alert(data);
+                }
+            }
+        });
+    }
+    const submitArchiveForm = () => {
+        // console.log($("#first_name").val());
+        $.ajax({
+            url: "{{ route('admin.case_archive.store') }}",
+            type: "POST",
+            data: $("#archive_form").serialize(),
             dataType: 'JSON',
             success: function(data) {
                 if (data == 1) {
@@ -157,8 +184,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="formModalLabel">Attach document to a case
-                </h4>
+                <h4 class="modal-title" id="formModalLabel">{{__('Attach document to a case')}}</h4>
             </div>
             <div class="modal-body" id="modal_body">
 
