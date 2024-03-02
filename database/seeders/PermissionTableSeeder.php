@@ -47,6 +47,12 @@ class PermissionTableSeeder extends Seeder
             'document-detail',
             'document-delete',
 
+            'laststatment-list',
+            'laststatment-create',
+            'laststatment-edit',
+            'laststatment-detail',
+            'laststatment-delete',
+
             'court-list',
             'court-create',
             'court-edit',

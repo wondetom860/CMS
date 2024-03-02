@@ -64,7 +64,8 @@
             <h2 style="color: teal">@yield('subtitle', __('MOD - Court Case Managment System'))</h2>
             <span
                 class="text-white; float-right"><?= date('l, F d, Y') . ' [ ' . $ethiopian_date->format('l, F d, Y') . '] ' ?></span>
-        </div>
+        
+            <div>
     </header>
     <!-- header -->
     <main class="py-4">
