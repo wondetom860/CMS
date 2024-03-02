@@ -2,6 +2,7 @@
 @section('title', $viewData['title'])
 @section('innerTitle', $viewData['title'])
 @section('content')
+    {{-- {{ $canEdit = Auth::user()->can('case-edit') ? '/case/edit' : false }} --}}
     <div class="">
         <div class="card">
             <h4 class="card-header">
@@ -9,6 +10,10 @@
                 @can('case-create')
                     <a class="btn btn-primary btn-xs float-right" href="{{ route('case.create') }}"
                         style="align-self: flex-end">{{ __('Register Case') }}</a>
+                @endcan
+                @can('case-create')
+                    <a class="btn btn-secondary btn-xs float-right" href="{{ route('case.create.report') }}"
+                        style="align-self: flex-end">{{ __('Generate report') }}</a>
                 @endcan
             </h4>
             <div class="card-body">
@@ -24,8 +29,9 @@
                         'title' => __('Cases'), // It can be empty ''
                         'strictFilters' => false, // If true, then a searching by filters will be strict, using an equal '=' SQL operator instead of 'like'.
                         'rowsFormAction' => '/admin/pages/deletion', // Route url to send slected checkbox items for deleting rows, for example.
-                        'useSendButtonAnyway' => true, // If true, even if there are no checkbox column, the main send button will be displayed.
+                        'useSendButtonAnyway' => false, // If true, even if there are no checkbox column, the main send button will be displayed.
                         'searchButtonLabel' => __('Find'),
+                        'deleteButtonLabel' => false,
                         'resetButtonLabel' => __('Reset'),
                         'columnFields' => [
                             [
@@ -152,15 +158,15 @@
                                         return '/case/show/' . $data->id;
                                     },
                                     'edit' => function ($data) {
-                                        '/case' . '/' . $data->id . '/edit';
+                                        return Auth::user()->can('case-edit') ? '/case' . '/' . $data->id . '/edit' : false;
                                     },
                                     [
                                         'class' => Itstructure\GridView\Actions\Delete::class, // REQUIRED
                                         'url' => function ($data) {
                                             if (Auth::user()->can('case-delete')) {
-                                                return '/case' . '/' . $data->id . '/delete';
+                                                '/case' . '/' . $data->id . '/delete';
                                             } else {
-                                                return false;
+                                                false;
                                             }
                                         },
                                         'htmlAttributes' => [
