@@ -195,7 +195,8 @@ class CaseModel extends Model
     {
         // , 'event.date_time' => date('Y-m-d')
         return CaseModel::where('case_public', self::CASE_PUBLIC)
-            ->leftJoin('events', 'case.id', '=', 'events.case_id')
+            ->join('events', 'case.id', '=', 'events.case_id')
+            ->where('events.date_time', '<>', NULL)
             ->where('events.date_time', 'like', str(date('Y-m-d')) . "%")
             ->get();
     }
@@ -259,6 +260,16 @@ class CaseModel extends Model
     //     return count($this->CaseModel()->where('case_status','<>',2)->get());
     // }
 
+    public static function getMyActiveCases($userId = null)
+    {
+        // returns counts of active cases - non-terminated
+        return self::query()
+            ->join('case_staff_assignment', 'case.id', '=', 'case_staff_assignment.case_id')
+            ->join('court_staff', 'court_staff.id', '=', 'case_staff_assignment.court_staff_id')
+            ->where('court_staff.person_id', Auth::user()->person_id)
+            ->count();
+    }
+
     public function court()
     {
         return $this->belongsTo(Court::class);
@@ -284,6 +295,6 @@ class CaseModel extends Model
     }
     public function archives()
     {
-        return $this->hasMany(CaseArchive::class,'case_id');
+        return $this->hasMany(CaseArchive::class, 'case_id');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Andegna\DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -39,6 +40,19 @@ class Party extends Model
     public function getLogoPath()
     {
         return $this->logo_image_path ? $this->logo_image_path : '/court2.jpg';
+    }
+
+    public function getDate()
+    {
+        if (session()->get('locale') == 'am') {
+            $ethiopian_date = new DateTime(date_create($this->date_time));
+            // $gregorian = date_create($this->created_at);
+            // return DateTimeFactory::fromDateTime($gregorian);
+            // Constants::DATE_ETHIOPIAN_WONDE
+            return $ethiopian_date->format("d/m/Y");
+        } else {
+            return date_format(date_create($this->date_time), "d/m/Y");
+        }
     }
 
     public function getDetail()

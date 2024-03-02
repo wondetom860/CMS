@@ -17,6 +17,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"> --}}
     <link href="{{ asset('/css/admin.css') }}" rel="stylesheet" />
     <title>@yield('title', __('Admin - MOD - Court Case Management System'))</title>
+    @php
+        $uid = Auth::user();
+        if ($uid) {
+            $user = App\Models\User::findOrFail($uid->id);
+            echo "<span class='text-right float-right bg-warning p-1'>{$user->getRoles()}</span><br>";
+        } else {
+            echo 'Guest User';
+        }
+    @endphp
 @stop
 
 @section('content')
