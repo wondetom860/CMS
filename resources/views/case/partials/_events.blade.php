@@ -27,7 +27,7 @@
         foreach ($events as $event) {
             $btn2 = "";
             $ad = "";
-            if (Auth::user()->can('event-create') && $event->createdBy->id == Auth::user()->id) {
+            if (Auth::user()->can('event-create') && $event->createdBy && ($event->createdBy->id == Auth::user()->id)) {
                 
                // $btn2 = "<button title='{{$event->createdBy->id}}' class='btn btn-xs btn-link float-right' onclick='updateEvent({$event->id}); return false;'>Update</button>";
                 $ad = "<button class='btn btn-primary btn-xs' onclick='addArchive({$event->id}); return false;'>{$add}</button>";

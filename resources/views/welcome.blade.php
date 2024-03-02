@@ -10,6 +10,6 @@
 @stop
 @section('js')
     <script>
-        console.log('Hi!');
+        // console.log('Hi!');
     </script>
 @stop

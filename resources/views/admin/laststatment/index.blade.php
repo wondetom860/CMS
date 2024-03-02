@@ -4,13 +4,14 @@
 @section('content')
     <div class="">
         <div class="card">
-            <h5 class="card-header">
-                {{__('Party - MOD-CCMS')}}
-                @can('party-create')
-                    <a class="btn btn-primary btn-xs register-caseType-btn float-right" href="{{ route('admin.party.create') }}"
-                        style="align-self: flex-end">{{__('Register New Parties')}}</a>
+            {{-- <img src="{{ asset($row->Image) }}" style="width:80px; height:80px; border-radius:50%;" alt=""> --}}
+            <h4 class="card-header">
+                {{__('LastStatment - MOD-CCMS')}}
+                @can('laststatment-create')
+                    <a class="btn btn-primary btn-xs register-caseType-btn float-right"
+                        href="{{ route('admin.laststatment.create') }}" style="align-self: flex-end">{{__('Register New LastStatment')}}</a>
                 @endcan
-            </h5>
+            </h4>
             <div class="card-body">
                 @php
                     $gridData = [
@@ -20,7 +21,7 @@
                             'pageName' => 'p',
                         ],
                         'rowsPerPage' => 5, // The number of rows in one page. By default 10.
-                        'title' => __('Parties'), // It can be empty ''
+                        'title' => __('LastStatment'), // It can be empty ''
                         'strictFilters' => true, // If true, then a searching by filters will be strict, using an equal '=' SQL operator instead of 'like'.
                         'rowsFormAction' => '/admin/pages/deletion', // Route url to send slected checkbox items for deleting rows, for example.
                         'useSendButtonAnyway' => false, // If true, even if there are no checkbox column, the main send button will be displayed.
@@ -28,16 +29,26 @@
                         'resetButtonLabel' => __('Reset'),
                         'columnFields' => [
                             [
-                                'attribute' => 'Case Number', // REQUIRED if value is not defined. Attribute name to get row column data.
+                                'attribute' => 'case_number', // REQUIRED if value is not defined. Attribute name to get row column data.
                                 'label' => __('Case Number'), // Column label.
+                                // 'filter' => false, // If false, then column will be without a search filter form field.,
                                 'value' => function ($row) {
                                     return $row->case->case_number;
                                 },
-                                // 'filter' => false, // If false, then column will be without a search filter form field.,
                                 'htmlAttributes' => [
                                     'width' => '15%', // Width of table column.
                                 ],
                             ],
+                            // [
+                            //     'attribute' => 'Submitted By',
+                            //     'label' => 'Submitted By',
+                            //     'value' => function ($row) {
+                            //         return $row->courtStaff->person->getFullName();
+                            //     },
+                            //     'htmlAttributes' => [
+                            //         'width' => '15%',
+                            //     ],
+                            // ],
                             // [
                             //     'label' => 'Active', // Column label.
                             //     'value' => function ($row) {
@@ -73,28 +84,57 @@
                             //         ],
                             //     ],
                             // ],
+                            
                             [
-                                'label' => __('Person'),
-                                'attribute' => 'person_id',
+                                'label' => __('Judges'), // Column label.
+                                'attribute' => 'judges', // Attribute, by which the row column data will be taken from a model.
                                 'value' => function ($row) {
-                                    return $row->person->getFullName();
+                                    return $row->judges;
                                 },
                             ],
                             [
-                                'label' => __('Party Type'),
-                                'value' => function ($row) {
-                                    return $row->partyType->party_type_name;
-                                },
-                                //'sort' => 'first_name', // To sort rows. Have to set if an 'attribute' is not defined for column.
-                            ],
-                            [
-                                'label' => __('Registered on'),
+                                'label' => __('Date'), // Column label.
+                                'attribute' => 'date_time', // Attribute, by which the row column data will be taken from a model.
                                 'value' => function ($row) {
                                     return $row->getDate();
                                 },
-                                //'sort' => 'first_name', // To sort rows. Have to set if an 'attribute' is not defined for column.
                             ],
-                            // __('created_at'), // Simple column setting by string.
+                            [
+                                'label' => __('Decision'), // Column label.
+                                'attribute' => 'statement_description', // Attribute, by which the row column data will be taken from a model.
+                                'value' => function ($row) {
+                                    return $row->statement_description;
+                                },
+                            ],
+                            
+                            [
+                                'label' => __('Evenet'), // Column label.
+                                'attribute' => 'event_id',
+                                'value' => function ($row) 
+                                {
+                                    return $row->event ? $row->event->eventType->event_type_name : "-";
+                                },
+                
+                               
+                            ],
+                            [
+                                'label' => __('Written By'), // Column label.
+                                'attribute' => 'writtenBy',
+                                'value' => function ($row) 
+                                {
+                                    return $row->writtenBy->user_name;
+                                },
+                
+                               
+                            ],
+                            [
+                                'label' => __('remark'), // Column label.
+                                'attribute' => 'remark', // Attribute, by which the row column data will be taken from a model.
+                                'value' => function ($row) {
+                                    return $row->remark;
+                                },
+                            ],
+
                             [
                                 // Set Action Buttons.
                                 'class' => Itstructure\GridView\Columns\ActionColumn::class, // REQUIRED.
@@ -104,18 +144,18 @@
                                 'actionTypes' => [
                                     // REQUIRED.
                                     'view' => function ($data) {
-                                        return '/admin/party/show/' . $data->id;
+                                        return '/admin/laststatment/show/' . $data->id;
                                     },
                                     'edit' => function ($data) {
-                                        return '/admin/party/' . $data->id . '/edit';
+                                        return '/admin/laststatment/' . $data->id . '/edit';
                                     },
                                     [
                                         'class' => Itstructure\GridView\Actions\Delete::class, // REQUIRED
                                         'url' => function ($data) {
-                                            return '/admin/party/' . $data->id . '/delete';
+                                            return '/admin/laststatment/' . $data->id . '/delete';
                                         },
                                         'htmlAttributes' => [
-                                            'target' => '_blank',
+                                            'target' => '_self',
                                             'style' => 'color: yellow; font-size: 16px;',
                                             'onclick' => 'return window.confirm("Sure to delete?");',
                                         ],
@@ -137,5 +177,26 @@
                 @gridView($gridData)
             </div>
         </div>
+        <script>
+            const showDocument = (doc_id) => {
+                $('#myForm').trigger("reset");
+                $('#formModal').modal('show');
+                $("#modal_body").html("Laoding image will be implemented soon...");
+            }
+        </script>
     </div>
 @endsection
+
+<div class="modal fade" id="formModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="formModalLabel">Case Document
+                </h4>
+            </div>
+            <div class="modal-body" id="modal_body">
+
+            </div>
+        </div>
+    </div>
+</div>

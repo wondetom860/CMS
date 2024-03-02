@@ -31,6 +31,7 @@ Route::get('/', function () {
     return view('/welcome');
 });
 
+
 Route::get('/error/{message}', function ($message) {
     return view('error')->with('message', $message);
 })->name('error');
@@ -50,7 +51,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/my-account/profile', App\Http\Controllers\MyAccountController::class . '@profile')->name('myaccount.profile');
     // Route::post('/my-account/update/{id}', App\Http\Controllers\MyAccountController::class . '@update')->name('myaccount.update.profile');
     // Route::post('/my-account/resetPassword/{id}', App\Http\Controllers\MyAccountController::class . '@resetPassword')->name('myaccount.reset.password');
-
+    // Route::get('/home', function () {
+    //     return view('/welcome');
+    // });
+    
     Route::get('/my-account/changeUserName', App\Http\Controllers\MyAccountController::class . '@changeUserName')->name('myaccount.change.username');
     Route::post('/my-account/updateUserName', App\Http\Controllers\MyAccountController::class . '@updateUserName')->name('myaccount.update.username');
 
@@ -77,6 +81,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+    Route::get('/home', App\Http\Controllers\HomeController::class . '@index')->name('home.index');
     // Route::resource('/roles', App\Http\Controllers\Admin\RoleController::class);
     // Route::resource('/users', App\Http\Controllers\Admin\UserController::class);
 });
@@ -86,7 +91,7 @@ Route::middleware('auth')->group(function () {
 // });
 
 Route::middleware('auth')->prefix('/admin')->group(function () {  //|'/SuperAdmin'
-    Route::get('', App\Http\Controllers\Admin\AdminHomeController::class . '@index')->name('admin.home.index');
+    Route::get('/home', App\Http\Controllers\Admin\AdminHomeController::class . '@index')->name('admin.home.index');
     // Route::get('/products', App\Http\Controllers\Admin\AdminProductController::class . '@index')->name('admin.products.index');
     // Route::get('/products/create', App\Http\Controllers\Admin\AdminProductController::class . '@create')->name('admin.products.create');
     // Route::post('/products/store', App\Http\Controllers\Admin\AdminProductController::class . '@store')->name('admin.products.store');
@@ -134,6 +139,18 @@ Route::middleware('auth')->prefix('/admin')->group(function () {  //|'/SuperAdmi
     Route::post('/document/{id}/delete', App\Http\Controllers\DocumentController::class . '@destroy')->name('admin.document.delete'); //readUploadedFile
     Route::get('/document/readUploadedFile', App\Http\Controllers\DocumentController::class . '@readUploadedFile')->name('admin.document.readUploadedFile'); //create_partial
     Route::get('/document/createPartial', App\Http\Controllers\DocumentController::class . '@createPartial')->name('admin.document.create_partial'); //
+
+
+    //last statment
+
+    Route::get('/laststatment', App\Http\Controllers\LastStatmentController::class . '@index')->name('admin.laststatment.index');
+    Route::get('/laststatment/show/{id}', App\Http\Controllers\LastStatmentController::class . '@show')->name('admin.laststatment.show');
+    Route::get('/laststatment/create', App\Http\Controllers\LastStatmentController::class . '@create')->name('admin.laststatment.create');
+    Route::post('/laststatment/store', App\Http\Controllers\LastStatmentController::class . '@store')->name('admin.laststatment.store');
+    Route::get('/laststatment/{id}/edit', App\Http\Controllers\LastStatmentController::class . '@edit')->name('admin.laststatment.edit');
+    Route::put('/laststatment/{id}/update', App\Http\Controllers\LastStatmentController::class . '@update')->name('admin.laststatment.update');
+    Route::get('/laststatment/{id}/delete', App\Http\Controllers\LastStatmentController::class . '@destroy')->name('admin.laststatment.delete');
+
 
 
     // event
@@ -294,9 +311,9 @@ Route::get('/{locale?}', function ($locale = null) {
     if (isset($locale) && in_array($locale, config('app.available_locales'))) {
         app()->setLocale($locale);
     }
-    $viewData = [];
-    $viewData["title"] = "Home Page - CCMS";
-    return view('home.index')->with("viewData", $viewData);
+    // $viewData = [];
+    // $viewData["title"] = "Home Page - CCMS";
+    return redirect()->route('home.index');
 });
 
 Route::get("language/{locale}", App\Http\Controllers\LocalizationController::class . '@changeLocale')->name('locale');
