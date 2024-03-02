@@ -9,18 +9,12 @@ use Carbon\Carbon;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class CaseModel extends Model
 {
     use HasFactory;
-
-    // use SoftDeletes;
-
-    // protected $dates = ['deleted_at'];
-    // public $searchBy = ['case_number', 'report_date'];
     const STATUS_CLOSED = 2;
     const STATUS_READY = 0;
     const STATUS_ACTIVE = 1;
@@ -39,16 +33,6 @@ class CaseModel extends Model
         ]);
     }
 
-    public function scopeFilter($model, $filters)
-    {
-        // dd($filters['start_date']);
-        if (isset($filters['start_date'])) {
-            $model->where('start_date', '>=', $filters['start_date']);
-        }
-        // dd($filters['start_date']);
-        return $model;
-    }
-
     protected function getParty($partyType)
     {
         $ptiff = PartyType::where(['party_type_name' => strtoupper($partyType)])->get()->first();
@@ -61,6 +45,7 @@ class CaseModel extends Model
         $plaintiffs = $this->parties()->where(['party_type_id' => $this->getParty('plaintiff')])->get();
         return $this->formatAndReturn($plaintiffs);
     }
+    
 
     private function formatAndReturn($party)
     {
@@ -228,6 +213,10 @@ class CaseModel extends Model
         return "MODCCMS/" . $this->court_id . "/" . str_pad(rand(99, 10000), 4, "0");
     }
 
+    public function getCouseOfAction()
+    {
+        return $this->cause_of_action;
+    }
     public function caseStaffAssignments()
     {
         return $this->hasMany(Case_Staff_Assignment::class, 'case_id');

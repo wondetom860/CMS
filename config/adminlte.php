@@ -423,6 +423,12 @@ return [
                     'icon' => 'far fa-fw fa-file',
                 ],
                 [
+                    'text' => 'Last Statatment',
+                    'can' => 'laststatment-list',
+                    'url' => 'admin/laststatment',
+                    'icon' => 'far fa-fw fa-file',
+                ],
+                [
                     'text' => 'Archives',
                     'can' => 'archive-list',
                     'url' => 'admin/case_archive',

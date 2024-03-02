@@ -136,6 +136,18 @@ Route::middleware('auth')->prefix('/admin')->group(function () {  //|'/SuperAdmi
     Route::get('/document/createPartial', App\Http\Controllers\DocumentController::class . '@createPartial')->name('admin.document.create_partial'); //
 
 
+    //last statment
+
+    Route::get('/laststatment', App\Http\Controllers\LastStatmentController::class . '@index')->name('admin.laststatment.index');
+    Route::get('/laststatment/show/{id}', App\Http\Controllers\LastStatmentController::class . '@show')->name('admin.laststatment.show');
+    Route::get('/laststatment/create', App\Http\Controllers\LastStatmentController::class . '@create')->name('admin.laststatment.create');
+    Route::post('/laststatment/store', App\Http\Controllers\LastStatmentController::class . '@store')->name('admin.laststatment.store');
+    Route::get('/laststatment/{id}/edit', App\Http\Controllers\LastStatmentController::class . '@edit')->name('admin.laststatment.edit');
+    Route::put('/laststatment/{id}/update', App\Http\Controllers\LastStatmentController::class . '@update')->name('admin.laststatment.update');
+    Route::get('/laststatment/{id}/delete', App\Http\Controllers\LastStatmentController::class . '@destroy')->name('admin.laststatment.delete');
+
+
+
     // event
     Route::get('/event', App\Http\Controllers\eventController::class . '@index')->name('admin.event.index');
     Route::get('/event/show/{id}', App\Http\Controllers\eventController::class . '@show')->name('admin.event.show');
