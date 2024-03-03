@@ -31,6 +31,7 @@ Route::get('/', function () {
     return view('/welcome');
 });
 
+
 Route::get('/error/{message}', function ($message) {
     return view('error')->with('message', $message);
 })->name('error');
@@ -50,7 +51,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/my-account/profile', App\Http\Controllers\MyAccountController::class . '@profile')->name('myaccount.profile');
     // Route::post('/my-account/update/{id}', App\Http\Controllers\MyAccountController::class . '@update')->name('myaccount.update.profile');
     // Route::post('/my-account/resetPassword/{id}', App\Http\Controllers\MyAccountController::class . '@resetPassword')->name('myaccount.reset.password');
-
+    // Route::get('/home', function () {
+    //     return view('/welcome');
+    // });
+    
     Route::get('/my-account/changeUserName', App\Http\Controllers\MyAccountController::class . '@changeUserName')->name('myaccount.change.username');
     Route::post('/my-account/updateUserName', App\Http\Controllers\MyAccountController::class . '@updateUserName')->name('myaccount.update.username');
 
@@ -67,6 +71,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/case/{id}/delete', App\Http\Controllers\CaseController::class . '@delete')->name('case.delete'); //case.get-report
     Route::get('/case/generate-report', App\Http\Controllers\CaseController::class . '@generateReport')->name('case.create.report');
     Route::get('/case/get-report', App\Http\Controllers\CaseController::class . '@getReport')->name('case.get-report');//
+    Route::get('/case/get-case-report', App\Http\Controllers\CaseController::class . '@getCaseReport')->name('case.get-case-report');//
     Route::get('/case/detail_remote/{case_number}', App\Http\Controllers\CaseController::class . '@showById')->name('case.detail_remote');//case.detail_remote
 
     // for auth users - court
@@ -77,6 +82,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+    Route::get('/home', App\Http\Controllers\HomeController::class . '@index')->name('home.index');
     // Route::resource('/roles', App\Http\Controllers\Admin\RoleController::class);
     // Route::resource('/users', App\Http\Controllers\Admin\UserController::class);
 });
@@ -86,7 +92,7 @@ Route::middleware('auth')->group(function () {
 // });
 
 Route::middleware('auth')->prefix('/admin')->group(function () {  //|'/SuperAdmin'
-    Route::get('', App\Http\Controllers\Admin\AdminHomeController::class . '@index')->name('admin.home.index');
+    Route::get('/home', App\Http\Controllers\Admin\AdminHomeController::class . '@index')->name('admin.home.index');
     // Route::get('/products', App\Http\Controllers\Admin\AdminProductController::class . '@index')->name('admin.products.index');
     // Route::get('/products/create', App\Http\Controllers\Admin\AdminProductController::class . '@create')->name('admin.products.create');
     // Route::post('/products/store', App\Http\Controllers\Admin\AdminProductController::class . '@store')->name('admin.products.store');
@@ -144,7 +150,8 @@ Route::middleware('auth')->prefix('/admin')->group(function () {  //|'/SuperAdmi
     Route::post('/laststatment/store', App\Http\Controllers\LastStatmentController::class . '@store')->name('admin.laststatment.store');
     Route::get('/laststatment/{id}/edit', App\Http\Controllers\LastStatmentController::class . '@edit')->name('admin.laststatment.edit');
     Route::put('/laststatment/{id}/update', App\Http\Controllers\LastStatmentController::class . '@update')->name('admin.laststatment.update');
-    Route::get('/laststatment/{id}/delete', App\Http\Controllers\LastStatmentController::class . '@destroy')->name('admin.laststatment.delete');
+    Route::get('/laststatment/{id}/delete', App\Http\Controllers\LastStatmentController::class . '@destroy')->name('admin.laststatment.delete');//
+    Route::get('/laststatment/create_partial', App\Http\Controllers\LastStatmentController::class . '@createPartial')->name('admin.laststatment.create_partial');//
 
 
 
@@ -212,6 +219,7 @@ Route::middleware('auth')->prefix('/admin')->group(function () {  //|'/SuperAdmi
     Route::get('/case_archive/{id}/edit', App\Http\Controllers\CaseArchiveController::class . '@edit')->name('admin.case_archive.edit');
     Route::put('/case_archive/{id}/update', App\Http\Controllers\CaseArchiveController::class . '@update')->name('admin.case_archive.update');
     Route::get('/case_archive/create_partial', App\Http\Controllers\CaseArchiveController::class . '@createPartial')->name('admin.case_archive.create_partial');
+    Route::get('/case_archive/show_archives', App\Http\Controllers\CaseArchiveController::class . '@showArchives')->name('admin.case_archive.show_archives');//show_archives
 
     //party type
 
@@ -306,9 +314,9 @@ Route::get('/{locale?}', function ($locale = null) {
     if (isset($locale) && in_array($locale, config('app.available_locales'))) {
         app()->setLocale($locale);
     }
-    $viewData = [];
-    $viewData["title"] = "Home Page - CCMS";
-    return view('home.index')->with("viewData", $viewData);
+    // $viewData = [];
+    // $viewData["title"] = "Home Page - CCMS";
+    return redirect()->route('home.index');
 });
 
 Route::get("language/{locale}", App\Http\Controllers\LocalizationController::class . '@changeLocale')->name('locale');

@@ -1,5 +1,5 @@
-<div class="container table-responsive">
-    <h2 class="text-center bg-gray mr-2 underlined">{{__('Today Registered case')}}</h2>
+<div class="container-fluid table-responsive">
+    <h2 class="text-center bg-gray mr-2 underlined">{{__('Cases registered Today')}}</h2>
     @php
         $cases = App\models\CaseModel::getTodayRegisteredCases();
         $count = 0;
@@ -31,6 +31,6 @@
             </tbody>
         </table>
     @else
-        <p>No active case schedule for today</p>
+        <p>No case registered today</p>
     @endif
 </div>

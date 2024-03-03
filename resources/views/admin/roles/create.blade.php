@@ -3,10 +3,10 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>{{__('Create New Role')}}</h2>
+                <h2>{{ __('Create New Role') }}</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('admin.roles.index') }}">{{__('Back')}}</a>
+                <a class="btn btn-primary" href="{{ route('admin.roles.index') }}">{{ __('Back') }}</a>
             </div>
         </div>
     </div>
@@ -25,7 +25,7 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <label for="name"><strong>{{__('Name')}}:</strong></label>
+                    <label for="name"><strong>{{ __('Name') }}:</strong></label>
                     <input type="text" name="name" id="name" placeholder="Name" class="form-control"
                         value="{{ old('name') }}">
                 </div>

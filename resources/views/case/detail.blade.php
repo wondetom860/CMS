@@ -3,8 +3,14 @@
 @section('subtitle', $viewData['subtitle'])
 @section('content')
     <div class="container-fluid">
-        <h3 class="">
+        <h3 class="bg-info p-2">
             {{ __('Detail') }}: {{ $viewData['case']->getDetail() }}
+            @php
+                if ($viewData['case']->case_status == 2) {
+                    //case judged/decided
+                    echo "<button class='btn btn-xs btn-secondary float-right' onclick='GenerateCaseReport({$viewData['case']->id});return false;' title='Generate case summery report'>Generate Case report</button>";
+                }
+            @endphp
         </h3>
         <div class="card mb-3">
             <div class="row g-0">
@@ -29,13 +35,18 @@
                             @include('case.partials._docs', ['case' => $viewData['case']])
                         </div>
                         <div class="container-fluid">
-                            @include('case.partials._events', ['case' => $viewData['case']])
-                        </div>
-                        <div class="container-fluid">
                             @include('case.partials._staffs', ['case' => $viewData['case']])
                         </div>
                         <div class="container-fluid">
+                            @include('case.partials._events', ['case' => $viewData['case']])
+                        </div>
+                        <div class="container-fluid">
                             @include('case.partials._parties', ['case' => $viewData['case']])
+                        </div>
+                        <div class="container-fluid">
+                            @include('admin.laststatment._partials.virdicts', [
+                                'case' => $viewData['case'],
+                            ])
                         </div>
                     </div>
                 </div>
@@ -45,6 +56,34 @@
 @endsection
 
 <script>
+    const GenerateCaseReport = (case_id) => {
+        window.open('/case/get-case-report?case_id=' + case_id, "Case Report {{ date('d/m/Y') }}",
+            "menubar=0,location=0,height=700,width=600");
+    }
+
+    const showArchives = (event_id) => {
+        $("#modal_body").html('Loading arcives...');
+        $("#formModalLabel").html("Archives uploaded for case {{ $viewData['case']->case_number }}");
+        $.get('{{ route('admin.case_archive.show_archives') }}', {
+            event_id: event_id
+        }).done((resp) => {
+            $("#modal_body").html(resp);
+        });
+        $('#myForm').trigger("reset");
+        // $('#formModal').addClass('modal-lg');
+        $('#formModal').modal('show');
+    }
+    const lastStatement = (case_id) => {
+        $("#modal_body").html('Loading Case Decision form');
+        $("#formModalLabel").html("Write Judgement for case {{ $viewData['case']->case_number }}");
+        $.get('{{ route('admin.laststatment.create_partial') }}', {
+            case_id: case_id
+        }).done((resp) => {
+            $("#modal_body").html(resp);
+        });
+        $('#myForm').trigger("reset");
+        $('#formModal').modal('show');
+    }
     const sendNotification = (csa_id) => {
         $.get("{{ route('admin.case_staff_assignments.send_notifiation') }}", {
             csa_id: csa_id
@@ -184,7 +223,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="formModalLabel">{{__('Attach document to a case')}}</h4>
+                <h4 class="modal-title" id="formModalLabel">{{ __('Attach document to a case') }}</h4>
             </div>
             <div class="modal-body" id="modal_body">
 

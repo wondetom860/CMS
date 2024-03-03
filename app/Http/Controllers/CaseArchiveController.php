@@ -52,9 +52,9 @@ class CaseArchiveController extends Controller
 
     public function createPartial(Request $request)
     {
-        $event =event::findOrFail($request->event_id);
+        $event = event::findOrFail($request->event_id);
         $viewData['case'] = $event->case;
-        $viewData['event'] =$event;
+        $viewData['event'] = $event;
         return view('admin.case_archive._partials._form')->with('viewData', $viewData);
     }
 
@@ -77,7 +77,7 @@ class CaseArchiveController extends Controller
         $archive->save();
         if ($request->hasFile('file')) {
             $ext = $request->file('file')->extension();
-            $ft = $archive->getFileType('.'.strtoupper($ext));
+            $ft = $archive->getFileType('.' . strtoupper($ext));
             if ($ft) {
                 $archive->file_type = $ft;
             } else {
@@ -94,11 +94,18 @@ class CaseArchiveController extends Controller
         }
         notify()->success('Case Archive registered Successfully', 'Creation Success');
         if (isset($request->pop_up)) {
-            return redirect()->route('case.show',['id' => $archive->case_id]);
+            return redirect()->route('case.show', ['id' => $archive->case_id]);
         }
         return redirect()->route('admin.case_archive.index');
         // notify()->success('Case Archive registered Successfully', 'Creation Success');
         // return redirect()->route('admin.case_archive.index');
+    }
+
+    public function showArchives(Request $request)
+    {
+        $event_id = $request->event_id;
+        $event = event::findOrFail($event_id);
+        return view('admin.case_archive._partials.event_archives')->with('event', $event);
     }
 
     /**

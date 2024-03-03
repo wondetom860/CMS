@@ -28,7 +28,7 @@
                         'resetButtonLabel' => __('Reset'),
                         'columnFields' => [
                             [
-                                'attribute' => 'Case Number', // REQUIRED if value is not defined. Attribute name to get row column data.
+                                'attribute' => 'case.case_number', // REQUIRED if value is not defined. Attribute name to get row column data.
                                 'label' => __('Case Number'), // Column label.
                                 'value' => function ($row) {
                                     return $row->case->case_number;
@@ -87,7 +87,14 @@
                                 },
                                 //'sort' => 'first_name', // To sort rows. Have to set if an 'attribute' is not defined for column.
                             ],
-                            __('created_at'), // Simple column setting by string.
+                            [
+                                'label' => __('Registered on'),
+                                'value' => function ($row) {
+                                    return $row->getDate();
+                                },
+                                //'sort' => 'first_name', // To sort rows. Have to set if an 'attribute' is not defined for column.
+                            ],
+                            // __('created_at'), // Simple column setting by string.
                             [
                                 // Set Action Buttons.
                                 'class' => Itstructure\GridView\Columns\ActionColumn::class, // REQUIRED.

@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Auth;
+// use App\Models\User;
+
+// $user = User::findOrFail(Auth::user()->id);
+// $roles = $user->getRoles();
 
 return [
 
@@ -298,17 +302,17 @@ return [
             'topnav_right' => true,
         ],
         [
-            'type'         => 'navbar-notification',
-            'id'           => 'my-notification',      // An ID attribute (required).
-            'icon'         => 'fas fa-bell',          // A font awesome icon (required).
-            'icon_color'   => 'warning',              // The initial icon color (optional).
-            'label'        => 0,                      // The initial label for the badge (optional).
-            'label_color'  => 'danger',               // The initial badge color (optional).
-            'url'          => 'notifications/show',   // The url to access all notifications/elements (required).
+            'type' => 'navbar-notification',
+            'id' => 'my-notification',      // An ID attribute (required).
+            'icon' => 'fas fa-bell',          // A font awesome icon (required).
+            'icon_color' => 'warning',              // The initial icon color (optional).
+            'label' => 0,                      // The initial label for the badge (optional).
+            'label_color' => 'danger',               // The initial badge color (optional).
+            'url' => 'notifications/show',   // The url to access all notifications/elements (required).
             'topnav_right' => true,                   // Or "topnav => true" to place on the left (required).
-            'dropdown_mode'   => true,                // Enables the dropdown mode (optional).
+            'dropdown_mode' => true,                // Enables the dropdown mode (optional).
             'dropdown_flabel' => 'All notifications', // The label for the dropdown footer link (optional).
-            'update_cfg'   => [
+            'update_cfg' => [
                 'url' => 'notifications/get',         // The url to periodically fetch new data (optional).
                 'period' => 30,                       // The update period for get new data (in seconds, optional).
             ],

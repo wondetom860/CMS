@@ -39,13 +39,18 @@ class CaseModel extends Model
         return $ptiff ? $ptiff->id : $ptiff;
     }
 
+    public function getWitnesses()
+    {
+        $plaintiffs = $this->parties()->where(['party_type_id' => $this->getParty('witness')])->get();
+        return $this->formatAndReturn($plaintiffs);
+    }
 
     public function getPlaintiff()
     {
         $plaintiffs = $this->parties()->where(['party_type_id' => $this->getParty('plaintiff')])->get();
         return $this->formatAndReturn($plaintiffs);
     }
-    
+
 
     private function formatAndReturn($party)
     {
@@ -53,7 +58,11 @@ class CaseModel extends Model
             $count = count($party);
             $fPerson = $party[0]->person->getFullName();
             if ($count > 1) {
-                return $fPerson . " and " . ($count - 1) . " others";
+                if($count == 2){
+                    $sPerson = $party[1]->person->getFullName();
+                    return "{$fPerson} and {$sPerson}";
+                }
+                return $fPerson . " (" . ($count - 1) . ")";
             } else {
                 return $fPerson;
             }
@@ -69,6 +78,19 @@ class CaseModel extends Model
     {
         $defendants = $this->parties()->where(['party_type_id' => $this->getParty('defendant')])->get();
         return $this->formatAndReturn($defendants);
+    }
+
+    public function getStartDate()
+    {
+        if (session()->get('locale') == 'am') {
+            $ethiopian_date = new DateTime(date_create($this->start_date));
+            // $gregorian = date_create($this->start_date);
+            // return DateTimeFactory::fromDateTime($gregorian);
+            // Constants::DATE_ETHIOPIAN_WONDE
+            return $ethiopian_date->format("d/m/Y");
+        } else {
+            return date_format(date_create($this->start_date), 'd/m/Y');
+        }
     }
 
     public function getDate()
@@ -128,7 +150,27 @@ class CaseModel extends Model
 
     public function getCaseStatus()
     {
-        return $this->case_status == self::STATUS_ACTIVE ? __("ACTIVE") : ($this->case_status == self::STATUS_READY ? __("Ready") : __("Completed"));
+        return $this->case_status == self::STATUS_ACTIVE ? __("ACTIVE") : ($this->case_status == self::STATUS_READY ? __("Ready") : __("Closed"));
+    }
+
+    public function terminateCase()
+    {
+        // $this->case_status = 2;
+        DB::table("case")
+            ->where(['id' => $this->id])
+            ->update(['case_status' => 2]);
+    }
+
+    public function updateCase($case_status)
+    {
+        DB::table("case")
+            ->where(['id' => $this->id])
+            ->update(['case_status' => $case_status]);
+    }
+
+    public function isClosed()
+    {
+        return $this->case_status == self::STATUS_CLOSED;
     }
 
     public static function getReport($report_type)
@@ -179,9 +221,11 @@ class CaseModel extends Model
     public static function getOpenCaseTrials() //cases scheduled for today
     {
         // , 'event.date_time' => date('Y-m-d')
-        return CaseModel::where('case_public', self::CASE_PUBLIC)
-            ->leftJoin('events', 'case.id', '=', 'events.case_id')
+        return CaseModel::query()
+            ->join('events', 'case.id', '=', 'events.case_id')
+            ->where('events.date_time', '<>', NULL)
             ->where('events.date_time', 'like', str(date('Y-m-d')) . "%")
+            ->where('case_public', self::CASE_PUBLIC)
             ->get();
     }
     public function isAssignedTo($person_id)
@@ -210,7 +254,7 @@ class CaseModel extends Model
 
     public function getCaseNumber()
     {
-        return "MODCCMS/" . $this->court_id . "/" . str_pad(rand(99, 10000), 4, "0");
+        return "MODCCMS/" . $this->court_id . "/" . str_pad(rand(99, 10000), 4, "0")."/".date('Y');
     }
 
     public function getCouseOfAction()
@@ -229,7 +273,7 @@ class CaseModel extends Model
 
     public function getStatus()
     {
-        return $this->status == 2 ? "Terminated" : "Active";
+        return $this->case_status == 2 ? "Closed" : "Active";
     }
 
     public function getLogoPath()
@@ -247,6 +291,17 @@ class CaseModel extends Model
     //     // returns counts of active cases - non-terminated
     //     return count($this->CaseModel()->where('case_status','<>',2)->get());
     // }
+
+    public static function getMyActiveCases($userId = null)
+    {
+        // returns counts of active cases - non-terminated
+        return self::query()
+            ->join('case_staff_assignment', 'case.id', '=', 'case_staff_assignment.case_id')
+            ->join('court_staff', 'court_staff.id', '=', 'case_staff_assignment.court_staff_id')
+            ->where('court_staff.person_id', Auth::user()->person_id)
+            ->where('case_status','<>',2)
+            ->count();
+    }
 
     public function court()
     {
@@ -273,6 +328,11 @@ class CaseModel extends Model
     }
     public function archives()
     {
-        return $this->hasMany(CaseArchive::class,'case_id');
+        return $this->hasMany(CaseArchive::class, 'case_id');
+    }
+
+    public function laststatements()
+    {
+        return $this->hasMany(LastStatment::class, 'case_id');
     }
 }
