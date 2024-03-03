@@ -109,9 +109,9 @@ class DocumentController extends Controller
     public function show($id)
     {
         $document = Document::findOrFail($id);
-        $viewData['title'] = 'Admin Page - Document Detail - CCMS';
+        $viewData['title'] = 'Dashboard - Document Detail - CCMS';
         $viewData['subtitle'] = 'Document Detail: ' . $document->getDetail();
-        $viewData['Document'] = $document;
+        $viewData['document'] = $document;
 
         return view('admin.document.detail')->with('viewData', $viewData);
     }
