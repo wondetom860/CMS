@@ -39,8 +39,7 @@
                         <div class="card-body" style="max-height: 350px; overflow-y:auto">
                             @foreach ($permission as $value)
                                 <label>
-                                    <input type="checkbox" name="permission[]" value="{{ $value->name }}" class="name"
-                                        {{ in_array($value->id, $rolePermissions) ? 'checked' : '' }}>
+                                    <input type="checkbox" name="permission[]" value="{{ $value->name }}" class="name">
                                     {{ $value->name }}
                                 </label>
                                 <br />

@@ -4,7 +4,7 @@
         echo "<h6>Cases registered in this court</h6>
         <table class='table table-condensed table-sm table-bordered' style='font-size: 9pt;'>
             <thead style='background-color:cornflowerblue;'>
-                <th>#</th>
+                <th>#</th>                
                 <th>Case Type</th>
                 <th>Case Number</th>
                 <th>Plaintiff(s)</th>
