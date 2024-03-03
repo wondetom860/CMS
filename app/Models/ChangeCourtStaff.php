@@ -11,10 +11,19 @@ class ChangeCourtStaff extends Model
 
     protected $table = 'change_court_staff';
     protected $fillable = [
+            'id',
         'csa_id',
-        'termination_reason',
+        'terminated_reason',
         'requestd_at',
         'requested_by',
+        'request_accepted',
+        'request_accepted_at',
+        'approval_status',
+        'approved_at',
+        'approved_by',
+        'remark',
+        'created_at',
+        'updated_at',
     ];
 
     public function caseStaffAssignment(){
@@ -62,7 +71,15 @@ class ChangeCourtStaff extends Model
         return $this->belongsTo(User::class, 'approved_by');
     }
 
+    public function getLogoPath()
+    {
+        return $this->logo_image_path ? $this->logo_image_path : '/court2.jpg';
+    }
 
+    public function getDetail()
+    {
+        return $this->id;
+    }
 
 
 
