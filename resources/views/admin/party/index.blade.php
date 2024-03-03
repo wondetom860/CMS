@@ -28,7 +28,7 @@
                         'resetButtonLabel' => __('Reset'),
                         'columnFields' => [
                             [
-                                'attribute' => 'Case Number', // REQUIRED if value is not defined. Attribute name to get row column data.
+                                'attribute' => 'case.case_number', // REQUIRED if value is not defined. Attribute name to get row column data.
                                 'label' => __('Case Number'), // Column label.
                                 'value' => function ($row) {
                                     return $row->case->case_number;

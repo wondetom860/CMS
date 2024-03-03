@@ -58,7 +58,11 @@ class CaseModel extends Model
             $count = count($party);
             $fPerson = $party[0]->person->getFullName();
             if ($count > 1) {
-                return $fPerson . " and " . ($count - 1) . " others";
+                if($count == 2){
+                    $sPerson = $party[1]->person->getFullName();
+                    return "{$fPerson} and {$sPerson}";
+                }
+                return $fPerson . " (" . ($count - 1) . ")";
             } else {
                 return $fPerson;
             }
@@ -250,7 +254,7 @@ class CaseModel extends Model
 
     public function getCaseNumber()
     {
-        return "MODCCMS/" . $this->court_id . "/" . str_pad(rand(99, 10000), 4, "0");
+        return "MODCCMS/" . $this->court_id . "/" . str_pad(rand(99, 10000), 4, "0")."/".date('Y');
     }
 
     public function getCouseOfAction()

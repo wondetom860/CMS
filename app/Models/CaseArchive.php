@@ -44,12 +44,19 @@ class CaseArchive extends Model
             '.GIF ',
             '.TIFF ',
             '.PSD ',
-            '.PDF ',
+            '.JPEG ',
             '.EPS ',
             '.AI ',
             '.INDD ',
             '.RAW ',
             '.JPG'
+        ],
+        'doc' => [
+            '.PDF',
+            '.DOC ',
+            '.DOCX ',
+            '.TXT ',
+            '.PDF ',
         ],
     ];
 

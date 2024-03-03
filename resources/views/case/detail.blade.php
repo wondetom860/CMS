@@ -60,6 +60,19 @@
         window.open('/case/get-case-report?case_id=' + case_id, "Case Report {{ date('d/m/Y') }}",
             "menubar=0,location=0,height=700,width=600");
     }
+
+    const showArchives = (event_id) => {
+        $("#modal_body").html('Loading arcives...');
+        $("#formModalLabel").html("Archives uploaded for case {{ $viewData['case']->case_number }}");
+        $.get('{{ route('admin.case_archive.show_archives') }}', {
+            event_id: event_id
+        }).done((resp) => {
+            $("#modal_body").html(resp);
+        });
+        $('#myForm').trigger("reset");
+        // $('#formModal').addClass('modal-lg');
+        $('#formModal').modal('show');
+    }
     const lastStatement = (case_id) => {
         $("#modal_body").html('Loading Case Decision form');
         $("#formModalLabel").html("Write Judgement for case {{ $viewData['case']->case_number }}");

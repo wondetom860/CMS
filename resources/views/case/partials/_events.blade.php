@@ -26,9 +26,9 @@
         foreach ($events as $event) {
             $btn2 = '';
             $ad = '';
-            $ccount = count($event->archives);
+            $ccount = $event->archives()->where('file_type', '<>', null)->count();
             if (!isset($print)) {
-                $btn = "<button class='btn btn-xs btn-success float-right' onclick='showArchives({$event->id});reeturn false;'>{$ccount} archives</button>";
+                $btn = "<button class='btn btn-xs btn-success' onclick='showArchives({$event->id});return false;'>{$ccount} archives</button>";
             }
             // Auth::user()->can('event-create') &&
             //     $event->createdBy &&
@@ -37,7 +37,7 @@
             if (Auth::user()->can('archive-create') && $event->case->isActive()) {
                 // $btn2 = "<button title='{{ $event->createdBy->id }}' class='btn btn-xs btn-link float-right' onclick='updateEvent({$event->id}); return false;'>Update</button>";
                 if (!isset($print)) {
-                    $ad = "<button class='btn btn-primary btn-xs' onclick='addArchive({$event->id}); return false;'>{$add}</button>";
+                    $ad = "<button class='btn btn-primary btn-xs' onclick='addArchive({$event->id}); return false;'>Add {$add}</button>";
                 }
             }
             echo "<tr>
@@ -48,8 +48,8 @@
                     <td>{$event->getDate()}</td>
                     <td>{$event->location}</td>
                     <td>{$event->out_come}{$btn2}</td>
-                    <td>{$ad}</td>
-                    <td>{$btn}</td>
+                    <td style='text-align: center;'>{$ad}</td>
+                    <td style='text-align: center;'>{$btn}</td>
                 </tr>";
         }
         echo '</tbody></table>';
