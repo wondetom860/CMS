@@ -1,7 +1,7 @@
 <div class="container-fluid table-responsive">
     <h2 class="text-center bg-gray mr-2 underlined">{{__('Cases registered Today')}}</h2>
     @php
-        $cases = App\models\CaseModel::getTodayRegisteredCases();
+        $cases = App\models\CaseModel::getTodayRegisteredCases(1);
         $count = 0;
     @endphp
     @if ($cases)

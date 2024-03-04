@@ -22,6 +22,7 @@
         $count = 0;
         foreach ($docs as $doc) {
             $aa = __('Show');
+            $btn = "";
             if (!isset($print)) {
                 $btn = "<button class='btn btn-link btn-xs' onclick='shoeDoc({$doc->id});return false;'>$aa</button>";
             }

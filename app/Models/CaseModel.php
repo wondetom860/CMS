@@ -165,7 +165,7 @@ class CaseModel extends Model
     {
         DB::table("case")
             ->where(['id' => $this->id])
-            ->update(['case_status' => $case_status]);
+            ->update(['case_status' => $case_status]); 
     }
 
     public function isClosed()
@@ -199,11 +199,11 @@ class CaseModel extends Model
         }
     }
 
-    public static function getTodayRegisteredCases()
+    public static function getTodayRegisteredCases($r)
     {
         $today = date("Y-m-d");
         $records = CaseModel::where('start_date', 'like', $today . "%")->get();
-        return count($records);
+        return $r ? $records :count($records);
     }
 
     public function isActive()
