@@ -17,13 +17,14 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('event_id')->nullable();
             $table->unsignedBigInteger('case_id');
-            $table->enum('file_type', ['audio','vedio','doc'])->nullable();
+            $table->enum('file_type', ['audio','vedio','doc','image'])->nullable();
             $table->string('file_path')->nullable();
             $table->dateTime('date_archived');
             $table->mediumText('description');
             $table->unsignedBigInteger('archived_by');
             $table->string('remark')->nullable();
             $table->foreign('event_id')->references('id')->on('events');
+            $table->foreign('archived_by')->references('id')->on('web_user');
             $table->foreign('case_id')->references('id')->on('case');
             $table->timestamps();
         });

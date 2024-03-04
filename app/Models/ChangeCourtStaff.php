@@ -26,6 +26,10 @@ class ChangeCourtStaff extends Model
         'updated_at',
     ];
 
+    public static function getRequests(){
+        return self::where(['approval_status' => 0])->count();
+    }
+
     public function caseStaffAssignment(){
         return $this->belongsTo(Case_Staff_Assignment::class,'csa_id');
     }

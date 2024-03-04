@@ -3,19 +3,19 @@
 @section('innerTitle', 'Register New Party')
 @section('content')
 <div class="card mb-4">
-    <div class="card-header bg-light"> Register New party
+    <div class="card-header bg-light">{{__('Register New party')}}
     </div>
     <div class="card-body">
         <form method="POST" action="{{ route('admin.party.store') }}">
             @csrf
             <div class="row">
                 <div class="mb-3">
-                    <label class="form-label">Case Number : {{ $viewData['case']->case_number }}</label>
+                    <label class="form-label">{{__('Case Number')}} : {{ $viewData['case']->case_number }}</label>
                 </div>
                 <div class="row">
                     <div class="col">
                         <div class="mb-4 row">
-                            <label class="text-right col-lg-4 col-md-6 col-sm-12 col-form-label">Party Type </label>
+                            <label class="text-right col-lg-4 col-md-6 col-sm-12 col-form-label">{{__('Party Type')}} </label>
                             <div class="col-lg-8 col-md-6 col-sm-12">
                                 <select name="party_type_id" id="party_type_id" class="form-select">
                                     @foreach (App\models\partyType::all() as $party_type)
@@ -83,8 +83,8 @@
                             <div class="col-lg-8 col-md-6 col-sm-12">
                                 {{-- <input name="gender" value="{{ old('gender') }}" type="text" class="form-control"> --}}
                                 <select class="form-control" name="gender" required>
-                                    <option value="MALE">Male</option>
-                                    <option value="FEMALE">Female</option>
+                                    <option value="MALE">{{__('Male')}}</option>
+                                    <option value="FEMALE">{{__('Female')}}</option>
                                     {{-- @foreach ($users as $user)
                                 <option value="{{ $user->id }}">{{ $user->name }}</option>
                                     @endforeach --}}
@@ -98,7 +98,7 @@
                         <div class="mb-4 row">
                             <input type="text" id='client_registration_id' name="client_registration" value="1" class="d-none">
                             <input type="text" id='case_id' name="case_id" value="{{ $viewData['case']->id }}" class="d-none">
-                            <button onclick="submitClientForm();return false;" type="submit" class="btn btn-primary">Submit</button>
+                            <button onclick="submitClientForm();return false;" type="submit" class="btn btn-primary">{{__('Submit')}}</button>
                         </div>
                     </div>
                 </div>

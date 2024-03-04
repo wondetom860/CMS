@@ -46,7 +46,7 @@ class CaseStaffAssignmentController extends Controller
      */
     public function create()
     {
-        $viewData['title'] = 'Add-case to staff-assignment - CCMS';
+        $viewData['title'] = 'Case Staff Assignment - CCMS';
         $viewData['subtitle'] = "Assign The Case to Staff";
         $viewData['innerTitle'] = "Assign The Case";
         // $viewData['case_staff_assignment'] = case_staff_assignment::all();
@@ -63,14 +63,21 @@ class CaseStaffAssignmentController extends Controller
         return view('admin.case_staff_assignments._partials._form')->with('viewData', $viewData);
     }
 
+    public function sendNotificationMail(Request $request)
+    {
+        $csa_id = $request->csa_id;
+        $csaModel = case_staff_assignment::findOrFail($csa_id);
+        if ($csaModel) {
+            $csaModel->notifyStaff();
+        }
+    }
+
+
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
-
-
     public function store(Request $request)
     {
         // $request->assign_as = ;
@@ -84,10 +91,22 @@ class CaseStaffAssignmentController extends Controller
         // $case_staff_assignment->updated_at = $request->updated_at;
         if ($case_staff_assignment->checkIfAssigned()) {
             notify()->error('Court Staff id already assigned to this case', 'record creation failed');
+            if ($request->pop_up) {
+                return 1;
+                // return redirect()->route('case.show', ['id' => $case_staff_assignment->case_id]);
+            }
             return redirect()->route('admin.case_staff_assignments.index');
         }
         $case_staff_assignment->save();
+        if ($case_staff_assignment->case->case_status != 1) {
+            $case_staff_assignment->case->updateCase(1);
+        }
+        $case_staff_assignment->notifyStaff();
         notify()->success('Case is Assigned Successfully', 'Creation Success');
+        if ($request->pop_up) {
+            return 1;
+            // return redirect()->route('case.show', ['id' => $case_staff_assignment->case_id]);
+        }
         return redirect()->route('admin.case_staff_assignments.index');
     }
 

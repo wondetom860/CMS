@@ -28,6 +28,11 @@ class Person extends Model
         ]);
     }
 
+    public function getEmail(){
+        $logins = $this->getLogins();
+        return  $logins ?  $logins->email :  $logins;
+    }
+
     public function checkIfExists()
     {
         return Person::where([

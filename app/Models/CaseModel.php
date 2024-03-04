@@ -5,21 +5,16 @@ namespace App\Models;
 use Andegna\Constants;
 use Andegna\DateTime;
 use Andegna\DateTimeFactory;
+use Carbon\Carbon;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class CaseModel extends Model
 {
     use HasFactory;
-
-    // use SoftDeletes;
-
-    // protected $dates = ['deleted_at'];
-    // public $searchBy = ['case_number', 'report_date'];
     const STATUS_CLOSED = 2;
     const STATUS_READY = 0;
     const STATUS_ACTIVE = 1;
@@ -38,22 +33,17 @@ class CaseModel extends Model
         ]);
     }
 
-    public function scopeFilter($model, $filters)
-    {
-        // dd($filters['start_date']);
-        if (isset($filters['start_date'])) {
-            $model->where('start_date', '>=', $filters['start_date']);
-        }
-        // dd($filters['start_date']);
-        return $model;
-    }
-
     protected function getParty($partyType)
     {
         $ptiff = PartyType::where(['party_type_name' => strtoupper($partyType)])->get()->first();
         return $ptiff ? $ptiff->id : $ptiff;
     }
 
+    public function getWitnesses()
+    {
+        $plaintiffs = $this->parties()->where(['party_type_id' => $this->getParty('witness')])->get();
+        return $this->formatAndReturn($plaintiffs);
+    }
 
     public function getPlaintiff()
     {
@@ -61,13 +51,18 @@ class CaseModel extends Model
         return $this->formatAndReturn($plaintiffs);
     }
 
+
     private function formatAndReturn($party)
     {
         if ($party && count($party) > 0) {
             $count = count($party);
             $fPerson = $party[0]->person->getFullName();
             if ($count > 1) {
-                return $fPerson . " and " . ($count - 1) . " others";
+                if($count == 2){
+                    $sPerson = $party[1]->person->getFullName();
+                    return "{$fPerson} and {$sPerson}";
+                }
+                return $fPerson . " (" . ($count - 1) . ")";
             } else {
                 return $fPerson;
             }
@@ -85,6 +80,19 @@ class CaseModel extends Model
         return $this->formatAndReturn($defendants);
     }
 
+    public function getStartDate()
+    {
+        if (session()->get('locale') == 'am') {
+            $ethiopian_date = new DateTime(date_create($this->start_date));
+            // $gregorian = date_create($this->start_date);
+            // return DateTimeFactory::fromDateTime($gregorian);
+            // Constants::DATE_ETHIOPIAN_WONDE
+            return $ethiopian_date->format("d/m/Y");
+        } else {
+            return date_format(date_create($this->start_date), 'd/m/Y');
+        }
+    }
+
     public function getDate()
     {
         if (session()->get('locale') == 'am') {
@@ -92,7 +100,7 @@ class CaseModel extends Model
             // $gregorian = date_create($this->created_at);
             // return DateTimeFactory::fromDateTime($gregorian);
             // Constants::DATE_ETHIOPIAN_WONDE
-            return $ethiopian_date->format("l, F d, Y");
+            return $ethiopian_date->format("d/m/Y");
         } else {
             return $this->created_at;
         }
@@ -122,7 +130,7 @@ class CaseModel extends Model
     }
     public function getEventType()
     {
-        $event = $this->events()->orderBy('date_time')->get()->first(); //3=>SORT_DESC
+        $event = $this->events()->orderBy('date_time', 'desc')->first(); //3=>SORT_DESC
         if ($event) {
             return $event->eventType->event_type_name;
         } else {
@@ -130,10 +138,71 @@ class CaseModel extends Model
         }
     }
 
+    public function getLastEvent()
+    {
+        $lEvent = $this->events()->orderBy('id', 'desc')->first();
+
+        if ($lEvent) {
+            return [$lEvent->getDate(), $lEvent->eventType->event_type_name];
+        }
+        return ['', ''];
+    }
+
+    public function getCaseStatus()
+    {
+        return $this->case_status == self::STATUS_ACTIVE ? __("ACTIVE") : ($this->case_status == self::STATUS_READY ? __("Ready") : __("Closed"));
+    }
+
+    public function terminateCase()
+    {
+        // $this->case_status = 2;
+        DB::table("case")
+            ->where(['id' => $this->id])
+            ->update(['case_status' => 2]);
+    }
+
+    public function updateCase($case_status)
+    {
+        DB::table("case")
+            ->where(['id' => $this->id])
+            ->update(['case_status' => $case_status]);
+    }
+
+    public function isClosed()
+    {
+        return $this->case_status == self::STATUS_CLOSED;
+    }
+
+    public static function getReport($report_type)
+    {
+        if ($report_type == 1) {
+            // cases registered today
+            return CaseModel::where('start_date', 'like', str(date('Y-m-d')) . "%")->orderBy('start_date', 'desc')->get();
+        } elseif ($report_type == 2) {
+            // cases registered in this week
+            $start_date = strtotime(date("Y-m-d")) - 5 * 86400;
+            $end_date = strtotime(date("Y-m-d"));
+            // return CaseModel::whereBetween('start_date', [date("Y-m-d", $start_date), date("Y-m-d", $end_date)])->orderBy('start_date','desc')->get();
+            return CaseModel::whereBetween('start_date', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->orderBy('start_date', 'desc')->get();
+        } elseif ($report_type == 3) { //last 3 month
+            $start_date = strtotime(date("Y-m-d")) - 3 * 30 * 86400;
+            $end_date = strtotime(date("Y-m-d"));
+            return CaseModel::whereBetween('start_date', [date("Y-m-d", $start_date), date("Y-m-d", $end_date)])->orderBy('start_date', 'desc')->get();
+        } elseif ($report_type == 4) { //last 6 month
+            $start_date = strtotime(date("Y-m-d")) - 6 * 30 * 86400;
+            $end_date = strtotime(date("Y-m-d"));
+            return CaseModel::whereBetween('start_date', [date("Y-m-d", $start_date), date("Y-m-d", $end_date)])->orderBy('start_date', 'desc')->get();
+        } elseif ($report_type == 5) { //last 1 year
+            $start_date = strtotime(date("Y-m-d")) - 12 * 30 * 86400;
+            $end_date = strtotime(date("Y-m-d"));
+            return CaseModel::whereBetween('start_date', [date("Y-m-d", $start_date), date("Y-m-d", $end_date)])->orderBy('start_date', 'desc')->get();
+        }
+    }
+
     public static function getTodayRegisteredCases()
     {
         $today = date("Y-m-d");
-        $records = CaseModel::where(['start_date' => $today])->get();
+        $records = CaseModel::where('start_date', 'like', $today . "%")->get();
         return count($records);
     }
 
@@ -149,12 +218,14 @@ class CaseModel extends Model
         // $court_staff_id = $courtStaff ? $courtStaff->id : null;
         // return $this->caseStaffAssignments()->where(['court_staff_id' => $court_staff_id])->count() > 0;
     }
-    public static function getOpenCaseTrials()
+    public static function getOpenCaseTrials() //cases scheduled for today
     {
         // , 'event.date_time' => date('Y-m-d')
-        return CaseModel::with(['caseStaffAssignments', 'parties', 'events'])
-            // ->join('event')
-            ->where(['case_public' => self::CASE_PUBLIC])
+        return CaseModel::query()
+            ->join('events', 'case.id', '=', 'events.case_id')
+            ->where('events.date_time', '<>', NULL)
+            ->where('events.date_time', 'like', str(date('Y-m-d')) . "%")
+            ->where('case_public', self::CASE_PUBLIC)
             ->get();
     }
     public function isAssignedTo($person_id)
@@ -183,9 +254,13 @@ class CaseModel extends Model
 
     public function getCaseNumber()
     {
-        return "MODCCMS/" . $this->court_id . "/" . str_pad(rand(99, 10000), 4, "0");
+        return "MODCCMS/" . $this->court_id . "/" . str_pad(rand(99, 10000), 4, "0")."/".date('Y');
     }
 
+    public function getCouseOfAction()
+    {
+        return $this->cause_of_action;
+    }
     public function caseStaffAssignments()
     {
         return $this->hasMany(Case_Staff_Assignment::class, 'case_id');
@@ -198,7 +273,7 @@ class CaseModel extends Model
 
     public function getStatus()
     {
-        return $this->status == 2 ? "Terminated" : "Active";
+        return $this->case_status == 2 ? "Closed" : "Active";
     }
 
     public function getLogoPath()
@@ -216,6 +291,17 @@ class CaseModel extends Model
     //     // returns counts of active cases - non-terminated
     //     return count($this->CaseModel()->where('case_status','<>',2)->get());
     // }
+
+    public static function getMyActiveCases($userId = null)
+    {
+        // returns counts of active cases - non-terminated
+        return self::query()
+            ->join('case_staff_assignment', 'case.id', '=', 'case_staff_assignment.case_id')
+            ->join('court_staff', 'court_staff.id', '=', 'case_staff_assignment.court_staff_id')
+            ->where('court_staff.person_id', Auth::user()->person_id)
+            ->where('case_status','<>',2)
+            ->count();
+    }
 
     public function court()
     {
@@ -239,5 +325,14 @@ class CaseModel extends Model
     public function parties()
     {
         return $this->hasMany(Party::class, 'case_id');
+    }
+    public function archives()
+    {
+        return $this->hasMany(CaseArchive::class, 'case_id');
+    }
+
+    public function laststatements()
+    {
+        return $this->hasMany(LastStatment::class, 'case_id');
     }
 }

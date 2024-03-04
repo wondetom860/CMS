@@ -1,7 +1,7 @@
 @php
     $events = $party->events;
     if ($events) {
-        echo "<h6>Events Attached To This Case</h6>
+        echo "<h6 class='text-info'>Events Attached To This Case</h6>
         <table class='table table-condensed table-sm table-bordered' style='font-size: 9pt;'>
             <thead style='background-color:cornflowerblue;'>
                 <th>#</th>

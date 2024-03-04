@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-lg-3 col-6">
 
-                <div class="small-box bg-info">
+                <div class="small-box bg-purple">
                     <div class="inner">
                         <h3>{{ count(App\Models\Court::all()) }}</h3>
                         <p>{{ __('Court') }}</p>
@@ -27,7 +27,7 @@
 
             <div class="col-lg-3 col-6">
 
-                <div class="small-box bg-success">
+                <div class="small-box bg-secondary">
                     <div class="inner">
                         <h3>{{ count(App\Models\CaseModel::all()) }}</h3>
                         <p>{{ __('Cases') }}</p>
@@ -60,13 +60,15 @@
 
                 <div class="small-box bg-danger">
                     <div class="inner">
-                        <h3>65</h3>
-                        <p>{{ __('Unique Visitors') }}</p>
+                        <h3>@php
+                            echo count(App\Models\Party::getClients());
+                        @endphp</h3>
+                        <p>{{ __('Clients Participated so far') }}</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-pie-graph"></i>
                     </div>
-                    <a href="#" class="small-box-footer">{{ __('More info') }} <i
+                    <a href="admin/party" class="small-box-footer">{{ __('More info') }} <i
                             class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
@@ -76,10 +78,10 @@
         <div class="row">
             <div class="col-lg-3 col-6">
 
-                <div class="small-box bg-danger">
+                {{-- <div class="small-box bg-danger">
                     <div class="inner">
                         <h3>{{ App\Models\CaseModel::getTodayRegisteredCases() }}</h3>
-                        <p>Cases registered today</p>
+                        <p>Total Cases registered today</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-pie-graph"></i>
@@ -87,12 +89,27 @@
                     <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
-        </div>
+            <div class="col-lg-3 col-6">
 
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3>{{ App\Models\event::getTodayEvent() }}</h3>
+                        <p>Total Today Event</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-pie-graph"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                </div> --}}
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="col-12 table-responsive">
+            @include('case.partials._dashboard2')
+        </div>
     </div>
 @stop
 @section('js')
-    <script>
-        
-    </script>
+    <script></script>
 @stop

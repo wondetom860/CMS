@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CaseModel;
+use App\Models\ChangeCourtStaff;
+use App\Models\event;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NotificationsController extends Controller
 {
@@ -16,49 +21,67 @@ class NotificationsController extends Controller
         // time: The time since notification was created on the server.
         // At next, we define a hardcoded variable with the explained format,
         // but you can assume this data comes from a database query.
-
+        $user = User::findOrFail(Auth::user()->id);
+        $courtChangeRequest = ChangeCourtStaff::getRequests();
+        $AssignedCases = CaseModel::getMyActiveCases($user);
+        $AssignedCaseEvents = event::getMyActiveCaseEvent($user);
         $notifications = [
             [
-                'icon' => 'fas fa-fw fa-envelope',
-                'text' => rand(0, 10) . ' new messages',
-                'time' => rand(0, 10) . ' minutes',
-            ],
-            [
                 'icon' => 'fas fa-fw fa-users text-primary',
-                'text' => rand(0, 10) . ' friend requests',
+                'text' => $courtChangeRequest . ' staff change requests',
                 'time' => rand(0, 60) . ' minutes',
+                'link' => 'admin.change_court_staff',
+                'can' => $user->can('change-court-staff-approve'),
+                'countt' => $courtChangeRequest,
             ],
             [
                 'icon' => 'fas fa-fw fa-file text-danger',
-                'text' => rand(0, 10) . ' new reports',
+                'text' => $AssignedCases . ' active cases',
                 'time' => rand(0, 60) . ' minutes',
+                'can' => $user->can('case-list'),
+                'link' => '/case',
+                'countt' => $AssignedCases,
+            ],
+            [
+                'icon' => 'fas fa-fw fa-file text-info',
+                'text' => $AssignedCases . ' case schedules',
+                'time' => rand(0, 60) . ' minutes',
+                'can' => $user->can('case-list'),
+                'link' => '/case',
+                'countt' => $AssignedCaseEvents,
             ],
         ];
 
         // Now, we create the notification dropdown main content.
 
         $dropdownHtml = '';
+        $nCount = 0;
 
         foreach ($notifications as $key => $not) {
+            if (!$not['can'] | ($not['countt'] == 0)) {
+                continue;
+            }
             $icon = "<i class='mr-2 {$not['icon']}'></i>";
 
             $time = "<span class='float-right text-muted text-sm'>
                    {$not['time']}
                  </span>";
 
-            $dropdownHtml .= "<a href='#' class='dropdown-item'>
+            $dropdownHtml .= "<a href='{$not['link']}' class='dropdown-item'>
                             {$icon}{$not['text']}{$time}
                           </a>";
 
             if ($key < count($notifications) - 1) {
                 $dropdownHtml .= "<div class='dropdown-divider'></div>";
             }
+
+            $nCount++;
         }
 
         // Return the new notification data.
 
         return [
-            'label' => count($notifications),
+            'label' => $nCount,
             'label_color' => 'danger',
             'icon_color' => 'dark',
             'dropdown' => $dropdownHtml,

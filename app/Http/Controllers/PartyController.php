@@ -28,7 +28,7 @@ class PartyController extends Controller
     {
         $viewData['title'] = "Parties";
         $viewData['subtitle'] = "Lists parties";
-        $viewData['party'] = Party::all();
+        // $viewData['party'] = Party::all();
         $dataProvider = new EloquentDataProvider(Party::query());
         return view('admin.party.index', [
             'dataProvider' => $dataProvider,
@@ -45,12 +45,12 @@ class PartyController extends Controller
         $viewData['title'] = 'Dashborad - parties - CCMS';
         $viewData['parttype'] = PartyType::all();
         $viewData['person'] = Person::getAllClients();
-        if($case_id){
+        if ($case_id) {
             $viewData['case'] = CaseModel::findOrFail($case_id);
-        }else{
+        } else {
             $viewData['cases'] = CaseModel::all();
         }
-        
+
         $viewData['client_registration'] = 1;
         return view('admin.party.create')->with('viewData', $viewData);
     }
@@ -74,7 +74,7 @@ class PartyController extends Controller
     public function store(Request $request)
     {
         // Party::validate($request);
-        $case = CaseModel::findOrFail($request->case_id);        
+        $case = CaseModel::findOrFail($request->case_id);
         $person = new Person();
         $person->court_id = $case->court_id;
         $person->first_name = ucfirst(strtolower($request->first_name));

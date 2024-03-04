@@ -8,17 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Document extends Model
 {
     use HasFactory;
-    protected $fillable = ['case_id', 'csa_id', 'document_type_id', 'date_filed','description','doc_storage_path'];
+    protected $fillable = ['case_id', 'csa_id', 'document_type_id', 'date_filed','description','created_by'];
 
     public $table='document';
+    public $file;
     public static function validate($request)
     {
         $request->validate([
-            // 'case_id' => "required|exists:case,id",
-            // 'csa_id' => "required|exists:case_staff_assignment,id",
-            // 'document_type_id' => "required|exists:document_type,id",
-            // // 'date_filed' => "required",
-            // 'description' => "required",
+            'case_id' => "required|exists:case,id",
+            'csa_id' => "required|exists:case_staff_assignment,id",
+            'document_type_id' => "required|exists:document_type,id",
+            'file.*' => 'required|file|mimes:png,jpeg,jpg,pdf',
+            'description' => "required",
             // // 'doc_storage_path' => "required",
         ]);
     }
