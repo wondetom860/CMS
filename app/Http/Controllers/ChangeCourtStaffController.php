@@ -54,17 +54,19 @@ class ChangeCourtStaffController extends Controller
         // return redirect()->route('admin.change_court_staff.index')->with('success', 'Change Court Staff created successfully.');
 
     }
-    public function show($id)
+    public function show(int $id)
     {
-        $change = ChangeCourtStaff::find($id);
+        $changes = ChangeCourtStaff::find($id);
         $viewData['title'] = "Case Assignment";
-        $viewData['subtitle'] = "detail of cases Assigned". $change->$id;
-        // $viewData['changes'] = ChangeCourtStaff::all();
-        
-        // $viewData['subtitle'] = "Course Detail: " ;
+        $viewData['subtitle'] = "Detail of cases Assigned" .$changes->id;
+        $viewData['changes'] =$changes;
         return view('admin.change_court_staff.show')->with('viewData', $viewData);
-        
-        // return view('admin.change_court_staff.show', compact('change'));
+    }
+    public function detail($id)
+    {
+       
+        $changes = ChangeCourtStaff::findOrFail($id);
+        return view('admin.change_court_staff.detail', compact('changes'));
     }
 
     public function edit($id)

@@ -1,6 +1,6 @@
 @extends('layout.adminLTE')
-{{-- @section('title', $viewData['title'])
-@section('innerTitle', $viewData['subtitle']) --}}
+@section('title', $viewData['title'])
+@section('innerTitle', $viewData['subtitle'])
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -10,7 +10,7 @@
     
                     <div class="card-body">
                         <div class="mb-3">
-                            <a href="{{ route('admin.change_court_staff.create') }}" class="btn btn-primary"> Change Staff</a>
+    <a href="{{ route('admin.change_court_staff.create') }}" class="btn btn-primary"> Change Staff</a>
                         </div>
         <table class="table">
             <thead class="card-header" style="font-size: 12.5px;">
@@ -49,6 +49,7 @@
                         <td>{{ $change->remark }}</td>
                         {{-- <td>{{ $change->created_at }}</td>
                         <td>{{ $change->updated_at }}</td> --}}
+                        <td><a href="{{route('admin.change_court_staff.show',$change->id )}}" class="btn btn-success">view</a></td>
                     </tr>
                 @endforeach
             </tbody>
