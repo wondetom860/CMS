@@ -180,9 +180,10 @@ Route::middleware('auth')->prefix('/admin')->group(function () {  //|'/SuperAdmi
     Route::post('/change_court_staff/store', [ChangeCourtStaffController::class, 'store'])->name('admin.change_court_staff.store');
     Route::get('/change_court_staff/{id}/edit', [ChangeCourtStaffController::class, 'edit'])->name('admin.change_court_staff.edit');
     Route::put('/change_court_staff/{id}', [ChangeCourtStaffController::class, 'update'])->name('admin.change_court_staff.update');
-    Route::get('/change_court_staff/{id}', [ChangeCourtStaffController::class, 'show'])->name('admin.change_court_staff.show');
+    Route::put('/change_court_staff/detail', [ChangeCourtStaffController::class, 'detail'])->name('admin.change_court_staff.detail');
+    Route::get('/change_court_staff/show/{id}', [ChangeCourtStaffController::class, 'show'])->name('admin.change_court_staff.show');
 
-
+//Staff Role
     Route::get('/staffrole', App\Http\Controllers\StaffRoleController::class . '@index')->name('admin.staffrole.index');
     Route::get('/staffrole/show/{id}', App\Http\Controllers\StaffRoleController::class . '@show')->name('admin.staffrole.show');
     Route::get('/staffrole/create', App\Http\Controllers\StaffRoleController::class . '@create')->name('admin.staffrole.create');
